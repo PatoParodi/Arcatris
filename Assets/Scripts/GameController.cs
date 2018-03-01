@@ -95,9 +95,10 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
-///////////////////////////////////////////////////////////
+///////////// TEST MODE ONLY ///////////////////////////
 		PlayerPrefs.SetInt ("High Score", 0);
 		PlayerPrefs.SetInt ("ArcatrisMonedas", 1000);
+//		PlayerPrefs.SetInt ("ExtraBall", 0);
 ///////////////////////////////////////////////////////////
 
 
@@ -139,6 +140,9 @@ public class GameController : MonoBehaviour {
 		textosEnPantalla.highScoreValue.text = PlayerPrefs.GetInt ("High Score").ToString();
 		if (textosEnPantalla.highScoreValue.text == "")
 			textosEnPantalla.highScoreValue.text = "Get one!";
+
+		// Vidas
+		vidas = 1;
 
 		// Monedas
 		Monedas = 0;
@@ -337,18 +341,14 @@ public class GameController : MonoBehaviour {
 		if (vidas > 0)
 			//Re-spawnear
 			ContinuarJuego (pelota);
+		
 		else {
 			
 			popUpContinue.SetActive (true);
-//			//Frenar Prefabs de la Cajas
-//			GameObject[] cajas = GameObject.FindGameObjectsWithTag ("prefab");
-//			foreach (GameObject caja in cajas) {
-//				caja.GetComponent<Caja> ().velocidad = 0;	
-//			}
 
 			BotonesEnPantalla.pausa.SetActive(false);
-			BotonesEnPantalla.izquierda.SetActive (false);
-			BotonesEnPantalla.derecha.SetActive (false);
+//			BotonesEnPantalla.izquierda.SetActive (false);
+//			BotonesEnPantalla.derecha.SetActive (false);
 
 		}
 			
@@ -366,8 +366,7 @@ public class GameController : MonoBehaviour {
 //		PantallaInicial.SetActive (false);
 		UI_inGame.SetActive (true);
 
-		//Mostrar vidas iniciales (3)
-		vidas = 3;
+		//Mostrar vidas iniciales
 		mostrarVidas (vidas, "vida");
 
 

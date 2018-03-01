@@ -49,9 +49,9 @@ public class LimiteBrea : MonoBehaviour {
 			if(GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().ballInPlay)
 				GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().gameOver ();
 			// Volver a habilitar el Collider del paddle luego de perder (cuando la bola pasa muy por debajo)
-			pad = GameObject.FindGameObjectWithTag ("paddle");
-			if(pad != null)
-				pad.GetComponent<BoxCollider2D> ().enabled = true;	
+//			pad = GameObject.FindGameObjectWithTag ("paddle");
+//			if(pad != null)
+//				pad.GetComponent<BoxCollider2D> ().enabled = true;	
 
 		}
 

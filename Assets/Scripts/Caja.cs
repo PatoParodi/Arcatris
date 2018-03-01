@@ -115,15 +115,5 @@ public class Caja : MonoBehaviour {
 		}
 
 	}
-
-	void OnTriggerExit2D(Collider2D col){
-		
-//		if (gameObject.tag == "prefab" &&
-//			col.gameObject.tag == "Marco"){
-//			//Una vez que el prefab termina de aparecer en la arena,  llamar al proximo
-////			if(controller.primerSpawn != true)
-//				controller.spawnCajas ();
-//		}
-	}
 		
 }

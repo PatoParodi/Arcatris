@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-//using UnityEngine.Advertisements;
+using UnityEngine.Advertisements;
 
 public class scriptContador : MonoBehaviour {
 
@@ -40,10 +40,10 @@ public class scriptContador : MonoBehaviour {
 			sinExtraBall = true;
 //			botonSiUse.GetComponent<Image> ().sprite = videoSprite;
 			botonSiUse.gameObject.SetActive(false);
-			botonSiVideo.gameObject.SetActive(true);
 
-//			if (!Advertisement.IsReady())
-//				botonSiVideo.gameObject.GetComponent<Button> ().interactable = false;
+			botonSiVideo.gameObject.SetActive(true);
+			botonSiVideo.gameObject.GetComponent<Button> ().interactable = false;
+
 
 		}
 
@@ -51,6 +51,9 @@ public class scriptContador : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+		if (Advertisement.IsReady())
+			botonSiVideo.gameObject.GetComponent<Button> ().interactable = true;
 
 		if (gameObject.activeSelf == true && contando == false) {
 
@@ -85,37 +88,38 @@ public class scriptContador : MonoBehaviour {
 
 	void ShowRewardedVideo ()
 	{
-//		ShowOptions options = new ShowOptions();
-//		options.resultCallback = ManagerShowResult;
-//
-//		Advertisement.Show("rewardedVideo", options);
+		ShowOptions options = new ShowOptions();
+		options.resultCallback = ManagerShowResult;
+
+		Advertisement.Show("rewardedVideo", options);
 	}
 
 
-//	void ManagerShowResult (ShowResult result)
-//	{
-//		if(result == ShowResult.Finished) {
-//			//Utilizar una Bola Extra.
-//			controller.extraBalls += 1;
-//			controller.utilizarExtraBall();
-//			// Reward your player here.
-//
-//		}else if(result == ShowResult.Skipped) {
-//			//Video was skipped - Do NOT reward the player
-//			buttonNo();
-//
-//		}else if(result == ShowResult.Failed) {
-//			//Video failed to show
-//			buttonNo();
-//
-//		}
-//		else			
-//			buttonNo();
-//	}
+	void ManagerShowResult (ShowResult result)
+	{
+		if(result == ShowResult.Finished) {
+			//Utilizar una Bola Extra.
+			controller.extraBalls += 1;
+			controller.utilizarExtraBall();
+			// Reward your player here.
+
+		}else if(result == ShowResult.Skipped) {
+			//Video was skipped - Do NOT reward the player
+			buttonNo();
+
+		}else if(result == ShowResult.Failed) {
+			//Video failed to show
+			buttonNo();
+
+		}
+		else			
+			buttonNo();
+	}
 
 	public void buttonSi(){
 
 		// Validar si le quedan Extra Ball
+		sinExtraBall = true;
 		if (sinExtraBall)
 			//VER VIDEO PARA GANAR UNA BOLA EXTRA
 			ShowRewardedVideo();
