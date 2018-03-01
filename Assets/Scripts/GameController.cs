@@ -116,7 +116,7 @@ public class GameController : MonoBehaviour {
 		// &*&*&*&*&*&*&**&*&*&*&*&*&*&*&*&*&*&*&*&*&*
 		// PARA PRUEBAS  de TUTORIAL SOLAMENTE!!!!!!! !! ! ! ! !! !! ! !!! !!!
 		// &*&*&*&*&*&*&**&*&*&*&*&*&*&*&*&*&*&*&*&*&*
-//		firstTimeEverToPlay = true;
+		firstTimeEverToPlay = true;
 
 
 		//Tutorial How to Play
