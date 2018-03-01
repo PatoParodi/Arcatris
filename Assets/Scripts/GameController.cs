@@ -119,6 +119,7 @@ public class GameController : MonoBehaviour {
 		firstTimeEverToPlay = false;
 
 
+
 		//Tutorial How to Play
 		if (firstTimeEverToPlay) {
 			PantallaInicial.GetComponent<MenuController> ().MostrarPlay (false);
