@@ -95,10 +95,12 @@ public class LimiteBrea : MonoBehaviour {
 
 		yield return new WaitForSeconds (0.1f);
 
-		pad = GameObject.FindGameObjectWithTag ("paddle");
-//		pad.GetComponent<Rigidbody2D> ().AddForce (new Vector2 (0, 10));
-		if(pad != null)
-			pad.transform.position = new Vector3 (pad.transform.position.x, pad.transform.position.y + movimientoPiso, pad.transform.position.z);
+//		pad.GetComponent<Rigidbody2D> ().AddForceAtPosition (1, pad.transform.position);
 
+//		pad = GameObject.FindGameObjectWithTag ("paddle");
+////		pad.GetComponent<Rigidbody2D> ().AddForce (new Vector2 (0, 10));
+//		if(pad != null)
+//			pad.transform.position = new Vector3 (pad.transform.position.x, pad.transform.position.y + movimientoPiso, pad.transform.position.z);
+//
 	}
 }
