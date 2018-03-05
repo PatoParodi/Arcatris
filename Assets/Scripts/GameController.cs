@@ -141,9 +141,6 @@ public class GameController : MonoBehaviour {
 		if (textosEnPantalla.highScoreValue.text == "")
 			textosEnPantalla.highScoreValue.text = "Get one!";
 
-		// Vidas
-		vidas = 1;
-
 		// Monedas
 		Monedas = 0;
 		Monedas = PlayerPrefs.GetInt("ArcatrisMonedas");
@@ -321,7 +318,7 @@ public class GameController : MonoBehaviour {
 			paddleVivo.GetComponent<Rigidbody2D> ().AddForce (new Vector2 (movimientoPaddle, 0));
 
 			// Limito la posicion en X del pad para que no se suba a las paredes
-			paddleVivo.transform.position = new Vector3(Mathf.Clamp(paddleVivo.transform.position.x,-2f,2f),paddleVivo.transform.position.y,paddleSpawn.transform.position.z);
+			paddleVivo.transform.position = new Vector3(Mathf.Clamp(paddleVivo.transform.position.x,-2f,2f),paddleVivo.transform.position.y,0);
 
 		}
 
@@ -394,9 +391,10 @@ public class GameController : MonoBehaviour {
 		BotonesEnPantalla.pausa.SetActive(true);
 
 		//Instanciar Pelota y Paddle
-		pelotaViva  = Instantiate (ballType,new Vector3 (ballSpawn.position.x,ballSpawn.position.y,ballSpawn.position.z),Quaternion.identity) as GameObject;
+//		pelotaViva  = Instantiate (ballType,new Vector3 (ballSpawn.position.x,ballSpawn.position.y,ballSpawn.position.z),Quaternion.identity) as GameObject;
+
 		if (paddleVivo == null) {
-			paddleVivo = Instantiate (paddle, paddleSpawnInicial) as GameObject;
+			paddleVivo = Instantiate (paddle) as GameObject;
 
 		}
 
@@ -455,11 +453,19 @@ public class GameController : MonoBehaviour {
 			}
 		}
 
-		paddleVivo.transform.position = new Vector2 (paddleVivo.transform.position.x, GameObject.FindGameObjectWithTag ("padPosition").transform.position.y);
+		GameObject ballSpawnNew = GameObject.FindGameObjectWithTag ("ballSpawn");
+		pelotaViva = Instantiate (ballType, new Vector3 (ballSpawnNew.transform.position.x, ballSpawnNew.transform.position.y, ballSpawnNew.transform.position.z), Quaternion.identity) as GameObject;
+//		pelotaViva  = Instantiate (ballType,new Vector3 (paddleVivo.GetComponentInChildren<Transform>().position.x,
+//			paddleVivo.GetComponentInChildren<Transform>().position.y,
+//			paddleVivo.GetComponentInChildren<Transform>().position.z),Quaternion.identity) as GameObject;
+		
+
+//		paddleVivo.transform.position = new Vector2 (paddleVivo.transform.position.x, GameObject.FindGameObjectWithTag ("padPosition").transform.position.y);
 		//Posicionar pelota arriba del pad a medida que vaya subiendo
-		pelotaViva.transform.position = new Vector3 (ballSpawn.transform.position.x, 
-			paddleSpawn.transform.position.y + 0.27f, 
-			ballSpawn.transform.position.z);
+		pelotaViva.transform.position = new Vector3 (paddleVivo.transform.position.x, //ballSpawn.transform.position.x, 
+			ballSpawnNew.transform.position.y,
+//			paddleSpawn.transform.position.y + 0.27f, 
+			0);
 
 		touchPad.transform.position = new Vector3 (0, touchPad.transform.position.y, touchPad.transform.position.z);
 

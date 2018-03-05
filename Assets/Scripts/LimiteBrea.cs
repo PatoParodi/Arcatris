@@ -9,11 +9,14 @@ public class LimiteBrea : MonoBehaviour {
 	public float velocidadPaddle;
 
 	private GameObject pad;
+	private GameController controller;
 	private float nuevaPosPad, nuevaPosBrea;
 
 	void Start(){
 		//Busco el paddle para referenciarlo despues
 		pad = GameObject.FindGameObjectWithTag ("paddle");
+
+		controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ();
 
 		//Establecer la nueva posicion de cada objeto
 		nuevaPosBrea = transform.position.y;
@@ -44,10 +47,10 @@ public class LimiteBrea : MonoBehaviour {
 	
 
 		//Si pasa la pelota, Game Over
-		if (other.gameObject.tag == "ball") {
-			Destroy (other.gameObject);
-			if(GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().ballInPlay)
-				GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().gameOver ();
+		if (other.gameObject.tag == "ball" && controller.ballInPlay) {
+
+			StartCoroutine (finJuego(other.gameObject));
+
 			// Volver a habilitar el Collider del paddle luego de perder (cuando la bola pasa muy por debajo)
 //			pad = GameObject.FindGameObjectWithTag ("paddle");
 //			if(pad != null)
@@ -68,15 +71,23 @@ public class LimiteBrea : MonoBehaviour {
 		}
 			
 	}
+
+	public IEnumerator finJuego(GameObject ball){
+
+		ball.GetComponent<CircleCollider2D> ().enabled = false;
+
+		yield return new WaitForSecondsRealtime (0.3f);
+
+		Destroy (ball);
+
+		yield return new WaitForSecondsRealtime (0.5f);
+
+		if(controller.ballInPlay)
+			controller.gameOver ();
+
+	}
 		
 	public IEnumerator SubirPiso(){
-//		public void SubirPiso(){
-			
-
-//		//Establecer la nueva posicion de cada objeto
-//		nuevaPosBrea = transform.position.y + movimientoPiso;
-//		if(pad != null)
-//			nuevaPosPad = pad.transform.position.y + movimientoPiso;
 
 		//Subir piso de forma gradual para que no se vea un salto
 		int partes = 5;
@@ -93,7 +104,7 @@ public class LimiteBrea : MonoBehaviour {
 
 		}
 
-		yield return new WaitForSeconds (0.1f);
+//		yield return new WaitForSeconds (0.1f);
 
 //		pad.GetComponent<Rigidbody2D> ().AddForceAtPosition (1, pad.transform.position);
 

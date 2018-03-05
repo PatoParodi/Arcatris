@@ -44,11 +44,11 @@ public class ballScript : MonoBehaviour {
 		}
 	
 		//Forzar vector de velocidad a magnitud fija
-		if (col.gameObject.tag == "Caja" || col.gameObject.tag == "Marco") { 				
+//		if (col.gameObject.tag == "Caja" || col.gameObject.tag == "Marco") { 				
 
 			gameObject.GetComponent<Rigidbody2D> ().velocity = 4.4f * (gameObject.GetComponent<Rigidbody2D> ().velocity.normalized);
 
-		}
+//		}
 			
 	}
 

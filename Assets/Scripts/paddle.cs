@@ -6,39 +6,18 @@ public class paddle : MonoBehaviour {
 
 	private GameController controller;
 
-	private GameObject waterLevel;
-//	public Transform waterLevel;
-	public float floatHeight;
-	public float bounceDamp;
-	public Vector3 buoyancyCenterOffset;
-	public Vector2 forceUp;
-
-	private float forceFactor;
-	private Vector3 actionPoint;
-	private Vector3 upLift;
-
-
 
 	void Awake(){
 	
 		controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ();
+
+		transform.position = new Vector2 (0, GameObject.Find("NivelDeFlotacion").transform.position.y);
+
 	}
 
 	void Update(){
 
-		waterLevel = GameObject.Find ("NivelDeFlotacion");
 
-//		GetComponent<Rigidbody2D> ().AddForceAtPosition (forceUp, waterLevel.transform.position);
-
-		actionPoint = transform.position + transform.TransformDirection(buoyancyCenterOffset);
-		forceFactor = 1f - ((actionPoint.y - waterLevel.transform.position.y) / floatHeight);
-
-		if(forceFactor > 0)
-		{
-			upLift = -Physics.gravity * (forceFactor - GetComponent<Rigidbody2D>().velocity.y * bounceDamp);
-			GetComponent<Rigidbody2D>().AddForceAtPosition(upLift, actionPoint);
-		}
-			
 	}
 		
 
