@@ -16,7 +16,6 @@ public class textos{
 				cantidadMonedas,
 				highScoreValue,
 				highScoreText,
-				bestScoreText,
 				extraBallsValue,
 				extraBallsInGame;
 
@@ -67,7 +66,6 @@ public class GameController : MonoBehaviour {
 	public Text UI_pauseTitle;
 	public GameObject popUpContinue;
 	public GameObject Brea;
-	public GameObject touchPad;
 
 	public Slider touchPadSlider;
 	public RectTransform handleSlider;
@@ -222,7 +220,6 @@ public class GameController : MonoBehaviour {
 
 		// Inicializar objetos en pantalla
 		textosEnPantalla.highScoreText.text = "";
-		textosEnPantalla.bestScoreText.enabled = false;
 		textosEnPantalla.highScoreValue.text = "";
 		BotonesEnPantalla.pausa.SetActive (false);
 		textosEnPantalla.puntajeText.text = "";
@@ -232,6 +229,14 @@ public class GameController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+		// Mover pad con barra
+		if (paddleVivo != null) {
+			if (Input.GetKey (KeyCode.Space)) {
+				Debug.Log ("Barra");
+				paddleVivo.GetComponent<Animator> ().SetFloat ("Move", 1f);
+			}
+		}
 
 		//Toque inicial durante el Tutorial
 		if (firstTimeEverToPlay){
@@ -457,11 +462,9 @@ public class GameController : MonoBehaviour {
 
 		paddleVivo.transform.position = new Vector2 (paddleVivo.transform.position.x, GameObject.FindGameObjectWithTag ("padPosition").transform.position.y);
 		//Posicionar pelota arriba del pad a medida que vaya subiendo
-		pelotaViva.transform.position = new Vector3 (ballSpawn.transform.position.x, 
+		pelotaViva.transform.position = new Vector3 (paddleVivo.transform.position.x, 
 			paddleSpawn.transform.position.y + 0.27f, 
-			ballSpawn.transform.position.z);
-
-		touchPad.transform.position = new Vector3 (0, touchPad.transform.position.y, touchPad.transform.position.z);
+			0);
 
 		yield return new WaitForSeconds (seconds);
 
@@ -568,10 +571,9 @@ public class GameController : MonoBehaviour {
 
 		extraBalls -= 1;
 		textosEnPantalla.extraBallsValue.text = extraBalls.ToString ();
+		textosEnPantalla.extraBallsInGame.text = extraBalls.ToString ();
 
 		PlayerPrefs.SetInt ("ExtraBall", extraBalls);
-
-		textosEnPantalla.extraBallsInGame.text = extraBalls.ToString ();
 
 		//Continuar Juego con Extra Ball
 		ContinuarJuego (extraBall);

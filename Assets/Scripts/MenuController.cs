@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class MenuController : MonoBehaviour {
 
+	private static FloatingText popUpText;
+
 	private GameController controller;
 
 
-	void Start(){
+	void Awake(){
 
 		controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
 
@@ -50,6 +52,26 @@ public class MenuController : MonoBehaviour {
 
 		gameObject.GetComponent<Animator> ().SetBool ("Mostrar", mostrar);
 
+
+	}
+
+	public void comprar(){
+
+		popUpCompra ("100", gameObject.transform);
+
+	}
+
+	public void popUpCompra(string precio, Transform location){
+	
+		popUpText = Resources.Load<FloatingText> ("Prefabs/PopUpTextParent");
+
+		FloatingText instance = Instantiate (popUpText);
+
+		//Ubicar popUp Text en el boton correspondiente
+		instance.transform.SetParent(location,false);
+
+		//Crear objeto en pantalla
+		instance.setText (precio);
 
 	}
 }

@@ -11,8 +11,6 @@ public class scriptContador : MonoBehaviour {
 	public GameObject popUpContinue;
 	public Button botonSiUse;
 	public Button botonSiVideo;
-	public Sprite videoSprite;
-	public Sprite yesSprite;
 
 	private bool sinExtraBall;
 
@@ -119,7 +117,6 @@ public class scriptContador : MonoBehaviour {
 	public void buttonSi(){
 
 		// Validar si le quedan Extra Ball
-		sinExtraBall = true;
 		if (sinExtraBall)
 			//VER VIDEO PARA GANAR UNA BOLA EXTRA
 			ShowRewardedVideo();
