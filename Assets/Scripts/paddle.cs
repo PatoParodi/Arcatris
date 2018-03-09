@@ -23,12 +23,12 @@ public class paddle : MonoBehaviour {
 
 			//Volver el animador Blend a 0
 //			Mathf.MoveTowards(move,0.5f,0.01f);
-			GetComponent<Animator> ().SetFloat ("Move", move);
-
-			if (move > 0.5f)
-				move -= factorFlotacion;
-			if(move < 0.5f)
-				move += factorFlotacion;
+//			GetComponent<Animator> ().SetFloat ("Move", move);
+//
+//			if (move > 0.5f)
+//				move -= factorFlotacion;
+//			if(move < 0.5f)
+//				move += factorFlotacion;
 //			move += 0.5f/(1 + factorFlotacion);
 //			Mathf.MoveTowards(move,0.5f,0.01f);
 			
@@ -37,8 +37,9 @@ public class paddle : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D col){
 
+		ContactPoint2D contact = col.contacts [0];
 
-		foreach (ContactPoint2D contact in col.contacts) {
+//		foreach (ContactPoint2D contact in col.contacts) {
 
 			if (col.gameObject.tag == "ball" ) {
 
@@ -52,16 +53,16 @@ public class paddle : MonoBehaviour {
 
 				//Verifico de que lado reboto para la animacion correspondiente
 				move = (porc/100) + 0.5f;
-//				GetComponent<Animator> ().SetFloat ("Move", move);
-//				GetComponentInChildren<Animator> ().SetFloat ("Blend", 0.5f);
-//				GetComponent<Animator> ().SetFloat ("Blend", 0.5f);
+				GetComponent<Animator> ().SetFloat ("Move", move);
+				GetComponent<Animator> ().SetBool ("Impacto", true);
+				StartCoroutine(reiniciarFlotacion(1f));
 
 				// Parto de los 90 grados como mi 0
 				porc = 90 - porc;
 
 				contact.rigidbody.AddForce(controller.obtenerVectorVelocidad (controller.fuerzaPelota, porc, porc));
 				
-			}
+//			}
 		}
 	}
 
@@ -71,7 +72,9 @@ public class paddle : MonoBehaviour {
 		yield return new WaitForSeconds (duracion);
 
 		//Volver el animador Blend a 0
-		GetComponent<Animator> ().SetFloat ("Move", 0.5f);
+//		GetComponent<Animator> ().SetFloat ("Move", 0.5f);
+		GetComponent<Animator> ().SetBool ("Impacto", false);
+
 
 	}
 
