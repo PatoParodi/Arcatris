@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
 
 //Para que Unity reconozca esta clase es necesaria esta sentencia
 [System.Serializable]
@@ -201,6 +202,14 @@ public class GameController : MonoBehaviour {
 			// Setear variable de primera vez que juega
 			PlayerPrefs.SetString ("jugoAntes", "Si");
 			firstTimeEverToPlay = false;
+
+			//Analytics
+//			Analytics.CustomEvent("PrimeraPartida");
+//				new Dictionary<string, object>
+//				{
+////					{ "jugadores", jugadoresAIstanciar }
+//				});
+
 		}
 			
 		yield return new WaitForSecondsRealtime (1);
@@ -401,7 +410,7 @@ public class GameController : MonoBehaviour {
 		//Instanciar Pelota y Paddle
 		pelotaViva  = Instantiate (ballType,new Vector3 (ballSpawn.position.x,ballSpawn.position.y,ballSpawn.position.z),Quaternion.identity) as GameObject;
 		if (paddleVivo == null) {
-			paddleVivo = Instantiate (paddle, paddleSpawnInicial) as GameObject;
+			paddleVivo = Instantiate (paddle, new Vector2(paddleSpawnInicial.transform.position.x,paddleSpawnInicial.transform.position.y), Quaternion.identity) as GameObject;
 
 		}
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour {
 
@@ -8,6 +9,7 @@ public class MenuController : MonoBehaviour {
 
 	private GameController controller;
 
+	public Text titleCongigMenu;
 
 	void Awake(){
 
@@ -24,16 +26,21 @@ public class MenuController : MonoBehaviour {
 	public void pauseGame(bool mostrar){
 
 		if (controller.ballInPlay) {
-		if (mostrar) {
+			
+			titleCongigMenu.text = "PAUSED";
+
+			if (mostrar) {
 				//Pause
 				Time.timeScale = 0;
-			}
-
-			else{
+			} else {
 				//Unpause
 				Time.timeScale = 1;
 				//Show Configuration Menu
 			}
+		} else {
+			
+			titleCongigMenu.text = "CONFIG";
+
 		}
 
 		gameObject.GetComponent<Animator> ().SetBool ("Mostrar", mostrar);
