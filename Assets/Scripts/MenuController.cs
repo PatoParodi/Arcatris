@@ -72,7 +72,7 @@ public class MenuController : MonoBehaviour {
 	
 		popUpText = Resources.Load<FloatingText> ("Prefabs/PopUpTextParent");
 
-		FloatingText instance = Instantiate (popUpText);
+		FloatingText instance = Instantiate (popUpText, location.position, Quaternion.identity);
 
 		//Ubicar popUp Text en el boton correspondiente
 		instance.transform.SetParent(location,false);
