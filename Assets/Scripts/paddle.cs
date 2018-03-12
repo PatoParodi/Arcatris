@@ -72,7 +72,6 @@ public class paddle : MonoBehaviour {
 		yield return new WaitForSeconds (duracion);
 
 		//Volver el animador Blend a 0
-//		GetComponent<Animator> ().SetFloat ("Move", 0.5f);
 		GetComponent<Animator> ().SetBool ("Impacto", false);
 
 

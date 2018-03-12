@@ -10,6 +10,7 @@ public class MenuController : MonoBehaviour {
 	private GameController controller;
 
 	public Text titleCongigMenu;
+	public Transform locationPopUpText;
 
 	void Awake(){
 
@@ -68,6 +69,12 @@ public class MenuController : MonoBehaviour {
 
 	}
 
+	public void comprar100(){
+
+		popUpCompra ("100", locationPopUpText);
+
+	}
+
 	public void popUpCompra(string precio, Transform location){
 	
 		popUpText = Resources.Load<FloatingText> ("Prefabs/PopUpTextParent");
@@ -75,7 +82,7 @@ public class MenuController : MonoBehaviour {
 		FloatingText instance = Instantiate (popUpText, location.position, Quaternion.identity);
 
 		//Ubicar popUp Text en el boton correspondiente
-		instance.transform.SetParent(location,false);
+		instance.transform.SetParent(gameObject.transform,false);
 
 		//Crear objeto en pantalla
 		instance.setText (precio);

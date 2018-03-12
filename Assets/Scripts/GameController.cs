@@ -141,7 +141,7 @@ public class GameController : MonoBehaviour {
 			textosEnPantalla.highScoreValue.text = "Get one!";
 
 		// Vidas
-		vidas = 1;
+//		vidas = 1;
 
 		// Monedas
 		Monedas = 0;
