@@ -9,7 +9,7 @@ public class MenuController : MonoBehaviour {
 
 	private GameController controller;
 
-	public Text titleCongigMenu;
+	public Text titleConfigMenu;
 	public Transform locationPopUpText;
 
 	void Awake(){
@@ -28,7 +28,7 @@ public class MenuController : MonoBehaviour {
 
 		if (controller.ballInPlay) {
 			
-			titleCongigMenu.text = "PAUSED";
+			titleConfigMenu.text = "PAUSED";
 
 			if (mostrar) {
 				//Pause
@@ -40,7 +40,7 @@ public class MenuController : MonoBehaviour {
 			}
 		} else {
 			
-			titleCongigMenu.text = "CONFIG";
+			titleConfigMenu.text = "CONFIG";
 
 		}
 

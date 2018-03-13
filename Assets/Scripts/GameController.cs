@@ -471,15 +471,15 @@ public class GameController : MonoBehaviour {
 
 		paddleVivo.transform.position = new Vector2 (paddleVivo.transform.position.x, GameObject.FindGameObjectWithTag ("padPosition").transform.position.y);
 		//Posicionar pelota arriba del pad a medida que vaya subiendo
-		pelotaViva.transform.position = new Vector3 (paddleVivo.transform.position.x, 
-			paddleSpawn.transform.position.y + 0.27f, 
-			0);
+//		pelotaViva.transform.position = new Vector3 (paddleVivo.transform.position.x, 
+//			paddleSpawn.transform.position.y + 0.27f, 
+//			0);
 
 		yield return new WaitForSeconds (seconds);
 
 		// Dar fuerza inicial a la pelota
 		pelotaViva.GetComponent<Rigidbody2D>().AddForce (obtenerVectorVelocidad(fuerzaPelota,50f,130f));
-
+		pelotaViva.GetComponent<CircleCollider2D> ().enabled = true;
 		ballInPlay = true;
 
 
