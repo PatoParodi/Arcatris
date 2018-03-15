@@ -179,14 +179,14 @@ public class GameController : MonoBehaviour {
 			
 	}
 		
-	public void comprarExtraBall(){
+	public void comprarExtraBall(int precio, int cantidad){
 	
-		if (Monedas >= 100) {
+		if (Monedas >= precio) {
 			//Quitar monedas de la compra
-			AddMoneda (-100);
+			AddMoneda (-precio);
 
 			//Agregar una Extra Ball
-			extraBalls = extraBalls + 1;
+			extraBalls = extraBalls + cantidad;
 			PlayerPrefs.SetInt ("ExtraBall", extraBalls);
 
 			textosEnPantalla.extraBallsValue.text = extraBalls.ToString ();
@@ -639,5 +639,10 @@ public class GameController : MonoBehaviour {
 	
 		return Puntaje;
 
+	}
+
+	public int _getMonedas(){
+	
+		return Monedas;
 	}
 }

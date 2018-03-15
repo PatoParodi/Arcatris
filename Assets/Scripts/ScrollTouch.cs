@@ -39,8 +39,9 @@ public class ScrollTouch : MonoBehaviour {
 		
 			distance[i] = Mathf.Abs(center.transform.position.x - bttn[i].transform.position.x);
 
-			if(!i.Equals(minButtonNum))
-				bttn [i].GetComponent<Button> ().interactable = false;
+//			if (!i.Equals (minButtonNum)) {
+//				bttn [i].GetComponent<Button> ().interactable = false;
+//			}
 		
 		}
 
@@ -48,7 +49,7 @@ public class ScrollTouch : MonoBehaviour {
 		if (minButtonNum == 0 || minButtonNum == (bttn.Length - 1)) {
 			if (distance [minButtonNum] > 1.5f) {
 				draggable = false;
-				LerpToBttn (minButtonNum * -bttnDistance);	
+//				LerpToBttn (minButtonNum * -bttnDistance);	
 			}
 			else {
 				draggable = true;
@@ -56,18 +57,13 @@ public class ScrollTouch : MonoBehaviour {
 
 			} else{ 
 				draggable = true;
-//				dragging = true;
-//			} 
-//		} else {				
-//			draggable = true;
-////			dragging = true;
-//
+
 		}
 			
-
+		draggable = true;
 		//Enable/Disable dragging if start or end buttons are gone too far
-		panelFather.GetComponent<ScrollRect> ().horizontal = draggable;
-		panelFather.GetComponent<ScrollRect> ().inertia = draggable;
+//		panelFather.GetComponent<ScrollRect> ().horizontal = draggable;
+//		panelFather.GetComponent<ScrollRect> ().inertia = draggable;
 
 		float minDistance = Mathf.Min (distance); // Get the min distance
 
@@ -80,9 +76,11 @@ public class ScrollTouch : MonoBehaviour {
 		}
 
 		if (!dragging) {
-		
-			LerpToBttn (minButtonNum * -bttnDistance);
-			bttn [minButtonNum].GetComponent<Button> ().interactable = true;
+
+			draggable = true;
+//			LerpToBttn (minButtonNum * -bttnDistance);
+//			bttn [minButtonNum].GetComponent<Button> ().interactable = true;
+
 		}
 	
 	}

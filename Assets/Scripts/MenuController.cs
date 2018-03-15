@@ -7,15 +7,32 @@ public class MenuController : MonoBehaviour {
 
 	private static FloatingText popUpText;
 
+	private GameObject _extraBall;
+
 	private GameController controller;
 
 	public Text titleConfigMenu;
-	public Transform locationPopUpText;
+	public Text _monedas;
+	public Text _extraBalls;
 
 	void Awake(){
 
 		controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
 
+	}
+
+	void Update(){
+	
+		if (_extraBalls != null) {
+		
+			_extraBalls.text = controller.extraBalls.ToString ();
+		}
+
+		if (_monedas != null) {
+
+			_monedas.text = controller._getMonedas ().ToString ();
+		}
+			
 	}
 
 	public void MostarConfiguracion(bool mostrar){
@@ -62,22 +79,58 @@ public class MenuController : MonoBehaviour {
 
 
 	}
+		
+	public void comprarExtraBallVid(){
 
-	public void comprar(){
+		//Mostrar video por Reward
 
-		popUpCompra ("100", gameObject.transform);
+		controller.comprarExtraBall (0, 1);
 
 	}
 
-	public void comprar100(){
+	public void comprarExtraBall1(){
+		//Mostrar PopUp desde el boton donde se compro
+//		popUpCompra ("100", gameObject.transform);
 
-		popUpCompra ("100", locationPopUpText);
+		_extraBall = Resources.Load("Prefabs/extraBallCompra") as GameObject;
+
+		Instantiate (_extraBall, gameObject.transform);
+
+		//Mover nueva extraBall comprada hacia el contador de ExtraBalls
+
+		controller.comprarExtraBall (100, 1);
+
+	}
+
+	public void comprarExtraBall2(){
+		//Mostrar PopUp desde el boton donde se compro
+		popUpCompra ("100", gameObject.transform);
+
+		controller.comprarExtraBall (100, 1);
+
+	}
+
+	public void comprarExtraBall3(){
+		//Mostrar PopUp desde el boton donde se compro
+		popUpCompra ("100", gameObject.transform);
+
+		controller.comprarExtraBall (100, 1);
+
+	}
+
+	public void comprarExtraBall4(){
+		//Mostrar PopUp desde el boton donde se compro
+		popUpCompra ("100", gameObject.transform);
+
+		controller.comprarExtraBall (100, 1);
 
 	}
 
 	public void popUpCompra(string precio, Transform location){
 	
 		popUpText = Resources.Load<FloatingText> ("Prefabs/PopUpTextParent");
+
+
 
 		FloatingText instance = Instantiate (popUpText, location.position, Quaternion.identity);
 
