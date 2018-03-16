@@ -43,7 +43,6 @@ public class GameController : MonoBehaviour {
 
 	public GameObject paddle;
 	public float velocidadPaddle;
-	public Transform paddleSpawn;
 	public Transform paddleSpawnInicial;
 	public GameObject pelota;
 	public GameObject extraBall;
@@ -95,7 +94,7 @@ public class GameController : MonoBehaviour {
 	void Start () {
 		
 ///////////// TEST MODE ONLY ///////////////////////////
-		PlayerPrefs.SetInt ("High Score", 0);
+//		PlayerPrefs.SetInt ("High Score", 0);
 		PlayerPrefs.SetInt ("ArcatrisMonedas", 1000);
 //		PlayerPrefs.SetInt ("ExtraBall", 0);
 ///////////////////////////////////////////////////////////
@@ -110,20 +109,20 @@ public class GameController : MonoBehaviour {
 		string strJugoAntes = PlayerPrefs.GetString ("jugoAntes");
 
 		if (strJugoAntes == "Si")
-			//Primera vez que juega
+			//Es la Primera vez que juega?
 			firstTimeEverToPlay = false;
 
 		// &*&*&*&*&*&*&**&*&*&*&*&*&*&*&*&*&*&*&*&*&*
 		// PARA PRUEBAS  de TUTORIAL SOLAMENTE!!!!!!! !! ! ! ! !! !! ! !!! !!!
 		// &*&*&*&*&*&*&**&*&*&*&*&*&*&*&*&*&*&*&*&*&*
-		firstTimeEverToPlay = false;
+//		firstTimeEverToPlay = true;
 
 
 
 		//Tutorial How to Play
 		if (firstTimeEverToPlay) {
 			PantallaInicial.GetComponent<MenuController> ().MostrarPlay (false);
-			paddleVivo = Instantiate (paddle, paddleSpawnInicial) as GameObject;
+			paddleVivo = Instantiate (paddle, new Vector2(paddleSpawnInicial.transform.position.x,paddleSpawnInicial.transform.position.y), Quaternion.identity) as GameObject;
 
 			tutorialObjetos.swipeText.SetActive (true);
 			tutorialObjetos.arrows.SetActive (true);
@@ -179,20 +178,29 @@ public class GameController : MonoBehaviour {
 			
 	}
 		
-	public void comprarExtraBall(int precio, int cantidad){
+	public bool comprarExtraBall(int precio, int cantidad){
 	
 		if (Monedas >= precio) {
 			//Quitar monedas de la compra
 			AddMoneda (-precio);
 
-			//Agregar una Extra Ball
-			extraBalls = extraBalls + cantidad;
-			PlayerPrefs.SetInt ("ExtraBall", extraBalls);
+			return true;
 
-			textosEnPantalla.extraBallsValue.text = extraBalls.ToString ();
-
+		} else {
+		// No hay suficientes diamantes para comprar
+			return false;
 		}
 
+	}
+
+	public void addExtraBallToScreen(){
+
+		//Agregar una Extra Ball
+		extraBalls +=  1;
+		PlayerPrefs.SetInt ("ExtraBall", extraBalls);
+
+		textosEnPantalla.extraBallsValue.text = extraBalls.ToString ();
+	
 	}
 		
 	public IEnumerator tutorialDemo(){
@@ -228,10 +236,10 @@ public class GameController : MonoBehaviour {
 		PantallaInicial.GetComponent<MenuController> ().MostrarPlay (true);
 
 		// Inicializar objetos en pantalla
-		textosEnPantalla.highScoreText.text = "";
-		textosEnPantalla.highScoreValue.text = "";
-		BotonesEnPantalla.pausa.SetActive (false);
-		textosEnPantalla.puntajeText.text = "";
+//		textosEnPantalla.highScoreText.text = "";
+//		textosEnPantalla.highScoreValue.text = "";
+//		BotonesEnPantalla.pausa.SetActive (false);
+//		textosEnPantalla.puntajeText.text = "";
 
 
 	}
@@ -335,7 +343,7 @@ public class GameController : MonoBehaviour {
 			paddleVivo.GetComponent<Rigidbody2D> ().AddForce (new Vector2 (movimientoPaddle, 0));
 
 			// Limito la posicion en X del pad para que no se suba a las paredes
-			paddleVivo.transform.position = new Vector3(Mathf.Clamp(paddleVivo.transform.position.x,-2f,2f),paddleVivo.transform.position.y,paddleSpawn.transform.position.z);
+			paddleVivo.transform.position = new Vector2(Mathf.Clamp(paddleVivo.transform.position.x,-2f,2f),paddleVivo.transform.position.y);
 
 		}
 
@@ -377,7 +385,6 @@ public class GameController : MonoBehaviour {
 //Comienza el juego desde el principio
 
 		PantallaInicial.GetComponent<MenuController> ().MostrarPlay (false);
-//		PantallaInicial.SetActive (false);
 		UI_inGame.SetActive (true);
 
 		//Mostrar vidas iniciales

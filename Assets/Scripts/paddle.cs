@@ -37,9 +37,7 @@ public class paddle : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D col){
 
-		ContactPoint2D contact = col.contacts [0];
-
-//		foreach (ContactPoint2D contact in col.contacts) {
+			ContactPoint2D contact = col.contacts [0];
 
 			if (col.gameObject.tag == "ball" ) {
 
@@ -62,8 +60,7 @@ public class paddle : MonoBehaviour {
 
 				contact.rigidbody.AddForce(controller.obtenerVectorVelocidad (controller.fuerzaPelota, porc, porc));
 				
-//			}
-		}
+			}
 	}
 
 	public IEnumerator reiniciarFlotacion(float duracion){

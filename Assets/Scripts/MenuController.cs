@@ -88,57 +88,69 @@ public class MenuController : MonoBehaviour {
 
 	}
 
+	void realizarCompraExtraBall(int precio, int cantidad){
+
+		// Hace la compra si tiene suficientes diamantes, caso contrario devuelve false
+		bool _compraHecha = controller.comprarExtraBall (precio, cantidad);
+
+		if (_compraHecha) {
+			//Instanciar pelota comprada, que volara hasta el contador
+			_extraBall = Resources.Load ("Prefabs/extraBallCompra") as GameObject;
+
+			StartCoroutine (_instanciarBola (cantidad, 0.1f));
+
+		}
+
+	}
+
+	public IEnumerator _instanciarBola(int cantidad, float tiempo){
+
+		for (int i = 0; i < cantidad; i++) {
+		
+			Instantiate (_extraBall, gameObject.transform);
+
+			yield return new WaitForSeconds (tiempo);
+		
+		}
+	}
+
 	public void comprarExtraBall1(){
-		//Mostrar PopUp desde el boton donde se compro
-//		popUpCompra ("100", gameObject.transform);
 
-		_extraBall = Resources.Load("Prefabs/extraBallCompra") as GameObject;
-
-		Instantiate (_extraBall, gameObject.transform);
-
-		//Mover nueva extraBall comprada hacia el contador de ExtraBalls
-
-		controller.comprarExtraBall (100, 1);
+		realizarCompraExtraBall (100, 1);
 
 	}
 
 	public void comprarExtraBall2(){
-		//Mostrar PopUp desde el boton donde se compro
-		popUpCompra ("100", gameObject.transform);
-
-		controller.comprarExtraBall (100, 1);
+		
+		realizarCompraExtraBall (400, 5);
 
 	}
 
 	public void comprarExtraBall3(){
-		//Mostrar PopUp desde el boton donde se compro
-		popUpCompra ("100", gameObject.transform);
 
-		controller.comprarExtraBall (100, 1);
+		realizarCompraExtraBall (600, 10);
 
 	}
 
 	public void comprarExtraBall4(){
-		//Mostrar PopUp desde el boton donde se compro
-		popUpCompra ("100", gameObject.transform);
 
-		controller.comprarExtraBall (100, 1);
+		realizarCompraExtraBall (1000, 25);
 
 	}
 
-	public void popUpCompra(string precio, Transform location){
-	
-		popUpText = Resources.Load<FloatingText> ("Prefabs/PopUpTextParent");
-
-
-
-		FloatingText instance = Instantiate (popUpText, location.position, Quaternion.identity);
-
-		//Ubicar popUp Text en el boton correspondiente
-		instance.transform.SetParent(gameObject.transform,false);
-
-		//Crear objeto en pantalla
-		instance.setText (precio);
-
-	}
+//	public void popUpCompra(string precio, Transform location){
+//	
+//		popUpText = Resources.Load<FloatingText> ("Prefabs/PopUpTextParent");
+//
+//
+//
+//		FloatingText instance = Instantiate (popUpText, location.position, Quaternion.identity);
+//
+//		//Ubicar popUp Text en el boton correspondiente
+//		instance.transform.SetParent(gameObject.transform,false);
+//
+//		//Crear objeto en pantalla
+//		instance.setText (precio);
+//
+//	}
 }
