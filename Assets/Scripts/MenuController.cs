@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
+using UnityEngine.Advertisements;
+
 
 public class MenuController : MonoBehaviour {
 
@@ -79,14 +82,7 @@ public class MenuController : MonoBehaviour {
 
 
 	}
-		
-	public void comprarExtraBallVid(){
 
-		//Mostrar video por Reward
-
-		controller.comprarExtraBall (0, 1);
-
-	}
 
 	void realizarCompraExtraBall(int precio, int cantidad){
 
@@ -94,6 +90,13 @@ public class MenuController : MonoBehaviour {
 		bool _compraHecha = controller.comprarExtraBall (precio, cantidad);
 
 		if (_compraHecha) {
+
+			//Alimentar analytics
+			Analytics.CustomEvent ("ComprasExtraBall", new Dictionary<string, object> {
+				{ "Cantidad", cantidad },
+				{ "Precio", precio }
+			});
+
 			//Instanciar pelota comprada, que volara hasta el contador
 			_extraBall = Resources.Load ("Prefabs/extraBallCompra") as GameObject;
 
@@ -114,15 +117,50 @@ public class MenuController : MonoBehaviour {
 		}
 	}
 
-	public void comprarExtraBall1(){
 
-		realizarCompraExtraBall (100, 1);
+	public void comprarExtraBallVid(){
+
+		//Mostrar video por Reward
+		if (Advertisement.IsReady ()) {
+			ShowOptions options = new ShowOptions();
+			options.resultCallback = ManagerShowResult;
+
+			Advertisement.Show("rewardedVideo", options);
+
+		}
+
+	}
+
+	void ManagerShowResult (ShowResult result)
+	{
+		if(result == ShowResult.Finished) {
+			// Reward your player here.
+			//Sumar una Bola Extra.
+			realizarCompraExtraBall (0, 1);
+
+		}else if(result == ShowResult.Skipped) {
+			//Video was skipped - Do NOT reward the player
+
+		}else if(result == ShowResult.Failed) {
+			//Video failed to show
+
+		}
+
+	}
+
+	public void comprarExtraBall1(){
+		int _cantidad = 1;
+		int _precio = 100;
+
+		realizarCompraExtraBall (_precio, _cantidad);
 
 	}
 
 	public void comprarExtraBall2(){
-		
-		realizarCompraExtraBall (400, 5);
+		int _cantidad = 5;
+		int _precio = 400;
+
+		realizarCompraExtraBall (_precio, _cantidad);
 
 	}
 

@@ -511,15 +511,7 @@ public class GameController : MonoBehaviour {
 		caja.GetComponent<Animator> ().SetBool ("Destruir", true);
 
 		//Destruir caja luego de que termine la animacion
-		StartCoroutine (destruirCaja(caja, 1.5f));
-
-	}
-
-	public IEnumerator destruirCaja(GameObject caja, float duracionAnimacion){
-
-		yield return new WaitForSeconds (duracionAnimacion);
-
-		Destroy(caja);
+		Destroy (caja, 1.5f);
 
 	}
 

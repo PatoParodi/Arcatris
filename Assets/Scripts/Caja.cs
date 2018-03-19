@@ -69,8 +69,6 @@ public class Caja : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D col){
 
-		GameObject instanciaMoneda;
-
 		if (col.gameObject.tag == "ball") {
 			// Deshabilitar los colliders NO triger al explotar
 			BoxCollider2D[] colidersCaja = GetComponents<BoxCollider2D>();
@@ -80,10 +78,11 @@ public class Caja : MonoBehaviour {
 
 			//Explotar moneda con 25% de probabilidad
 			if (probabilidad (25)) {
-				instanciaMoneda = Instantiate (moneda, new Vector3 (transform.position.x, transform.position.y, -1), Quaternion.identity) as GameObject;
-				StartCoroutine (destruirObjeto (instanciaMoneda, 1.5f));
+				Instantiate (moneda, new Vector3 (transform.position.x, transform.position.y, -1), Quaternion.identity);
+				//El objeto moneda viajara hasta el contador y luego se destruira
+				//				Destroy (instanciaMoneda, 1.5f);
 				//Sumar moneda al total
-				controller.AddMoneda(1);
+//				controller.AddMoneda(1);
 			}
 
 			//Animar y destruir caja
@@ -94,14 +93,6 @@ public class Caja : MonoBehaviour {
 
 
 		}
-	}
-
-	private IEnumerator destruirObjeto(GameObject objeto, float delay){
-
-		yield return new WaitForSeconds (delay);
-
-		Destroy (objeto);
-
 	}
 
 	public bool probabilidad(int porcentaje){
