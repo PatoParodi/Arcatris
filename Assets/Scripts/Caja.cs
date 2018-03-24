@@ -77,7 +77,7 @@ public class Caja : MonoBehaviour {
 					colider.enabled = false;
 
 			//Explotar moneda con 25% de probabilidad
-			if (probabilidad (25)) {
+			if (probabilidad (controller.porcentajeSpawnDiamante)) {
 				Instantiate (moneda, new Vector3 (transform.position.x, transform.position.y, -1), Quaternion.identity);
 				//El objeto moneda viajara hasta el contador y luego se destruira
 				//				Destroy (instanciaMoneda, 1.5f);

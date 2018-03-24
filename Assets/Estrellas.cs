@@ -1,0 +1,27 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+
+public class Estrellas : MonoBehaviour {
+
+	public int nroEstrella;
+
+	public void pintarEstrellas(){
+
+		for (int e = 1; e <= 5; e++) {
+
+			//Establece el mismo estado del Toggle tocado para las estrellas anteriores
+			GameObject.Find ("Estrella" + e).GetComponent<Toggle> ().isOn = false;
+
+		}
+
+			for (int i = 1; i <= nroEstrella; i++) {
+			
+				//Establece el mismo estado del Toggle tocado para las estrellas anteriores
+			GameObject.Find ("Estrella" + i).GetComponent<Toggle> ().isOn = true;
+		
+		}
+	}
+}

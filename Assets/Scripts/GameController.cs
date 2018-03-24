@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Analytics;
+using Language;
 
 //Para que Unity reconozca esta clase es necesaria esta sentencia
 [System.Serializable]
@@ -54,6 +55,8 @@ public class GameController : MonoBehaviour {
 	public GameObject cajas_04;
 	public Transform cajaSpawn;
 	public float velocidadCaja;
+	public int porcentajeSpawnDiamante;
+
 
 	public float countdownInicial;
 	public float timeBetweenWaves;
@@ -90,16 +93,21 @@ public class GameController : MonoBehaviour {
 	public float areaMuerta;
 	public Coroutine spawneoCajas;
 
+//	private static LanguageManager _languageManager;
+
 	// Use this for initialization
 	void Start () {
-		
+
 ///////////// TEST MODE ONLY ///////////////////////////
 //		PlayerPrefs.SetInt ("High Score", 0);
 		PlayerPrefs.SetInt ("ArcatrisMonedas", 1000);
 //		PlayerPrefs.SetInt ("ExtraBall", 0);
 ///////////////////////////////////////////////////////////
 
-
+		//Setear idioma elegido anteriormente
+		string _language = PlayerPrefs.GetString("Idioma");
+		LanguageManager.setLanguage (_language);
+		
 		velocidadCaja = velocidadCaja / 100;
 
 		//Puntaje a cero
@@ -388,6 +396,7 @@ public class GameController : MonoBehaviour {
 		UI_inGame.SetActive (true);
 
 		//Mostrar vidas iniciales
+		vidas = 3;
 		mostrarVidas (vidas, "vida");
 
 

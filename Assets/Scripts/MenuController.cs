@@ -4,7 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Analytics;
 using UnityEngine.Advertisements;
+using Language;
 
+
+[System.Serializable]
+public class langButton{
+	public string lang, iconName;
+
+}
 
 public class MenuController : MonoBehaviour {
 
@@ -23,6 +30,7 @@ public class MenuController : MonoBehaviour {
 		controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
 
 	}
+
 
 	void Update(){
 	
@@ -60,7 +68,7 @@ public class MenuController : MonoBehaviour {
 			}
 		} else {
 			
-			titleConfigMenu.text = "CONFIG";
+//			titleConfigMenu.text = "CONFIG";
 
 		}
 
