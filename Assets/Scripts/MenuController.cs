@@ -184,11 +184,16 @@ public class MenuController : MonoBehaviour {
 
 	}
 
+	public void GoToMarket(){
+	
+		Application.OpenURL ("market://details?id=" + "Limbo"); //Application.productName);
+	
+	}
+
+
 //	public void popUpCompra(string precio, Transform location){
 //	
 //		popUpText = Resources.Load<FloatingText> ("Prefabs/PopUpTextParent");
-//
-//
 //
 //		FloatingText instance = Instantiate (popUpText, location.position, Quaternion.identity);
 //

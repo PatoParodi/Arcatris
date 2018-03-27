@@ -98,10 +98,14 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+// &*&*&*&*&*&*&**&*&*&*&*&*&*&*&*&*&*&*&*&*&*
+// PARA PRUEBAS  de TUTORIAL SOLAMENTE!!!!!!! !! ! ! ! !! !! ! !!! !!!
+// &*&*&*&*&*&*&**&*&*&*&*&*&*&*&*&*&*&*&*&*&*
 ///////////// TEST MODE ONLY ///////////////////////////
 //		PlayerPrefs.SetInt ("High Score", 0);
 		PlayerPrefs.SetInt ("ArcatrisMonedas", 1000);
 //		PlayerPrefs.SetInt ("ExtraBall", 0);
+//		firstTimeEverToPlay = true;
 ///////////////////////////////////////////////////////////
 
 		//Setear idioma elegido anteriormente
@@ -119,13 +123,6 @@ public class GameController : MonoBehaviour {
 		if (strJugoAntes == "Si")
 			//Es la Primera vez que juega?
 			firstTimeEverToPlay = false;
-
-		// &*&*&*&*&*&*&**&*&*&*&*&*&*&*&*&*&*&*&*&*&*
-		// PARA PRUEBAS  de TUTORIAL SOLAMENTE!!!!!!! !! ! ! ! !! !! ! !!! !!!
-		// &*&*&*&*&*&*&**&*&*&*&*&*&*&*&*&*&*&*&*&*&*
-//		firstTimeEverToPlay = true;
-
-
 
 		//Tutorial How to Play
 		if (firstTimeEverToPlay) {
@@ -364,8 +361,10 @@ public class GameController : MonoBehaviour {
 		ballInPlay = false;
 
 		//Bajar una vida y actualizarlas en pantalla
-		vidas = vidas - 1; 
-		mostrarVidas (vidas, "vida");
+		if (vidas > 0) {
+			vidas = vidas - 1; 
+			mostrarVidas (vidas, "vida");
+		}
 
 
 		if (vidas > 0)
@@ -461,19 +460,17 @@ public class GameController : MonoBehaviour {
 			Puntaje = 0;
 			textosEnPantalla.puntajeText.text = Puntaje.ToString();
 
-			spawnCajas ();
+			GameObject _instanciaCajas = spawnCajas ();
+
+			//Al empezar desde la pantalla de PLAY, empezar con algunos ladrillos mas abajo
+			Transform _prefabActual = _instanciaCajas.GetComponent<Transform>();
+			_prefabActual.position = new Vector2 (_prefabActual.position.x, _prefabActual.position.y - 2.2f);
 
 		}
 		else{
 
 			// Solo para cuando se utiliza una Bola Extra
 			if (vidas == 0) {
-//				//Volver a mover  Prefabs de la Cajas
-//				prefabs = GameObject.FindGameObjectsWithTag ("prefab");
-//				foreach (GameObject prefab in prefabs) {
-//					prefab.GetComponent<Caja> ().velocidad = velocidadCaja;
-//				}
-
 
 				// Limpiar cajas explotando
 				float posicionConvertidor = GameObject.FindGameObjectWithTag ("Convertidor").transform.position.y;
@@ -539,29 +536,32 @@ public class GameController : MonoBehaviour {
 
 	}
 
-	public void spawnCajas (){
+	public GameObject spawnCajas (){
 
+		GameObject _instancia = new GameObject();
 
 		//Elegir el prefab aleatroriamente
 		//Generar el prefab 
 		switch (Random.Range (1, 4)){
 		case 1:
-			Instantiate(cajas_01);
+			_instancia = Instantiate(cajas_01) as GameObject;
 			break;
 		
 		case 2:
-			Instantiate(cajas_02);
+			_instancia = Instantiate(cajas_02) as GameObject;
 			break;
 
 		case 3:
-			Instantiate(cajas_03);
+			_instancia = Instantiate(cajas_03) as GameObject;
 			break;
 
 		case 4:
-			Instantiate(cajas_04);
+			_instancia = Instantiate(cajas_04) as GameObject;
 			break;
 
 		}
+
+		return _instancia;
 
 	}
 
@@ -569,6 +569,12 @@ public class GameController : MonoBehaviour {
 
 		Puntaje += puntos;
 		textosEnPantalla.puntajeText.text = Puntaje.ToString ();
+
+		//Cada x puntos incrementar la velocidad de las cajas
+		if (Puntaje % 500 == 0) {
+			velocidadCaja *= 1.10f;
+			Debug.Log ("Se incrementa la velocidad");
+		}
 
 		return Puntaje;
 	

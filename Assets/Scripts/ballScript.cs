@@ -5,7 +5,7 @@ using UnityEngine;
 public class ballScript : MonoBehaviour {
 
 
-	void Update(){
+	void FixedUpdate(){
 	
 		gameObject.GetComponent<Rigidbody2D> ().velocity = 4.4f * (gameObject.GetComponent<Rigidbody2D> ().velocity.normalized);
 
