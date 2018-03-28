@@ -98,6 +98,9 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+// &*&*&*&*&*&*&**&*&*&*&*&*&*&*&*&*&*&*&*&*&*
+// PARA PRUEBAS  de TUTORIAL SOLAMENTE!!!!!!! !! ! ! ! !! !! ! !!! !!!
+// &*&*&*&*&*&*&**&*&*&*&*&*&*&*&*&*&*&*&*&*&*
 ///////////// TEST MODE ONLY ///////////////////////////
 //		PlayerPrefs.SetInt ("High Score", 0);
 		PlayerPrefs.SetInt ("ArcatrisMonedas", 1000);
@@ -120,11 +123,8 @@ public class GameController : MonoBehaviour {
 			//Es la Primera vez que juega?
 			firstTimeEverToPlay = false;
 
-		// &*&*&*&*&*&*&**&*&*&*&*&*&*&*&*&*&*&*&*&*&*
-		// PARA PRUEBAS  de TUTORIAL SOLAMENTE!!!!!!! !! ! ! ! !! !! ! !!! !!!
-		// &*&*&*&*&*&*&**&*&*&*&*&*&*&*&*&*&*&*&*&*&*
-//		firstTimeEverToPlay = true;
-
+		///////////// TEST MODE ONLY ///////////////////////////
+		//		firstTimeEverToPlay = true;
 
 
 		//Tutorial How to Play
@@ -461,7 +461,9 @@ public class GameController : MonoBehaviour {
 			Puntaje = 0;
 			textosEnPantalla.puntajeText.text = Puntaje.ToString();
 
-			spawnCajas ();
+			GameObject _instanciaCajas = spawnCajas ();
+			//Spawnear las cajas un poco mas abajo al empezar
+			_instanciaCajas.transform.position = new Vector2 (_instanciaCajas.transform.position.x, _instanciaCajas.transform.position.y - 2.2f);
 
 		}
 		else{
@@ -539,29 +541,32 @@ public class GameController : MonoBehaviour {
 
 	}
 
-	public void spawnCajas (){
+	public GameObject spawnCajas (){
 
+		GameObject _instancia = new GameObject();
 
 		//Elegir el prefab aleatroriamente
 		//Generar el prefab 
 		switch (Random.Range (1, 4)){
 		case 1:
-			Instantiate(cajas_01);
+			_instancia = Instantiate(cajas_01) as GameObject;
 			break;
 		
 		case 2:
-			Instantiate(cajas_02);
+			_instancia = Instantiate(cajas_02) as GameObject;
 			break;
 
 		case 3:
-			Instantiate(cajas_03);
+			_instancia = Instantiate(cajas_03) as GameObject;
 			break;
 
 		case 4:
-			Instantiate(cajas_04);
+			_instancia = Instantiate(cajas_04) as GameObject;
 			break;
 
 		}
+
+		return _instancia;
 
 	}
 
@@ -620,26 +625,6 @@ public class GameController : MonoBehaviour {
 
 		if(!flagDerecha && !flagIzquierda)
 			movimientoPaddle = 0;
-
-	}
-
-	public void pauseGame(){
-
-		if (ballInPlay) {
-			if (Time.timeScale == 0) {
-				//Unpause
-				Time.timeScale = 1;
-				UI_pauseTitle.text = "CONFIG";
-			}
-
-			else if (Time.timeScale == 1){
-				//Pause
-				Time.timeScale = 0;
-				//Show Configuration Menu
-//				UI_pause.SetActive(true);
-				UI_pauseTitle.text = "PAUSED";
-			}
-		}
 
 	}
 

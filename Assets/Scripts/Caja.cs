@@ -80,16 +80,18 @@ public class Caja : MonoBehaviour {
 			if (probabilidad (controller.porcentajeSpawnDiamante)) {
 				Instantiate (moneda, new Vector3 (transform.position.x, transform.position.y, -1), Quaternion.identity);
 				//El objeto moneda viajara hasta el contador y luego se destruira
-				//				Destroy (instanciaMoneda, 1.5f);
-				//Sumar moneda al total
-//				controller.AddMoneda(1);
 			}
 
 			//Animar y destruir caja
 			controller.explotarCaja (gameObject, true);
 
+			//Instanciar particulas y acumular puntos
+			GameObject _instanciaParticulas = Instantiate(Resources.Load("Prefabs/puntosParticulas"),transform.position,Quaternion.identity) as GameObject;
+//
+//			_instanciaParticulas.transform.position = new Vector2 (transform.position.x, transform.position.y);
+
 			//Sumar puntaje
-			int puntosRecibidos = controller.AddScore(puntos);
+//			int puntosRecibidos = controller.AddScore(puntos);
 
 
 		}

@@ -31,9 +31,9 @@ public class LanguageGetText : MonoBehaviour {
 		string[] boton = new string[2];
 
 		//Llenar array con idiomas posibles
-		boton [0] = LanguageManager.espanol;
+		boton [0] = LanguageManager.ingles;
 		//		boton [0].iconName = "icon_lan_ES";
-		boton [1] = LanguageManager.ingles;
+		boton [1] = LanguageManager.espanol;
 		//		boton [1].iconName = "icon_lan_EN";
 
 		posicionLanguage += 1;
