@@ -448,14 +448,11 @@ public class GameController : MonoBehaviour {
 				Destroy (prefab);
 			}
 
+			//Paddle a su posicion inicial
+			touchPadSlider.value = 0.5f;
+
 			//Brea a su posicion inicial
 			Brea.transform.position = new Vector3 (Brea.transform.position.x, -3.9f, Brea.transform.position.z);
-
-			//paddle a su posicion inicial
-//			paddleVivo.transform.position = new Vector3 (paddleSpawnInicial.transform.position.x,paddleSpawnInicial.transform.position.y,paddleSpawnInicial.transform.position.z);
-
-			//TouchPad a su posicion inicial
-//			touchPadSlider.value = 0.5f;
 
 			//Puntaje a cero
 			Puntaje = 0;
@@ -470,12 +467,6 @@ public class GameController : MonoBehaviour {
 
 			// Solo para cuando se utiliza una Bola Extra
 			if (vidas == 0) {
-//				//Volver a mover  Prefabs de la Cajas
-//				prefabs = GameObject.FindGameObjectsWithTag ("prefab");
-//				foreach (GameObject prefab in prefabs) {
-//					prefab.GetComponent<Caja> ().velocidad = velocidadCaja;
-//				}
-
 
 				// Limpiar cajas explotando
 				float posicionConvertidor = GameObject.FindGameObjectWithTag ("Convertidor").transform.position.y;
@@ -489,6 +480,8 @@ public class GameController : MonoBehaviour {
 
 		paddleVivo.transform.position = new Vector2 (paddleVivo.transform.position.x, GameObject.FindGameObjectWithTag ("padPosition").transform.position.y);
 		//Posicionar pelota arriba del pad a medida que vaya subiendo
+		pelotaViva.transform.position = new Vector2(ballSpawn.transform.position.x,ballSpawn.transform.position.y);
+
 //		pelotaViva.transform.position = new Vector3 (paddleVivo.transform.position.x, 
 //			paddleSpawn.transform.position.y + 0.27f, 
 //			0);
@@ -543,7 +536,7 @@ public class GameController : MonoBehaviour {
 
 	public GameObject spawnCajas (){
 
-		GameObject _instancia = new GameObject();
+		GameObject _instancia = null;
 
 		//Elegir el prefab aleatroriamente
 		//Generar el prefab 

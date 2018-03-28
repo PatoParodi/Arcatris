@@ -86,13 +86,7 @@ public class Caja : MonoBehaviour {
 			controller.explotarCaja (gameObject, true);
 
 			//Instanciar particulas y acumular puntos
-			GameObject _instanciaParticulas = Instantiate(Resources.Load("Prefabs/puntosParticulas"),transform.position,Quaternion.identity) as GameObject;
-//
-//			_instanciaParticulas.transform.position = new Vector2 (transform.position.x, transform.position.y);
-
-			//Sumar puntaje
-//			int puntosRecibidos = controller.AddScore(puntos);
-
+			Instantiate(Resources.Load("Prefabs/puntosParticulas"),transform.position,Quaternion.identity);
 
 		}
 	}
