@@ -19,6 +19,13 @@ public class LanguageGetText : MonoBehaviour {
 	
 	}
 
+	void Update(){
+
+		if(posicion >= 0 && GetComponent<Text>().text == "")
+			GetComponent<Text>().text = LanguageManager.textos [posicion];
+
+	}
+
 	public void switchLanguage(){
 
 		string[] boton = new string[2];

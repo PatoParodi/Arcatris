@@ -31,6 +31,18 @@ public class MenuController : MonoBehaviour {
 
 	}
 
+	void OnEnable(){
+
+		//Cambiar el titulo del menu a PAUSA durante el juego
+		if (titleConfigMenu != null) 
+			if (controller.ballInPlay)
+			//PAUSA
+				titleConfigMenu.GetComponent<LanguageGetText> ().posicion = 10;
+			else
+			//CONFIG
+				titleConfigMenu.GetComponent<LanguageGetText> ().posicion = 0;
+
+	}
 
 	void Update(){
 	
@@ -45,35 +57,37 @@ public class MenuController : MonoBehaviour {
 		}
 			
 	}
-
-	public void MostarConfiguracion(bool mostrar){
-
-		gameObject.GetComponent<Animator> ().SetBool ("Mostrar", mostrar);
-
+		
+	public void UnPauseGame(){
+	
+		Time.timeScale = 1;
+	
 	}
 
-	public void pauseGame(bool mostrar){
+	public void pauseGame(){
 
-		if (controller.ballInPlay) {
-			
-			titleConfigMenu.text = "PAUSED";
-
-			if (mostrar) {
-				//Pause
-				Time.timeScale = 0;
-			} else {
-				//Unpause
-				Time.timeScale = 1;
-				//Show Configuration Menu
-			}
-		} else {
-			
-//			titleConfigMenu.text = "CONFIG";
-
-		}
-
-		gameObject.GetComponent<Animator> ().SetBool ("Mostrar", mostrar);
-
+		Time.timeScale = 0;
+//
+//		if (controller.ballInPlay) {
+//			
+//			titleConfigMenu.text = "PAUSED";
+//
+//			if (mostrar) {
+//				//Pause
+//				Time.timeScale = 0;
+//			} else {
+//				//Unpause
+//				Time.timeScale = 1;
+//				//Show Configuration Menu
+//			}
+//		} else {
+//			
+////			titleConfigMenu.text = "CONFIG";
+//
+//		}
+//
+//		gameObject.GetComponent<Animator> ().SetBool ("Mostrar", mostrar);
+//
 	}
 
 	public void MostrarPlay(bool mostrar){
@@ -81,13 +95,6 @@ public class MenuController : MonoBehaviour {
 		if (!controller.ballInPlay) {
 			gameObject.GetComponent<Animator> ().SetBool ("Mostrar", mostrar);
 		}
-
-	}
-
-	public void MostarShop(bool mostrar){
-
-		gameObject.GetComponent<Animator> ().SetBool ("Mostrar", mostrar);
-
 
 	}
 
@@ -189,19 +196,5 @@ public class MenuController : MonoBehaviour {
 		Application.OpenURL ("market://details?id=" + "Limbo"); //Application.productName);
 	
 	}
-
-
-//	public void popUpCompra(string precio, Transform location){
-//	
-//		popUpText = Resources.Load<FloatingText> ("Prefabs/PopUpTextParent");
-//
-//		FloatingText instance = Instantiate (popUpText, location.position, Quaternion.identity);
-//
-//		//Ubicar popUp Text en el boton correspondiente
-//		instance.transform.SetParent(gameObject.transform,false);
-//
-//		//Crear objeto en pantalla
-//		instance.setText (precio);
-//
-//	}
+		
 }
