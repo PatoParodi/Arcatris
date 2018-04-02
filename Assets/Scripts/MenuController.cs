@@ -20,10 +20,13 @@ public class MenuController : MonoBehaviour {
 	private GameObject _extraBall;
 
 	private GameController controller;
+	private bool _juegoPausado = false;
 
 	public Text titleConfigMenu;
+	public GameObject _pantallaInicial;
 	public Text _monedas;
 	public Text _extraBalls;
+
 
 	void Awake(){
 
@@ -34,13 +37,12 @@ public class MenuController : MonoBehaviour {
 	void OnEnable(){
 
 		//Cambiar el titulo del menu a PAUSA durante el juego
-		if (titleConfigMenu != null) 
-			if (controller.ballInPlay)
-			//PAUSA
-				titleConfigMenu.GetComponent<LanguageGetText> ().posicion = 10;
-			else
-			//CONFIG
-				titleConfigMenu.GetComponent<LanguageGetText> ().posicion = 0;
+//		if (titleConfigMenu != null) 
+//			if (controller.ballInPlay)
+//			//PAUSA
+//			else
+//			//CONFIG
+//				titleConfigMenu.GetComponent<LanguageGetText> ().posicion = 0;
 
 	}
 
@@ -58,15 +60,30 @@ public class MenuController : MonoBehaviour {
 			
 	}
 		
-	public void UnPauseGame(){
-	
-		Time.timeScale = 1;
-	
+
+	public void buttonCloseConfig(){
+
+		if (_juegoPausado) {
+			Time.timeScale = 1;
+			titleConfigMenu.GetComponent<LanguageGetText> ().posicion = 0;
+
+		} else {
+
+			MostrarPlay (true);
+		}
+
+		_juegoPausado = false;
+
 	}
 
 	public void pauseGame(){
 
+		_juegoPausado = true;
+
 		Time.timeScale = 0;
+
+		titleConfigMenu.GetComponent<LanguageGetText> ().posicion = 10;
+
 //
 //		if (controller.ballInPlay) {
 //			
@@ -92,9 +109,7 @@ public class MenuController : MonoBehaviour {
 
 	public void MostrarPlay(bool mostrar){
 
-		if (!controller.ballInPlay) {
-			gameObject.GetComponent<Animator> ().SetBool ("Mostrar", mostrar);
-		}
+		_pantallaInicial.GetComponent<Animator> ().SetBool ("Mostrar", mostrar);
 
 	}
 

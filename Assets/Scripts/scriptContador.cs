@@ -14,7 +14,7 @@ public class scriptContador : MonoBehaviour {
 
 	private bool sinExtraBall;
 
-	private bool contando;
+	private bool contando = false;
 	private GameController controller;
 
 	void Awake(){
@@ -26,7 +26,9 @@ public class scriptContador : MonoBehaviour {
 	}
 
 	void OnEnable(){
-	
+
+		contando = false;
+
 		if (controller.extraBalls > 0){
 //			botonSiUse.GetComponent<Image> ().sprite = yesSprite;
 			sinExtraBall = false;
@@ -152,6 +154,10 @@ public class scriptContador : MonoBehaviour {
 		else{
 			//Animar pantalla de Play
 			pantallaInicial.GetComponent<MenuController> ().MostrarPlay (true);
+
+			//Volver Brea a su posicion inicial
+			controller.breaPosicionInicial ();
+
 		}
 			
 

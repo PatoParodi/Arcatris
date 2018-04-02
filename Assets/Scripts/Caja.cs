@@ -53,8 +53,8 @@ public class Caja : MonoBehaviour {
 			GameObject brea = GameObject.FindGameObjectWithTag ("Brea");
 
 			// Subir el nivel de la brea
-			StartCoroutine( brea.GetComponent<LimiteBrea> ().SubirPiso ());
-//			brea.GetComponent<LimiteBrea> ().SubirPiso ();
+//			StartCoroutine( brea.GetComponent<LimiteBrea> ().SubirPiso ());
+			brea.GetComponent<LimiteBrea> ().subirBrea ();
 
 		}
 

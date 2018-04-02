@@ -140,6 +140,7 @@ public class GameController : MonoBehaviour {
 		} else {
 			
 			PantallaInicial.GetComponent<MenuController> ().MostrarPlay (true);
+//			PantallaInicial.SetActive (true);
 
 		}
 		// Buscar High Score
@@ -451,8 +452,8 @@ public class GameController : MonoBehaviour {
 			//Paddle a su posicion inicial
 			touchPadSlider.value = 0.5f;
 
-			//Brea a su posicion inicial
-			Brea.transform.position = new Vector3 (Brea.transform.position.x, -3.9f, Brea.transform.position.z);
+			//Brea y paddle a su posicion inicial
+			breaPosicionInicial();
 
 			//Puntaje a cero
 			Puntaje = 0;
@@ -493,6 +494,12 @@ public class GameController : MonoBehaviour {
 		pelotaViva.GetComponent<CircleCollider2D> ().enabled = true;
 		ballInPlay = true;
 
+
+	}
+
+	public void breaPosicionInicial(){
+	//Llevar brea a su posicion inicial
+		Brea.GetComponent<LimiteBrea>().moverBrea(new Vector3 (Brea.transform.position.x, -3.9f, Brea.transform.position.z));
 
 	}
 

@@ -10,6 +10,7 @@ public class LimiteBrea : MonoBehaviour {
 
 	private GameObject pad;
 	private float nuevaPosPad, nuevaPosBrea;
+	private Vector3 nuevaPosicion;
 
 	void Start(){
 		//Busco el paddle para referenciarlo despues
@@ -17,27 +18,16 @@ public class LimiteBrea : MonoBehaviour {
 
 		//Establecer la nueva posicion de cada objeto
 		nuevaPosBrea = transform.position.y;
+
+		nuevaPosicion = gameObject.transform.position;
 	
 	}
 
 	void Update(){
-//		
+		
 //		//Subir Brea
-//		if(transform.position.y < nuevaPosBrea)
-//			transform.position =  new Vector3 (transform.position.x, 
-//				transform.position.y + velocidadBrea * Time.deltaTime , transform.position.z);
-//
-//		// Subir Paddle
-//		if (pad == null) {
-//			pad = GameObject.FindGameObjectWithTag ("paddle");
-//			if(pad != null)
-//				nuevaPosPad = pad.transform.position.y;
-//		}
-//		else
-//			if (pad.transform.position.y < nuevaPosPad)
-//				pad.transform.position = new Vector3 (pad.transform.position.x,
-//					pad.transform.position.y + velocidadPaddle * Time.deltaTime, pad.transform.position.z);
-//		
+		gameObject.transform.position = Vector3.Lerp (transform.position, nuevaPosicion , velocidadBrea * Time.deltaTime);
+
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
@@ -67,6 +57,21 @@ public class LimiteBrea : MonoBehaviour {
 			Destroy (other.gameObject);
 		}
 			
+	}
+
+	public void moverBrea(Vector3 posicion){
+	//Mueve la brea hacia la nueva posicion
+		nuevaPosicion = posicion;
+//		gameObject.transform.position = Vector3.Lerp (transform.position, nuevaPosicion, velocidadBrea * Time.deltaTime);
+
+	}
+
+	public void subirBrea(){
+
+		nuevaPosicion += Vector3.up * movimientoPiso;
+			
+	//Subir brea cuando caen ladrillos
+
 	}
 		
 	public IEnumerator SubirPiso(){

@@ -4,34 +4,34 @@ using UnityEngine;
 
 public class paddle : MonoBehaviour {
 
-	public float factorFlotacion;
+	public float velocidad;
 
 	private GameController controller;
 	private float move;
+	private Transform posBrea;
+	private Transform posicionInicial; 
+	private Vector3 nuevaPosicion;
 
 	void Awake(){
 	
 		controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ();
-	
+
+		posicionInicial = GameObject.Find ("paddleSpawnInicial").transform;
+
+		Vector3 nuevaPosicion = gameObject.transform.position;
+
 		move = 0.5f;
 		
 	}
 		
 	void Update(){
-//			StartCoroutine (reiniciarFlotacion (GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip.length));
-//			paddleMoving = false;
 
-			//Volver el animador Blend a 0
-//			Mathf.MoveTowards(move,0.5f,0.01f);
-//			GetComponent<Animator> ().SetFloat ("Move", move);
-//
-//			if (move > 0.5f)
-//				move -= factorFlotacion;
-//			if(move < 0.5f)
-//				move += factorFlotacion;
-//			move += 0.5f/(1 + factorFlotacion);
-//			Mathf.MoveTowards(move,0.5f,0.01f);
-			
+		nuevaPosicion = new Vector3 (gameObject.transform.position.x, GameObject.Find ("paddleSpawn").transform.position.y, 0);
+
+		//Subir pad siempre al nivel de la brea
+//		gameObject.transform.position = Vector3.Lerp (gameObject.transform.position, nuevaPosicion, velocidad * Time.deltaTime);
+		gameObject.transform.position = Vector3.MoveTowards (gameObject.transform.position, nuevaPosicion, velocidad * Time.deltaTime);
+
 	}
 
 
