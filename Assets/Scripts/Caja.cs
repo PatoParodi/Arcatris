@@ -8,12 +8,19 @@ public class Caja : MonoBehaviour {
 
 	public float velocidad;
 	public GameObject moneda;
+	public Sprite _cajaRoja;
 
 	private GameController controller;
 
 	void Awake(){
 	
-	
+		//Determinar si esta caja tendra un POWER UP
+		if (gameObject.tag == "Caja" && probabilidad (21)) {
+
+//			GetComponent<SpriteRenderer> ().sprite = _cajaRoja;
+
+		}
+
 	}
 
 	void Start(){
@@ -27,6 +34,7 @@ public class Caja : MonoBehaviour {
 			velocidad = controller.velocidadCaja;
 
 		}
+			
 	}
 
 	// Update is called once per frame

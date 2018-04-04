@@ -105,7 +105,7 @@ public class GameController : MonoBehaviour {
 // &*&*&*&*&*&*&**&*&*&*&*&*&*&*&*&*&*&*&*&*&*
 ///////////// TEST MODE ONLY ///////////////////////////
 //		PlayerPrefs.SetInt ("High Score", 0);
-		PlayerPrefs.SetInt ("ArcatrisMonedas", 1000);
+//		PlayerPrefs.SetInt ("ArcatrisMonedas", 1000);
 //		PlayerPrefs.SetInt ("ExtraBall", 0);
 ///////////////////////////////////////////////////////////
 
@@ -128,7 +128,7 @@ public class GameController : MonoBehaviour {
 			firstTimeEverToPlay = false;
 
 		///////////// TEST MODE ONLY ///////////////////////////
-		//		firstTimeEverToPlay = true;
+//				firstTimeEverToPlay = true;
 
 
 		//Tutorial How to Play
@@ -142,9 +142,9 @@ public class GameController : MonoBehaviour {
 			tutorialObjetos.forceField.SetActive (false);
 			//En el Update() se apagan estos objetos al tocar
 		} else {
-			
-			PantallaInicial.GetComponent<MenuController> ().MostrarPlay (true);
-//			PantallaInicial.SetActive (true);
+
+			PantallaInicial.SetActive (true);
+//			PantallaInicial.GetComponent<MenuController> ().MostrarPlay (true);
 
 		}
 		// Buscar High Score
@@ -246,7 +246,8 @@ public class GameController : MonoBehaviour {
 		tutorialObjetos.challengeText.SetActive (false);
 
 		//Mostrar pantalla inicial
-		PantallaInicial.GetComponent<MenuController> ().MostrarPlay (true);
+//		PantallaInicial.GetComponent<MenuController> ().MostrarPlay (true);
+		IniciarJuego();
 
 		// Inicializar objetos en pantalla
 //		textosEnPantalla.highScoreText.text = "";

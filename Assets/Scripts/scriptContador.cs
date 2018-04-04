@@ -153,6 +153,7 @@ public class scriptContador : MonoBehaviour {
 
 		else{
 			//Animar pantalla de Play
+			pantallaInicial.SetActive(true);
 			pantallaInicial.GetComponent<MenuController> ().MostrarPlay (true);
 
 			//Volver Brea a su posicion inicial
