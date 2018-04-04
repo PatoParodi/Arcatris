@@ -85,6 +85,8 @@ public class GameController : MonoBehaviour {
 	private bool firstTimeEverToPlay = true;
 	private bool flagMovioIzquierda = false; 
 	private bool flagMovioDerecha = false;
+	public int contadorPartidas;
+
 	public int vidas;
 	public int extraBalls;
 
@@ -106,6 +108,8 @@ public class GameController : MonoBehaviour {
 		PlayerPrefs.SetInt ("ArcatrisMonedas", 1000);
 //		PlayerPrefs.SetInt ("ExtraBall", 0);
 ///////////////////////////////////////////////////////////
+
+		//Setear sonido elegido anteriormente
 
 		//Setear idioma elegido anteriormente
 		string _language = PlayerPrefs.GetString("Idioma");
@@ -365,7 +369,8 @@ public class GameController : MonoBehaviour {
 		ballInPlay = false;
 
 		//Bajar una vida y actualizarlas en pantalla
-		vidas = vidas - 1; 
+		if(vidas > 0)
+			vidas = vidas - 1; 
 		mostrarVidas (vidas, "vida");
 
 
@@ -425,11 +430,13 @@ public class GameController : MonoBehaviour {
 		BotonesEnPantalla.pausa.SetActive(true);
 
 		//Instanciar Pelota y Paddle
-		pelotaViva  = Instantiate (ballType,new Vector3 (ballSpawn.position.x,ballSpawn.position.y,ballSpawn.position.z),Quaternion.identity) as GameObject;
 		if (paddleVivo == null) {
 			paddleVivo = Instantiate (paddle, new Vector2(paddleSpawnInicial.transform.position.x,paddleSpawnInicial.transform.position.y), Quaternion.identity) as GameObject;
 
 		}
+		paddleVivo.transform.position = new Vector2 (paddleVivo.transform.position.x, GameObject.FindGameObjectWithTag ("padPosition").transform.position.y);
+//		pelotaViva  = Instantiate (ballType,new Vector3 (ballSpawn.position.x,ballSpawn.position.y,ballSpawn.position.z),Quaternion.identity) as GameObject;
+		pelotaViva  = Instantiate (ballType,new Vector3 (paddleVivo.transform.position.x,ballSpawn.position.y,ballSpawn.position.z),Quaternion.identity) as GameObject;
 
 		//Frenar cualquier movimiento del pad
 		moverDerecha(false);
@@ -449,6 +456,9 @@ public class GameController : MonoBehaviour {
 				Destroy (prefab);
 			}
 
+			//Contador de partidas
+			contadorPartidas += 1;
+
 			//Paddle a su posicion inicial
 			touchPadSlider.value = 0.5f;
 
@@ -467,7 +477,7 @@ public class GameController : MonoBehaviour {
 		else{
 
 			// Solo para cuando se utiliza una Bola Extra
-			if (vidas == 0) {
+			if (vidas <= 0) {
 
 				// Limpiar cajas explotando
 				float posicionConvertidor = GameObject.FindGameObjectWithTag ("Convertidor").transform.position.y;
@@ -479,19 +489,15 @@ public class GameController : MonoBehaviour {
 			}
 		}
 
-		paddleVivo.transform.position = new Vector2 (paddleVivo.transform.position.x, GameObject.FindGameObjectWithTag ("padPosition").transform.position.y);
 		//Posicionar pelota arriba del pad a medida que vaya subiendo
-		pelotaViva.transform.position = new Vector2(ballSpawn.transform.position.x,ballSpawn.transform.position.y);
-
-//		pelotaViva.transform.position = new Vector3 (paddleVivo.transform.position.x, 
-//			paddleSpawn.transform.position.y + 0.27f, 
-//			0);
+//		pelotaViva.transform.position = new Vector2(ballSpawn.transform.position.x,ballSpawn.transform.position.y);
 
 		yield return new WaitForSeconds (seconds);
 
 		// Dar fuerza inicial a la pelota
 		pelotaViva.GetComponent<Rigidbody2D>().AddForce (obtenerVectorVelocidad(fuerzaPelota,50f,130f));
 		pelotaViva.GetComponent<CircleCollider2D> ().enabled = true;
+
 		ballInPlay = true;
 
 

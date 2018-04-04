@@ -71,10 +71,7 @@ public class Caja : MonoBehaviour {
 
 		if (col.gameObject.tag == "ball") {
 			// Deshabilitar los colliders NO triger al explotar
-			BoxCollider2D[] colidersCaja = GetComponents<BoxCollider2D>();
-			foreach(BoxCollider2D colider in colidersCaja)
-				if(!colider.isTrigger)
-					colider.enabled = false;
+			GetComponent<BoxCollider2D>().enabled = false;
 
 			//Explotar moneda con 25% de probabilidad
 			if (probabilidad (controller.porcentajeSpawnDiamante)) {
@@ -87,6 +84,9 @@ public class Caja : MonoBehaviour {
 
 			//Instanciar particulas y acumular puntos
 			Instantiate(Resources.Load("Prefabs/puntosParticulas"),transform.position,Quaternion.identity);
+
+			//Reproducir sonido
+			SoundManager.soundManager.playSound(GetComponent<AudioSource>());
 
 		}
 	}

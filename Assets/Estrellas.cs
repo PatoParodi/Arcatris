@@ -12,7 +12,7 @@ public class Estrellas : MonoBehaviour {
 
 		for (int e = 1; e <= 5; e++) {
 
-			//Establece el mismo estado del Toggle tocado para las estrellas anteriores
+			// Apagar todas las estrellas
 			GameObject.Find ("Estrella" + e).GetComponent<Toggle> ().isOn = false;
 
 		}

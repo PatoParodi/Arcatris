@@ -160,6 +160,12 @@ public class scriptContador : MonoBehaviour {
 
 		}
 			
+		//MOSTRAR PANTALLA DE RATE US
+
+		//Validar si muestro el pop up para valorar
+//		if (mostrar == true && controller.contadorPartidas == 1 && _UI_RateUS.activeSelf == false)
+//			_UI_RateUS.SetActive (true);
+//		else
 
 	}
 }

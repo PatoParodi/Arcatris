@@ -23,9 +23,11 @@ public class MenuController : MonoBehaviour {
 	private bool _juegoPausado = false;
 
 	public Text titleConfigMenu;
+	public Toggle soundOnOff;
 	public GameObject _pantallaInicial;
 	public Text _monedas;
 	public Text _extraBalls;
+	public GameObject _UI_RateUS;
 
 
 	void Awake(){
@@ -83,36 +85,21 @@ public class MenuController : MonoBehaviour {
 		Time.timeScale = 0;
 
 		titleConfigMenu.GetComponent<LanguageGetText> ().posicion = 10;
-
-//
-//		if (controller.ballInPlay) {
-//			
-//			titleConfigMenu.text = "PAUSED";
-//
-//			if (mostrar) {
-//				//Pause
-//				Time.timeScale = 0;
-//			} else {
-//				//Unpause
-//				Time.timeScale = 1;
-//				//Show Configuration Menu
-//			}
-//		} else {
-//			
-////			titleConfigMenu.text = "CONFIG";
-//
-//		}
-//
-//		gameObject.GetComponent<Animator> ().SetBool ("Mostrar", mostrar);
-//
+	
 	}
 
 	public void MostrarPlay(bool mostrar){
 
-		_pantallaInicial.GetComponent<Animator> ().SetBool ("Mostrar", mostrar);
+			//Ir a pantalla de PLAY
+			_pantallaInicial.GetComponent<Animator> ().SetBool ("Mostrar", mostrar);
 
 	}
 
+	public void controlSound(){
+	
+		SoundManager.soundManager.enableSound (soundOnOff.isOn);
+
+	}
 
 	void realizarCompraExtraBall(int precio, int cantidad){
 

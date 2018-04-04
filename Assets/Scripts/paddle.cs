@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SoundManager;
 
 public class paddle : MonoBehaviour {
 
@@ -39,8 +40,8 @@ public class paddle : MonoBehaviour {
 
 			ContactPoint2D contact = col.contacts [0];
 
-			if (col.gameObject.tag == "ball" ) {
-
+			if (col.gameObject.tag == "ball" && controller.ballInPlay) {
+			
 				col.gameObject.GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, 0);
 
 				// Calculo la diferencia entre el centro del pad y el punto x de colision
@@ -60,6 +61,9 @@ public class paddle : MonoBehaviour {
 
 				contact.rigidbody.AddForce(controller.obtenerVectorVelocidad (controller.fuerzaPelota, porc, porc));
 				
+				//Reproducir audio
+				soundManager.playSound(GetComponent<AudioSource>());
+
 			}
 	}
 

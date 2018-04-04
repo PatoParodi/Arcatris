@@ -31,7 +31,7 @@ public class puntosSpawn : MonoBehaviour {
 		if (!_destruido) {
 			if (Vector2.Distance (transform.position, _diamanteTarget.position) < 0.1f) {
 
-				Destroy (gameObject);
+				Destroy (gameObject, 0.6f);
 				_destruido = true;
 				//Agregar Puntos al contador
 				_controller.AddScore (100);
