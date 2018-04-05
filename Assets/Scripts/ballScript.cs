@@ -1,13 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using LevelManager;
 
 public class ballScript : MonoBehaviour {
 
+	private float velocidadConstante; //valor original 4.4
+
+	void Awake(){
+	
+		velocidadConstante = LevelManager.levelManager.velocidadPelota;
+	
+	}
 
 	void Update(){
 	
-		gameObject.GetComponent<Rigidbody2D> ().velocity = 4.4f * (gameObject.GetComponent<Rigidbody2D> ().velocity.normalized);
+		gameObject.GetComponent<Rigidbody2D> ().velocity = velocidadConstante * (gameObject.GetComponent<Rigidbody2D> ().velocity.normalized);
 
 	}
 
@@ -18,7 +26,7 @@ public class ballScript : MonoBehaviour {
 		if (col.gameObject.tag == "Marco" &&
 		    col.contacts [0].point.y < 4.25f) {
 			//Forzar vector de velocidad a magnitud fija
-			gameObject.GetComponent<Rigidbody2D> ().velocity = 4.4f * (gameObject.GetComponent<Rigidbody2D> ().velocity.normalized);
+			gameObject.GetComponent<Rigidbody2D> ().velocity = velocidadConstante * (gameObject.GetComponent<Rigidbody2D> ().velocity.normalized);
 
 			// RelativeVelocity POSITIVA
 			if (col.relativeVelocity.x < 1 && col.relativeVelocity.x > 0)
@@ -44,7 +52,7 @@ public class ballScript : MonoBehaviour {
 		}
 
 		//Forzar vector de velocidad a magnitud fija
-		gameObject.GetComponent<Rigidbody2D> ().velocity = 4.4f * (gameObject.GetComponent<Rigidbody2D> ().velocity.normalized);
+		gameObject.GetComponent<Rigidbody2D> ().velocity = velocidadConstante * (gameObject.GetComponent<Rigidbody2D> ().velocity.normalized);
 
 	
 	}

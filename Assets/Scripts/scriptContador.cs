@@ -11,6 +11,7 @@ public class scriptContador : MonoBehaviour {
 	public GameObject popUpContinue;
 	public Button botonSiUse;
 	public Button botonSiVideo;
+	public GameObject _UI_RateUs;
 
 	private bool sinExtraBall;
 
@@ -140,18 +141,22 @@ public class scriptContador : MonoBehaviour {
 		controller.UI_inGame.SetActive (false);
 
 		//Mostrar HighScore si corresponde
-		if (controller.getHighScore() > PlayerPrefs.GetInt ("High Score")) {
+		if (controller.getHighScore () > PlayerPrefs.GetInt ("High Score")) {
 
 			controller.UI_highScore.SetActive (true);
 
-			PlayerPrefs.SetInt ("High Score", controller.getHighScore());
+			PlayerPrefs.SetInt ("High Score", controller.getHighScore ());
 
 			//Actualizar texto de Pantalla Inicial
 			controller.textosEnPantalla.highScoreValue.text = controller.getHighScore ().ToString ();
 
+		} 
+		//MOSTRAR PANTALLA DE RATE US
+		else if (controller.contadorPartidas%3 == 0) {	//Mostrar cada 3 partidas
+			_UI_RateUs.SetActive (true);
 		}
-
-		else{
+		
+			else{
 			//Animar pantalla de Play
 			pantallaInicial.SetActive(true);
 			pantallaInicial.GetComponent<MenuController> ().MostrarPlay (true);
@@ -161,11 +166,9 @@ public class scriptContador : MonoBehaviour {
 
 		}
 			
-		//MOSTRAR PANTALLA DE RATE US
 
 		//Validar si muestro el pop up para valorar
-//		if (mostrar == true && controller.contadorPartidas == 1 && _UI_RateUS.activeSelf == false)
-//			_UI_RateUS.SetActive (true);
+
 //		else
 
 	}

@@ -65,8 +65,6 @@ public class GameController : MonoBehaviour {
 	public GameObject PantallaInicial;
 	public GameObject UI_inGame;
 	public GameObject UI_highScore;
-	public GameObject UI_pause;
-	public Text UI_pauseTitle;
 	public GameObject popUpContinue;
 	public GameObject Brea;
 
