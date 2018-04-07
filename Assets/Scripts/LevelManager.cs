@@ -9,7 +9,9 @@ namespace LevelManager
 {
 	public class levelManager {
 
-		public static float velocidadPelota = 4.0f;
+		public static float velocidadPelota = 4.3f;
+
+		public static float velocidadCajas = 0.22f;
 
 		private static int golpesPorNivel = 10;
 
@@ -19,6 +21,12 @@ namespace LevelManager
 		{
 
 			cantRebotes += 1;
+
+		}
+
+		public static void nivelControlador(){
+
+			determinarNivel ();
 
 		}
 
@@ -48,6 +56,10 @@ namespace LevelManager
 
 			//Reiniciar cantidad de Rebotes para siguiente partida
 			cantRebotes = 0;
+
+			velocidadCajas = velocidadCajas * factorDif * nivelActual;
+			velocidadPelota = velocidadPelota * factorDif * nivelActual;
+
 
 			return nivelActual * factorDif;
 

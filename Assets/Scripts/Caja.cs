@@ -31,7 +31,7 @@ public class Caja : MonoBehaviour {
 			velocidad = 0;
 		}
 		else {
-			velocidad = controller.velocidadCaja;
+			velocidad = LevelManager.levelManager.velocidadCajas;
 
 		}
 			

@@ -28,7 +28,7 @@ public class MenuController : MonoBehaviour {
 	public Text _monedas;
 	public Text _extraBalls;
 	public GameObject _UI_RateUS;
-	public Text _velocidadPelotaText;
+//	public Text _velocidadPelotaText;
 
 
 	void Awake(){
@@ -61,10 +61,10 @@ public class MenuController : MonoBehaviour {
 			_monedas.text = controller._getMonedas ().ToString ();
 		}
 			
-		//Velocidad variable de pelota
-		if (_velocidadPelotaText != null)
-			LevelManager.levelManager.velocidadPelota = float.Parse (_velocidadPelotaText.text);
-
+//		//Velocidad variable de pelota
+//		if (_velocidadPelotaText != null)
+//			LevelManager.levelManager.velocidadPelota = float.Parse (_velocidadPelotaText.text);
+//
 	}
 		
 
@@ -95,8 +95,9 @@ public class MenuController : MonoBehaviour {
 
 	public void MostrarPlay(bool mostrar){
 
-			//Ir a pantalla de PLAY
-			_pantallaInicial.GetComponent<Animator> ().SetBool ("Mostrar", mostrar);
+		//Ir a pantalla de PLAY
+		_pantallaInicial.SetActive(true);
+		_pantallaInicial.GetComponent<Animator> ().SetBool ("Mostrar", mostrar);
 
 	}
 
