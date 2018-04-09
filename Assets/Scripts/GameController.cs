@@ -126,7 +126,7 @@ public class GameController : MonoBehaviour {
 			firstTimeEverToPlay = false;
 
 		///////////// TEST MODE ONLY ///////////////////////////
-//				firstTimeEverToPlay = true;
+				firstTimeEverToPlay = true;
 
 
 		//Tutorial How to Play
@@ -242,6 +242,9 @@ public class GameController : MonoBehaviour {
 		tutorialObjetos.challengeText.SetActive (true);
 		yield return new WaitForSecondsRealtime (3.3f);
 		tutorialObjetos.challengeText.SetActive (false);
+
+		//Setear nivel inicial
+		PlayerPrefs.SetInt ("TEST_Nivel", 4);
 
 		//Mostrar pantalla inicial
 //		PantallaInicial.GetComponent<MenuController> ().MostrarPlay (true);
@@ -396,6 +399,8 @@ public class GameController : MonoBehaviour {
 
 	public void IniciarJuego(){
 //Comienza el juego desde el principio
+
+		LevelManager.levelManager.determinarNivel ();
 
 		PantallaInicial.GetComponent<MenuController> ().MostrarPlay (false);
 		UI_inGame.SetActive (true);

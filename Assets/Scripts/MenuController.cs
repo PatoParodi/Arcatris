@@ -28,6 +28,7 @@ public class MenuController : MonoBehaviour {
 	public Text _monedas;
 	public Text _extraBalls;
 	public GameObject _UI_RateUS;
+	public Text _txtNivel;
 //	public Text _velocidadPelotaText;
 
 
@@ -65,6 +66,7 @@ public class MenuController : MonoBehaviour {
 //		if (_velocidadPelotaText != null)
 //			LevelManager.levelManager.velocidadPelota = float.Parse (_velocidadPelotaText.text);
 //
+		
 	}
 		
 

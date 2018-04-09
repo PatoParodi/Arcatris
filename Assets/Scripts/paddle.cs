@@ -42,6 +42,9 @@ public class paddle : MonoBehaviour {
 
 			if (col.gameObject.tag == "ball" && controller.ballInPlay) {
 			
+				//LevelManager -> Sumar rebote
+				LevelManager.levelManager.addRebote();
+
 				col.gameObject.GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, 0);
 
 				// Calculo la diferencia entre el centro del pad y el punto x de colision

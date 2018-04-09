@@ -9,35 +9,41 @@ namespace LevelManager
 {
 	public class levelManager {
 
+		private static float velocidadPelotaBase = 4.3f;
+
+		private static float velocidadCajasBase = 0.22f;
+
 		public static float velocidadPelota = 4.3f;
 
 		public static float velocidadCajas = 0.22f;
 
-		private static int golpesPorNivel = 10;
+		private static int golpesPorNivel = 3;
 
-		private int cantRebotes = 0;
+		private static int cantRebotes;
 
-		public void addRebote ()
+		public static int nivelActual;
+
+		public static void addRebote ()
 		{
 
-			cantRebotes += 1;
+			cantRebotes ++;
 
 		}
 
-		public static void nivelControlador(){
-
-			determinarNivel ();
-
-		}
+//		public static void nivelControlador(){
+//
+//			determinarNivel ();
+//
+//		}
 
 		//Devolvera un factor de dificultad para aplicar en el juego
-		public float determinarNivel(){
+		public static int determinarNivel(){
 		
-			int nivelActual, nivelCalculado;
-			float factorDif = 0.3f;
+			int nivelCalculado;
+			float factorDif = 0.05f;
 
 			//Calcular nuevo nivel
-			nivelCalculado = cantRebotes % golpesPorNivel;
+			nivelCalculado = cantRebotes / golpesPorNivel;
 
 			//Verificar si el nuevo nivel supera el anterior
 			nivelActual = PlayerPrefs.GetInt ("TEST_Nivel");
@@ -57,11 +63,12 @@ namespace LevelManager
 			//Reiniciar cantidad de Rebotes para siguiente partida
 			cantRebotes = 0;
 
-			velocidadCajas = velocidadCajas * factorDif * nivelActual;
-			velocidadPelota = velocidadPelota * factorDif * nivelActual;
+			//Se parte de la premisa que el primer nivel es 3. por eso el factor debe ser 1 para Nivel = 3
+			velocidadCajas = velocidadCajasBase   * (factorDif * nivelActual + 0.85f);
+			velocidadPelota = velocidadPelotaBase * (factorDif * nivelActual + 0.85f);
 
-
-			return nivelActual * factorDif;
+			Debug.Log (nivelActual);
+			return nivelActual;
 
 		}
 	}
