@@ -42,16 +42,17 @@ namespace LevelManager
 			int nivelCalculado;
 			float factorDif = 0.05f;
 
-			//Calcular nuevo nivel
-			nivelCalculado = cantRebotes / golpesPorNivel;
-
+//			//Calcular nuevo nivel
+//			nivelCalculado = cantRebotes / golpesPorNivel;
+//
 			//Verificar si el nuevo nivel supera el anterior
 			nivelActual = PlayerPrefs.GetInt ("TEST_Nivel");
 
 			//Subir o bajar el nivel segun corresponda
-			if (nivelCalculado > nivelActual)
+//			if (nivelCalculado > nivelActual)
+			if(cantRebotes > golpesPorNivel)
 				nivelActual++;
-			else if (nivelCalculado < nivelActual)
+			else if(cantRebotes > golpesPorNivel)
 				nivelActual--;
 
 			if (nivelActual < 1)

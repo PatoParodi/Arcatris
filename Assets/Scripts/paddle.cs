@@ -10,14 +10,12 @@ public class paddle : MonoBehaviour {
 	private GameController controller;
 	private float move;
 	private Transform posBrea;
-	private Transform posicionInicial; 
+	public Transform pelotaSpawnPaddle; 
 	private Vector3 nuevaPosicion;
 
 	void Awake(){
 	
 		controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ();
-
-		posicionInicial = GameObject.Find ("paddleSpawnInicial").transform;
 
 		Vector3 nuevaPosicion = gameObject.transform.position;
 

@@ -131,7 +131,7 @@ public class GameController : MonoBehaviour {
 
 		//Tutorial How to Play
 		if (firstTimeEverToPlay) {
-			PantallaInicial.GetComponent<MenuController> ().MostrarPlay (false);
+//			PantallaInicial.GetComponent<MenuController> ().MostrarPlay (false);
 			paddleVivo = Instantiate (paddle, new Vector2(paddleSpawnInicial.transform.position.x,paddleSpawnInicial.transform.position.y), Quaternion.identity) as GameObject;
 
 			tutorialObjetos.swipeText.SetActive (true);
@@ -243,18 +243,11 @@ public class GameController : MonoBehaviour {
 		yield return new WaitForSecondsRealtime (3.3f);
 		tutorialObjetos.challengeText.SetActive (false);
 
-		//Setear nivel inicial
+		//Setear nivel inicial como 4 para que la nueva partida arranque en 3
 		PlayerPrefs.SetInt ("TEST_Nivel", 4);
 
 		//Mostrar pantalla inicial
-//		PantallaInicial.GetComponent<MenuController> ().MostrarPlay (true);
-		IniciarJuego();
-
-		// Inicializar objetos en pantalla
-//		textosEnPantalla.highScoreText.text = "";
-//		textosEnPantalla.highScoreValue.text = "";
-//		BotonesEnPantalla.pausa.SetActive (false);
-//		textosEnPantalla.puntajeText.text = "";
+		IniciarJuego(true);
 
 
 	}
@@ -262,12 +255,8 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		// Mover pad con barra
 		if (paddleVivo != null) {
-			if (Input.GetKey (KeyCode.Space)) {
-				Debug.Log ("Barra");
-				paddleVivo.GetComponent<Animator> ().SetFloat ("Move", 1f);
-			}
+
 		}
 
 		//Toque inicial durante el Tutorial
@@ -289,7 +278,7 @@ public class GameController : MonoBehaviour {
 		//Mover pelota junto con el pad al iniciar
 		if (!ballInPlay && pelotaViva != null) {
 
-			pelotaViva.transform.position = new Vector3(paddleVivo.transform.position.x, pelotaViva.transform.position.y,pelotaViva.transform.position.z);
+			pelotaViva.transform.position = new Vector3(paddleVivo.transform.position.x, paddleVivo.GetComponent<paddle>().pelotaSpawnPaddle.position.y ,0);
 
 		}
 
@@ -397,12 +386,11 @@ public class GameController : MonoBehaviour {
 
 	}
 
-	public void IniciarJuego(){
+	public void IniciarJuego(bool continueFlag){
 //Comienza el juego desde el principio
 
 		LevelManager.levelManager.determinarNivel ();
 
-		PantallaInicial.GetComponent<MenuController> ().MostrarPlay (false);
 		UI_inGame.SetActive (true);
 
 		//Mostrar vidas iniciales
@@ -413,7 +401,7 @@ public class GameController : MonoBehaviour {
 		textosEnPantalla.extraBallsInGame.text = extraBalls.ToString ();
 
 		//Inicializar Objetos
-		StartCoroutine(inicializarObjetos(countdownInicial, false, pelota));
+		StartCoroutine(inicializarObjetos(countdownInicial, continueFlag, pelota));
 
 	}
 
@@ -432,14 +420,13 @@ public class GameController : MonoBehaviour {
 
 		//Habilitar Boton de Pausa
 		BotonesEnPantalla.pausa.SetActive(true);
-
+	
 		//Instanciar Pelota y Paddle
 		if (paddleVivo == null) {
 			paddleVivo = Instantiate (paddle, new Vector2(paddleSpawnInicial.transform.position.x,paddleSpawnInicial.transform.position.y), Quaternion.identity) as GameObject;
 
 		}
 		paddleVivo.transform.position = new Vector2 (paddleVivo.transform.position.x, GameObject.FindGameObjectWithTag ("padPosition").transform.position.y);
-//		pelotaViva  = Instantiate (ballType,new Vector3 (ballSpawn.position.x,ballSpawn.position.y,ballSpawn.position.z),Quaternion.identity) as GameObject;
 		pelotaViva  = Instantiate (ballType,new Vector3 (paddleVivo.transform.position.x,ballSpawn.position.y,ballSpawn.position.z),Quaternion.identity) as GameObject;
 
 		//Frenar cualquier movimiento del pad
@@ -494,7 +481,7 @@ public class GameController : MonoBehaviour {
 		}
 
 		//Posicionar pelota arriba del pad a medida que vaya subiendo
-//		pelotaViva.transform.position = new Vector2(ballSpawn.transform.position.x,ballSpawn.transform.position.y);
+		pelotaViva.transform.position = new Vector2(paddleVivo.transform.position.x, paddleVivo.transform.position.y + paddleVivo.GetComponentInChildren<SpriteRenderer>().bounds.size.y/2 + pelotaViva.GetComponentInChildren<SpriteRenderer>().bounds.size.y/2);
 
 		yield return new WaitForSeconds (seconds);
 
