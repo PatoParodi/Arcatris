@@ -126,7 +126,7 @@ public class GameController : MonoBehaviour {
 			firstTimeEverToPlay = false;
 
 		///////////// TEST MODE ONLY ///////////////////////////
-				firstTimeEverToPlay = true;
+//				firstTimeEverToPlay = true;
 
 
 		//Tutorial How to Play

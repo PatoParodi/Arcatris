@@ -52,7 +52,7 @@ namespace LevelManager
 //			if (nivelCalculado > nivelActual)
 			if(cantRebotes > golpesPorNivel)
 				nivelActual++;
-			else if(cantRebotes > golpesPorNivel)
+			else if(cantRebotes < golpesPorNivel)
 				nivelActual--;
 
 			if (nivelActual < 1)

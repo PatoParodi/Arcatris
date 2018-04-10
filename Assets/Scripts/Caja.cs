@@ -11,20 +11,17 @@ public class Caja : MonoBehaviour {
 	public Sprite _cajaRoja;
 
 	private GameController controller;
+	private bool b_tienePowerUp;
 
-	void Awake(){
+	void Start(){
 	
 		//Determinar si esta caja tendra un POWER UP
 		if (gameObject.tag == "Caja" && probabilidad (21)) {
 
-//			GetComponent<SpriteRenderer> ().sprite = _cajaRoja;
+			b_tienePowerUp = true;
 
 		}
 
-	}
-
-	void Start(){
-	
 		controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
 
 		if (gameObject.tag == "Caja") {
@@ -39,12 +36,14 @@ public class Caja : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
+
 		if(controller.ballInPlay)
 			//Solo moverse cuando la pelota esta en juego
 			transform.position = new Vector3(transform.position.x, transform.position.y - velocidad * Time.deltaTime, transform.position.z);
 
 	}
+
+
 
 	void OnTriggerEnter2D(Collider2D col){
 
