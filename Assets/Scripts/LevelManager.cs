@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 // Manejar los diferentes niveles. Controlar la forma de calcularlos y
-// devolver un factor para ajustar las velocidades en el GameController
+//Nivelador del juego segun skills del jugador
 namespace LevelManager
 {
 	public class levelManager {
@@ -17,7 +17,9 @@ namespace LevelManager
 
 		public static float velocidadCajas = 0.22f;
 
-		private static int golpesPorNivel = 3;
+		private static int golpesPorNivelMinimo = 12;
+
+		private static int golpesPorNivel = 30;
 
 		private static int cantRebotes;
 
@@ -30,16 +32,9 @@ namespace LevelManager
 
 		}
 
-//		public static void nivelControlador(){
-//
-//			determinarNivel ();
-//
-//		}
-
 		//Devolvera un factor de dificultad para aplicar en el juego
 		public static int determinarNivel(){
 		
-			int nivelCalculado;
 			float factorDif = 0.05f;
 
 //			//Calcular nuevo nivel
@@ -52,7 +47,7 @@ namespace LevelManager
 //			if (nivelCalculado > nivelActual)
 			if(cantRebotes > golpesPorNivel)
 				nivelActual++;
-			else if(cantRebotes < golpesPorNivel)
+			else if(cantRebotes < golpesPorNivelMinimo)
 				nivelActual--;
 
 			if (nivelActual < 1)
@@ -64,7 +59,7 @@ namespace LevelManager
 			//Reiniciar cantidad de Rebotes para siguiente partida
 			cantRebotes = 0;
 
-			//Se parte de la premisa que el primer nivel es 3. por eso el factor debe ser 1 para Nivel = 3
+			//Se parte de la premisa que el primer nivel es 5. por eso el factor debe ser 1 para Nivel = 5
 			velocidadCajas = velocidadCajasBase   * (factorDif * nivelActual + 0.85f);
 			velocidadPelota = velocidadPelotaBase * (factorDif * nivelActual + 0.85f);
 

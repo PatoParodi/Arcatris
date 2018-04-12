@@ -6,18 +6,13 @@ public class LimiteBrea : MonoBehaviour {
 
 	public float movimientoPiso;
 	public float velocidadBrea;
-	public float velocidadPaddle;
 
 	private GameObject pad;
-	private float nuevaPosPad, nuevaPosBrea;
 	private Vector3 nuevaPosicion;
 
 	void Start(){
 		//Busco el paddle para referenciarlo despues
 		pad = GameObject.FindGameObjectWithTag ("paddle");
-
-		//Establecer la nueva posicion de cada objeto
-		nuevaPosBrea = transform.position.y;
 
 		nuevaPosicion = gameObject.transform.position;
 	
@@ -48,7 +43,6 @@ public class LimiteBrea : MonoBehaviour {
 		//En caso que llegue al fondo, subir el piso
 		if (other.gameObject.tag == "Caja") {
 			Destroy (other.gameObject);
-//			StartCoroutine ("SubirPiso");
 
 		}
 

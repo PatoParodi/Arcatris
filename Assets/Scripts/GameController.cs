@@ -87,6 +87,7 @@ public class GameController : MonoBehaviour {
 
 	public int vidas;
 	public int extraBalls;
+	public bool c_TutorialTest;
 
 	public tutorial tutorialObjetos;
 	public SelectorControl Controles;
@@ -126,7 +127,7 @@ public class GameController : MonoBehaviour {
 			firstTimeEverToPlay = false;
 
 		///////////// TEST MODE ONLY ///////////////////////////
-//				firstTimeEverToPlay = true;
+				firstTimeEverToPlay = c_TutorialTest;
 
 
 		//Tutorial How to Play
@@ -244,7 +245,7 @@ public class GameController : MonoBehaviour {
 		tutorialObjetos.challengeText.SetActive (false);
 
 		//Setear nivel inicial como 4 para que la nueva partida arranque en 3
-		PlayerPrefs.SetInt ("TEST_Nivel", 4);
+		PlayerPrefs.SetInt ("TEST_Nivel", 6);
 
 		//Mostrar pantalla inicial
 		IniciarJuego(true);
@@ -448,7 +449,7 @@ public class GameController : MonoBehaviour {
 			}
 
 			//Contador de partidas
-			contadorPartidas += 1;
+			contadorPartidas ++;
 
 			//Paddle a su posicion inicial
 			touchPadSlider.value = 0.5f;

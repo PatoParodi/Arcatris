@@ -49,19 +49,21 @@ public class Caja : MonoBehaviour {
 
 		//Animar ladrillo a derretirse al pasar por el convertidor
 		if (gameObject.tag == "Caja" && col.gameObject.tag == "Convertidor") {
+
+			//Le doy velocidad inversa al ladrillo para que no se mueva (Nacho crack)
+			velocidad = -1 * LevelManager.levelManager.velocidadCajas;
+			 
+
 			// Convertir la caja a liquido
 			GetComponent<Animator> ().SetBool ("Convertir", true);
 			// Deshabilitar los colliders NO triger al transformarse
 			BoxCollider2D[] colidersCaja = GetComponents<BoxCollider2D>();
+
 			foreach(BoxCollider2D colider in colidersCaja)
 				if(!colider.isTrigger)
 					colider.enabled = false;
 
-			GameObject brea = GameObject.FindGameObjectWithTag ("Brea");
-
-			// Subir el nivel de la brea
-//			StartCoroutine( brea.GetComponent<LimiteBrea> ().SubirPiso ());
-			brea.GetComponent<LimiteBrea> ().subirBrea ();
+			// Luego de la animacion se dispara un evento (Animator) para subir la brea SubirBrea()
 
 		}
 
@@ -73,6 +75,15 @@ public class Caja : MonoBehaviour {
 		}
 			
 	}
+
+	public void SubirBrea(){
+
+		GameObject brea = GameObject.FindGameObjectWithTag ("Brea");
+
+		brea.GetComponent<LimiteBrea> ().subirBrea ();
+
+	}
+
 
 	void OnCollisionEnter2D(Collision2D col){
 
