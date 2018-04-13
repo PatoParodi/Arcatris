@@ -127,6 +127,7 @@ public class GameController : MonoBehaviour {
 			firstTimeEverToPlay = false;
 
 		///////////// TEST MODE ONLY ///////////////////////////
+		 if(c_TutorialTest)
 				firstTimeEverToPlay = c_TutorialTest;
 
 

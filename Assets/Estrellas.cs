@@ -18,7 +18,7 @@ public class Estrellas : MonoBehaviour {
 
 			// Apagar todas las estrellas
 			GameObject.Find ("Estrella" + e).GetComponent<Toggle> ().isOn = false;
-			GameObject.Find ("Estrella" + e).GetComponent<Toggle> ().interactable = false;
+//			GameObject.Find ("Estrella" + e).GetComponent<Toggle> ().interactable = false;
 
 		}
 
@@ -26,7 +26,7 @@ public class Estrellas : MonoBehaviour {
 			
 				//Establece el mismo estado del Toggle tocado para las estrellas anteriores
 			GameObject.Find ("Estrella" + i).GetComponent<Toggle> ().isOn = true;
-			GameObject.Find ("Estrella" + i).GetComponent<Toggle> ().interactable = true;
+//			GameObject.Find ("Estrella" + i).GetComponent<Toggle> ().interactable = true;
 
 		
 		}
