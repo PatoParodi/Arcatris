@@ -24,6 +24,9 @@ public class MenuController : MonoBehaviour {
 
 	public Text titleConfigMenu;
 	public Toggle soundOnOff;
+	public Toggle TouchPad;
+	public Toggle Botones;
+
 	public GameObject _pantallaInicial;
 	public Text _monedas;
 	public Text _extraBalls;
@@ -36,17 +39,44 @@ public class MenuController : MonoBehaviour {
 
 		controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
 
+		//Levantar de memoria la config del Sonido
+		if (soundOnOff != null) {
+			if (PlayerPrefs.GetString (LevelManager.levelManager.s_sound) == LevelManager.levelManager.s_On)
+				soundOnOff.isOn = true;
+			else if(PlayerPrefs.GetString (LevelManager.levelManager.s_sound) == LevelManager.levelManager.s_Off) {
+				soundOnOff.isOn = false;
+			}
+			// Actualizar controlador global del sonido
+			SoundManager.soundManager.enableSound (soundOnOff.isOn);
+		}
+
+		//Levantar de memoria la config de los controles
+		if (TouchPad != null) {
+			if (PlayerPrefs.GetString (LevelManager.levelManager.s_TouchPad) == LevelManager.levelManager.s_On)
+				TouchPad.isOn = true;
+			if (PlayerPrefs.GetString (LevelManager.levelManager.s_TouchPad) == LevelManager.levelManager.s_Off){
+				TouchPad.isOn = false;
+				Botones.isOn = true;
+			}
+
+
+				
+		}
+
+
+	}
+
+	public void controlTouchPad(){
+	
+		if (TouchPad.isOn)
+			PlayerPrefs.SetString (LevelManager.levelManager.s_TouchPad,LevelManager.levelManager.s_On);
+		else
+			PlayerPrefs.SetString (LevelManager.levelManager.s_TouchPad,LevelManager.levelManager.s_Off);
+				
+	
 	}
 
 	void OnEnable(){
-
-		//Cambiar el titulo del menu a PAUSA durante el juego
-//		if (titleConfigMenu != null) 
-//			if (controller.ballInPlay)
-//			//PAUSA
-//			else
-//			//CONFIG
-//				titleConfigMenu.GetComponent<LanguageGetText> ().posicion = 0;
 
 	}
 
@@ -106,6 +136,12 @@ public class MenuController : MonoBehaviour {
 	public void controlSound(){
 	
 		SoundManager.soundManager.enableSound (soundOnOff.isOn);
+
+		if(soundOnOff.isOn)
+			PlayerPrefs.SetString (LevelManager.levelManager.s_sound, LevelManager.levelManager.s_On);
+		else
+			PlayerPrefs.SetString (LevelManager.levelManager.s_sound, LevelManager.levelManager.s_Off);
+		
 
 	}
 

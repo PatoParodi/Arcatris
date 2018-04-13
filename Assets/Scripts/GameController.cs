@@ -245,7 +245,7 @@ public class GameController : MonoBehaviour {
 		tutorialObjetos.challengeText.SetActive (false);
 
 		//Setear nivel inicial como 4 para que la nueva partida arranque en 3
-		PlayerPrefs.SetInt ("TEST_Nivel", 6);
+		PlayerPrefs.SetInt (LevelManager.levelManager.s_Level, 6);
 
 		//Mostrar pantalla inicial
 		IniciarJuego(true);
@@ -381,10 +381,6 @@ public class GameController : MonoBehaviour {
 		}
 			
 			
-	}
-
-	void OnLateUpdate(){
-
 	}
 
 	public void IniciarJuego(bool continueFlag){

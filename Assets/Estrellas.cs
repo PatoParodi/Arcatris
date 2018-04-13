@@ -8,7 +8,11 @@ public class Estrellas : MonoBehaviour {
 
 	public int nroEstrella;
 
+	public GameObject botonContinue;
+
 	public void pintarEstrellas(){
+
+		botonContinue.GetComponent<Button> ().interactable = true;
 
 		for (int e = 1; e <= 5; e++) {
 
@@ -24,4 +28,6 @@ public class Estrellas : MonoBehaviour {
 		
 		}
 	}
+
+
 }

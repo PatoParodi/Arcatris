@@ -10,20 +10,22 @@ namespace LevelManager
 	public class levelManager {
 
 		private static float velocidadPelotaBase = 4.3f;
-
 		private static float velocidadCajasBase = 0.22f;
 
-		public static float velocidadPelota = 4.3f;
-
-		public static float velocidadCajas = 0.22f;
+		public static float velocidadPelota;
+		public static float velocidadCajas;
+		public static int nivelActual;
 
 		private static int golpesPorNivelMinimo = 12;
-
 		private static int golpesPorNivel = 30;
-
 		private static int cantRebotes;
 
-		public static int nivelActual;
+		public static string s_Level = "TEST_Nivel";
+		public static string s_sound = "Sound";
+		public static string s_TouchPad = "SelectorTouchPad";
+
+		public static string s_On = "On";
+		public static string s_Off = "Off";
 
 		public static void addRebote ()
 		{
@@ -41,7 +43,7 @@ namespace LevelManager
 //			nivelCalculado = cantRebotes / golpesPorNivel;
 //
 			//Verificar si el nuevo nivel supera el anterior
-			nivelActual = PlayerPrefs.GetInt ("TEST_Nivel");
+			nivelActual = PlayerPrefs.GetInt (s_Level);
 
 			//Subir o bajar el nivel segun corresponda
 //			if (nivelCalculado > nivelActual)
@@ -54,7 +56,7 @@ namespace LevelManager
 				nivelActual = 1;
 
 			//Guardar nuevo nivel
-			PlayerPrefs.SetInt ("TEST_Nivel", nivelActual);
+			PlayerPrefs.SetInt (s_Level, nivelActual);
 
 			//Reiniciar cantidad de Rebotes para siguiente partida
 			cantRebotes = 0;
