@@ -12,8 +12,8 @@ namespace LevelManager
 		private static float velocidadPelotaBase = 4.3f;
 		private static float velocidadCajasBase = 0.22f;
 
-		public static float velocidadPelota;
-		public static float velocidadCajas;
+		public static float velocidadPelota = 4.3f;
+		public static float velocidadCajas = 0.22f;
 		public static int nivelActual;
 
 		private static int golpesPorNivelMinimo = 12;
