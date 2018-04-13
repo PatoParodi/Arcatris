@@ -9,10 +9,13 @@ public class Estrellas : MonoBehaviour {
 	public int nroEstrella;
 
 	public GameObject botonContinue;
+	public Text textContinue;
+
 
 	public void pintarEstrellas(){
 
 		botonContinue.GetComponent<Button> ().interactable = true;
+		textContinue.color = new Color (textContinue.color.r, textContinue.color.g, textContinue.color.b, 255);
 
 		for (int e = 1; e <= 5; e++) {
 
