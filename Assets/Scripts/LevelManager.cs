@@ -18,11 +18,12 @@ namespace LevelManager
 
 		private static int golpesPorNivelMinimo = 12;
 		private static int golpesPorNivel = 30;
-		private static int cantRebotes;
+		public static int cantRebotes;
 
 		public static string s_Level = "TEST_Nivel";
 		public static string s_sound = "Sound";
 		public static string s_TouchPad = "SelectorTouchPad";
+		public static string s_Rated = "Rated";
 
 		public static string s_On = "On";
 		public static string s_Off = "Off";

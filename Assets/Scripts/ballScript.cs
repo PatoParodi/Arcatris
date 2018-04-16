@@ -10,6 +10,9 @@ public class ballScript : MonoBehaviour {
 	void Awake(){
 	
 		velocidadConstante = LevelManager.levelManager.velocidadPelota;
+
+		//Play spawn sound
+		SoundManager.soundManager.playSound(GetComponent<AudioSource>());
 	
 	}
 

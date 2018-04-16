@@ -52,4 +52,5 @@ public class LanguageGetText : MonoBehaviour {
 
 	}
 		
+
 }

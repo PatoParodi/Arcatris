@@ -8,7 +8,7 @@ public static class LanguageManager {
 
 	public static string espanol = "ES", ingles = "EN";
 
-	public static string[] textos = new string[11];
+	public static string[] textos = new string[15];
 
 	public static int posicion;
 
@@ -40,6 +40,7 @@ public static class LanguageManager {
 				textos [8] = "Use One";
 				textos [9] = "Get One";
 				textos [10] = "PAUSED";
+				textos [11] = "Not enough diamonds";
 
 				break;
 
@@ -55,6 +56,8 @@ public static class LanguageManager {
 				textos [8] = "Usar Una";
 				textos [9] = "Obtener";
 				textos [10] = "PAUSA";
+				textos [11] = "No tiene suficientes diamantes";
+
 
 				break;
 
@@ -70,6 +73,8 @@ public static class LanguageManager {
 				textos [8] = "Use One";
 				textos [9] = "Get One";
 				textos [10] = "PAUSED";
+				textos [11] = "Not enough diamonds";
+
 
 				break;
 			}

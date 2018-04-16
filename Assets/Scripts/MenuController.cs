@@ -28,8 +28,10 @@ public class MenuController : MonoBehaviour {
 	public Toggle Botones;
 
 	public GameObject _pantallaInicial;
+	public GameObject _UI_RateUs;
 	public Text _monedas;
 	public Text _extraBalls;
+	public GameObject _txtPopUp;
 	public GameObject _UI_RateUS;
 	public Text _txtNivel;
 //	public Text _velocidadPelotaText;
@@ -127,10 +129,43 @@ public class MenuController : MonoBehaviour {
 
 	public void MostrarPlay(bool mostrar){
 
-		//Ir a pantalla de PLAY
-		_pantallaInicial.SetActive(true);
-		_pantallaInicial.GetComponent<Animator> ().SetBool ("Mostrar", mostrar);
+		bool popUp;
 
+		popUp = false;
+
+		//Mostrar HighScore si corresponde
+		if (controller.getHighScore () > PlayerPrefs.GetInt ("High Score")) {
+
+			PlayerPrefs.SetInt ("High Score", controller.getHighScore ());
+
+			//Actualizar texto de Pantalla Inicial
+			controller.textosEnPantalla.highScoreValue.text = controller.getHighScore ().ToString ();
+
+			popUp = true;
+
+			controller.UI_highScore.SetActive (true);
+
+		}
+
+		if (!popUp && PlayerPrefs.GetString (LevelManager.levelManager.s_Rated) != "Si") //Si aun no reateo
+			if(controller.contadorPartidas > 1 && controller.contadorPartidas%3 == 0) //Mostrar cada 3 partidas
+				{	
+
+					controller.contadorPartidas++;
+				
+					popUp = true;
+
+					_UI_RateUs.SetActive (true);
+
+				}
+
+		//Ir a pantalla de PLAY
+		if (!popUp) {
+			// Al ir a pantalla de Play siempre volver la Brea a su posicion inicial
+			controller.breaPosicionInicial ();
+			_pantallaInicial.SetActive (true);
+		}
+			
 	}
 
 	public void controlSound(){
@@ -162,6 +197,11 @@ public class MenuController : MonoBehaviour {
 			_extraBall = Resources.Load ("Prefabs/extraBallCompra") as GameObject;
 
 			StartCoroutine (_instanciarBola (cantidad, 0.1f));
+
+		} // No hay suficientes diamantes
+		else{ 
+			
+			_txtPopUp.GetComponent<Animator> ().SetTrigger ("Show");
 
 		}
 
@@ -240,7 +280,9 @@ public class MenuController : MonoBehaviour {
 	public void GoToMarket(){
 	
 		Application.OpenURL ("market://details?id=" + "Limbo"); //Application.productName);
-	
+
+		PlayerPrefs.SetString (LevelManager.levelManager.s_Rated, "Si");
+
 	}
 
 }

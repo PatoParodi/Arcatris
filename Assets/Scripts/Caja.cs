@@ -9,18 +9,11 @@ public class Caja : MonoBehaviour {
 	public float velocidad;
 	public GameObject moneda;
 	public Sprite _cajaRoja;
+	public bool powerUpBajarBrea; //Determina que es un ladrillo con PowerUp
 
 	private GameController controller;
-	private bool b_tienePowerUp;
 
 	void Start(){
-	
-		//Determinar si esta caja tendra un POWER UP
-		if (gameObject.tag == "Caja" && probabilidad (21)) {
-
-			b_tienePowerUp = true;
-
-		}
 
 		controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
 
@@ -28,7 +21,7 @@ public class Caja : MonoBehaviour {
 			velocidad = 0;
 		}
 		else {
-			velocidad = LevelManager.levelManager.velocidadCajas;
+				velocidad = LevelManager.levelManager.velocidadCajas;
 
 		}
 			
@@ -76,14 +69,21 @@ public class Caja : MonoBehaviour {
 			
 	}
 
-	public void SubirBrea(){
+	public void BajarBrea(){
 
+		GameObject brea = GameObject.FindGameObjectWithTag ("Brea");
+
+		brea.GetComponent<LimiteBrea> ().bajarBrea(3);
+
+	}
+
+	public void SubirBrea(){
+		//Este evento es llamado desde el Animator de la Caja (Brea_Fall)
 		GameObject brea = GameObject.FindGameObjectWithTag ("Brea");
 
 		brea.GetComponent<LimiteBrea> ().subirBrea ();
 
 	}
-
 
 	void OnCollisionEnter2D(Collision2D col){
 
@@ -92,19 +92,26 @@ public class Caja : MonoBehaviour {
 			GetComponent<BoxCollider2D>().enabled = false;
 
 			//Explotar moneda con 25% de probabilidad
-			if (probabilidad (controller.porcentajeSpawnDiamante)) {
-				Instantiate (moneda, new Vector3 (transform.position.x, transform.position.y, -1), Quaternion.identity);
-				//El objeto moneda viajara hasta el contador y luego se destruira
+			if (!powerUpBajarBrea) {
+				if (probabilidad (controller.porcentajeSpawnDiamante)) {
+					Instantiate (moneda, new Vector3 (transform.position.x, transform.position.y, -1), Quaternion.identity);
+					//El objeto moneda viajara hasta el contador y luego se destruira
+				}
+				//Instanciar particulas y acumular puntos
+				Instantiate (Resources.Load ("Prefabs/puntosParticulas"), transform.position, Quaternion.identity);
+
+				//Reproducir sonido
+				SoundManager.soundManager.playSound (GetComponent<AudioSource> ());
+			} 
+			else {
+				//Bajar Brea
+				BajarBrea();
+
+
 			}
 
 			//Animar y destruir caja
 			controller.explotarCaja (gameObject, true);
-
-			//Instanciar particulas y acumular puntos
-			Instantiate(Resources.Load("Prefabs/puntosParticulas"),transform.position,Quaternion.identity);
-
-			//Reproducir sonido
-			SoundManager.soundManager.playSound(GetComponent<AudioSource>());
 
 		}
 	}

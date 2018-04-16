@@ -67,6 +67,8 @@ public class GameController : MonoBehaviour {
 	public GameObject UI_highScore;
 	public GameObject popUpContinue;
 	public GameObject Brea;
+	public Text txtCantGolpes;
+	public Text txtNivel;
 
 	public Slider touchPadSlider;
 	public RectTransform handleSlider;
@@ -257,9 +259,10 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (paddleVivo != null) {
-
-		}
+		//TEST 
+		//Cant Golpes y Nivel
+		txtNivel.text = LevelManager.levelManager.nivelActual.ToString();
+		txtCantGolpes.text = LevelManager.levelManager.cantRebotes.ToString ();
 
 		//Toque inicial durante el Tutorial
 		if (firstTimeEverToPlay){

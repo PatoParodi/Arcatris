@@ -61,43 +61,16 @@ public class LimiteBrea : MonoBehaviour {
 	}
 
 	public void subirBrea(){
+		//Subir brea cuando caen ladrillos
 
 		nuevaPosicion += Vector3.up * movimientoPiso;
 			
-	//Subir brea cuando caen ladrillos
+	}
+
+	public void bajarBrea(float multiplicador){
+
+		nuevaPosicion -= Vector3.up * movimientoPiso * multiplicador;
 
 	}
 		
-	public IEnumerator SubirPiso(){
-//		public void SubirPiso(){
-			
-
-//		//Establecer la nueva posicion de cada objeto
-//		nuevaPosBrea = transform.position.y + movimientoPiso;
-//		if(pad != null)
-//			nuevaPosPad = pad.transform.position.y + movimientoPiso;
-
-		//Subir piso de forma gradual para que no se vea un salto
-		int partes = 5;
-		float Porcion = movimientoPiso / partes;
-
-		yield return new WaitForSeconds (0.5f);
-
-		for(int i = 0; i<partes;i++){
-
-			yield return new WaitForFixedUpdate();
-
-			transform.position = new Vector3 (transform.position.x, 
-				transform.position.y + Porcion, transform.position.z);
-
-		}
-
-		yield return new WaitForSeconds (0.1f);
-
-		pad = GameObject.FindGameObjectWithTag ("paddle");
-//		pad.GetComponent<Rigidbody2D> ().AddForce (new Vector2 (0, 10));
-		if(pad != null)
-			pad.transform.position = new Vector3 (pad.transform.position.x, pad.transform.position.y + movimientoPiso, pad.transform.position.z);
-
-	}
 }
