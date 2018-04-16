@@ -171,6 +171,7 @@ public class scriptContador : MonoBehaviour {
 			
 			//Animar pantalla de Play
 //			pantallaInicial.SetActive(true);
+
 			pantallaInicial.GetComponent<MenuController> ().MostrarPlay (true);
 
 //		}

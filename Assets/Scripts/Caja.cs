@@ -58,7 +58,12 @@ public class Caja : MonoBehaviour {
 			 
 
 			// Convertir la caja a liquido
-			GetComponent<Animator> ().SetBool ("Convertir", true);
+			if (powerUpBajarBrea) {
+				GetComponent<Animator> ().SetBool ("ConvertirVioleta", true);
+			}
+			else{
+				GetComponent<Animator> ().SetBool ("Convertir", true);
+			}
 			// Deshabilitar los colliders NO triger al transformarse
 			BoxCollider2D[] colidersCaja = GetComponents<BoxCollider2D>();
 
@@ -110,15 +115,15 @@ public class Caja : MonoBehaviour {
 				//Instanciar particulas y acumular puntos
 				Instantiate (Resources.Load ("Prefabs/puntosParticulas"), transform.position, Quaternion.identity);
 
-				//Reproducir sonido
-				SoundManager.soundManager.playSound (GetComponent<AudioSource> ());
 			} 
 			else {
 				//Bajar Brea
 				BajarBrea();
 
-
 			}
+
+			//Reproducir sonido
+			SoundManager.soundManager.playSound (GetComponent<AudioSource> ());
 
 			//Animar y destruir caja
 			controller.explotarCaja (gameObject, true);
