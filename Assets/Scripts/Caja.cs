@@ -24,7 +24,14 @@ public class Caja : MonoBehaviour {
 				velocidad = LevelManager.levelManager.velocidadCajas;
 
 		}
-			
+
+		if(LevelManager.levelManager.contadorCajasDerretidas > 5)
+			if (gameObject.tag == "Caja" && probabilidad (5)) {
+				GetComponent<Animator> ().SetBool ("BreaDown", true);
+				powerUpBajarBrea = true;
+			}
+		
+
 	}
 
 	// Update is called once per frame
@@ -42,6 +49,9 @@ public class Caja : MonoBehaviour {
 
 		//Animar ladrillo a derretirse al pasar por el convertidor
 		if (gameObject.tag == "Caja" && col.gameObject.tag == "Convertidor") {
+
+			//Contador para activar la aparicion de PowerUps para bajar la brea
+			LevelManager.levelManager.contadorCajasDerretidas++;
 
 			//Le doy velocidad inversa al ladrillo para que no se mueva (Nacho crack)
 			velocidad = -1 * LevelManager.levelManager.velocidadCajas;
@@ -73,7 +83,7 @@ public class Caja : MonoBehaviour {
 
 		GameObject brea = GameObject.FindGameObjectWithTag ("Brea");
 
-		brea.GetComponent<LimiteBrea> ().bajarBrea(3);
+		brea.GetComponent<LimiteBrea> ().bajarBrea(5);
 
 	}
 

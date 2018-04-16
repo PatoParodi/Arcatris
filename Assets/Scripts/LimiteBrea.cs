@@ -6,13 +6,11 @@ public class LimiteBrea : MonoBehaviour {
 
 	public float movimientoPiso;
 	public float velocidadBrea;
+	public Transform PosicionInicial;
 
-	private GameObject pad;
 	private Vector3 nuevaPosicion;
 
 	void Start(){
-		//Busco el paddle para referenciarlo despues
-		pad = GameObject.FindGameObjectWithTag ("paddle");
 
 		nuevaPosicion = gameObject.transform.position;
 	
@@ -70,6 +68,10 @@ public class LimiteBrea : MonoBehaviour {
 	public void bajarBrea(float multiplicador){
 
 		nuevaPosicion -= Vector3.up * movimientoPiso * multiplicador;
+
+		//Validar que la nueva posicion no quede abajo del minimo
+		if (PosicionInicial.position.y > nuevaPosicion.y)
+			nuevaPosicion = new Vector3 (nuevaPosicion.x, PosicionInicial.position.y, nuevaPosicion.z);
 
 	}
 		

@@ -37,7 +37,7 @@ public class MenuController : MonoBehaviour {
 //	public Text _velocidadPelotaText;
 
 
-	void Awake(){
+	void Start(){
 
 		controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
 
@@ -54,15 +54,12 @@ public class MenuController : MonoBehaviour {
 
 		//Levantar de memoria la config de los controles
 		if (TouchPad != null) {
-			if (PlayerPrefs.GetString (LevelManager.levelManager.s_TouchPad) == LevelManager.levelManager.s_On)
-				TouchPad.isOn = true;
-			if (PlayerPrefs.GetString (LevelManager.levelManager.s_TouchPad) == LevelManager.levelManager.s_Off){
+			if (PlayerPrefs.GetString (LevelManager.levelManager.s_TouchPad) == LevelManager.levelManager.s_Off) {
 				TouchPad.isOn = false;
 				Botones.isOn = true;
+			} else{
+				TouchPad.isOn = true;
 			}
-
-
-				
 		}
 
 
@@ -133,6 +130,10 @@ public class MenuController : MonoBehaviour {
 
 		popUp = false;
 
+		//Buscar GameController si aun no se recupero
+		if(controller == null)
+			controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
+		
 		//Mostrar HighScore si corresponde
 		if (controller.getHighScore () > PlayerPrefs.GetInt ("High Score")) {
 

@@ -19,6 +19,7 @@ namespace LevelManager
 		private static int golpesPorNivelMinimo = 12;
 		private static int golpesPorNivel = 30;
 		public static int cantRebotes;
+		public static int contadorCajasDerretidas;
 
 		public static string s_Level = "TEST_Nivel";
 		public static string s_sound = "Sound";

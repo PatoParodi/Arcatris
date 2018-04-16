@@ -105,6 +105,7 @@ public class GameController : MonoBehaviour {
 // PARA PRUEBAS  de TUTORIAL SOLAMENTE!!!!!!! !! ! ! ! !! !! ! !!! !!!
 // &*&*&*&*&*&*&**&*&*&*&*&*&*&*&*&*&*&*&*&*&*
 ///////////// TEST MODE ONLY ///////////////////////////
+//		PlayerPrefs.DeleteAll();
 //		PlayerPrefs.SetInt ("High Score", 0);
 //		PlayerPrefs.SetInt ("ArcatrisMonedas", 1000);
 //		PlayerPrefs.SetInt ("ExtraBall", 0);
@@ -137,6 +138,8 @@ public class GameController : MonoBehaviour {
 		if (firstTimeEverToPlay) {
 //			PantallaInicial.GetComponent<MenuController> ().MostrarPlay (false);
 			paddleVivo = Instantiate (paddle, new Vector2(paddleSpawnInicial.transform.position.x,paddleSpawnInicial.transform.position.y), Quaternion.identity) as GameObject;
+
+			Controles.sw_TouchPad.isOn = true;
 
 			tutorialObjetos.swipeText.SetActive (true);
 			tutorialObjetos.arrows.SetActive (true);
@@ -447,6 +450,9 @@ public class GameController : MonoBehaviour {
 			foreach (GameObject prefab in prefabs) {
 				Destroy (prefab);
 			}
+
+			//Contador de Cajas derretidas
+			LevelManager.levelManager.contadorCajasDerretidas = 0;
 
 			//Contador de partidas
 			contadorPartidas ++;
