@@ -147,9 +147,11 @@ public class GameController : MonoBehaviour {
 			tutorialObjetos.forceField.SetActive (false);
 			//En el Update() se apagan estos objetos al tocar
 		} else {
+			
+			//Ajustar dificultad
+			LevelManager.levelManager.determinarNivel (false);
 
 			PantallaInicial.SetActive (true);
-//			PantallaInicial.GetComponent<MenuController> ().MostrarPlay (true);
 
 		}
 		// Buscar High Score
@@ -251,7 +253,9 @@ public class GameController : MonoBehaviour {
 		tutorialObjetos.challengeText.SetActive (false);
 
 		//Setear nivel inicial como 4 para que la nueva partida arranque en 3
-		PlayerPrefs.SetInt (LevelManager.levelManager.s_Level, 6);
+		PlayerPrefs.SetInt (LevelManager.levelManager.s_Level, 5);
+		//Ajustar el nivel
+		LevelManager.levelManager.determinarNivel (false);
 
 		//Mostrar pantalla inicial
 		IniciarJuego(true);
@@ -382,18 +386,13 @@ public class GameController : MonoBehaviour {
 			popUpContinue.SetActive (true);
 
 			BotonesEnPantalla.pausa.SetActive(false);
-//			BotonesEnPantalla.izquierda.SetActive (false);
-//			BotonesEnPantalla.derecha.SetActive (false);
 
 		}
-			
 			
 	}
 
 	public void IniciarJuego(bool continueFlag){
 //Comienza el juego desde el principio
-
-		LevelManager.levelManager.determinarNivel ();
 
 		UI_inGame.SetActive (true);
 

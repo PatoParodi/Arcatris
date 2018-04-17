@@ -151,35 +151,9 @@ public class scriptContador : MonoBehaviour {
 		//Ocultar Canvas UI de inGame
 		controller.UI_inGame.SetActive (false);
 
-//		//Mostrar HighScore si corresponde
-//		if (controller.getHighScore () > PlayerPrefs.GetInt ("High Score")) {
-//
-////			controller.UI_highScore.SetActive (true);
-////
-////			PlayerPrefs.SetInt ("High Score", controller.getHighScore ());
-////
-////			//Actualizar texto de Pantalla Inicial
-////			controller.textosEnPantalla.highScoreValue.text = controller.getHighScore ().ToString ();
-//
-//		} 
-//		//MOSTRAR PANTALLA DE RATE US
-//		else if (controller.contadorPartidas%3 == 0) {	//Mostrar cada 3 partidas
-//			_UI_RateUs.SetActive (true);
-//		}
-//		
-//			else{
-			
-			//Animar pantalla de Play
-//			pantallaInicial.SetActive(true);
 
-			pantallaInicial.GetComponent<MenuController> ().MostrarPlay (true);
+		pantallaInicial.GetComponent<MenuController> ().MostrarPlay (true);
 
-//		}
-			
-
-		//Validar si muestro el pop up para valorar
-
-//		else
 
 	}
 }

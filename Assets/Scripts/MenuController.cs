@@ -163,6 +163,10 @@ public class MenuController : MonoBehaviour {
 
 		//Ir a pantalla de PLAY
 		if (!popUp) {
+			
+			//Ajustar el nivel al terminar la partida
+			LevelManager.levelManager.determinarNivel (true);
+
 			// Al ir a pantalla de Play siempre volver la Brea a su posicion inicial
 			controller.breaPosicionInicial ();
 			_pantallaInicial.SetActive (true);
@@ -286,5 +290,5 @@ public class MenuController : MonoBehaviour {
 		PlayerPrefs.SetString (LevelManager.levelManager.s_Rated, "Si");
 
 	}
-
+		
 }

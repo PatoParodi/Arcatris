@@ -37,29 +37,26 @@ namespace LevelManager
 		}
 
 		//Devolvera un factor de dificultad para aplicar en el juego
-		public static int determinarNivel(){
+		public static int determinarNivel(bool calcular){
 		
-			float factorDif = 0.05f;
+			float factorDif = 0.05f; // Aumento progresivo de dificultad 5%
 
-//			//Calcular nuevo nivel
-//			nivelCalculado = cantRebotes / golpesPorNivel;
-//
 			//Verificar si el nuevo nivel supera el anterior
 			nivelActual = PlayerPrefs.GetInt (s_Level);
 
 			//Subir o bajar el nivel segun corresponda
-//			if (nivelCalculado > nivelActual)
-			if(cantRebotes >= golpesPorNivel)
-				nivelActual++;
-			else if(cantRebotes <= golpesPorNivelMinimo)
-				nivelActual--;
+			if (calcular) {
+				if (cantRebotes >= golpesPorNivel)
+					nivelActual++;
+				else if (cantRebotes <= golpesPorNivelMinimo)
+					nivelActual--;
 
-			if (nivelActual < 1)
-				nivelActual = 1;
+				if (nivelActual < 1)
+					nivelActual = 1;
 
-			if (nivelActual > 10)
-				nivelActual = 10;
-			
+				if (nivelActual > 10)
+					nivelActual = 10;
+			}
 
 			//Guardar nuevo nivel
 			PlayerPrefs.SetInt (s_Level, nivelActual);
@@ -71,7 +68,6 @@ namespace LevelManager
 			velocidadCajas = velocidadCajasBase   * (factorDif * nivelActual + 0.85f);
 			velocidadPelota = velocidadPelotaBase * (factorDif * nivelActual + 0.85f);
 
-			Debug.Log (nivelActual);
 			return nivelActual;
 
 		}
