@@ -49,7 +49,7 @@ namespace LevelManager
 
 			//Subir o bajar el nivel segun corresponda
 //			if (nivelCalculado > nivelActual)
-			if(cantRebotes => golpesPorNivel)
+			if(cantRebotes >= golpesPorNivel)
 				nivelActual++;
 			else if(cantRebotes <= golpesPorNivelMinimo)
 				nivelActual--;

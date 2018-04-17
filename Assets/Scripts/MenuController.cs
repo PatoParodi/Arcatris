@@ -149,7 +149,8 @@ public class MenuController : MonoBehaviour {
 		}
 
 		if (!popUp && PlayerPrefs.GetString (LevelManager.levelManager.s_Rated) != "Si") //Si aun no reateo
-			if(controller.contadorPartidas > 1 && controller.contadorPartidas%3 == 0) //Mostrar cada 3 partidas
+		if(controller.contadorPartidas == 5 || 
+			(controller.contadorPartidas > 1 && controller.contadorPartidas%20 == 0)) //Mostrar cada 3 partidas
 				{	
 
 					controller.contadorPartidas++;
