@@ -16,8 +16,8 @@ namespace LevelManager
 		public static float velocidadCajas = 0.22f;
 		public static int nivelActual;
 
-		private static int golpesPorNivelMinimo = 12;
-		private static int golpesPorNivel = 30;
+		private static int golpesPorNivelMinimo = 10;
+		private static int golpesPorNivel = 36;
 		public static int cantRebotes;
 		public static int contadorCajasDerretidas;
 
