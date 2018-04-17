@@ -145,6 +145,7 @@ public class GameController : MonoBehaviour {
 			tutorialObjetos.arrows.SetActive (true);
 			tutorialObjetos.ladrillos.SetActive (true);
 			tutorialObjetos.forceField.SetActive (false);
+
 			//En el Update() se apagan estos objetos al tocar
 		} else {
 			
@@ -274,14 +275,21 @@ public class GameController : MonoBehaviour {
 		//Toque inicial durante el Tutorial
 		if (firstTimeEverToPlay){
 			if (paddleVivo != null) {
-				if (paddleVivo.transform.position.x < -1.3f)
+
+				//Flashing del touchPad para que lo vea
+				touchPadSlider.GetComponent<Animator>().SetBool("Flashing",true);
+
+				if (paddleVivo.transform.position.x < -0.75f)
 					flagMovioIzquierda = true;
-				if (paddleVivo.transform.position.x > 1.3f)
+				if (paddleVivo.transform.position.x > 0.75f)
 					flagMovioDerecha = true;
 			}
 			if (flagMovioIzquierda && flagMovioDerecha) { 
 				tutorialObjetos.swipeText.SetActive (false);
 				tutorialObjetos.arrows.SetActive (false);
+
+				//Cortar flashing del TouchPad
+				touchPadSlider.GetComponent<Animator>().SetBool("Flashing",false);
 
 				StartCoroutine ("tutorialDemo");
 			}
