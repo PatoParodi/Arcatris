@@ -57,6 +57,10 @@ namespace LevelManager
 			if (nivelActual < 1)
 				nivelActual = 1;
 
+			if (nivelActual > 10)
+				nivelActual = 10;
+			
+
 			//Guardar nuevo nivel
 			PlayerPrefs.SetInt (s_Level, nivelActual);
 
