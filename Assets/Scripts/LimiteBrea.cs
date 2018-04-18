@@ -7,6 +7,7 @@ public class LimiteBrea : MonoBehaviour {
 	public float movimientoPiso;
 	public float velocidadBrea;
 	public Transform PosicionInicial;
+	public ParticleSystem particulasBrea;
 
 	private Vector3 nuevaPosicion;
 
@@ -20,6 +21,7 @@ public class LimiteBrea : MonoBehaviour {
 		
 //		//Subir Brea
 		gameObject.transform.position = Vector3.Lerp (transform.position, nuevaPosicion , velocidadBrea * Time.deltaTime);
+
 
 	}
 
@@ -66,6 +68,8 @@ public class LimiteBrea : MonoBehaviour {
 	}
 
 	public void bajarBrea(float multiplicador){
+
+		particulasBrea.Play ();
 
 		nuevaPosicion -= Vector3.up * movimientoPiso * multiplicador;
 
