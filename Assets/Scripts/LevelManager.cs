@@ -18,6 +18,7 @@ namespace LevelManager
 
 		private static int golpesPorNivelMinimo = 10;
 		private static int golpesPorNivel = 36;
+		private static bool flagBajarNivel = false;
 		public static int cantRebotes;
 		public static int contadorCajasDerretidas;
 
@@ -28,6 +29,7 @@ namespace LevelManager
 
 		public static string s_On = "On";
 		public static string s_Off = "Off";
+
 
 		public static void addRebote ()
 		{
@@ -46,10 +48,19 @@ namespace LevelManager
 
 			//Subir o bajar el nivel segun corresponda
 			if (calcular) {
-				if (cantRebotes >= golpesPorNivel)
+				//Subir Nivel
+				if (cantRebotes >= golpesPorNivel) {
 					nivelActual++;
-				else if (cantRebotes <= golpesPorNivelMinimo)
-					nivelActual--;
+					flagBajarNivel = false;
+				}
+				//Bajar Nivel a la segunda vez que no llega al minimo
+				if (flagBajarNivel == true) {
+					if (cantRebotes <= golpesPorNivelMinimo){
+						nivelActual--;
+						flagBajarNivel = false;
+					}
+				} else
+					flagBajarNivel = true;
 
 				if (nivelActual < 1)
 					nivelActual = 1;
