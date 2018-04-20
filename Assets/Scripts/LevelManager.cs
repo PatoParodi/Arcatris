@@ -15,6 +15,8 @@ namespace LevelManager
 		public static float velocidadPelota = 4.3f;
 		public static float velocidadCajas = 0.22f;
 		public static int nivelActual;
+		public static int puntosBaseCaja = 20;
+		public static int multiplicadorPuntosCaja = 0;
 
 		private static int golpesPorNivelMinimo = 10;
 		private static int golpesPorNivel = 36;
@@ -30,6 +32,11 @@ namespace LevelManager
 		public static string s_On = "On";
 		public static string s_Off = "Off";
 
+		public static void ReinicializarMultiplicadorPuntos(){
+		
+			multiplicadorPuntosCaja = 0;
+		
+		}
 
 		public static void addRebote ()
 		{
@@ -83,5 +90,6 @@ namespace LevelManager
 
 		}
 	}
+		
 }
 

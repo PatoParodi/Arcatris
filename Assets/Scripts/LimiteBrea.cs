@@ -10,6 +10,7 @@ public class LimiteBrea : MonoBehaviour {
 	public ParticleSystem particulasBrea;
 
 	private Vector3 nuevaPosicion;
+	public bool BreaEnPosicionInicial;
 
 	void Start(){
 
@@ -22,6 +23,16 @@ public class LimiteBrea : MonoBehaviour {
 //		//Subir Brea
 		gameObject.transform.position = Vector3.Lerp (transform.position, nuevaPosicion , velocidadBrea * Time.deltaTime);
 
+		if (Vector3.Distance (gameObject.transform.position, PosicionInicial.position) <= 0.05f)
+			BreaEnPosicionInicial = true;
+		else
+			BreaEnPosicionInicial = false;
+
+	}
+
+	public bool BreaEstaEnPosicionInicial(){
+
+		return BreaEnPosicionInicial;
 
 	}
 

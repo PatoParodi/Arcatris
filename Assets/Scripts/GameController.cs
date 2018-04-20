@@ -141,6 +141,9 @@ public class GameController : MonoBehaviour {
 
 			Controles.sw_TouchPad.isOn = true;
 
+			PlayerPrefs.SetInt ("ExtraBall", 3);
+
+
 			tutorialObjetos.swipeText.SetActive (true);
 			tutorialObjetos.arrows.SetActive (true);
 			tutorialObjetos.ladrillos.SetActive (true);
@@ -298,7 +301,7 @@ public class GameController : MonoBehaviour {
 		//Mover pelota junto con el pad al iniciar
 		if (!ballInPlay && pelotaViva != null) {
 
-			pelotaViva.transform.position = new Vector3(paddleVivo.transform.position.x, paddleVivo.GetComponent<paddle>().pelotaSpawnPaddle.position.y ,0);
+			pelotaViva.transform.position = new Vector3(Mathf.Clamp(paddleVivo.transform.position.x,-2f,2f), paddleVivo.GetComponent<paddle>().pelotaSpawnPaddle.position.y ,0);
 
 		}
 
@@ -429,6 +432,9 @@ public class GameController : MonoBehaviour {
 		GameObject[] cajas;
 		GameObject[] prefabs;
 
+		//Reinicializar Multiplicador de Puntos
+		LevelManager.levelManager.ReinicializarMultiplicadorPuntos();
+
 		//Habilitar Boton de Pausa
 		BotonesEnPantalla.pausa.SetActive(true);
 	
@@ -474,6 +480,9 @@ public class GameController : MonoBehaviour {
 			Puntaje = 0;
 			textosEnPantalla.puntajeText.text = Puntaje.ToString();
 
+			//Esperar a que la Brea este en posicion inicial para arrancar
+			yield return new WaitUntil( Brea.GetComponent<LimiteBrea>().BreaEstaEnPosicionInicial );
+
 			GameObject _instanciaCajas = spawnCajas ();
 			//Spawnear las cajas un poco mas abajo al empezar
 			_instanciaCajas.transform.position = new Vector2 (_instanciaCajas.transform.position.x, _instanciaCajas.transform.position.y - 2.2f);
@@ -495,10 +504,10 @@ public class GameController : MonoBehaviour {
 		}
 
 		//Posicionar pelota arriba del pad a medida que vaya subiendo
-		pelotaViva.transform.position = new Vector2(paddleVivo.transform.position.x, paddleVivo.transform.position.y + paddleVivo.GetComponentInChildren<SpriteRenderer>().bounds.size.y/2 + pelotaViva.GetComponentInChildren<SpriteRenderer>().bounds.size.y/2);
+//		pelotaViva.transform.position = new Vector2(paddleVivo.transform.position.x, paddleVivo.transform.position.y + paddleVivo.GetComponentInChildren<SpriteRenderer>().bounds.size.y/2 + pelotaViva.GetComponentInChildren<SpriteRenderer>().bounds.size.y/2);
 
 		yield return new WaitForSeconds (seconds);
-
+			
 		// Dar fuerza inicial a la pelota
 		pelotaViva.GetComponent<Rigidbody2D>().AddForce (obtenerVectorVelocidad(fuerzaPelota,50f,130f));
 		pelotaViva.GetComponent<CircleCollider2D> ().enabled = true;

@@ -42,6 +42,9 @@ public class paddle : MonoBehaviour {
 			
 				//LevelManager -> Sumar rebote
 				LevelManager.levelManager.addRebote();
+				
+				//LevelManager -> Reinicializar Multiplicador puntos
+				LevelManager.levelManager.ReinicializarMultiplicadorPuntos();
 
 				col.gameObject.GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, 0);
 
@@ -78,6 +81,6 @@ public class paddle : MonoBehaviour {
 
 
 	}
-
+		
 
 }

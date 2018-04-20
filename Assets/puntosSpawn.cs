@@ -6,6 +6,7 @@ public class puntosSpawn : MonoBehaviour {
 
 
 	public float _speed;
+	public int _puntos;
 
 	private Transform _diamanteTarget;
 	private GameController _controller;
@@ -34,7 +35,7 @@ public class puntosSpawn : MonoBehaviour {
 				Destroy (gameObject, 0.6f);
 				_destruido = true;
 				//Agregar Puntos al contador
-				_controller.AddScore (100);
+				_controller.AddScore (_puntos);
 
 			}
 		}

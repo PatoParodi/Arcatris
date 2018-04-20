@@ -106,14 +106,23 @@ public class Caja : MonoBehaviour {
 			// Deshabilitar los colliders NO triger al explotar
 			GetComponent<BoxCollider2D>().enabled = false;
 
-			//Explotar moneda con 25% de probabilidad
 			if (!powerUpBajarBrea) {
+				//Explotar moneda con 25% de probabilidad
 				if (probabilidad (controller.porcentajeSpawnDiamante)) {
 					Instantiate (moneda, new Vector3 (transform.position.x, transform.position.y, -1), Quaternion.identity);
 					//El objeto moneda viajara hasta el contador y luego se destruira
 				}
+				//PUNTOS
+				//Multiplicador de puntos por combo
+				LevelManager.levelManager.multiplicadorPuntosCaja++;
+				if(LevelManager.levelManager.multiplicadorPuntosCaja > 1)
+					popUpMultiplicador ();
+				
 				//Instanciar particulas y acumular puntos
-				Instantiate (Resources.Load ("Prefabs/puntosParticulas"), transform.position, Quaternion.identity);
+				GameObject particulas = Instantiate (Resources.Load ("Prefabs/puntosParticulas"), transform.position, Quaternion.identity) as GameObject;
+				particulas.GetComponent<puntosSpawn> ()._puntos = LevelManager.levelManager.multiplicadorPuntosCaja * LevelManager.levelManager.puntosBaseCaja;
+
+
 
 			} 
 			else {
@@ -140,6 +149,14 @@ public class Caja : MonoBehaviour {
 		else {
 			return false;
 		}
+
+	}
+
+	public void popUpMultiplicador(){
+		//Mostrar PopUp del multiplicador por Combo de Cajas
+
+		Instantiate (Resources.Load ("Prefabs/PopUpMultiplicador"));
+
 
 	}
 		
