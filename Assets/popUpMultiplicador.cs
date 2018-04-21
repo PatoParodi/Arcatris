@@ -10,6 +10,11 @@ public class popUpMultiplicador : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+		GetComponent<Canvas> ().worldCamera = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<Camera> ();
+		GetComponent<Canvas> ().planeDistance = 8;
+		GetComponent<Canvas> ().sortingLayerName = "UI";
+		GetComponent<Canvas> ().sortingOrder = 6;
+
 		textoMultiplicador.text = LevelManager.levelManager.multiplicadorPuntosCaja.ToString () + "X";
 
 	}

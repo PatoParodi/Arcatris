@@ -55,19 +55,31 @@ namespace LevelManager
 
 			//Subir o bajar el nivel segun corresponda
 			if (calcular) {
+
+				if (nivelActual < 5)	//de 1 a 4 20 golpes para subir
+					golpesPorNivel = 20;
+				else if (nivelActual >= 5 && nivelActual < 8)	//de 5 a 7 36 golpes para subir
+					golpesPorNivel = 36;
+				else //Mayor a 7 50 golpes para subir
+					golpesPorNivel = 50;
+
 				//Subir Nivel
 				if (cantRebotes >= golpesPorNivel) {
 					nivelActual++;
 					flagBajarNivel = false;
 				}
-				//Bajar Nivel a la segunda vez que no llega al minimo
-				if (flagBajarNivel == true) {
-					if (cantRebotes <= golpesPorNivelMinimo){
+				//Bajar Nivel 
+				else if (cantRebotes <= golpesPorNivelMinimo) {
+					if (flagBajarNivel == true) {
+						//a la segunda vez seguida que no llega al minimo
 						nivelActual--;
 						flagBajarNivel = false;
-					}
-				} else
-					flagBajarNivel = true;
+					} else
+						flagBajarNivel = true;
+				}
+				else //Quedo en el mismo nivel
+					flagBajarNivel = false;
+				
 
 				if (nivelActual < 1)
 					nivelActual = 1;
