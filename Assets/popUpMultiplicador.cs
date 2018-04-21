@@ -15,7 +15,7 @@ public class popUpMultiplicador : MonoBehaviour {
 		GetComponent<Canvas> ().sortingLayerName = "UI";
 		GetComponent<Canvas> ().sortingOrder = 6;
 
-		textoMultiplicador.text = LevelManager.levelManager.multiplicadorPuntosCaja.ToString () + "X";
+		textoMultiplicador.text = "X" + LevelManager.levelManager.multiplicadorPuntosCaja.ToString ();
 
 	}
 
