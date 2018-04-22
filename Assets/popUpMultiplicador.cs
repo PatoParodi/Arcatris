@@ -7,6 +7,8 @@ public class popUpMultiplicador : MonoBehaviour {
 
 	public Text textoMultiplicador;
 
+	private Color newColor;
+
 	// Use this for initialization
 	void Start () {
 
@@ -16,6 +18,8 @@ public class popUpMultiplicador : MonoBehaviour {
 		GetComponent<Canvas> ().sortingOrder = 6;
 
 		textoMultiplicador.text = "X" + LevelManager.levelManager.multiplicadorPuntosCaja.ToString ();
+		//Definir color Random para el texto
+		newColor = new Color (Random.value, Random.value, Random.value);
 
 	}
 
@@ -23,6 +27,13 @@ public class popUpMultiplicador : MonoBehaviour {
 	
 		Destroy (gameObject);
 	
+	}
+
+	public void LateUpdate(){
+		//Aplicar nuevo color generado en Start()
+		textoMultiplicador.color = newColor;
+
+
 	}
 
 }
