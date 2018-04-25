@@ -349,7 +349,7 @@ public class GameController : MonoBehaviour {
 				BotonesEnPantalla.derecha.SetActive (false);
 				BotonesEnPantalla.izquierda.SetActive (false);
 
-				float diferencia = handleSlider.transform.position.x - paddleVivo.transform.position.x;
+				float diferencia = (handleSlider.transform.position.x * 1.3f) - paddleVivo.transform.position.x;
 
 				// Si la diferencia es mayor a 0.3 empezar a mover el pad
 				if (Mathf.Abs (diferencia) < areaMuerta)
