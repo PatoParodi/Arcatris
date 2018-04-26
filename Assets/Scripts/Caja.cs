@@ -10,10 +10,14 @@ public class Caja : MonoBehaviour {
 	public GameObject moneda;
 	public Sprite _cajaRoja;
 	public bool powerUpBajarBrea; //Determina que es un ladrillo con PowerUp
+	public bool primeraCaja = false;
 
 	private GameController controller;
+	private Vector2 posicionInicial;
 
 	void Start(){
+
+		posicionInicial = transform.position;
 
 		controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
 
@@ -37,10 +41,17 @@ public class Caja : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if(controller.ballInPlay)
+		if (controller.ballInPlay){
 			//Solo moverse cuando la pelota esta en juego
-			transform.position = new Vector3(transform.position.x, transform.position.y - velocidad * Time.deltaTime, transform.position.z);
+			transform.position = new Vector3 (transform.position.x, transform.position.y - velocidad * Time.deltaTime, transform.position.z);
+			primeraCaja = false;
+		}
+		
+		if (primeraCaja) {
 
+			transform.position = Vector2.Lerp(transform.position, new Vector2 (posicionInicial.x, posicionInicial.y - 2.2f),0.1f);
+	
+		}
 	}
 
 

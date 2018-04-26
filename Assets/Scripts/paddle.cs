@@ -35,16 +35,17 @@ public class paddle : MonoBehaviour {
 
 
 	void OnCollisionEnter2D(Collision2D col){
-
+			
+		if (col.contacts.Length > 0) {
 			ContactPoint2D contact = col.contacts [0];
 
 			if (col.gameObject.tag == "ball" && controller.ballInPlay) {
 			
 				//LevelManager -> Sumar rebote
-				LevelManager.levelManager.addRebote();
+				LevelManager.levelManager.addRebote ();
 				
 				//LevelManager -> Reinicializar Multiplicador puntos
-				LevelManager.levelManager.ReinicializarMultiplicadorPuntos();
+				LevelManager.levelManager.ReinicializarMultiplicadorPuntos ();
 
 				col.gameObject.GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, 0);
 
@@ -55,20 +56,21 @@ public class paddle : MonoBehaviour {
 				float porc = calc * 100 / GetComponent<BoxCollider2D> ().bounds.size.x;
 
 				//Verifico de que lado reboto para la animacion correspondiente
-				move = (porc/100) + 0.5f;
+				move = (porc / 100) + 0.5f;
 				GetComponent<Animator> ().SetFloat ("Move", move);
 				GetComponent<Animator> ().SetBool ("Impacto", true);
-				StartCoroutine(reiniciarFlotacion(1f));
+				StartCoroutine (reiniciarFlotacion (1f));
 
 				// Parto de los 90 grados como mi 0
 				porc = 90 - porc;
 
-				contact.rigidbody.AddForce(controller.obtenerVectorVelocidad (controller.fuerzaPelota, porc, porc));
+				contact.rigidbody.AddForce (controller.obtenerVectorVelocidad (controller.fuerzaPelota, porc, porc));
 				
 				//Reproducir audio
-				soundManager.playSound(GetComponent<AudioSource>());
+				soundManager.playSound (GetComponent<AudioSource> ());
 
 			}
+		}
 	}
 
 	public IEnumerator reiniciarFlotacion(float duracion){

@@ -341,13 +341,14 @@ public class GameController : MonoBehaviour {
 
 		#endif
 
+
 		if (paddleVivo != null) {
 			// Verificar control elegido
 			if (Controles.sw_TouchPad.isOn) {
 				// TouchPad
 				touchPadSlider.gameObject.SetActive (true);
-				BotonesEnPantalla.derecha.SetActive (false);
-				BotonesEnPantalla.izquierda.SetActive (false);
+//				BotonesEnPantalla.derecha.SetActive (false);
+//				BotonesEnPantalla.izquierda.SetActive (false);
 
 				float diferencia = handleSlider.transform.position.x - paddleVivo.transform.position.x;
 
@@ -358,14 +359,36 @@ public class GameController : MonoBehaviour {
 					movimientoPaddle = velocidadPaddle;
 				else if (diferencia < 0)
 					movimientoPaddle = -velocidadPaddle;
-				
+
+				//Comportamiento para los extremos
+				if(touchPadSlider.value == 0)
+					movimientoPaddle = -velocidadPaddle;
+				else if(touchPadSlider.value == 1)
+					movimientoPaddle = velocidadPaddle;
+
 			} else if (Controles.sw_Botones.isOn) {
 				//Botones de media pantalla
-				BotonesEnPantalla.derecha.SetActive (true);
-				BotonesEnPantalla.izquierda.SetActive (true);
+//				BotonesEnPantalla.derecha.SetActive (true);
+//				BotonesEnPantalla.izquierda.SetActive (true);
 				touchPadSlider.gameObject.SetActive (false);
 
+				//Verificar si esta tocando la pantalla para mover el pad
+				if (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Began || Input.GetTouch(0).phase == TouchPhase.Moved)) {
+					//We transform the touch position into word space from screen space and store it.
+					Vector3 touchPosWorld = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+					if(touchPosWorld.x > 0)
+						movimientoPaddle = velocidadPaddle;
+					else if (touchPosWorld.x < 0)
+						movimientoPaddle = -velocidadPaddle;
+				}
+
+				if (Input.touchCount == 0) {
+					movimientoPaddle = 0;
+
+				}
+
 			}
+				
 
 			paddleVivo.GetComponent<Rigidbody2D> ().AddForce (new Vector2 (movimientoPaddle, 0));
 
@@ -402,10 +425,44 @@ public class GameController : MonoBehaviour {
 			
 	}
 
+//	public void playMusic(bool enabled){
+//
+//		AudioSource audioMenu = PantallaInicial.GetComponent<AudioSource> ();
+//
+//		if (enabled) {
+//
+//			if (PantallaInicial.activeSelf) {
+//				PantallaInicial.GetComponent<AudioSource> ().Play ();
+//			}
+//				
+//
+//		} else {
+//		}
+//
+//	}
+
 	public void IniciarJuego(bool continueFlag){
 //Comienza el juego desde el principio
+		string _controlElegido = "1";
+
+		if(!continueFlag){
+			//Nueva partida
+		
+			//Alimentar analytics
+			if(Controles.sw_TouchPad.isOn)
+				_controlElegido = "TouchPad";
+			else if(Controles.sw_Botones.isOn)
+				_controlElegido = "Botones";
+			
+			Analytics.CustomEvent ("NuevaPartida", new Dictionary<string, object> {
+				{ "Sonido", SoundManager.soundManager.soundEnabled },
+				{ "ControlElegido", _controlElegido}
+			});
+		
+		}
 
 		UI_inGame.SetActive (true);
+		SoundManager.soundManager.playSound (UI_inGame.GetComponent<AudioSource> ());
 
 		//Mostrar vidas iniciales
 		vidas = 3;
@@ -480,12 +537,14 @@ public class GameController : MonoBehaviour {
 			Puntaje = 0;
 			textosEnPantalla.puntajeText.text = Puntaje.ToString();
 
-			//Esperar a que la Brea este en posicion inicial para arrancar
-			yield return new WaitUntil( Brea.GetComponent<LimiteBrea>().BreaEstaEnPosicionInicial );
-
 			GameObject _instanciaCajas = spawnCajas ();
 			//Spawnear las cajas un poco mas abajo al empezar
-			_instanciaCajas.transform.position = new Vector2 (_instanciaCajas.transform.position.x, _instanciaCajas.transform.position.y - 2.2f);
+			_instanciaCajas.GetComponent<Caja>().primeraCaja = true;
+//			_instanciaCajas.transform.position = new Vector2 (_instanciaCajas.transform.position.x, _instanciaCajas.transform.position.y - 2.2f);
+//			_instanciaCajas.transform.position = Vector2.Lerp(_instanciaCajas.transform.position, new Vector2 (_instanciaCajas.transform.position.x, _instanciaCajas.transform.position.y - 2.2f),0.5f);
+
+			//Esperar a que la Brea este en posicion inicial para arrancar
+			yield return new WaitUntil( Brea.GetComponent<LimiteBrea>().BreaEstaEnPosicionInicial );
 
 		}
 		else{
@@ -567,24 +626,34 @@ public class GameController : MonoBehaviour {
 
 		//Elegir el prefab aleatroriamente
 		//Generar el prefab 
-		switch (Random.Range (1, 4)){
-		case 1:
-			_instancia = Instantiate(cajas_01) as GameObject;
-			break;
-		
-		case 2:
-			_instancia = Instantiate(cajas_02) as GameObject;
-			break;
+//		switch (Random.Range (1, 5)){
+//		case 1:
+//			_instancia = Instantiate(cajas_01) as GameObject;
+//			break;
+//		
+//		case 2:
+//			_instancia = Instantiate(cajas_02) as GameObject;
+//			break;
+//
+//		case 3:
+//			_instancia = Instantiate(cajas_03) as GameObject;
+//			break;
+//
+//		case 4:
+//			_instancia = Instantiate(cajas_04) as GameObject;
+//			break;
+//
+//		case 5:
+//			_instancia = Instantiate(cajas_05) as GameObject;
+//			break;
+//
+//		}
+//
+//		return _instancia;
 
-		case 3:
-			_instancia = Instantiate(cajas_03) as GameObject;
-			break;
+		string prefabRandom = "prefab" + Random.Range(1,5);
 
-		case 4:
-			_instancia = Instantiate(cajas_04) as GameObject;
-			break;
-
-		}
+		_instancia = Instantiate(Resources.Load("Prefabs/" + prefabRandom)) as GameObject;
 
 		return _instancia;
 

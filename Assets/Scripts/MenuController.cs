@@ -77,6 +77,11 @@ public class MenuController : MonoBehaviour {
 
 	void OnEnable(){
 
+		AudioSource audio = GetComponent<AudioSource> ();
+
+		if (audio != null)
+			SoundManager.soundManager.playSound (audio);
+		
 	}
 
 	void Update(){
@@ -175,13 +180,22 @@ public class MenuController : MonoBehaviour {
 	}
 
 	public void controlSound(){
-	
+
+		//Musica de cada menu
+		AudioSource audio = GetComponent<AudioSource> ();
+
 		SoundManager.soundManager.enableSound (soundOnOff.isOn);
 
-		if(soundOnOff.isOn)
+		if (soundOnOff.isOn) {
 			PlayerPrefs.SetString (LevelManager.levelManager.s_sound, LevelManager.levelManager.s_On);
-		else
+			if (audio != null)
+				audio.Play ();
+
+		} else {
 			PlayerPrefs.SetString (LevelManager.levelManager.s_sound, LevelManager.levelManager.s_Off);
+			audio.Stop ();
+
+		}
 		
 
 	}

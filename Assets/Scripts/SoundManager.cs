@@ -8,7 +8,7 @@ namespace SoundManager
 {
 	public static class soundManager {
 
-		private static bool soundEnabled = true;
+		public static bool soundEnabled = true;
 
 		public static void playSound (AudioSource audio)
 		{
