@@ -28,12 +28,14 @@ public class MenuController : MonoBehaviour {
 	public Toggle Botones;
 
 	public GameObject _pantallaInicial;
+	public GameObject _inGame;
 	public GameObject _UI_RateUs;
 	public Text _monedas;
 	public Text _extraBalls;
 	public GameObject _txtPopUp;
 	public GameObject _UI_RateUS;
 	public Text _txtNivel;
+	public AudioSource musicaMenu;
 //	public Text _velocidadPelotaText;
 
 
@@ -77,10 +79,9 @@ public class MenuController : MonoBehaviour {
 
 	void OnEnable(){
 
-		AudioSource audio = GetComponent<AudioSource> ();
-
-		if (audio != null)
-			SoundManager.soundManager.playSound (audio);
+			
+		if (musicaMenu != null)
+			SoundManager.soundManager.playSound (musicaMenu);
 		
 	}
 
@@ -181,22 +182,24 @@ public class MenuController : MonoBehaviour {
 
 	public void controlSound(){
 
-		//Musica de cada menu
-		AudioSource audio = GetComponent<AudioSource> ();
-
 		SoundManager.soundManager.enableSound (soundOnOff.isOn);
 
 		if (soundOnOff.isOn) {
 			PlayerPrefs.SetString (LevelManager.levelManager.s_sound, LevelManager.levelManager.s_On);
-			if (audio != null)
-				audio.Play ();
+			if (_pantallaInicial != null && _pantallaInicial.activeSelf)
+				_pantallaInicial.GetComponent<MenuController>().musicaMenu.Play();
+			else if(_inGame != null && _inGame.activeSelf)
+				_inGame.GetComponent<MenuController>().musicaMenu.Play();
+			
 
 		} else {
 			PlayerPrefs.SetString (LevelManager.levelManager.s_sound, LevelManager.levelManager.s_Off);
-			audio.Stop ();
+			if (_pantallaInicial != null && _pantallaInicial.activeSelf)
+				_pantallaInicial.GetComponent<MenuController>().musicaMenu.Stop();
+			else if(_inGame != null && _inGame.activeSelf)
+				_inGame.GetComponent<MenuController>().musicaMenu.Stop();
 
 		}
-		
 
 	}
 

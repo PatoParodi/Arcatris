@@ -15,11 +15,12 @@ public class popUpMultiplicador : MonoBehaviour {
 		GetComponent<Canvas> ().worldCamera = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<Camera> ();
 		GetComponent<Canvas> ().planeDistance = 8;
 		GetComponent<Canvas> ().sortingLayerName = "UI";
-		GetComponent<Canvas> ().sortingOrder = 6;
+		GetComponent<Canvas> ().sortingOrder = LevelManager.levelManager._sortingLayer;
 
 		textoMultiplicador.text = "X" + LevelManager.levelManager.multiplicadorPuntosCaja.ToString ();
 		//Definir color Random para el texto
-		newColor = new Color (Random.value, Random.value, Random.value);
+		newColor = LevelManager.levelManager.seleccionarSiguienteColor();
+
 
 	}
 

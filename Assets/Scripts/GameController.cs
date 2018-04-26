@@ -111,6 +111,9 @@ public class GameController : MonoBehaviour {
 //		PlayerPrefs.SetInt ("ExtraBall", 0);
 ///////////////////////////////////////////////////////////
 
+		//Cargar array de colores para el multiplicador
+		LevelManager.levelManager.llenarColoresMultiplicador();
+
 		//Setear sonido elegido anteriormente
 
 		//Setear idioma elegido anteriormente
@@ -360,11 +363,11 @@ public class GameController : MonoBehaviour {
 				else if (diferencia < 0)
 					movimientoPaddle = -velocidadPaddle;
 
-				//Comportamiento para los extremos
-				if(touchPadSlider.value == 0)
-					movimientoPaddle = -velocidadPaddle;
-				else if(touchPadSlider.value == 1)
-					movimientoPaddle = velocidadPaddle;
+//				//Comportamiento para los extremos
+//				if(touchPadSlider.value == 0)
+//					movimientoPaddle = -velocidadPaddle;
+//				else if(touchPadSlider.value == 1)
+//					movimientoPaddle = velocidadPaddle;
 
 			} else if (Controles.sw_Botones.isOn) {
 				//Botones de media pantalla
@@ -462,7 +465,6 @@ public class GameController : MonoBehaviour {
 		}
 
 		UI_inGame.SetActive (true);
-		SoundManager.soundManager.playSound (UI_inGame.GetComponent<AudioSource> ());
 
 		//Mostrar vidas iniciales
 		vidas = 3;

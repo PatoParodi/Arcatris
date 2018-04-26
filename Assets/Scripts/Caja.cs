@@ -126,6 +126,7 @@ public class Caja : MonoBehaviour {
 				//PUNTOS
 				//Multiplicador de puntos por combo
 				LevelManager.levelManager.multiplicadorPuntosCaja++;
+				LevelManager.levelManager._sortingLayer++;	//Aumento la capa para que se muestre delante
 				if(LevelManager.levelManager.multiplicadorPuntosCaja > 1)
 					popUpMultiplicador ();
 				
