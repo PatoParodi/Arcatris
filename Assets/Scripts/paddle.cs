@@ -36,16 +36,21 @@ public class paddle : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D col){
 			
-		if (col.contacts.Length > 0) {
-			ContactPoint2D contact = col.contacts [0];
 
 			if (col.gameObject.tag == "ball" && controller.ballInPlay) {
-			
-				//LevelManager -> Sumar rebote
-				LevelManager.levelManager.addRebote ();
-				
-				//LevelManager -> Reinicializar Multiplicador puntos
-				LevelManager.levelManager.ReinicializarMultiplicadorPuntos ();
+
+
+			//LevelManager -> Sumar rebote
+			LevelManager.levelManager.addRebote ();
+
+			//LevelManager -> Reinicializar Multiplicador puntos
+			LevelManager.levelManager.ReinicializarMultiplicadorPuntos ();
+
+			//Reproducir audio
+			soundManager.playSound (GetComponent<AudioSource> ());
+
+			if (col.contacts.Length > 0) {
+				ContactPoint2D contact = col.contacts [0];
 
 				col.gameObject.GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, 0);
 
@@ -65,10 +70,13 @@ public class paddle : MonoBehaviour {
 				porc = 90 - porc;
 
 				contact.rigidbody.AddForce (controller.obtenerVectorVelocidad (controller.fuerzaPelota, porc, porc));
-				
-				//Reproducir audio
-				soundManager.playSound (GetComponent<AudioSource> ());
 
+
+			} else {
+				//Animar aunque no encuentre punto de contacto
+				GetComponent<Animator> ().SetFloat ("Move", 0.5f);
+				GetComponent<Animator> ().SetBool ("Impacto", true);
+				StartCoroutine (reiniciarFlotacion (1f));
 			}
 		}
 	}
