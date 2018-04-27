@@ -18,6 +18,8 @@ public class diamanteSpawn : MonoBehaviour {
 
 		_controller =  GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
 
+		SoundManager.soundManager.playSound (GetComponent<AudioSource> ());
+
 	}
 	
 	// Update is called once per frame
@@ -31,10 +33,12 @@ public class diamanteSpawn : MonoBehaviour {
 			if (Vector2.Distance (transform.position, _diamanteTarget.position) < 0.1f) {
 
 				GetComponent<Animator> ().SetTrigger ("Morir");
-				Destroy (gameObject, 0.3f);
-				_destruido = true;
-				//Agregar Moneda al contador
-				_controller.AddMoneda (1);
+				if (!GetComponent<AudioSource> ().isPlaying) {
+					Destroy (gameObject, 0.3f);
+					_destruido = true;
+					//Agregar Moneda al contador
+					_controller.AddMoneda (1);
+				}
 
 			}
 		}

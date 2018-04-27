@@ -197,7 +197,7 @@ public class MenuController : MonoBehaviour {
 			if (_pantallaInicial != null && _pantallaInicial.activeSelf)
 				_pantallaInicial.GetComponent<MenuController>().musicaMenu.Stop();
 			else if(_inGame != null && _inGame.activeSelf)
-				_inGame.GetComponent<MenuController>().musicaMenu.Stop();
+				_inGame.GetComponent<MenuController>().musicaMenu.Pause();
 
 		}
 
