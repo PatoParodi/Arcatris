@@ -22,6 +22,9 @@ public class MenuController : MonoBehaviour {
 	private GameController controller;
 	private bool _juegoPausado = false;
 
+	private bool _RateShowed  = false;
+	private bool _publiShowed = false;
+
 	public Text titleConfigMenu;
 	public Toggle soundOnOff;
 	public Toggle TouchPad;
@@ -154,21 +157,39 @@ public class MenuController : MonoBehaviour {
 
 		}
 
-		if (!popUp && PlayerPrefs.GetString (LevelManager.levelManager.s_Rated) != "Si") //Si aun no reateo
+		//Mostrar Rate US a las 5 partidas y luego cada 20
+		if (!_RateShowed && !popUp && PlayerPrefs.GetString (LevelManager.levelManager.s_Rated) != "Si") //Si aun no reateo
 		if(controller.contadorPartidas == 5 || 
-			(controller.contadorPartidas > 1 && controller.contadorPartidas%20 == 0)) //Mostrar cada 3 partidas
+			(controller.contadorPartidas > 1 && controller.contadorPartidas%20 == 0)) //Mostrar cada 20 partidas
 				{	
 
-					controller.contadorPartidas++;
-				
+//					controller.contadorPartidas++;
+					_RateShowed = true;
 					popUp = true;
 
 					_UI_RateUs.SetActive (true);
 
 				}
 
+		//Mostrar publicidad cada 7 partidas
+		if (!popUp && !_publiShowed) //Si aun no reateo
+		if(controller.contadorPartidas > 1 && controller.contadorPartidas%7 == 0) //Mostrar cada 7 partidas
+		{	
+
+			_publiShowed = true;
+
+			popUp = true;
+
+		}
+
+
 		//Ir a pantalla de PLAY
 		if (!popUp) {
+			
+			_publiShowed = false;
+			_RateShowed = false;
+
+			controller.contadorPartidas++;
 			
 			//Ajustar el nivel al terminar la partida
 			LevelManager.levelManager.determinarNivel (true);

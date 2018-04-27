@@ -85,7 +85,7 @@ public class GameController : MonoBehaviour {
 	private bool firstTimeEverToPlay = true;
 	private bool flagMovioIzquierda = false; 
 	private bool flagMovioDerecha = false;
-	public int contadorPartidas;
+	public int contadorPartidas = 1;
 
 	public int vidas;
 	public int extraBalls;
@@ -521,7 +521,7 @@ public class GameController : MonoBehaviour {
 			LevelManager.levelManager.contadorCajasDerretidas = 0;
 
 			//Contador de partidas
-			contadorPartidas ++;
+			//contadorPartidas ++;
 
 			//Paddle a su posicion inicial
 			touchPadSlider.value = 0.5f;
