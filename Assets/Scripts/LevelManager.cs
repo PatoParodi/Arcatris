@@ -118,7 +118,7 @@ namespace LevelManager
 			coloresMultiplicador [3]  = new Color (117f / 255f, 219f / 255f, 238f / 255f);
 			coloresMultiplicador [4]  = new Color (111f / 255f, 237f / 255f, 233f / 255f);
 			coloresMultiplicador [5]  = new Color (104f / 255f, 165f / 255f, 228f / 255f);
-			coloresMultiplicador [6]  = new Color (154f / 255f, 237f / 255f, 168f / 255f);
+			coloresMultiplicador [6]  = new Color (154f / 255f, 253f / 255f, 168f / 255f);
 			coloresMultiplicador [7]  = new Color (236f / 255f, 233f / 255f, 151f / 255f);
 			coloresMultiplicador [8]  = new Color (235f / 255f, 139f / 255f, 123f / 255f);
 			coloresMultiplicador [9]  = new Color (255f / 255f, 104f / 255f, 131f / 255f);

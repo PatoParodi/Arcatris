@@ -30,6 +30,7 @@ public class Caja : MonoBehaviour {
 		}
 
 		if(LevelManager.levelManager.contadorCajasDerretidas > 5)
+		//Verificar si sera una caja Power Up Bajar Brea
 			if (gameObject.tag == "Caja" && probabilidad (5)) {
 				GetComponent<Animator> ().SetBool ("BreaDown", true);
 				powerUpBajarBrea = true;
@@ -99,7 +100,7 @@ public class Caja : MonoBehaviour {
 
 		GameObject brea = GameObject.FindGameObjectWithTag ("Brea");
 
-		brea.GetComponent<LimiteBrea> ().bajarBrea(5);
+		brea.GetComponent<LimiteBrea> ().bajarBrea(4);
 
 	}
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
+using UnityEngine.Analytics;
 
 public class scriptContador : MonoBehaviour {
 
@@ -130,16 +131,28 @@ public class scriptContador : MonoBehaviour {
 
 	public void buttonSi(){
 
+		int _conExtraBall = 0, _conVideo = 0;
+
 		// Validar si le quedan Extra Ball
-		if (sinExtraBall)
+		if (sinExtraBall){
 			//VER VIDEO PARA GANAR UNA BOLA EXTRA
-			ShowRewardedVideo();
-		else
+			ShowRewardedVideo ();
+			_conVideo++;
+		}
+		else{
 		//Utilizar una Bola Extra.
-			controller.utilizarExtraBall();
+			controller.utilizarExtraBall ();
+			_conExtraBall++;
+		}	
 
 		contando = false;
 		popUpContinue.SetActive (false);
+
+		//Metricas - Analytics - Cuantas extraball se usan y cuantas por video
+		Analytics.CustomEvent ("ContinueExtraBall", new Dictionary<string, object> {
+			{ "ConExtraBall", _conExtraBall},
+			{ "ConVideo", _conVideo}
+		});
 
 	}
 

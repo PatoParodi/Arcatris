@@ -238,13 +238,6 @@ public class GameController : MonoBehaviour {
 			PlayerPrefs.SetString ("jugoAntes", "Si");
 			firstTimeEverToPlay = false;
 
-			//Analytics
-//			Analytics.CustomEvent("PrimeraPartida");
-//				new Dictionary<string, object>
-//				{
-////					{ "jugadores", jugadoresAIstanciar }
-//				});
-
 		}
 			
 		yield return new WaitForSecondsRealtime (1);
@@ -456,10 +449,11 @@ public class GameController : MonoBehaviour {
 				_controlElegido = "TouchPad";
 			else if(Controles.sw_Botones.isOn)
 				_controlElegido = "Botones";
-			
+
 			Analytics.CustomEvent ("NuevaPartida", new Dictionary<string, object> {
 				{ "Sonido", SoundManager.soundManager.soundEnabled },
-				{ "ControlElegido", _controlElegido}
+				{ "ControlElegido", _controlElegido},
+				{ "Dificultad", LevelManager.levelManager.nivelActual}
 			});
 		
 		}

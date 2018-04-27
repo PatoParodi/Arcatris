@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
 
 public class ScriptHighScore : MonoBehaviour {
 
@@ -15,13 +16,38 @@ public class ScriptHighScore : MonoBehaviour {
 
 		highScore.text = controller.getHighScore ().ToString();
 
+		if(controller.getHighScore () > 100000)
+			//Metricas - Analytics - Checkpoints de HighScore
+			Analytics.CustomEvent ("HighScore", new Dictionary<string, object> {
+				{ "MayorA100.000", 1}
+			});
+		else if(controller.getHighScore () > 50000)
+			//Metricas - Analytics - Checkpoints de HighScore
+			Analytics.CustomEvent ("HighScore", new Dictionary<string, object> {
+				{ "MayorA50.000", 1}
+			});
+		else if(controller.getHighScore () > 25000)
+			//Metricas - Analytics - Checkpoints de HighScore
+			Analytics.CustomEvent ("HighScore", new Dictionary<string, object> {
+				{ "MayorA25.000", 1}
+			});
+		else if(controller.getHighScore () > 10000)
+			//Metricas - Analytics - Checkpoints de HighScore
+			Analytics.CustomEvent ("HighScore", new Dictionary<string, object> {
+				{ "MayorA10.000", 1}
+			});
+		else if(controller.getHighScore () > 5000)
+			//Metricas - Analytics - Checkpoints de HighScore
+			Analytics.CustomEvent ("HighScore", new Dictionary<string, object> {
+				{ "MayorA5.000", 1}
+			});
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 		//Recuperar High Score del Game Controller
-		highScore.text = controller.getHighScore ().ToString();
+//		highScore.text = controller.getHighScore ().ToString();
 
 	}
 
