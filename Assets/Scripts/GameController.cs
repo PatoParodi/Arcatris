@@ -370,10 +370,18 @@ public class GameController : MonoBehaviour {
 //				BotonesEnPantalla.izquierda.SetActive (true);
 				touchPadSlider.gameObject.SetActive (false);
 
+				Vector3 touchPosWorld;
+
 				//Verificar si esta tocando la pantalla para mover el pad
-				if (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Began || Input.GetTouch(0).phase == TouchPhase.Moved)) {
-					//We transform the touch position into word space from screen space and store it.
-					Vector3 touchPosWorld = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+				if (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Began || Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetTouch(0).phase == TouchPhase.Stationary)) {
+
+					if (Input.touches.Length > 1) {
+						touchPosWorld = Camera.main.ScreenToWorldPoint (Input.touches [1].position);
+					} else {
+						//We transform the touch position into word space from screen space and store it.
+						touchPosWorld = Camera.main.ScreenToWorldPoint (Input.GetTouch (0).position);
+					}
+
 					if(touchPosWorld.x > 0)
 						movimientoPaddle = velocidadPaddle;
 					else if (touchPosWorld.x < 0)

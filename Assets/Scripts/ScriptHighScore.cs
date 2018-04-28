@@ -12,8 +12,6 @@ public class ScriptHighScore : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		SoundManager.soundManager.playSound (GetComponent<AudioSource> ());
-
 		controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
 
 		highScore.text = controller.getHighScore ().ToString();
@@ -44,12 +42,18 @@ public class ScriptHighScore : MonoBehaviour {
 				{ "MayorA5.000", 1}
 			});
 	}
-	
+
+	void OnEnable(){
+		
+		SoundManager.soundManager.playSound (GetComponent<AudioSource> ());
+
+	}
+
 	// Update is called once per frame
 	void Update () {
 		
 		//Recuperar High Score del Game Controller
-//		highScore.text = controller.getHighScore ().ToString();
+		highScore.text = controller.getHighScore ().ToString();
 
 	}
 

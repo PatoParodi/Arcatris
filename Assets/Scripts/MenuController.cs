@@ -119,7 +119,7 @@ public class MenuController : MonoBehaviour {
 
 		} else {
 
-			MostrarPlay (true);
+//			MostrarPlay (true);
 		}
 
 		_juegoPausado = false;
@@ -184,6 +184,8 @@ public class MenuController : MonoBehaviour {
 			popUp = true;
 
 			Advertisement.Show ();
+
+			MostrarPlay (true);
 
 		}
 
@@ -332,7 +334,9 @@ public class MenuController : MonoBehaviour {
 
 	public void GoToMarket(){
 	
-		Application.OpenURL ("market://details?id=" + "Limbo"); //Application.productName);
+//		Application.OpenURL ("market://details?id=" + "Limbo"); //Application.productName);
+
+		Application.OpenURL ("https://play.google.com/store/apps/details?id=com.PardeSotas.Arcatris");
 
 		PlayerPrefs.SetString (LevelManager.levelManager.s_Rated, "Si");
 

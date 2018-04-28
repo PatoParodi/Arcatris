@@ -21,7 +21,6 @@ public class popUpMultiplicador : MonoBehaviour {
 		//Definir color Random para el texto
 		newColor = LevelManager.levelManager.seleccionarSiguienteColor();
 
-
 	}
 
 	public void Destruir(){
