@@ -245,12 +245,12 @@ public class GameController : MonoBehaviour {
 		//Text del Objetivo
 		tutorialObjetos.objectiveText.SetActive (true);
 		tutorialObjetos.forceField.SetActive (true);
-		yield return new WaitForSecondsRealtime (4);
+		yield return new WaitForSecondsRealtime (2.3f);
 		tutorialObjetos.objectiveText.SetActive (false);
 
 		//Texto Your challenge starts now
 		tutorialObjetos.challengeText.SetActive (true);
-		yield return new WaitForSecondsRealtime (3.3f);
+		yield return new WaitForSecondsRealtime (2.0f);
 		tutorialObjetos.challengeText.SetActive (false);
 
 		//Setear nivel inicial como 4 para que la nueva partida arranque en 3
@@ -513,7 +513,7 @@ public class GameController : MonoBehaviour {
 		}
 		paddleVivo.transform.position = new Vector2 (paddleVivo.transform.position.x, GameObject.FindGameObjectWithTag ("padPosition").transform.position.y);
 		pelotaViva  = Instantiate (ballType,new Vector3 (paddleVivo.transform.position.x,ballSpawn.transform.position.y,ballSpawn.transform.position.z),Quaternion.identity) as GameObject;
-		ballSpawn.GetComponent<AudioSource> ().Play ();
+		SoundManager.soundManager.playSound (ballSpawn.GetComponent<AudioSource> ());
 
 		//Apagar la 
 		GameObject bolaVida = GameObject.Find ("vida" + vidas.ToString()) as GameObject;

@@ -6,6 +6,9 @@ using LevelManager;
 public class ballScript : MonoBehaviour {
 
 	private float velocidadConstante; //valor original 4.4
+	private GameController controller;
+
+	public TrailRenderer _colaExtraBall;
 
 	void Awake(){
 	
@@ -13,12 +16,19 @@ public class ballScript : MonoBehaviour {
 
 		//Play spawn sound
 		SoundManager.soundManager.playSound(GetComponent<AudioSource>());
+
+		controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
+
 	
 	}
 
 	void Update(){
 	
 		gameObject.GetComponent<Rigidbody2D> ().velocity = velocidadConstante * (gameObject.GetComponent<Rigidbody2D> ().velocity.normalized);
+
+		if(_colaExtraBall != null)
+			if (controller.ballInPlay)
+				_colaExtraBall.enabled = true;
 
 	}
 

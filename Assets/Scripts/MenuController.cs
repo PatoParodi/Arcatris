@@ -243,6 +243,9 @@ public class MenuController : MonoBehaviour {
 				{ "Precio", precio }
 			});
 
+			//Reproducir sonido
+			SoundManager.soundManager.playSound(GetComponent<AudioSource>());
+
 			//Instanciar pelota comprada, que volara hasta el contador
 			_extraBall = Resources.Load ("Prefabs/extraBallCompra") as GameObject;
 

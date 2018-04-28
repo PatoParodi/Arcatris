@@ -8,7 +8,7 @@ public static class LanguageManager {
 
 	public static string espanol = "ES", ingles = "EN";
 
-	public static string[] textos = new string[15];
+	public static string[] textos = new string[30];
 
 	public static int posicion;
 
@@ -41,6 +41,12 @@ public static class LanguageManager {
 				textos [9] = "Get One";
 				textos [10] = "PAUSED";
 				textos [11] = "Not enough diamonds";
+				textos [12] = "swipe";
+				textos [13] = "HIT";
+				textos [14] = "THE OIL BRICKS";
+				textos [15] = "BEFORE\nTHEY REACH";
+				textos [16] = "OUR\nFORCE FIELD";
+
 
 				break;
 
@@ -57,6 +63,11 @@ public static class LanguageManager {
 				textos [9] = "Obtener";
 				textos [10] = "PAUSA";
 				textos [11] = "No tiene suficientes diamantes";
+				textos [12] = "desliza";
+				textos [13] = "GOLPEA";
+				textos [14] = "LOS BLOQUES";
+				textos [15] = "ANTES\nQUE ALCANCEN";
+				textos [16] = "NUESTRO\nCAMPO DE FUERZA";
 
 
 				break;
@@ -74,6 +85,11 @@ public static class LanguageManager {
 				textos [9] = "Get One";
 				textos [10] = "PAUSED";
 				textos [11] = "Not enough diamonds";
+				textos [12] = "swipe";
+				textos [13] = "HIT";
+				textos [14] = "THE OIL BRICKS";
+				textos [15] = "BEFORE\nTHEY REACH";
+				textos [16] = "OUR\nFORCE FIELD";
 
 
 				break;
