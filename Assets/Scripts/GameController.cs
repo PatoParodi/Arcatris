@@ -48,7 +48,7 @@ public class GameController : MonoBehaviour {
 	public GameObject pelota;
 	public GameObject extraBall;
 	public float fuerzaPelota;
-	public Transform ballSpawn;
+	public GameObject ballSpawn;
 	public GameObject cajas_01;
 	public GameObject cajas_02;
 	public GameObject cajas_03;
@@ -191,6 +191,7 @@ public class GameController : MonoBehaviour {
 		for (int i = 1; i <= 5; i++) {
 			bolaVida = GameObject.Find (objeto + i.ToString()) as GameObject;
 			if (bolaVida != null)
+//				bolaVida.GetComponent<Animator> ().SetBool ("Ocultar", false);
 				bolaVida.GetComponent<SpriteRenderer> ().enabled = false;
 
 		}
@@ -199,7 +200,7 @@ public class GameController : MonoBehaviour {
 		for (int i = 1; i <= vidas; i++) {
 			bolaVida = GameObject.Find (objeto + i.ToString()) as GameObject;
 			if (bolaVida != null)
-				bolaVida.GetComponent<SpriteRenderer> ().enabled = true;
+				bolaVida.GetComponent<Animator> ().SetBool ("Ocultar", false);
 		
 		}
 			
@@ -295,9 +296,10 @@ public class GameController : MonoBehaviour {
 		}
 			
 		//Mover pelota junto con el pad al iniciar
+//		if (!ballInPlay && pelotaViva != null) {
 		if (!ballInPlay && pelotaViva != null) {
-
-			pelotaViva.transform.position = new Vector3(Mathf.Clamp(paddleVivo.transform.position.x,-2f,2f), paddleVivo.GetComponent<paddle>().pelotaSpawnPaddle.position.y ,0);
+			if(pelotaViva.GetComponent<Rigidbody2D>().velocity == Vector2.zero)	
+				pelotaViva.transform.position = new Vector3(Mathf.Clamp(paddleVivo.transform.position.x,-2f,2f), paddleVivo.GetComponent<paddle>().pelotaSpawnPaddle.position.y ,0);
 
 		}
 
@@ -402,9 +404,17 @@ public class GameController : MonoBehaviour {
 		ballInPlay = false;
 
 		//Bajar una vida y actualizarlas en pantalla
-		if(vidas > 0)
-			vidas = vidas - 1; 
-		mostrarVidas (vidas, "vida");
+		if(vidas > 0){
+			vidas--; 
+//			//Apagar la 
+//			for (int i = 3; i >= vidas; i--) {
+//				GameObject bolaVida = GameObject.Find ("vida" + i.ToString()) as GameObject;
+//				if (bolaVida != null)
+//					bolaVida.GetComponent<Animator> ().SetBool ("Ocultar", true);
+//
+//				}
+		}
+//		mostrarVidas (vidas, "vida");
 
 
 		if (vidas > 0)
@@ -462,8 +472,13 @@ public class GameController : MonoBehaviour {
 
 		//Mostrar vidas iniciales
 		vidas = 3;
-		mostrarVidas (vidas, "vida");
-
+//		mostrarVidas (vidas, "vida");
+		//Prender las vidas actuales
+		for (int i = 1; i <= vidas; i++) {
+			GameObject bolaVida = GameObject.Find ("vida" + i.ToString()) as GameObject;
+			if (bolaVida != null)
+				bolaVida.GetComponent<Animator> ().SetBool ("Ocultar", false);
+		}
 
 		textosEnPantalla.extraBallsInGame.text = extraBalls.ToString ();
 
@@ -497,7 +512,14 @@ public class GameController : MonoBehaviour {
 
 		}
 		paddleVivo.transform.position = new Vector2 (paddleVivo.transform.position.x, GameObject.FindGameObjectWithTag ("padPosition").transform.position.y);
-		pelotaViva  = Instantiate (ballType,new Vector3 (paddleVivo.transform.position.x,ballSpawn.position.y,ballSpawn.position.z),Quaternion.identity) as GameObject;
+		pelotaViva  = Instantiate (ballType,new Vector3 (paddleVivo.transform.position.x,ballSpawn.transform.position.y,ballSpawn.transform.position.z),Quaternion.identity) as GameObject;
+		ballSpawn.GetComponent<AudioSource> ().Play ();
+
+		//Apagar la 
+		GameObject bolaVida = GameObject.Find ("vida" + vidas.ToString()) as GameObject;
+		if (bolaVida != null)
+			bolaVida.GetComponent<Animator> ().SetBool ("Ocultar", true);
+
 
 		//Frenar cualquier movimiento del pad
 		moverDerecha(false);
@@ -521,7 +543,7 @@ public class GameController : MonoBehaviour {
 			LevelManager.levelManager.contadorCajasDerretidas = 0;
 
 			//Contador de partidas
-			//contadorPartidas ++;
+			contadorPartidas ++;
 
 			//Paddle a su posicion inicial
 			touchPadSlider.value = 0.5f;

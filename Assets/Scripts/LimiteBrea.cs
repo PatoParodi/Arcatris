@@ -41,13 +41,16 @@ public class LimiteBrea : MonoBehaviour {
 
 		//Si pasa la pelota, Game Over
 		if (other.gameObject.tag == "ball") {
-			Destroy (other.gameObject);
+
+			SoundManager.soundManager.playSound(other.GetComponent<AudioSource> ());
+
+			Destroy (other.gameObject, 1.2f);
+
+//			delayGameOver (0.5f);
 			if(GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().ballInPlay)
 				GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().gameOver ();
-			// Volver a habilitar el Collider del paddle luego de perder (cuando la bola pasa muy por debajo)
-//			pad = GameObject.FindGameObjectWithTag ("paddle");
-//			if(pad != null)
-//				pad.GetComponent<BoxCollider2D> ().enabled = true;	
+			
+			
 
 		}
 
@@ -63,6 +66,15 @@ public class LimiteBrea : MonoBehaviour {
 		}
 			
 	}
+
+//	public IEnumerator delayGameOver(float delay){
+//	
+//		yield return new WaitForSeconds (delay);
+//
+//		if(GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().ballInPlay)
+//			GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().gameOver ();
+//	
+//	}
 
 	public void moverBrea(Vector3 posicion){
 	//Mueve la brea hacia la nueva posicion

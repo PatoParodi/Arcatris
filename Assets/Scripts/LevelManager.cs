@@ -28,6 +28,7 @@ namespace LevelManager
 		public static string s_sound = "Sound";
 		public static string s_TouchPad = "SelectorTouchPad";
 		public static string s_Rated = "Rated";
+		public static string s_CantPartidas = "CantidadPartidas";
 
 		public static string s_On = "On";
 		public static string s_Off = "Off";

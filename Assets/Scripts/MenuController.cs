@@ -39,6 +39,7 @@ public class MenuController : MonoBehaviour {
 	public GameObject _UI_RateUS;
 	public Text _txtNivel;
 	public AudioSource musicaMenu;
+	public bool tieneSonidos;
 //	public Text _velocidadPelotaText;
 
 
@@ -82,10 +83,12 @@ public class MenuController : MonoBehaviour {
 
 	void OnEnable(){
 
-			
 		if (musicaMenu != null)
 			SoundManager.soundManager.playSound (musicaMenu);
-		
+
+		//Sonido al mostrar
+		if (tieneSonidos)
+			SoundManager.soundManager.playSound (GetComponent<AudioSource> ());
 	}
 
 	void Update(){
@@ -180,6 +183,8 @@ public class MenuController : MonoBehaviour {
 
 			popUp = true;
 
+			Advertisement.Show ();
+
 		}
 
 
@@ -189,7 +194,8 @@ public class MenuController : MonoBehaviour {
 			_publiShowed = false;
 			_RateShowed = false;
 
-			controller.contadorPartidas++;
+//			controller.contadorPartidas++;
+//			PlayerPrefs.SetInt(
 			
 			//Ajustar el nivel al terminar la partida
 			LevelManager.levelManager.determinarNivel (true);
@@ -216,7 +222,7 @@ public class MenuController : MonoBehaviour {
 		} else {
 			PlayerPrefs.SetString (LevelManager.levelManager.s_sound, LevelManager.levelManager.s_Off);
 			if (_pantallaInicial != null && _pantallaInicial.activeSelf)
-				_pantallaInicial.GetComponent<MenuController>().musicaMenu.Stop();
+				_pantallaInicial.GetComponent<MenuController>().musicaMenu.Pause();
 			else if(_inGame != null && _inGame.activeSelf)
 				_inGame.GetComponent<MenuController>().musicaMenu.Pause();
 
