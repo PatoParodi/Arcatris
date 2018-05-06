@@ -42,6 +42,9 @@ public class Caja : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		if (gameObject.tag != "Caja")
+			velocidad = LevelManager.levelManager.velocidadCajas;
+
 		if (controller.ballInPlay){
 			//Solo moverse cuando la pelota esta en juego
 			transform.position = new Vector3 (transform.position.x, transform.position.y - velocidad * Time.deltaTime, transform.position.z);

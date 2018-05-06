@@ -49,17 +49,17 @@ public class GameController : MonoBehaviour {
 	public GameObject extraBall;
 	public float fuerzaPelota;
 	public GameObject ballSpawn;
-	public GameObject cajas_01;
-	public GameObject cajas_02;
-	public GameObject cajas_03;
-	public GameObject cajas_04;
-	public Transform cajaSpawn;
+//	public GameObject cajas_01;
+//	public GameObject cajas_02;
+//	public GameObject cajas_03;
+//	public GameObject cajas_04;
+//	public Transform cajaSpawn;
 	public float velocidadCaja;
 	public int porcentajeSpawnDiamante;
 
 
 	public float countdownInicial;
-	public float timeBetweenWaves;
+//	public float timeBetweenWaves;
 	public botones BotonesEnPantalla;
 	public textos textosEnPantalla;
 	public GameObject PantallaInicial;
@@ -70,8 +70,8 @@ public class GameController : MonoBehaviour {
 	public Text txtCantGolpes;
 	public Text txtNivel;
 
-	public Slider touchPadSlider;
-	public RectTransform handleSlider;
+//	public Slider touchPadSlider;
+//	public RectTransform handleSlider;
 
 	private GameObject paddleVivo;
 	private float movimientoPaddle;
@@ -93,10 +93,12 @@ public class GameController : MonoBehaviour {
 
 	public tutorial tutorialObjetos;
 	public SelectorControl Controles;
-	public float areaMuerta;
-	public Coroutine spawneoCajas;
+//	public float areaMuerta;
+//	public Coroutine spawneoCajas;
 
 //	private static LanguageManager _languageManager;
+
+	private int _BloquesSpawneados = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -269,7 +271,7 @@ public class GameController : MonoBehaviour {
 
 		//TEST 
 		//Cant Golpes y Nivel
-		txtNivel.text = LevelManager.levelManager.nivelActual.ToString();
+		txtNivel.text = LevelManager.levelManager.dificultadActual.ToString();
 		txtCantGolpes.text = LevelManager.levelManager.cantRebotes.ToString ();
 
 		//Toque inicial durante el Tutorial
@@ -277,7 +279,7 @@ public class GameController : MonoBehaviour {
 			if (paddleVivo != null) {
 
 				//Flashing del touchPad para que lo vea
-				touchPadSlider.GetComponent<Animator>().SetBool("Flashing",true);
+//				touchPadSlider.GetComponent<Animator>().SetBool("Flashing",true);
 
 				if (paddleVivo.transform.position.x < -0.75f)
 					flagMovioIzquierda = true;
@@ -289,7 +291,7 @@ public class GameController : MonoBehaviour {
 				tutorialObjetos.arrows.SetActive (false);
 
 				//Cortar flashing del TouchPad
-				touchPadSlider.GetComponent<Animator>().SetBool("Flashing",false);
+//				touchPadSlider.GetComponent<Animator>().SetBool("Flashing",false);
 
 				StartCoroutine ("tutorialDemo");
 			}
@@ -344,31 +346,43 @@ public class GameController : MonoBehaviour {
 			// Verificar control elegido
 			if (Controles.sw_TouchPad.isOn) {
 				// TouchPad
-				touchPadSlider.gameObject.SetActive (true);
+//				touchPadSlider.gameObject.SetActive (true);
 //				BotonesEnPantalla.derecha.SetActive (false);
 //				BotonesEnPantalla.izquierda.SetActive (false);
 
-				float diferencia = (handleSlider.transform.position.x * 1.3f) - paddleVivo.transform.position.x;
-
-				// Si la diferencia es mayor a 0.3 empezar a mover el pad
-				if (Mathf.Abs (diferencia) < areaMuerta)
-					movimientoPaddle = 0;
-				else if (diferencia > 0)
-					movimientoPaddle = velocidadPaddle;
-				else if (diferencia < 0)
-					movimientoPaddle = -velocidadPaddle;
-
-//				//Comportamiento para los extremos
-//				if(touchPadSlider.value == 0)
-//					movimientoPaddle = -velocidadPaddle;
-//				else if(touchPadSlider.value == 1)
+//				float diferencia = (handleSlider.transform.position.x * 1.3f) - paddleVivo.transform.position.x;
+//
+//				// Si la diferencia es mayor a 0.3 empezar a mover el pad
+//				if (Mathf.Abs (diferencia) < areaMuerta)
+//					movimientoPaddle = 0;
+//				else if (diferencia > 0)
 //					movimientoPaddle = velocidadPaddle;
+//				else if (diferencia < 0)
+//					movimientoPaddle = -velocidadPaddle;
+//
+				if (Input.touchCount == 0)
+					movimientoPaddle = 0;
+				else {
+
+					if (Mathf.Abs (paddleVivo.GetComponent<Rigidbody2D> ().velocity.x) > 0) {
+						if (Mathf.Abs (Input.GetTouch (0).deltaPosition.x) > 0.9f) {
+							movimientoPaddle = Input.GetTouch (0).deltaPosition.x * 30f;
+						}
+
+					} else{
+						movimientoPaddle = Input.GetTouch (0).deltaPosition.x * 30f;
+					}
+
+					Mathf.Clamp (movimientoPaddle, -velocidadPaddle, velocidadPaddle);
+
+				}
 
 			} else if (Controles.sw_Botones.isOn) {
 				//Botones de media pantalla
 //				BotonesEnPantalla.derecha.SetActive (true);
 //				BotonesEnPantalla.izquierda.SetActive (true);
-				touchPadSlider.gameObject.SetActive (false);
+//				touchPadSlider.gameObject.SetActive (false);
+
 
 				Vector3 touchPosWorld;
 
@@ -394,7 +408,6 @@ public class GameController : MonoBehaviour {
 				}
 
 			}
-				
 
 			paddleVivo.GetComponent<Rigidbody2D> ().AddForce (new Vector2 (movimientoPaddle, 0));
 
@@ -471,7 +484,7 @@ public class GameController : MonoBehaviour {
 			Analytics.CustomEvent ("NuevaPartida", new Dictionary<string, object> {
 				{ "Sonido", SoundManager.soundManager.soundEnabled },
 				{ "ControlElegido", _controlElegido},
-				{ "Dificultad", LevelManager.levelManager.nivelActual}
+				{ "Dificultad", LevelManager.levelManager.dificultadActual}
 			});
 		
 		}
@@ -550,11 +563,16 @@ public class GameController : MonoBehaviour {
 			//Contador de Cajas derretidas
 			LevelManager.levelManager.contadorCajasDerretidas = 0;
 
+			LevelManager.levelManager.nivelActual = 1;
+
+			//Reinicializar contador de Spawns de prefabs antes del Boss
+			_BloquesSpawneados = 0;
+
 			//Contador de partidas
 			contadorPartidas ++;
 
 			//Paddle a su posicion inicial
-			touchPadSlider.value = 0.5f;
+//			touchPadSlider.value = 0.5f;
 
 			//Brea y paddle a su posicion inicial
 			breaPosicionInicial();
@@ -566,8 +584,6 @@ public class GameController : MonoBehaviour {
 			GameObject _instanciaCajas = spawnCajas ();
 			//Spawnear las cajas un poco mas abajo al empezar
 			_instanciaCajas.GetComponent<Caja>().primeraCaja = true;
-//			_instanciaCajas.transform.position = new Vector2 (_instanciaCajas.transform.position.x, _instanciaCajas.transform.position.y - 2.2f);
-//			_instanciaCajas.transform.position = Vector2.Lerp(_instanciaCajas.transform.position, new Vector2 (_instanciaCajas.transform.position.x, _instanciaCajas.transform.position.y - 2.2f),0.5f);
 
 			//Esperar a que la Brea este en posicion inicial para arrancar
 			yield return new WaitUntil( Brea.GetComponent<LimiteBrea>().BreaEstaEnPosicionInicial );
@@ -651,35 +667,26 @@ public class GameController : MonoBehaviour {
 		GameObject _instancia = null;
 
 		//Elegir el prefab aleatroriamente
-		//Generar el prefab 
-//		switch (Random.Range (1, 5)){
-//		case 1:
-//			_instancia = Instantiate(cajas_01) as GameObject;
-//			break;
-//		
-//		case 2:
-//			_instancia = Instantiate(cajas_02) as GameObject;
-//			break;
-//
-//		case 3:
-//			_instancia = Instantiate(cajas_03) as GameObject;
-//			break;
-//
-//		case 4:
-//			_instancia = Instantiate(cajas_04) as GameObject;
-//			break;
-//
-//		case 5:
-//			_instancia = Instantiate(cajas_05) as GameObject;
-//			break;
-//
-//		}
-//
-//		return _instancia;
 
-		string prefabRandom = "prefab" + Random.Range(1,5);
+		if (_BloquesSpawneados < LevelManager.levelManager.BloquesPorNivel ()) {
+			//L1_bloque2
+			string prefabRandom = "L" + LevelManager.levelManager.nivelActual + "_bloque" + Random.Range (1, 5);
 
-		_instancia = Instantiate(Resources.Load("Prefabs/" + prefabRandom)) as GameObject;
+			_instancia = Instantiate (Resources.Load ("Prefabs/" + prefabRandom)) as GameObject;
+
+			_BloquesSpawneados++;
+
+		} else {
+		//Viene un boss
+			string prefabRandom = "L" + LevelManager.levelManager.nivelActual + "_boss";
+
+			_instancia = Instantiate (Resources.Load ("Prefabs/" + prefabRandom)) as GameObject;
+
+			//subir de nivel
+			LevelManager.levelManager.SubirNivel();
+			_BloquesSpawneados = 0;
+
+		}
 
 		return _instancia;
 
