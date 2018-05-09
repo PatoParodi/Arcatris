@@ -366,11 +366,11 @@ public class GameController : MonoBehaviour {
 
 					if (Mathf.Abs (paddleVivo.GetComponent<Rigidbody2D> ().velocity.x) > 0) {
 						if (Mathf.Abs (Input.GetTouch (0).deltaPosition.x) > 0.9f) {
-							movimientoPaddle = Input.GetTouch (0).deltaPosition.x * 30f;
+							movimientoPaddle = Input.GetTouch (0).deltaPosition.x * 10f;
 						}
 
 					} else{
-						movimientoPaddle = Input.GetTouch (0).deltaPosition.x * 30f;
+						movimientoPaddle = Input.GetTouch (0).deltaPosition.x * 10f;
 					}
 
 					Mathf.Clamp (movimientoPaddle, -velocidadPaddle, velocidadPaddle);
