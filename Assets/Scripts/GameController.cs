@@ -57,6 +57,7 @@ public class GameController : MonoBehaviour {
 	public float velocidadCaja;
 	public int porcentajeSpawnDiamante;
 
+	public GameObject BackgroundController;
 
 	public float countdownInicial;
 //	public float timeBetweenWaves;
@@ -73,6 +74,7 @@ public class GameController : MonoBehaviour {
 //	public Slider touchPadSlider;
 //	public RectTransform handleSlider;
 
+	private float PrimerToqueX;
 	private GameObject paddleVivo;
 	private float movimientoPaddle;
 	private float movimientoTouchPad;
@@ -124,6 +126,9 @@ public class GameController : MonoBehaviour {
 		
 		velocidadCaja = velocidadCaja / 100;
 
+		//Inicializar Nivel y leer Dificultad
+		LevelManager.levelManager.ReinicializarNivel ();
+
 		//Puntaje a cero
 		textosEnPantalla.puntajeText.text = "0";
 
@@ -141,7 +146,10 @@ public class GameController : MonoBehaviour {
 
 		//Tutorial How to Play
 		if (firstTimeEverToPlay) {
-//			PantallaInicial.GetComponent<MenuController> ().MostrarPlay (false);
+
+			LevelManager.levelManager.nivelActual++;
+			_BloquesSpawneados++;
+
 			paddleVivo = Instantiate (paddle, new Vector2(paddleSpawnInicial.transform.position.x,paddleSpawnInicial.transform.position.y), Quaternion.identity) as GameObject;
 
 			Controles.sw_TouchPad.isOn = true;
@@ -298,90 +306,118 @@ public class GameController : MonoBehaviour {
 		}
 			
 		//Mover pelota junto con el pad al iniciar
-//		if (!ballInPlay && pelotaViva != null) {
 		if (!ballInPlay && pelotaViva != null) {
 			if(pelotaViva.GetComponent<Rigidbody2D>().velocity == Vector2.zero)	
 				pelotaViva.transform.position = new Vector3(Mathf.Clamp(paddleVivo.transform.position.x,-2f,2f), paddleVivo.GetComponent<paddle>().pelotaSpawnPaddle.position.y ,0);
 
 		}
+			
 
-		if (ballInPlay && pelotaViva != null) {
+	}
 
-		}
-
-		#if UNITY_EDITOR 
-
-//
-//		if (Input.GetKeyDown (KeyCode.A)) {
-//			if(paddleVivo != null){
-////				moverIzquierda(true);
-//				movimientoTouchPad = -200;
-//
-//			}
-//		}else if (Input.GetKeyUp (KeyCode.A)) {
-//			if(paddleVivo != null){
-////				moverIzquierda(false);
-//				movimientoTouchPad = 0;
-//
-//			}
-//		}
-//		else if (Input.GetKeyDown (KeyCode.D)) {
-//			if(paddleVivo != null){
-////				moverDerecha(true);
-//				movimientoTouchPad = 200;
-//
-//			}
-//		}else if (Input.GetKeyUp (KeyCode.D)) {
-//			if(paddleVivo != null){
-////				moverDerecha(false);
-//				movimientoTouchPad = 0;
-//
-//			}
-//		}
-
-		#endif
-
+	void FixedUpdate(){
+	
 
 		if (paddleVivo != null) {
 			// Verificar control elegido
 			if (Controles.sw_TouchPad.isOn) {
 				// TouchPad
-//				touchPadSlider.gameObject.SetActive (true);
-//				BotonesEnPantalla.derecha.SetActive (false);
-//				BotonesEnPantalla.izquierda.SetActive (false);
+				//				touchPadSlider.gameObject.SetActive (true);
+				//				BotonesEnPantalla.derecha.SetActive (false);
+				//				BotonesEnPantalla.izquierda.SetActive (false);
 
-//				float diferencia = (handleSlider.transform.position.x * 1.3f) - paddleVivo.transform.position.x;
-//
-//				// Si la diferencia es mayor a 0.3 empezar a mover el pad
-//				if (Mathf.Abs (diferencia) < areaMuerta)
-//					movimientoPaddle = 0;
-//				else if (diferencia > 0)
-//					movimientoPaddle = velocidadPaddle;
-//				else if (diferencia < 0)
-//					movimientoPaddle = -velocidadPaddle;
-//
-				if (Input.touchCount == 0)
+				//				float diferencia = (handleSlider.transform.position.x * 1.3f) - paddleVivo.transform.position.x;
+				//
+				//				// Si la diferencia es mayor a 0.3 empezar a mover el pad
+				//				if (Mathf.Abs (diferencia) < areaMuerta)
+				//					movimientoPaddle = 0;
+				//				else if (diferencia > 0)
+				//					movimientoPaddle = velocidadPaddle;
+				//				else if (diferencia < 0)
+				//					movimientoPaddle = -velocidadPaddle;
+				//
+				float _FuerzaDrag = 0;
+
+				if (Input.touchCount == 0){
 					movimientoPaddle = 0;
+					_FuerzaDrag = 0;
+
+					paddleVivo.GetComponent<Rigidbody2D> ().velocity = Vector2.MoveTowards(paddleVivo.GetComponent<Rigidbody2D> ().velocity, new Vector2 (0f, paddleVivo.GetComponent<Rigidbody2D> ().velocity.y),0.1f);
+
+				}
 				else {
 
 					if (Mathf.Abs (paddleVivo.GetComponent<Rigidbody2D> ().velocity.x) > 0) {
-						if (Mathf.Abs (Input.GetTouch (0).deltaPosition.x) > 0.9f) {
-							movimientoPaddle = Input.GetTouch (0).deltaPosition.x * 10f;
+						if (Mathf.Abs (Input.GetTouch (0).deltaPosition.x) > 0.5f) {
+//							_FuerzaDrag = Input.GetTouch (0).deltaPosition.x * paddleVivo.GetComponent<paddle> ().VelocidadControl;
+							_FuerzaDrag = Input.GetTouch (0).deltaPosition.x * LevelManager.levelManager.VelocidadPaddle;
+
 						}
 
 					} else{
-						movimientoPaddle = Input.GetTouch (0).deltaPosition.x * 10f;
+//						_FuerzaDrag = Input.GetTouch (0).deltaPosition.x * paddleVivo.GetComponent<paddle> ().VelocidadControl;
+						_FuerzaDrag = Input.GetTouch (0).deltaPosition.x * LevelManager.levelManager.VelocidadPaddle;
+
 					}
 
-					Mathf.Clamp (movimientoPaddle, -velocidadPaddle, velocidadPaddle);
+					//					Mathf.Clamp (movimientoPaddle, -velocidadPaddle, velocidadPaddle);
 
 				}
 
+				//				if(Mathf.Abs(_FuerzaDrag) > Mathf.Abs(movimientoPaddle))
+				movimientoPaddle = _FuerzaDrag;
+
+				//Clamp manual
+				if (_FuerzaDrag > LevelManager.levelManager.MaxVelocidadPaddle)
+//					movimientoPaddle = velocidadPaddle;
+					movimientoPaddle = LevelManager.levelManager.MaxVelocidadPaddle;
+
+
+				if (_FuerzaDrag < -LevelManager.levelManager.MaxVelocidadPaddle)
+//					movimientoPaddle = -velocidadPaddle;
+					movimientoPaddle = -LevelManager.levelManager.MaxVelocidadPaddle;
+
+				paddleVivo.GetComponent<Rigidbody2D> ().velocity = new Vector2 (movimientoPaddle / 10, paddleVivo.GetComponent<Rigidbody2D> ().velocity.y);
+
+
+				//				float _FuerzaDrag;
+				//				float diferenciaPosicion;
+				//
+				//				if (Input.touchCount == 0){
+				//					diferenciaPosicion = 0;
+				//					PrimerToqueX = 0;	
+				//					}
+				//				else {
+				//					//Asignar si es el primer toque
+				//					if (PrimerToqueX == 0)
+				//						PrimerToqueX = Input.GetTouch (0).position.x;
+				//
+				//					if (Input.GetTouch (0).position.x == PrimerToqueX)
+				//						diferenciaPosicion = 0;
+				//					else
+				//						diferenciaPosicion = Input.GetTouch (0).position.x - PrimerToqueX;
+				//
+				//				}
+				//
+				//				paddleVivo.GetComponent<Rigidbody2D> ().velocity = new Vector2 (diferenciaPosicion / 8, paddleVivo.GetComponent<Rigidbody2D> ().velocity.y);
+				//
+				////				Debug.Log(diferenciaPosicion);
+				////				diferenciaPosicion = diferenciaPosicion * 1.5f;
+				//				_FuerzaDrag = diferenciaPosicion * paddleVivo.GetComponent<paddle> ().VelocidadControl;
+				//
+				//				movimientoPaddle = _FuerzaDrag;
+				//				if (movimientoPaddle > velocidadPaddle)
+				//					movimientoPaddle = velocidadPaddle;
+				//
+				//				if (movimientoPaddle < -velocidadPaddle)
+				//					movimientoPaddle = -velocidadPaddle;
+
+
 			} else if (Controles.sw_Botones.isOn) {
 				//Botones de media pantalla
-//				BotonesEnPantalla.derecha.SetActive (true);
-//				BotonesEnPantalla.izquierda.SetActive (true);
-//				touchPadSlider.gameObject.SetActive (false);
+				//				BotonesEnPantalla.derecha.SetActive (true);
+				//				BotonesEnPantalla.izquierda.SetActive (true);
+				//				touchPadSlider.gameObject.SetActive (false);
 
 
 				Vector3 touchPosWorld;
@@ -409,15 +445,14 @@ public class GameController : MonoBehaviour {
 
 			}
 
-			paddleVivo.GetComponent<Rigidbody2D> ().AddForce (new Vector2 (movimientoPaddle, 0));
-
+			//			paddleVivo.GetComponent<Rigidbody2D> ().AddForce (new Vector2 (movimientoPaddle, 0));
+//			paddleVivo.GetComponent<Rigidbody2D> ().velocity = new Vector2 (movimientoPaddle / 10, paddleVivo.GetComponent<Rigidbody2D> ().velocity.y);
 			// Limito la posicion en X del pad para que no se suba a las paredes
 			paddleVivo.transform.position = new Vector2(Mathf.Clamp(paddleVivo.transform.position.x,-2f,2f),paddleVivo.transform.position.y);
 
 		}
-
+	
 	}
-
 
 		
 	public void gameOver(){
@@ -563,7 +598,8 @@ public class GameController : MonoBehaviour {
 			//Contador de Cajas derretidas
 			LevelManager.levelManager.contadorCajasDerretidas = 0;
 
-			LevelManager.levelManager.nivelActual = 1;
+			//Reinicializar Nivel y get Dificultad
+			LevelManager.levelManager.ReinicializarNivel ();
 
 			//Reinicializar contador de Spawns de prefabs antes del Boss
 			_BloquesSpawneados = 0;
@@ -666,10 +702,19 @@ public class GameController : MonoBehaviour {
 
 		GameObject _instancia = null;
 
-		//Elegir el prefab aleatroriamente
+		//Despues de cada Boss subir el nivel
+		if(_BloquesSpawneados == 0){
+			//subir de nivel
+			LevelManager.levelManager.SubirNivel();
+			//Cambiar color del fondo
+			BackgroundController.GetComponent<Animator>().SetInteger("Nivel",LevelManager.levelManager.nivelActual);
 
+		}
+
+		//Elegir el prefab aleatroriamente
 		if (_BloquesSpawneados < LevelManager.levelManager.BloquesPorNivel ()) {
-			//L1_bloque2
+
+			//por ejemplo L1_bloque2
 			string prefabRandom = "L" + LevelManager.levelManager.nivelActual + "_bloque" + Random.Range (1, 5);
 
 			_instancia = Instantiate (Resources.Load ("Prefabs/" + prefabRandom)) as GameObject;
@@ -682,8 +727,6 @@ public class GameController : MonoBehaviour {
 
 			_instancia = Instantiate (Resources.Load ("Prefabs/" + prefabRandom)) as GameObject;
 
-			//subir de nivel
-			LevelManager.levelManager.SubirNivel();
 			_BloquesSpawneados = 0;
 
 		}

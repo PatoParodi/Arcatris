@@ -19,6 +19,9 @@ namespace LevelManager
 		public static int puntosBaseCaja = 20;
 		public static int multiplicadorPuntosCaja = 0;
 
+		public static float VelocidadPaddle;
+		public static float MaxVelocidadPaddle;
+
 		private static float porcentajeAumentoNivel = 0.025f;	// 2.5%
 		private static float factorDif = 0.05f; // Aumento progresivo de dificultad 5%
 
@@ -29,6 +32,7 @@ namespace LevelManager
 		public static int contadorCajasDerretidas;
 
 		public static string s_Level = "TEST_Nivel";
+		public static string s_Dificultad = "Dificultad";
 		public static string s_sound = "Sound";
 		public static string s_TouchPad = "SelectorTouchPad";
 		public static string s_Rated = "Rated";
@@ -68,16 +72,30 @@ namespace LevelManager
 
 		}
 
+		public static void ReinicializarNivel(){
+
+			nivelActual = 0;
+
+			if (PlayerPrefs.HasKey(s_Dificultad))
+				dificultadActual = PlayerPrefs.GetInt (s_Dificultad);
+			else
+				dificultadActual = 1;
+			
+			//Aumento progresivo de factorDif% en cada Dificultad
+			velocidadCajasBase = velocidadCajasBase * (1 + factorDif * dificultadActual);
+
+		}
+
 		public static void SubirNivel(){
 		
 			nivelActual++;
 
+			//Al terminar el nivel 5 se aumenta la Dificultad y vuelven a comenzar los niveles
+			if (nivelActual == 6)
+				determinarDificultad ();
+			
 			//Velocidad cajas
 			velocidadCajas = velocidadCajasBase * (1 + nivelActual * porcentajeAumentoNivel);
-		
-			//Al llegar al nivel 5 se aumenta la Dificultad y vuelven a comenzar los niveles
-			if (nivelActual == 5)
-				determinarDificultad ();
 			
 		}
 
@@ -89,14 +107,17 @@ namespace LevelManager
 		}
 
 		public static void determinarDificultad(){
+			//Se vuelve al nivel 1
+			nivelActual = 1;
 
+			//Se aumenta la dificultad
 			dificultadActual++;
+
+			//Guardar nueva Dificultad
+			PlayerPrefs.SetInt (s_Dificultad, dificultadActual);
 
 			//Aumento progresivo de factorDif% en cada Dificultad
 			velocidadCajasBase = velocidadCajasBase * (1 + factorDif * dificultadActual);
-
-			//Se vuelve al nivel 1
-			nivelActual = 1;
 		
 		}
 

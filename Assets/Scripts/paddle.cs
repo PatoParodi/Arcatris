@@ -7,6 +7,8 @@ public class paddle : MonoBehaviour {
 
 	public float velocidad;
 
+	public float VelocidadControl;
+
 	private GameController controller;
 	private float move;
 	private Transform posBrea;
