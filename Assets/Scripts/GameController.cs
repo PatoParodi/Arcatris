@@ -277,6 +277,10 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		//Exit app on Back Button
+		if (Input.GetKeyDown(KeyCode.Escape)) 
+			Application.Quit(); 
+
 		//TEST 
 		//Cant Golpes y Nivel
 		txtNivel.text = LevelManager.levelManager.dificultadActual.ToString();
@@ -569,6 +573,7 @@ public class GameController : MonoBehaviour {
 		}
 		paddleVivo.transform.position = new Vector2 (paddleVivo.transform.position.x, GameObject.FindGameObjectWithTag ("padPosition").transform.position.y);
 		pelotaViva  = Instantiate (ballType,new Vector3 (paddleVivo.transform.position.x,ballSpawn.transform.position.y,ballSpawn.transform.position.z),Quaternion.identity) as GameObject;
+		pelotaViva.GetComponent<ballScript> ().AnimarSpawn = true;
 		SoundManager.soundManager.playSound (ballSpawn.GetComponent<AudioSource> ());
 
 		//Apagar la 

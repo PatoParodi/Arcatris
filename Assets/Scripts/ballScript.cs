@@ -10,6 +10,8 @@ public class ballScript : MonoBehaviour {
 
 	public TrailRenderer _colaExtraBall;
 
+	public bool AnimarSpawn = false;
+
 	void Awake(){
 	
 		velocidadConstante = LevelManager.levelManager.velocidadPelota;
@@ -19,6 +21,9 @@ public class ballScript : MonoBehaviour {
 
 		controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
 
+		//Animacion de spawn
+		if (AnimarSpawn)
+			GetComponentInChildren<Animator> ().SetTrigger ("Instanciar");
 	
 	}
 

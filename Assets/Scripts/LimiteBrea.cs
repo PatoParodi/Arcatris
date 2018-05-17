@@ -38,17 +38,23 @@ public class LimiteBrea : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 	
+		int cantBolas;
+
+		cantBolas = GameObject.FindGameObjectsWithTag ("pelota").Length;
 
 		//Si pasa la pelota, Game Over
-		if (other.gameObject.tag == "ball") {
+		if (other.gameObject.tag == "pelota") {
 
 			SoundManager.soundManager.playSound(other.GetComponent<AudioSource> ());
 
-			Destroy (other.gameObject, 1.2f);
+			Destroy (other.gameObject); //, 1.2f);
+
+			cantBolas = GameObject.FindGameObjectsWithTag ("pelota").Length;
 
 //			delayGameOver (0.5f);
-			if(GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().ballInPlay)
-				GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().gameOver ();
+			if(cantBolas == 1) //Solo cuando queda 1 bola
+				if(GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().ballInPlay)
+					GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().gameOver ();
 			
 			
 

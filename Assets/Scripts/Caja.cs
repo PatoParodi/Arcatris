@@ -10,6 +10,7 @@ public class Caja : MonoBehaviour {
 	public GameObject moneda;
 	public Sprite _cajaRoja;
 	public bool powerUpBajarBrea; //Determina que es un ladrillo con PowerUp
+	public bool powerUpMB; //Power Up Multiple Balls
 	public bool primeraCaja = false;
 
 	private GameController controller;
@@ -35,7 +36,11 @@ public class Caja : MonoBehaviour {
 				GetComponent<Animator> ().SetBool ("BreaDown", true);
 				powerUpBajarBrea = true;
 			}
-		
+
+		if (!powerUpBajarBrea && gameObject.tag == "Caja" && probabilidad (9)) {
+			GetComponent<Animator> ().SetBool ("PowerUpMB", true);
+			powerUpMB = true;
+		}
 
 	}
 
@@ -117,11 +122,24 @@ public class Caja : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D col){
 
-		if (col.gameObject.tag == "ball") {
+		if (col.gameObject.tag == "pelota") {
 			// Deshabilitar los colliders NO triger al explotar
 			GetComponent<BoxCollider2D>().enabled = false;
 
-			if (!powerUpBajarBrea) {
+			if (powerUpBajarBrea) {
+				//Bajar Brea
+				BajarBrea ();
+
+			} else if (powerUpMB) {
+				//Multiple Balls
+				//Instanciar 2 bolas extra
+				GameObject bolaNueva;
+				bolaNueva = Instantiate (Resources.Load ("Prefabs/ball"), transform.position, Quaternion.identity) as GameObject;
+				bolaNueva.GetComponent<ballScript> ().AnimarSpawn = false;
+				bolaNueva.GetComponent<Rigidbody2D> ().AddForce (controller.obtenerVectorVelocidad (controller.fuerzaPelota, 50f, 130f));
+				bolaNueva.GetComponent<CircleCollider2D> ().enabled = true;
+			
+			}else{
 				//Explotar moneda con 25% de probabilidad
 				if (probabilidad (controller.porcentajeSpawnDiamante)) {
 					Instantiate (moneda, new Vector3 (transform.position.x, transform.position.y, -1), Quaternion.identity);
@@ -133,19 +151,38 @@ public class Caja : MonoBehaviour {
 				LevelManager.levelManager._sortingLayer++;	//Aumento la capa para que se muestre delante
 				if(LevelManager.levelManager.multiplicadorPuntosCaja > 1)
 					popUpMultiplicador ();
-				
+
 				//Instanciar particulas y acumular puntos
 				GameObject particulas = Instantiate (Resources.Load ("Prefabs/puntosParticulas"), transform.position, Quaternion.identity) as GameObject;
 				particulas.GetComponent<puntosSpawn> ()._puntos = LevelManager.levelManager.multiplicadorPuntosCaja * LevelManager.levelManager.puntosBaseCaja;
 
-
-
-			} 
-			else {
-				//Bajar Brea
-				BajarBrea();
-
 			}
+
+//			if (!powerUpBajarBrea) {
+//				//Explotar moneda con 25% de probabilidad
+//				if (probabilidad (controller.porcentajeSpawnDiamante)) {
+//					Instantiate (moneda, new Vector3 (transform.position.x, transform.position.y, -1), Quaternion.identity);
+//					//El objeto moneda viajara hasta el contador y luego se destruira
+//				}
+//				//PUNTOS
+//				//Multiplicador de puntos por combo
+//				LevelManager.levelManager.multiplicadorPuntosCaja++;
+//				LevelManager.levelManager._sortingLayer++;	//Aumento la capa para que se muestre delante
+//				if(LevelManager.levelManager.multiplicadorPuntosCaja > 1)
+//					popUpMultiplicador ();
+//				
+//				//Instanciar particulas y acumular puntos
+//				GameObject particulas = Instantiate (Resources.Load ("Prefabs/puntosParticulas"), transform.position, Quaternion.identity) as GameObject;
+//				particulas.GetComponent<puntosSpawn> ()._puntos = LevelManager.levelManager.multiplicadorPuntosCaja * LevelManager.levelManager.puntosBaseCaja;
+//
+
+
+//			} 
+//			else {
+//				//Bajar Brea
+//				BajarBrea();
+//
+//			}
 
 			//Reproducir sonido
 			SoundManager.soundManager.playSound (GetComponent<AudioSource> ());

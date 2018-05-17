@@ -39,7 +39,7 @@ public class paddle : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D col){
 			
 
-			if (col.gameObject.tag == "ball" && controller.ballInPlay) {
+			if (col.gameObject.tag == "pelota" && controller.ballInPlay) {
 
 
 			//LevelManager -> Sumar rebote
