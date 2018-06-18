@@ -24,11 +24,11 @@ public class Textos : MonoBehaviour {
 		if (txtVelocidadCajas != null)
 			txtVelocidadCajas.text = LevelManager.levelManager.velocidadCajas.ToString();
 
-		if (txtVelocidadPaddle)
-			float.TryParse (txtVelocidadPaddle.text, out LevelManager.levelManager.VelocidadPaddle);
-
-		if (txtMaxVelocidadPaddle)
-			float.TryParse (txtMaxVelocidadPaddle.text, out LevelManager.levelManager.MaxVelocidadPaddle);
+//		if (txtVelocidadPaddle)
+//			float.TryParse (txtVelocidadPaddle.text, out LevelManager.levelManager.VelocidadPaddle);
+//
+//		if (txtMaxVelocidadPaddle)
+//			float.TryParse (txtMaxVelocidadPaddle.text, out LevelManager.levelManager.MaxVelocidadPaddle);
 		
 
 

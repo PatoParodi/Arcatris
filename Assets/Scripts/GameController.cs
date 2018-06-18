@@ -78,6 +78,9 @@ public class GameController : MonoBehaviour {
 	private GameObject paddleVivo;
 	private float movimientoPaddle;
 	private float movimientoTouchPad;
+	private float tiempoPresionandoR = 0;
+	private float tiempoPresionandoL = 0;
+	public int multiplicadorVelocidad;
 	private GameObject pelotaViva;
 	public bool ballInPlay = false;
 	private int Puntaje;
@@ -274,10 +277,23 @@ public class GameController : MonoBehaviour {
 
 	}
 
+
 	// Update is called once per frame
 	void Update () {
 
 		//Exit app on Back Button
+		if (Input.GetKeyUp(KeyCode.Escape))
+		{
+			if (Application.platform == RuntimePlatform.Android)
+			{
+				AndroidJavaObject activity = new AndroidJavaClass("com.unity3d.player.UnityPlayer").GetStatic<AndroidJavaObject>("currentActivity");
+				activity.Call<bool>("moveTaskToBack", true);
+			}
+			else
+			{
+				Application.Quit();
+			}
+		}
 		if (Input.GetKeyDown(KeyCode.Escape)) 
 			Application.Quit(); 
 
@@ -316,6 +332,12 @@ public class GameController : MonoBehaviour {
 
 		}
 			
+
+		if (Input.touchCount == 0) {
+			movimientoPaddle = 0;
+//			tiempoPresionando = 0;
+
+		}
 
 	}
 
@@ -371,50 +393,19 @@ public class GameController : MonoBehaviour {
 				//				if(Mathf.Abs(_FuerzaDrag) > Mathf.Abs(movimientoPaddle))
 				movimientoPaddle = _FuerzaDrag;
 
-				//Clamp manual
-				if (_FuerzaDrag > LevelManager.levelManager.MaxVelocidadPaddle)
-//					movimientoPaddle = velocidadPaddle;
-					movimientoPaddle = LevelManager.levelManager.MaxVelocidadPaddle;
+//				//Clamp manual
+//				if (movimientoPaddle > LevelManager.levelManager.MaxVelocidadPaddle)
+////					movimientoPaddle = velocidadPaddle;
+//					movimientoPaddle = LevelManager.levelManager.MaxVelocidadPaddle;
+//
+//
+//				if (movimientoPaddle < -LevelManager.levelManager.MaxVelocidadPaddle)
+////					movimientoPaddle = -velocidadPaddle;
+//					movimientoPaddle = -LevelManager.levelManager.MaxVelocidadPaddle;
+//
+//				movimientoPaddle = movimientoPaddle / 10;
+//				paddleVivo.GetComponent<Rigidbody2D> ().velocity = new Vector2 (movimientoPaddle / 10, paddleVivo.GetComponent<Rigidbody2D> ().velocity.y);
 
-
-				if (_FuerzaDrag < -LevelManager.levelManager.MaxVelocidadPaddle)
-//					movimientoPaddle = -velocidadPaddle;
-					movimientoPaddle = -LevelManager.levelManager.MaxVelocidadPaddle;
-
-				paddleVivo.GetComponent<Rigidbody2D> ().velocity = new Vector2 (movimientoPaddle / 10, paddleVivo.GetComponent<Rigidbody2D> ().velocity.y);
-
-
-				//				float _FuerzaDrag;
-				//				float diferenciaPosicion;
-				//
-				//				if (Input.touchCount == 0){
-				//					diferenciaPosicion = 0;
-				//					PrimerToqueX = 0;	
-				//					}
-				//				else {
-				//					//Asignar si es el primer toque
-				//					if (PrimerToqueX == 0)
-				//						PrimerToqueX = Input.GetTouch (0).position.x;
-				//
-				//					if (Input.GetTouch (0).position.x == PrimerToqueX)
-				//						diferenciaPosicion = 0;
-				//					else
-				//						diferenciaPosicion = Input.GetTouch (0).position.x - PrimerToqueX;
-				//
-				//				}
-				//
-				//				paddleVivo.GetComponent<Rigidbody2D> ().velocity = new Vector2 (diferenciaPosicion / 8, paddleVivo.GetComponent<Rigidbody2D> ().velocity.y);
-				//
-				////				Debug.Log(diferenciaPosicion);
-				////				diferenciaPosicion = diferenciaPosicion * 1.5f;
-				//				_FuerzaDrag = diferenciaPosicion * paddleVivo.GetComponent<paddle> ().VelocidadControl;
-				//
-				//				movimientoPaddle = _FuerzaDrag;
-				//				if (movimientoPaddle > velocidadPaddle)
-				//					movimientoPaddle = velocidadPaddle;
-				//
-				//				if (movimientoPaddle < -velocidadPaddle)
-				//					movimientoPaddle = -velocidadPaddle;
 
 
 			} else if (Controles.sw_Botones.isOn) {
@@ -426,28 +417,60 @@ public class GameController : MonoBehaviour {
 
 				Vector3 touchPosWorld;
 
+
 				//Verificar si esta tocando la pantalla para mover el pad
 				if (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Began || Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetTouch(0).phase == TouchPhase.Stationary)) {
 
 					if (Input.touches.Length > 1) {
 						touchPosWorld = Camera.main.ScreenToWorldPoint (Input.touches [1].position);
 					} else {
-						//We transform the touch position into word space from screen space and store it.
+						//We transform the touch position into world space from screen space and store it.
 						touchPosWorld = Camera.main.ScreenToWorldPoint (Input.GetTouch (0).position);
 					}
 
-					if(touchPosWorld.x > 0)
-						movimientoPaddle = velocidadPaddle;
-					else if (touchPosWorld.x < 0)
-						movimientoPaddle = -velocidadPaddle;
+//					if (tiempoPresionando == 0)
+//						tiempoPresionando = Time.deltaTime;
+//					else
+
+					if (touchPosWorld.x > 0) {
+//						movimientoPaddle = velocidadPaddle;
+						tiempoPresionandoR = tiempoPresionandoR + (Time.deltaTime * multiplicadorVelocidad);
+						tiempoPresionandoL = 0;
+						movimientoPaddle = LevelManager.levelManager.VelocidadPaddle * tiempoPresionandoR;
+
+					}else if (touchPosWorld.x < 0){
+//						movimientoPaddle = -velocidadPaddle;
+						tiempoPresionandoL = tiempoPresionandoL + (Time.deltaTime * multiplicadorVelocidad);
+						tiempoPresionandoR = 0;
+						movimientoPaddle = -LevelManager.levelManager.VelocidadPaddle * tiempoPresionandoL;
+					}
 				}
 
 				if (Input.touchCount == 0) {
 					movimientoPaddle = 0;
+					//					tiempoPresionando = 0;
 
 				}
 
+				Debug.Log (movimientoPaddle);
+
+
 			}
+
+			//Clamp manual
+			if (movimientoPaddle > LevelManager.levelManager.MaxVelocidadPaddle)
+				//					movimientoPaddle = velocidadPaddle;
+				movimientoPaddle = LevelManager.levelManager.MaxVelocidadPaddle;
+
+
+			if (movimientoPaddle < -LevelManager.levelManager.MaxVelocidadPaddle)
+				//					movimientoPaddle = -velocidadPaddle;
+				movimientoPaddle = -LevelManager.levelManager.MaxVelocidadPaddle;
+
+//			movimientoPaddle = movimientoPaddle / 10;
+
+			paddleVivo.GetComponent<Rigidbody2D> ().velocity = new Vector2 (movimientoPaddle / 10, paddleVivo.GetComponent<Rigidbody2D> ().velocity.y);
+
 
 			//			paddleVivo.GetComponent<Rigidbody2D> ().AddForce (new Vector2 (movimientoPaddle, 0));
 //			paddleVivo.GetComponent<Rigidbody2D> ().velocity = new Vector2 (movimientoPaddle / 10, paddleVivo.GetComponent<Rigidbody2D> ().velocity.y);
@@ -573,7 +596,7 @@ public class GameController : MonoBehaviour {
 		}
 		paddleVivo.transform.position = new Vector2 (paddleVivo.transform.position.x, GameObject.FindGameObjectWithTag ("padPosition").transform.position.y);
 		pelotaViva  = Instantiate (ballType,new Vector3 (paddleVivo.transform.position.x,ballSpawn.transform.position.y,ballSpawn.transform.position.z),Quaternion.identity) as GameObject;
-		pelotaViva.GetComponent<ballScript> ().AnimarSpawn = true;
+		pelotaViva.GetComponent<ballScript> ().animarSpawning ();
 		SoundManager.soundManager.playSound (ballSpawn.GetComponent<AudioSource> ());
 
 		//Apagar la 

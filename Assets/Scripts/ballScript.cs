@@ -10,7 +10,8 @@ public class ballScript : MonoBehaviour {
 
 	public TrailRenderer _colaExtraBall;
 
-	public bool AnimarSpawn = false;
+	public bool RedBallFlag = false;
+
 
 	void Awake(){
 	
@@ -21,10 +22,14 @@ public class ballScript : MonoBehaviour {
 
 		controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
 
-		//Animacion de spawn
-		if (AnimarSpawn)
-			GetComponentInChildren<Animator> ().SetTrigger ("Instanciar");
-	
+
+	}
+
+	//Animacion de spawn
+	public void animarSpawning(){
+		
+		GetComponentInChildren<Animator> ().SetTrigger ("Instanciar");
+
 	}
 
 	void Update(){
@@ -37,6 +42,26 @@ public class ballScript : MonoBehaviour {
 
 	}
 
+	public void PowerUpRedBall(float duracion){
+
+		//Iniciar comportamiento durante "duracion" segundos
+		StartCoroutine (activarPowerUpRedBall (duracion));
+
+	}
+
+
+	public IEnumerator activarPowerUpRedBall(float duracion){
+	
+		//Animar bola para que cambie de color
+		GetComponentInChildren<Animator>().SetBool("RedBall",true);
+		RedBallFlag = true;
+
+		yield return new WaitForSeconds (duracion);
+
+		RedBallFlag = false;
+		GetComponentInChildren<Animator>().SetBool("RedBall",false);
+
+	}
 
 	void OnCollisionEnter2D(Collision2D col){
 
@@ -71,7 +96,6 @@ public class ballScript : MonoBehaviour {
 
 		//Forzar vector de velocidad a magnitud fija
 		gameObject.GetComponent<Rigidbody2D> ().velocity = velocidadConstante * (gameObject.GetComponent<Rigidbody2D> ().velocity.normalized);
-
 	
 	}
 

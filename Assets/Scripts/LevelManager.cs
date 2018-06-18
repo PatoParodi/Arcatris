@@ -19,18 +19,27 @@ namespace LevelManager
 		public static int puntosBaseCaja = 20;
 		public static int multiplicadorPuntosCaja = 0;
 
-		public static float VelocidadPaddle;
-		public static float MaxVelocidadPaddle;
+		public static float VelocidadPaddle = 3;
+		public static float MaxVelocidadPaddle = 300;
 
+		//Customizing: Variables globales configuracion del juego
+		// Aumento de niveles
 		private static float porcentajeAumentoNivel = 0.025f;	// 2.5%
 		private static float factorDif = 0.05f; // Aumento progresivo de dificultad 5%
 
+		//Probabilidades de PowerUps
+		public static float PowerUpBajarBrea = 3;
+		public static float PowerUpMultipleBalls = 2.5f;
+		public static float PowerUpRedBall = 2f;
+
+		//Subir de nivel
 		private static int golpesPorNivelMinimo = 10;
 		private static int golpesPorNivel = 36;
 		private static bool flagBajarNivel = false;
 		public static int cantRebotes;
 		public static int contadorCajasDerretidas;
 
+		//Variables gloables PlayerPrefs
 		public static string s_Level = "TEST_Nivel";
 		public static string s_Dificultad = "Dificultad";
 		public static string s_sound = "Sound";
