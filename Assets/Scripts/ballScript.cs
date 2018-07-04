@@ -8,10 +8,18 @@ public class ballScript : MonoBehaviour {
 	private float velocidadConstante; //valor original 4.4
 	private GameController controller;
 
+	public bool pelotaSpawneada = false;
+
 //	public TrailRenderer _colaExtraBall;
 
 	public bool RedBallFlag = false;
 
+	//Se llama desde la animacion de Spawn
+	public void afterSpawn(){
+
+		pelotaSpawneada = true;
+	
+	}
 
 	void Awake(){
 	

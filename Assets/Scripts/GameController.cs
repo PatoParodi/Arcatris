@@ -72,6 +72,7 @@ public class GameController : MonoBehaviour {
 	private float tiempoPresionandoL = 0;
 	public int multiplicadorVelocidad;
 	private GameObject pelotaViva;
+	private bool validarTouchInicial = false;
 	public bool ballInPlay = false;
 	private int Puntaje;
 	private int Monedas;
@@ -344,11 +345,15 @@ public class GameController : MonoBehaviour {
 		}
 			
 
-		if (Input.touchCount == 0) {
-			movimientoPaddle = 0;
-//			tiempoPresionando = 0;
+		//Verificar toque inicial para soltar pelota
+		if (ballInPlay == false)
+			if (pelotaViva != null)
+				if (pelotaViva.GetComponent<ballScript> ().pelotaSpawneada == true)
+					if (Input.touchCount > 0)
+						validarTouchInicial = true;
 
-		}
+		if (ballInPlay == true)
+			validarTouchInicial = false;
 
 	}
 
@@ -669,8 +674,13 @@ public class GameController : MonoBehaviour {
 		//Posicionar pelota arriba del pad a medida que vaya subiendo
 //		pelotaViva.transform.position = new Vector2(paddleVivo.transform.position.x, paddleVivo.transform.position.y + paddleVivo.GetComponentInChildren<SpriteRenderer>().bounds.size.y/2 + pelotaViva.GetComponentInChildren<SpriteRenderer>().bounds.size.y/2);
 
-		yield return new WaitForSeconds (seconds);
+//		yield return new WaitUntil (() => validarTouchInicial == true);
+//
+//		validarTouchInicial = false;
 			
+		yield return new WaitForSeconds(seconds);
+
+
 		// Dar fuerza inicial a la pelota
 		pelotaViva.GetComponent<Rigidbody2D>().AddForce (obtenerVectorVelocidad(fuerzaPelota,50f,130f));
 		pelotaViva.GetComponent<CircleCollider2D> ().enabled = true;
@@ -679,6 +689,7 @@ public class GameController : MonoBehaviour {
 
 
 	}
+		
 
 	public void breaPosicionInicial(){
 	//Llevar brea a su posicion inicial
@@ -723,39 +734,53 @@ public class GameController : MonoBehaviour {
 		return vector2D;
 
 	}
+//
+//	public GameObject spawnCajas (){
+//
+//		GameObject _instancia = null;
+//
+//		//Despues de cada Boss subir el nivel
+//		if(_BloquesSpawneados == 0){
+//			//subir de nivel
+//			LevelManager.levelManager.SubirNivel();
+//			//Cambiar color del fondo
+//			BackgroundController.GetComponent<Animator>().SetInteger("Nivel",LevelManager.levelManager.nivelActual);
+//
+//		}
+//
+//		//Elegir el prefab aleatroriamente
+//		if (_BloquesSpawneados < LevelManager.levelManager.BloquesPorNivel ()) {
+//
+//			//por ejemplo L1_bloque2
+//			string prefabRandom = "L" + LevelManager.levelManager.nivelActual + "_bloque" + Random.Range (1, 5);
+//
+//			_instancia = Instantiate (Resources.Load ("Prefabs/" + prefabRandom)) as GameObject;
+//
+//			_BloquesSpawneados++;
+//
+//		} else {
+//		//Viene un boss
+//			string prefabRandom = "L" + LevelManager.levelManager.nivelActual + "_boss";
+//
+//			_instancia = Instantiate (Resources.Load ("Prefabs/" + prefabRandom)) as GameObject;
+//
+//			_BloquesSpawneados = 0;
+//
+//		}
+//
+//		return _instancia;
+//
+//	}
+
 
 	public GameObject spawnCajas (){
 
 		GameObject _instancia = null;
 
-		//Despues de cada Boss subir el nivel
-		if(_BloquesSpawneados == 0){
-			//subir de nivel
-			LevelManager.levelManager.SubirNivel();
-			//Cambiar color del fondo
-			BackgroundController.GetComponent<Animator>().SetInteger("Nivel",LevelManager.levelManager.nivelActual);
-
-		}
-
 		//Elegir el prefab aleatroriamente
-		if (_BloquesSpawneados < LevelManager.levelManager.BloquesPorNivel ()) {
+		string prefabRandom = "L1" + "_bloque" + Random.Range (1, 5);
 
-			//por ejemplo L1_bloque2
-			string prefabRandom = "L" + LevelManager.levelManager.nivelActual + "_bloque" + Random.Range (1, 5);
-
-			_instancia = Instantiate (Resources.Load ("Prefabs/" + prefabRandom)) as GameObject;
-
-			_BloquesSpawneados++;
-
-		} else {
-		//Viene un boss
-			string prefabRandom = "L" + LevelManager.levelManager.nivelActual + "_boss";
-
-			_instancia = Instantiate (Resources.Load ("Prefabs/" + prefabRandom)) as GameObject;
-
-			_BloquesSpawneados = 0;
-
-		}
+		_instancia = Instantiate (Resources.Load ("Prefabs/" + prefabRandom)) as GameObject;
 
 		return _instancia;
 

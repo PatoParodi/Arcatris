@@ -27,7 +27,7 @@ public class Caja : MonoBehaviour {
 			velocidad = 0;
 		}
 		else {
-				velocidad = LevelManager.levelManager.velocidadCajas;
+			velocidad = LevelManager.levelManager.velocidadCajas;
 
 		}
 
@@ -37,9 +37,9 @@ public class Caja : MonoBehaviour {
 			if (probabilidad (LevelManager.levelManager.PowerUpBajarBrea)) {
 					GetComponent<Animator> ().SetBool ("BreaDown", true);
 					powerUpBajarBrea = true;
-				}
+			}
 
-			if (!powerUpBajarBrea && probabilidad (LevelManager.levelManager.PowerUpMultipleBallProb)) {
+		if (!powerUpBajarBrea && probabilidad (LevelManager.levelManager.PowerUpMultipleBallProb)) {
 			GetComponent<Animator> ().SetBool ("PowerUpMB", true);
 			powerUpMB = true;
 		}
