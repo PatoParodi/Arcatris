@@ -8,7 +8,7 @@ public class ballScript : MonoBehaviour {
 	private float velocidadConstante; //valor original 4.4
 	private GameController controller;
 
-	public TrailRenderer _colaExtraBall;
+//	public TrailRenderer _colaExtraBall;
 
 	public bool RedBallFlag = false;
 
@@ -32,13 +32,25 @@ public class ballScript : MonoBehaviour {
 
 	}
 
+	//Animacion para tipo de bola
+	/// <summary>
+	/// Setear la Animacion para cada tipo de Bola
+	/// </summary>
+	/// <param name="tipoDeBola">Nombre del tipo de bola.</param>
+	public void SetTipoDeBola(string tipoDeBola){
+
+		GetComponentInChildren<Animator> ().SetTrigger (tipoDeBola);
+
+	}
+
+
 	void Update(){
 	
 		gameObject.GetComponent<Rigidbody2D> ().velocity = velocidadConstante * (gameObject.GetComponent<Rigidbody2D> ().velocity.normalized);
 
-		if(_colaExtraBall != null)
-			if (controller.ballInPlay)
-				_colaExtraBall.enabled = true;
+//		if(_colaExtraBall != null)
+//			if (controller.ballInPlay)
+//				_colaExtraBall.enabled = true;
 
 	}
 
@@ -49,7 +61,7 @@ public class ballScript : MonoBehaviour {
 
 	}
 
-
+	// Power Up Red Ball - Activar
 	public IEnumerator activarPowerUpRedBall(float duracion){
 	
 		//Animar bola para que cambie de color

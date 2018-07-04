@@ -9,7 +9,6 @@ namespace LevelManager
 {
 	public class levelManager {
 
-		private static float velocidadPelotaBase = 4.3f;
 		private static float velocidadCajasBase = 0.18f;  //Original 0.22f
 
 		public static float velocidadPelota = 4.3f;
@@ -25,12 +24,17 @@ namespace LevelManager
 		//Customizing: Variables globales configuracion del juego
 		// Aumento de niveles
 		private static float porcentajeAumentoNivel = 0.025f;	// 2.5%
-		private static float factorDif = 0.05f; // Aumento progresivo de dificultad 5%
+		private static float factorDif = 0.04f; // Aumento progresivo de dificultad 4%
 
-		//Probabilidades de PowerUps
-		public static float PowerUpBajarBrea = 3;
-		public static float PowerUpMultipleBalls = 2.5f;
-		public static float PowerUpRedBall = 2f;
+		//POWER UPS
+		//Red Ball
+		public static float PowerUpRedBallDuracion 	= 6f;
+		public static float PowerUpRedBall 			= 2.5f;
+		//Bajar Brea
+		public static float PowerUpBajarBrea 		= 4.3f;
+		//Multiple Balls
+		public static float PowerUpMultipleBallProb = 2.5f;
+		public static float PowerUpMultipleBallCant = 1;
 
 		//Subir de nivel
 		private static int golpesPorNivelMinimo = 10;
@@ -41,11 +45,16 @@ namespace LevelManager
 
 		//Variables gloables PlayerPrefs
 		public static string s_Level = "TEST_Nivel";
-		public static string s_Dificultad = "Dificultad";
+		public static string s_Dificultad = "Dificultad_X";
 		public static string s_sound = "Sound";
 		public static string s_TouchPad = "SelectorTouchPad";
 		public static string s_Rated = "Rated";
 		public static string s_CantPartidas = "CantidadPartidas";
+		public static string s_PowerUpRebBallProb 		= "PowerUpRedBallProb";
+		public static string s_PowerUpRebBallDurac 		= "PowerUpRedBallDurac";
+		public static string s_PowerUpMultipleBallCant 	= "PowerUpMultipleBallCant";
+		public static string s_PowerUpBajarBreaProb 	= "PowerUpBajarBreaProb";
+
 
 		public static string s_On = "On";
 		public static string s_Off = "Off";

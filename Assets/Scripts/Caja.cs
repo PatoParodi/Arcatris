@@ -39,13 +39,12 @@ public class Caja : MonoBehaviour {
 					powerUpBajarBrea = true;
 				}
 
-		if (!powerUpBajarBrea && probabilidad (LevelManager.levelManager.PowerUpMultipleBalls)) {
+			if (!powerUpBajarBrea && probabilidad (LevelManager.levelManager.PowerUpMultipleBallProb)) {
 			GetComponent<Animator> ().SetBool ("PowerUpMB", true);
 			powerUpMB = true;
 		}
 
 		if (!powerUpBajarBrea && !powerUpMB && probabilidad (LevelManager.levelManager.PowerUpRedBall)) {
-				Debug.Log ("RedBall");
 			GetComponent<Animator> ().SetBool ("PowerUpRedBall", true);
 			powerUpRedBall = true;
 		}
@@ -165,15 +164,16 @@ public class Caja : MonoBehaviour {
 			//Multiple Balls
 			//Instanciar bola extra
 			GameObject bolaNueva;
-			bolaNueva = Instantiate (Resources.Load ("Prefabs/ball"), transform.position, Quaternion.identity) as GameObject;
-//			bolaNueva.GetComponent<ballScript> ().animarSpawning();
-			bolaNueva.GetComponent<Rigidbody2D> ().AddForce (controller.obtenerVectorVelocidad (controller.fuerzaPelota, 50f, 130f));
-			bolaNueva.GetComponent<CircleCollider2D> ().enabled = true;
+			for (int i = 0; i < LevelManager.levelManager.PowerUpMultipleBallCant; i++) {
+				bolaNueva = Instantiate (Resources.Load ("Prefabs/ball"), transform.position, Quaternion.identity) as GameObject;
+				bolaNueva.GetComponentInChildren<Animator> ().SetTrigger ("MultipleBall");	//Saltar animacion de Spawn
+				bolaNueva.GetComponent<Rigidbody2D> ().AddForce (controller.obtenerVectorVelocidad (controller.fuerzaPelota, 50f, 130f));
+				bolaNueva.GetComponent<CircleCollider2D> ().enabled = true;
+			}
 
 		} else if (powerUpRedBall) {
 			//Red Ball
-			//Instanciar 2 bolas extra
-			objeto.GetComponent<ballScript>().PowerUpRedBall(6f);
+			objeto.GetComponent<ballScript>().PowerUpRedBall(LevelManager.levelManager.PowerUpRedBallDuracion);
 		}
 
 		else{

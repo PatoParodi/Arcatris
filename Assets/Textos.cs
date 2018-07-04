@@ -8,6 +8,7 @@ public class Textos : MonoBehaviour {
 	public Text txtNivel;
 	public Text txtDificultad;
 	public Text txtVelocidadCajas;
+	public Text txtPowerUpRedBall;
 
 	public Text txtVelocidadPaddle;
 	public Text txtMaxVelocidadPaddle;
@@ -24,13 +25,14 @@ public class Textos : MonoBehaviour {
 		if (txtVelocidadCajas != null)
 			txtVelocidadCajas.text = LevelManager.levelManager.velocidadCajas.ToString();
 
+		if (txtPowerUpRedBall != null)
+			txtPowerUpRedBall.text = LevelManager.levelManager.PowerUpMultipleBallCant.ToString();
+		
 //		if (txtVelocidadPaddle)
 //			float.TryParse (txtVelocidadPaddle.text, out LevelManager.levelManager.VelocidadPaddle);
 //
 //		if (txtMaxVelocidadPaddle)
 //			float.TryParse (txtMaxVelocidadPaddle.text, out LevelManager.levelManager.MaxVelocidadPaddle);
-		
-
 
 	}
 }

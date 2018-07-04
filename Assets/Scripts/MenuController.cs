@@ -200,7 +200,7 @@ public class MenuController : MonoBehaviour {
 //			PlayerPrefs.SetInt(
 			
 			//Ajustar el nivel al terminar la partida
-			LevelManager.levelManager.determinarNivel (true);
+//			LevelManager.levelManager.determinarNivel (true);
 
 			// Al ir a pantalla de Play siempre volver la Brea a su posicion inicial
 			controller.breaPosicionInicial ();
@@ -235,7 +235,7 @@ public class MenuController : MonoBehaviour {
 	void realizarCompraExtraBall(int precio, int cantidad){
 
 		// Hace la compra si tiene suficientes diamantes, caso contrario devuelve false
-		bool _compraHecha = controller.comprarExtraBall (precio, cantidad);
+		bool _compraHecha = controller.Comprar (precio);
 
 		if (_compraHecha) {
 
@@ -329,6 +329,122 @@ public class MenuController : MonoBehaviour {
 	public void comprarExtraBall4(){
 
 		realizarCompraExtraBall (1000, 25);
+
+	}
+
+	public void comprarPowerUp1(){
+//RedBall -> Probabilidad +3%  
+		//Mostrar video por Reward
+		if (Advertisement.IsReady ()) {
+			ShowOptions options = new ShowOptions();
+			options.resultCallback = ManagerShowResultPowerUp;
+
+			Advertisement.Show("rewardedVideo", options);
+
+		}
+
+	}
+
+	void ManagerShowResultPowerUp (ShowResult result)
+	{
+		if(result == ShowResult.Finished) {
+			// Reward your player here.
+			//Sumar 3% a la probabilidad de RedBall
+			LevelManager.levelManager.PowerUpRedBall += LevelManager.levelManager.PowerUpRedBall * 0.03f;
+
+			PlayerPrefs.SetFloat (LevelManager.levelManager.s_PowerUpRebBallProb, LevelManager.levelManager.PowerUpRedBall);
+
+			//Reproducir sonido de compra
+			SoundManager.soundManager.playSound(GetComponent<AudioSource>());
+
+			//Alimentar analytics
+			Analytics.CustomEvent ("ComprasPowerUp", new Dictionary<string, object> {
+				{ "PowerUp", "RedBallProb" }
+			});
+
+		}else if(result == ShowResult.Skipped) {
+			//Video was skipped - Do NOT reward the player
+
+		}else if(result == ShowResult.Failed) {
+			//Video failed to show
+
+		}
+
+	}
+
+	public void comprarPowerUp2(){
+//BajarBrea -> Probabilidad +7%
+
+		if (realizarCompraPowerUp (95, "BajarBreaProb")) {
+
+			LevelManager.levelManager.PowerUpBajarBrea += LevelManager.levelManager.PowerUpBajarBrea * 0.07f;
+
+			PlayerPrefs.SetFloat (LevelManager.levelManager.s_PowerUpBajarBreaProb, LevelManager.levelManager.PowerUpBajarBrea);
+
+		}
+
+	}
+
+	public void comprarPowerUp3(){
+//RedBall -> Tiempo +1 segundo
+
+		if (realizarCompraPowerUp (100, "RedBallTiempo")) {
+
+			LevelManager.levelManager.PowerUpRedBallDuracion += 1;
+
+			PlayerPrefs.SetFloat (LevelManager.levelManager.s_PowerUpRebBallDurac, LevelManager.levelManager.PowerUpRedBallDuracion);
+
+		}
+	}
+
+	public void comprarPowerUp4(){
+//MultipleBalls -> Cantidad +1 bola
+
+		if (realizarCompraPowerUp (450, "MultipleBallCant")) {
+
+			LevelManager.levelManager.PowerUpMultipleBallCant += 1;
+
+			PlayerPrefs.SetFloat (LevelManager.levelManager.s_PowerUpMultipleBallCant, LevelManager.levelManager.PowerUpMultipleBallCant);
+
+		}
+	}
+
+	public void comprarPowerUp5(){
+//BajarBrea -> Probabilidad +10%
+
+		if (realizarCompraPowerUp (140, "BajarBreaProb")) {
+
+			LevelManager.levelManager.PowerUpBajarBrea += LevelManager.levelManager.PowerUpBajarBrea * 0.10f;
+
+			PlayerPrefs.SetFloat (LevelManager.levelManager.s_PowerUpBajarBreaProb, LevelManager.levelManager.PowerUpBajarBrea);
+
+		}
+	}
+
+	bool realizarCompraPowerUp(int precio, string tipoDePowerUp){
+
+		// Hace la compra si tiene suficientes diamantes, caso contrario devuelve false
+		bool _compraHecha = controller.Comprar(precio);
+
+		if (_compraHecha) {
+
+			//Alimentar analytics
+			Analytics.CustomEvent ("ComprasPowerUp", new Dictionary<string, object> {
+				{ "PowerUp", tipoDePowerUp }
+			});
+
+			//Reproducir sonido
+			SoundManager.soundManager.playSound(GetComponent<AudioSource>());
+
+			return true;
+
+		} // No hay suficientes diamantes
+		else{ 
+
+			_txtPopUp.GetComponent<Animator> ().SetTrigger ("Show");
+
+			return false;
+		}
 
 	}
 

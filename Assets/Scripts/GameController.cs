@@ -46,14 +46,9 @@ public class GameController : MonoBehaviour {
 	public float velocidadPaddle;
 	public Transform paddleSpawnInicial;
 	public GameObject pelota;
-	public GameObject extraBall;
+//	public GameObject extraBall;
 	public float fuerzaPelota;
 	public GameObject ballSpawn;
-//	public GameObject cajas_01;
-//	public GameObject cajas_02;
-//	public GameObject cajas_03;
-//	public GameObject cajas_04;
-//	public Transform cajaSpawn;
 	public float velocidadCaja;
 	public int porcentajeSpawnDiamante;
 
@@ -68,11 +63,6 @@ public class GameController : MonoBehaviour {
 	public GameObject UI_highScore;
 	public GameObject popUpContinue;
 	public GameObject Brea;
-	public Text txtCantGolpes;
-	public Text txtNivel;
-
-//	public Slider touchPadSlider;
-//	public RectTransform handleSlider;
 
 	private float PrimerToqueX;
 	private GameObject paddleVivo;
@@ -115,6 +105,7 @@ public class GameController : MonoBehaviour {
 //		PlayerPrefs.DeleteAll();
 //		PlayerPrefs.SetInt ("High Score", 0);
 //		PlayerPrefs.SetInt ("ArcatrisMonedas", 1000);
+//		PlayerPrefs.SetString ("jugoAntes", "Si");
 //		PlayerPrefs.SetInt ("ExtraBall", 0);
 ///////////////////////////////////////////////////////////
 
@@ -126,7 +117,16 @@ public class GameController : MonoBehaviour {
 		//Setear idioma elegido anteriormente
 		string _language = PlayerPrefs.GetString("Idioma");
 		LanguageManager.setLanguage (_language);
-		
+
+		//Leer info de Power Ups
+		//Red Ball
+		leerDataPowerUps(LevelManager.levelManager.s_PowerUpRebBallProb, ref LevelManager.levelManager.PowerUpRedBall);
+		leerDataPowerUps(LevelManager.levelManager.s_PowerUpRebBallDurac, ref LevelManager.levelManager.PowerUpRedBallDuracion);
+		//Bajar Brea
+		leerDataPowerUps(LevelManager.levelManager.s_PowerUpBajarBreaProb, ref LevelManager.levelManager.PowerUpBajarBrea);
+		//Multiple Ball
+		leerDataPowerUps(LevelManager.levelManager.s_PowerUpMultipleBallCant, ref LevelManager.levelManager.PowerUpMultipleBallCant);
+
 		velocidadCaja = velocidadCaja / 100;
 
 		//Inicializar Nivel y leer Dificultad
@@ -150,14 +150,14 @@ public class GameController : MonoBehaviour {
 		//Tutorial How to Play
 		if (firstTimeEverToPlay) {
 
-			LevelManager.levelManager.nivelActual++;
+//			LevelManager.levelManager.nivelActual++;
 			_BloquesSpawneados++;
 
 			paddleVivo = Instantiate (paddle, new Vector2(paddleSpawnInicial.transform.position.x,paddleSpawnInicial.transform.position.y), Quaternion.identity) as GameObject;
 
 			Controles.sw_TouchPad.isOn = true;
 
-			PlayerPrefs.SetInt ("ExtraBall", 3);
+			PlayerPrefs.SetInt ("ExtraBall", 1);
 
 
 			tutorialObjetos.swipeText.SetActive (true);
@@ -169,7 +169,8 @@ public class GameController : MonoBehaviour {
 		} else {
 			
 			//Ajustar dificultad
-			LevelManager.levelManager.determinarNivel (false);
+//			LevelManager.levelManager.determinarNivel (false);
+			LevelManager.levelManager.ReinicializarNivel ();
 
 			PantallaInicial.SetActive (true);
 
@@ -219,7 +220,19 @@ public class GameController : MonoBehaviour {
 			
 	}
 		
-	public bool comprarExtraBall(int precio, int cantidad){
+	public void leerDataPowerUps(string nombre, ref float variable){
+		//Si existe la actualiza, si no existe se crea/inicializa
+		if (PlayerPrefs.HasKey (nombre)) { //Si existe
+			variable = PlayerPrefs.GetFloat (nombre);
+
+		}
+			else
+			//Si no existe
+			PlayerPrefs.SetFloat (nombre, variable);
+	
+	}
+
+	public bool Comprar(int precio){
 	
 		if (Monedas >= precio) {
 			//Quitar monedas de la compra
@@ -267,9 +280,12 @@ public class GameController : MonoBehaviour {
 		tutorialObjetos.challengeText.SetActive (false);
 
 		//Setear nivel inicial como 4 para que la nueva partida arranque en 3
-		PlayerPrefs.SetInt (LevelManager.levelManager.s_Level, 5);
+//		PlayerPrefs.SetInt (LevelManager.levelManager.s_Level, 5);
 		//Ajustar el nivel
-		LevelManager.levelManager.determinarNivel (false);
+//		LevelManager.levelManager.determinarNivel (false);
+		LevelManager.levelManager.ReinicializarNivel ();
+		//Por el prefab que ya esta generado
+		_BloquesSpawneados = 0;
 
 		//Mostrar pantalla inicial
 		IniciarJuego(true);
@@ -296,11 +312,6 @@ public class GameController : MonoBehaviour {
 		}
 		if (Input.GetKeyDown(KeyCode.Escape)) 
 			Application.Quit(); 
-
-		//TEST 
-		//Cant Golpes y Nivel
-		txtNivel.text = LevelManager.levelManager.dificultadActual.ToString();
-		txtCantGolpes.text = LevelManager.levelManager.cantRebotes.ToString ();
 
 		//Toque inicial durante el Tutorial
 		if (firstTimeEverToPlay){
@@ -502,7 +513,7 @@ public class GameController : MonoBehaviour {
 
 		if (vidas > 0)
 			//Re-spawnear
-			ContinuarJuego (pelota);
+			ContinuarJuego ("WhiteBall");	//WhiteBall
 		
 		else {
 			
@@ -513,22 +524,7 @@ public class GameController : MonoBehaviour {
 		}
 			
 	}
-
-//	public void playMusic(bool enabled){
-//
-//		AudioSource audioMenu = PantallaInicial.GetComponent<AudioSource> ();
-//
-//		if (enabled) {
-//
-//			if (PantallaInicial.activeSelf) {
-//				PantallaInicial.GetComponent<AudioSource> ().Play ();
-//			}
-//				
-//
-//		} else {
-//		}
-//
-//	}
+		
 
 	public void IniciarJuego(bool continueFlag){
 //Comienza el juego desde el principio
@@ -566,11 +562,11 @@ public class GameController : MonoBehaviour {
 		textosEnPantalla.extraBallsInGame.text = extraBalls.ToString ();
 
 		//Inicializar Objetos
-		StartCoroutine(inicializarObjetos(countdownInicial, continueFlag, pelota));
+		StartCoroutine(inicializarObjetos(countdownInicial, continueFlag, "WhiteBall")); //WhiteBall
 
 	}
 
-	public void ContinuarJuego(GameObject ballType){
+	public void ContinuarJuego(string ballType){
 //Continuar el juego sin volver a empezar
 
 		//		inicializarObjetos ();
@@ -578,7 +574,7 @@ public class GameController : MonoBehaviour {
 
 	}
 
-	public IEnumerator inicializarObjetos(float seconds, bool continueFlag, GameObject ballType){
+	public IEnumerator inicializarObjetos(float seconds, bool continueFlag, string ballType){
 
 		GameObject[] cajas;
 		GameObject[] prefabs;
@@ -595,8 +591,10 @@ public class GameController : MonoBehaviour {
 
 		}
 		paddleVivo.transform.position = new Vector2 (paddleVivo.transform.position.x, GameObject.FindGameObjectWithTag ("padPosition").transform.position.y);
-		pelotaViva  = Instantiate (ballType,new Vector3 (paddleVivo.transform.position.x,ballSpawn.transform.position.y,ballSpawn.transform.position.z),Quaternion.identity) as GameObject;
-		pelotaViva.GetComponent<ballScript> ().animarSpawning ();
+		pelotaViva  = Instantiate (pelota,new Vector3 (paddleVivo.transform.position.x,ballSpawn.transform.position.y,ballSpawn.transform.position.z),Quaternion.identity) as GameObject;
+//		pelotaViva.GetComponent<ballScript> ().animarSpawning ();
+		pelotaViva.GetComponent<ballScript>().SetTipoDeBola(ballType);
+
 		SoundManager.soundManager.playSound (ballSpawn.GetComponent<AudioSource> ());
 
 		//Apagar la 
@@ -791,7 +789,7 @@ public class GameController : MonoBehaviour {
 		PlayerPrefs.SetInt ("ExtraBall", extraBalls);
 
 		//Continuar Juego con Extra Ball
-		ContinuarJuego (extraBall);
+		ContinuarJuego ("ExtraBall");
 
 	}
 
