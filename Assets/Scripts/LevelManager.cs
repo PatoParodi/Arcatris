@@ -9,7 +9,7 @@ namespace LevelManager
 {
 	public class levelManager {
 
-		private static float velocidadCajasBase = 0.18f;  //Original 0.22f
+		private static float velocidadCajasBase = 0.2f;  //Original 0.22f
 
 		public static float velocidadPelota = 4.3f;
 		public static float velocidadCajas = 0.22f;
@@ -122,6 +122,18 @@ namespace LevelManager
 
 			cantRebotes ++;
 
+		}
+
+		public static void AumentarVelocidadCajas(){
+		
+			velocidadCajas *= 1.05f;
+		
+		}
+
+		public static void ResetearVelocidadCajas(){
+		
+			velocidadCajas = velocidadCajasBase;
+		
 		}
 
 		public static void determinarDificultad(){

@@ -350,7 +350,8 @@ public class GameController : MonoBehaviour {
 			if (pelotaViva != null)
 				if (pelotaViva.GetComponent<ballScript> ().pelotaSpawneada == true)
 					if (Input.touchCount > 0)
-						validarTouchInicial = true;
+						if(Input.touches[0].phase == TouchPhase.Ended)
+							validarTouchInicial = true;
 
 		if (ballInPlay == true)
 			validarTouchInicial = false;
@@ -556,7 +557,6 @@ public class GameController : MonoBehaviour {
 
 		//Mostrar vidas iniciales
 		vidas = 3;
-//		mostrarVidas (vidas, "vida");
 		//Prender las vidas actuales
 		for (int i = 1; i <= vidas; i++) {
 			GameObject bolaVida = GameObject.Find ("vida" + i.ToString()) as GameObject;
@@ -565,6 +565,9 @@ public class GameController : MonoBehaviour {
 		}
 
 		textosEnPantalla.extraBallsInGame.text = extraBalls.ToString ();
+
+		//Reinicializar velocidad de Cajas
+		LevelManager.levelManager.ResetearVelocidadCajas();
 
 		//Inicializar Objetos
 		StartCoroutine(inicializarObjetos(countdownInicial, continueFlag, "WhiteBall")); //WhiteBall
@@ -674,11 +677,11 @@ public class GameController : MonoBehaviour {
 		//Posicionar pelota arriba del pad a medida que vaya subiendo
 //		pelotaViva.transform.position = new Vector2(paddleVivo.transform.position.x, paddleVivo.transform.position.y + paddleVivo.GetComponentInChildren<SpriteRenderer>().bounds.size.y/2 + pelotaViva.GetComponentInChildren<SpriteRenderer>().bounds.size.y/2);
 
-//		yield return new WaitUntil (() => validarTouchInicial == true);
-//
-//		validarTouchInicial = false;
+		yield return new WaitUntil (() => validarTouchInicial == true);
+
+		validarTouchInicial = false;
 			
-		yield return new WaitForSeconds(seconds);
+//		yield return new WaitForSeconds(seconds);
 
 
 		// Dar fuerza inicial a la pelota

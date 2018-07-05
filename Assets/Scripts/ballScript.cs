@@ -14,12 +14,6 @@ public class ballScript : MonoBehaviour {
 
 	public bool RedBallFlag = false;
 
-	//Se llama desde la animacion de Spawn
-	public void afterSpawn(){
-
-		pelotaSpawneada = true;
-	
-	}
 
 	void Awake(){
 	

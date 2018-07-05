@@ -13,6 +13,7 @@ public class Caja : MonoBehaviour {
 	public bool powerUpMB; //Power Up Multiple Balls
 	public bool powerUpRedBall; //Power Up Red Ball
 	public bool primeraCaja = false;
+	public bool NoCalcularPowerUp;
 
 	private GameController controller;
 	private Vector2 posicionInicial;
@@ -31,24 +32,36 @@ public class Caja : MonoBehaviour {
 
 		}
 
-		if(gameObject.tag == "Caja"){
-		if(LevelManager.levelManager.contadorCajasDerretidas > 5)
-			//Verificar si sera una caja Power Up Bajar Brea
-			if (probabilidad (LevelManager.levelManager.PowerUpBajarBrea)) {
+		if (NoCalcularPowerUp) {
+			//No determinar si son powerUps para la oleada de Tutorial
+			if (gameObject.tag == "Caja") {
+				if (LevelManager.levelManager.contadorCajasDerretidas > 5)
+				//Verificar si sera una caja Power Up Bajar Brea
+				if (probabilidad (LevelManager.levelManager.PowerUpBajarBrea)) {
 					GetComponent<Animator> ().SetBool ("BreaDown", true);
 					powerUpBajarBrea = true;
+				}
+
+				if (!powerUpBajarBrea && !powerUpRedBall && probabilidad (LevelManager.levelManager.PowerUpMultipleBallProb)) {
+					powerUpMB = true;
+
+				}
+
+				if (!powerUpBajarBrea && !powerUpMB && probabilidad (LevelManager.levelManager.PowerUpRedBall)) {
+					powerUpRedBall = true;
+
+				}
+
+			
+				if (powerUpMB) {
+					GetComponent<Animator> ().SetBool ("PowerUpMB", true);
+				}
+
+				if (powerUpRedBall) {
+					GetComponent<Animator> ().SetBool ("PowerUpRedBall", true);
+				}
+		
 			}
-
-		if (!powerUpBajarBrea && probabilidad (LevelManager.levelManager.PowerUpMultipleBallProb)) {
-			GetComponent<Animator> ().SetBool ("PowerUpMB", true);
-			powerUpMB = true;
-		}
-
-		if (!powerUpBajarBrea && !powerUpMB && probabilidad (LevelManager.levelManager.PowerUpRedBall)) {
-			GetComponent<Animator> ().SetBool ("PowerUpRedBall", true);
-			powerUpRedBall = true;
-		}
-
 		}
 
 	}
@@ -121,6 +134,9 @@ public class Caja : MonoBehaviour {
 			//Una vez que el prefab termina de aparecer en la arena,  llamar al proximo
 			//			if(controller.primerSpawn != true)
 			controller.spawnCajas ();
+
+			LevelManager.levelManager.AumentarVelocidadCajas ();
+
 		}
 			
 	}
