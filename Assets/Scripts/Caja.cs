@@ -32,7 +32,7 @@ public class Caja : MonoBehaviour {
 
 		}
 
-		if (NoCalcularPowerUp) {
+		if (!NoCalcularPowerUp) {
 			//No determinar si son powerUps para la oleada de Tutorial
 			if (gameObject.tag == "Caja") {
 				if (LevelManager.levelManager.contadorCajasDerretidas > 5)
@@ -51,17 +51,17 @@ public class Caja : MonoBehaviour {
 					powerUpRedBall = true;
 
 				}
-
-			
-				if (powerUpMB) {
-					GetComponent<Animator> ().SetBool ("PowerUpMB", true);
-				}
-
-				if (powerUpRedBall) {
-					GetComponent<Animator> ().SetBool ("PowerUpRedBall", true);
-				}
 		
 			}
+		
+		}
+
+		if (powerUpMB) {
+			GetComponent<Animator> ().SetBool ("PowerUpMB", true);
+		}
+
+		if (powerUpRedBall) {
+			GetComponent<Animator> ().SetBool ("PowerUpRedBall", true);
 		}
 
 	}

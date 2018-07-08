@@ -26,7 +26,7 @@ public class Textos : MonoBehaviour {
 			txtVelocidadCajas.text = LevelManager.levelManager.velocidadCajas.ToString();
 
 		if (txtPowerUpRedBall != null)
-			txtPowerUpRedBall.text = LevelManager.levelManager.PowerUpMultipleBallCant.ToString();
+			txtPowerUpRedBall.text = LevelManager.levelManager.dificultadActual.ToString();
 		
 //		if (txtVelocidadPaddle)
 //			float.TryParse (txtVelocidadPaddle.text, out LevelManager.levelManager.VelocidadPaddle);

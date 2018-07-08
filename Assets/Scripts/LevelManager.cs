@@ -12,6 +12,10 @@ namespace LevelManager
 		private static float velocidadCajasBase = 0.2f;  //Original 0.22f
 
 		public static float velocidadPelota = 4.3f;
+		public static float velocidadPelotaBase = 3f;
+		public static float velocidadPelotaAumento = 0.4f; //10% por nivel
+
+
 		public static float velocidadCajas = 0.22f;
 		public static int dificultadActual = 1;
 		public static int nivelActual;
@@ -38,7 +42,7 @@ namespace LevelManager
 
 		//Subir de nivel
 		private static int golpesPorNivelMinimo = 10;
-		private static int golpesPorNivel = 36;
+//		private static int golpesPorNivel = 36;
 		private static bool flagBajarNivel = false;
 		public static int cantRebotes;
 		public static int contadorCajasDerretidas;
@@ -71,24 +75,24 @@ namespace LevelManager
 		
 		}
 
-		public static int BloquesPorNivel(){
-			int _CantBloques = 0;
-
-			switch (nivelActual) {
-			case 1:
-				_CantBloques = 2;
-				break;
-			case 2:
-				_CantBloques = 2;
-				break;
-			default:
-				_CantBloques = 3;
-				break;
-			}
-
-			return _CantBloques;
-
-		}
+//		public static int BloquesPorNivel(){
+//			int _CantBloques = 0;
+//
+//			switch (nivelActual) {
+//			case 1:
+//				_CantBloques = 2;
+//				break;
+//			case 2:
+//				_CantBloques = 2;
+//				break;
+//			default:
+//				_CantBloques = 3;
+//				break;
+//			}
+//
+//			return _CantBloques;
+//
+//		}
 
 		public static void ReinicializarNivel(){
 
@@ -104,18 +108,18 @@ namespace LevelManager
 
 		}
 
-		public static void SubirNivel(){
-		
-			nivelActual++;
-
-			//Al terminar el nivel 5 se aumenta la Dificultad y vuelven a comenzar los niveles
-			if (nivelActual == 6)
-				determinarDificultad ();
-			
-			//Velocidad cajas
-			velocidadCajas = velocidadCajasBase * (1 + nivelActual * porcentajeAumentoNivel);
-			
-		}
+//		public static void SubirNivel(){
+//		
+//			nivelActual++;
+//
+//			//Al terminar el nivel 5 se aumenta la Dificultad y vuelven a comenzar los niveles
+//			if (nivelActual == 6)
+//				determinarDificultad ();
+//			
+//			//Velocidad cajas
+//			velocidadCajas = velocidadCajasBase * (1 + nivelActual * porcentajeAumentoNivel);
+//			
+//		}
 
 		public static void addRebote ()
 		{
@@ -137,45 +141,20 @@ namespace LevelManager
 		}
 
 		public static void determinarDificultad(){
-			//Se vuelve al nivel 1
-			nivelActual = 1;
 
-			//Se aumenta la dificultad
-			dificultadActual++;
+			if (PlayerPrefs.HasKey (s_Dificultad)){
+				
+				dificultadActual = PlayerPrefs.GetInt (s_Dificultad);
 
-			//Guardar nueva Dificultad
-			PlayerPrefs.SetInt (s_Dificultad, dificultadActual);
-
-			//Aumento progresivo de factorDif% en cada Dificultad
-			velocidadCajasBase = velocidadCajasBase * (1 + factorDif * dificultadActual);
-		
-		}
-
-		//Devolvera un factor de dificultad para aplicar en el juego
-		public static int determinarNivel(bool calcular){
-		
-
-			//Verificar si el nuevo nivel supera el anterior
-			dificultadActual = PlayerPrefs.GetInt (s_Level);
-
-			//Subir o bajar el nivel segun corresponda
-			if (calcular) {
-
-				if (dificultadActual < 5)	//de 1 a 4 20 golpes para subir
-					golpesPorNivel = 20;
-				else if (dificultadActual >= 5 && dificultadActual < 8)	//de 5 a 7 36 golpes para subir
-					golpesPorNivel = 36;
-				else //Mayor a 7 50 golpes para subir
-					golpesPorNivel = 50;
-
-				//Subir Nivel
-				if (cantRebotes >= golpesPorNivel) {
+				//Evaluar si sube o baja de dificultad
+				if (cantRebotes >= golpesPorNivel()) {
+					//Subir Dificultad
 					dificultadActual++;
 					flagBajarNivel = false;
 				}
 				//Bajar Nivel 
 				else if (cantRebotes <= golpesPorNivelMinimo) {
-					if (flagBajarNivel == true) {
+					if (flagBajarNivel) {
 						//a la segunda vez seguida que no llega al minimo
 						dificultadActual--;
 						flagBajarNivel = false;
@@ -184,28 +163,86 @@ namespace LevelManager
 				}
 				else //Quedo en el mismo nivel
 					flagBajarNivel = false;
-				
-
-				if (dificultadActual < 1)
-					dificultadActual = 1;
-
-				if (dificultadActual > 10)
-					dificultadActual = 10;
-			}
-
-			//Guardar nuevo nivel
-			PlayerPrefs.SetInt (s_Level, dificultadActual);
-
-			//Reiniciar cantidad de Rebotes para siguiente partida
-			cantRebotes = 0;
-
-			//Se parte de la premisa que el primer nivel es 5. por eso el factor debe ser 1 para Nivel = 5
-//			velocidadCajas = velocidadCajasBase   * (factorDif * dificultadActual + 0.85f);
-//			velocidadPelota = velocidadPelotaBase * (factorDif * dificultadActual + 0.85f);
-
-			return dificultadActual;
 
 		}
+
+			else //Primera vez al setear la Dificultad 
+				dificultadActual = 3;
+
+			//Guardar nueva Dificultad
+			PlayerPrefs.SetInt (s_Dificultad, dificultadActual);
+
+			//Aumentar la velocidad de la pelota a medida que se avanza de Dificultad
+			velocidadPelota = velocidadPelotaBase + (dificultadActual * velocidadPelotaAumento);
+				
+		}
+
+		public static int golpesPorNivel(){
+
+			if (dificultadActual < 3)	//de 1 a 2 20 golpes para subir
+				return 20;
+			else if (dificultadActual >= 3 && dificultadActual < 5)	//de 3 a 5 36 golpes para subir
+				return 36;
+			else //Mayor o igual a 5 50 golpes para subir
+				return 50;
+
+		}
+
+		//Devolvera un factor de dificultad para aplicar en el juego
+//		public static int determinarNivel(bool calcular){
+//		
+//
+////			//Verificar si el nuevo nivel supera el anterior
+////			dificultadActual = PlayerPrefs.GetInt (s_Level);
+////
+////			//Subir o bajar el nivel segun corresponda
+////			if (calcular) {
+////
+////				if (dificultadActual < 5)	//de 1 a 4 20 golpes para subir
+////					golpesPorNivel = 20;
+////				else if (dificultadActual >= 5 && dificultadActual < 8)	//de 5 a 7 36 golpes para subir
+////					golpesPorNivel = 36;
+////				else //Mayor a 7 50 golpes para subir
+////					golpesPorNivel = 50;
+////
+////				//Subir Nivel
+////				if (cantRebotes >= golpesPorNivel) {
+////					dificultadActual++;
+////					flagBajarNivel = false;
+////				}
+////				//Bajar Nivel 
+////				else if (cantRebotes <= golpesPorNivelMinimo) {
+////					if (flagBajarNivel == true) {
+////						//a la segunda vez seguida que no llega al minimo
+////						dificultadActual--;
+////						flagBajarNivel = false;
+////					} else
+////						flagBajarNivel = true;
+////				}
+////				else //Quedo en el mismo nivel
+////					flagBajarNivel = false;
+////				
+////
+////				if (dificultadActual < 1)
+////					dificultadActual = 1;
+////
+////				if (dificultadActual > 10)
+////					dificultadActual = 10;
+////			}
+////
+////			//Guardar nuevo nivel
+////			PlayerPrefs.SetInt (s_Level, dificultadActual);
+////
+////			//Reiniciar cantidad de Rebotes para siguiente partida
+////			cantRebotes = 0;
+////
+////			//Se parte de la premisa que el primer nivel es 5. por eso el factor debe ser 1 para Nivel = 5
+//////			velocidadCajas = velocidadCajasBase   * (factorDif * dificultadActual + 0.85f);
+//////			velocidadPelota = velocidadPelotaBase * (factorDif * dificultadActual + 0.85f);
+////
+////			return dificultadActual;
+////
+//		}
 
 		public static void llenarColoresMultiplicador(){
 

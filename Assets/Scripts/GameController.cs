@@ -569,6 +569,9 @@ public class GameController : MonoBehaviour {
 		//Reinicializar velocidad de Cajas
 		LevelManager.levelManager.ResetearVelocidadCajas();
 
+		//Determinar Dificultad
+		LevelManager.levelManager.determinarDificultad();
+
 		//Inicializar Objetos
 		StartCoroutine(inicializarObjetos(countdownInicial, continueFlag, "WhiteBall")); //WhiteBall
 
