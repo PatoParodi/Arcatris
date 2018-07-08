@@ -17,7 +17,10 @@ namespace LevelManager
 
 
 		public static float velocidadCajas = 0.22f;
+
 		public static int dificultadActual = 1;
+		public static int dificultadMaxima = 7;
+
 		public static int nivelActual;
 		public static int puntosBaseCaja = 20;
 		public static int multiplicadorPuntosCaja = 0;
@@ -96,15 +99,15 @@ namespace LevelManager
 
 		public static void ReinicializarNivel(){
 
-			nivelActual = 0;
-
-			if (PlayerPrefs.HasKey(s_Dificultad))
-				dificultadActual = PlayerPrefs.GetInt (s_Dificultad);
-			else
-				dificultadActual = 1;
-			
-			//Aumento progresivo de factorDif% en cada Dificultad
-			velocidadCajasBase = velocidadCajasBase * (1 + factorDif * dificultadActual);
+//			nivelActual = 0;
+//
+//			if (PlayerPrefs.HasKey(s_Dificultad))
+//				dificultadActual = PlayerPrefs.GetInt (s_Dificultad);
+//			else
+//				dificultadActual = 1;
+//			
+//			//Aumento progresivo de factorDif% en cada Dificultad
+//			velocidadCajasBase = velocidadCajasBase * (1 + factorDif * dificultadActual);
 
 		}
 
@@ -147,22 +150,29 @@ namespace LevelManager
 				dificultadActual = PlayerPrefs.GetInt (s_Dificultad);
 
 				//Evaluar si sube o baja de dificultad
-				if (cantRebotes >= golpesPorNivel()) {
-					//Subir Dificultad
-					dificultadActual++;
-					flagBajarNivel = false;
-				}
+				if (cantRebotes > 0) {
+					if (cantRebotes >= golpesPorNivel ()) {
+						//Subir Dificultad
+						dificultadActual++;
+						flagBajarNivel = false;
+					}
 				//Bajar Nivel 
 				else if (cantRebotes <= golpesPorNivelMinimo) {
-					if (flagBajarNivel) {
-						//a la segunda vez seguida que no llega al minimo
-						dificultadActual--;
-						flagBajarNivel = false;
-					} else
-						flagBajarNivel = true;
-				}
-				else //Quedo en el mismo nivel
+						if (flagBajarNivel) {
+							//a la segunda vez seguida que no llega al minimo
+							dificultadActual--;
+							flagBajarNivel = false;
+						} else
+							flagBajarNivel = true;
+					} else //Quedo en el mismo nivel
 					flagBajarNivel = false;
+				}
+
+				if (dificultadActual < 1)
+					dificultadActual = 1;
+
+				if (dificultadActual > dificultadMaxima)
+					dificultadActual = dificultadMaxima;
 
 		}
 
@@ -174,6 +184,9 @@ namespace LevelManager
 
 			//Aumentar la velocidad de la pelota a medida que se avanza de Dificultad
 			velocidadPelota = velocidadPelotaBase + (dificultadActual * velocidadPelotaAumento);
+
+			//Reiniciar cantidad de Rebotes para siguiente partida
+			cantRebotes = 0;
 				
 		}
 

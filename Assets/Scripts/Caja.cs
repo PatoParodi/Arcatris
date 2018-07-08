@@ -132,7 +132,6 @@ public class Caja : MonoBehaviour {
 		if (gameObject.tag == "prefab" &&
 			col.gameObject.tag == "lineaSpawn"){
 			//Una vez que el prefab termina de aparecer en la arena,  llamar al proximo
-			//			if(controller.primerSpawn != true)
 			controller.spawnCajas ();
 
 			LevelManager.levelManager.AumentarVelocidadCajas ();
