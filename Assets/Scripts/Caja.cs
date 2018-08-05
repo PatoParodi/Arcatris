@@ -99,6 +99,8 @@ public class Caja : MonoBehaviour {
 			//Le doy velocidad inversa al ladrillo para que no se mueva (Nacho crack)
 			velocidad = -1 * LevelManager.levelManager.velocidadCajas;
 			 
+			//Reproducir sonido al derretirse (contenido en el convertidor)
+			SoundManager.soundManager.playSound(col.gameObject.GetComponent<AudioSource>());
 
 			// Convertir la caja a liquido
 			if (powerUpBajarBrea) {

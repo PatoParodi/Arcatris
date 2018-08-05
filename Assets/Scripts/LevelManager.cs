@@ -9,22 +9,22 @@ namespace LevelManager
 {
 	public class levelManager {
 
-		private static float velocidadCajasBase = 0.2f;  //Original 0.22f
-
+		//Pelota
 		public static float velocidadPelota = 4.3f;
 		public static float velocidadPelotaBase = 3f;
 		public static float velocidadPelotaAumento = 0.4f; //10% por nivel
-
-
-		public static float velocidadCajas = 0.22f;
-
 		public static int dificultadActual = 1;
 		public static int dificultadMaxima = 7;
 
-		public static int nivelActual;
+		//Cajas
+		private static float velocidadCajasBase = 0.2f;  //Original 0.22f
+		public static float velocidadCajas = 0.22f;
 		public static int puntosBaseCaja = 20;
 		public static int multiplicadorPuntosCaja = 0;
 
+		public static int nivelActual;
+
+		//Paddle
 		public static float VelocidadPaddle = 3;
 		public static float MaxVelocidadPaddle = 300;
 

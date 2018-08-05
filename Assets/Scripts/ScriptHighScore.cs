@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Analytics;
+using GooglePlayGames;
 
 public class ScriptHighScore : MonoBehaviour {
 
@@ -41,13 +42,25 @@ public class ScriptHighScore : MonoBehaviour {
 			Analytics.CustomEvent ("HighScore", new Dictionary<string, object> {
 				{ "MayorA5.000", 1}
 			});
+
 	}
 
 	void OnEnable(){
 		
 		SoundManager.soundManager.playSound (GetComponent<AudioSource> ());
 
+		//Submit Score to Play Services
+		// Note: make sure to add 'using GooglePlayGames'
+		PlayGamesPlatform.Instance.ReportScore(controller.getHighScore(),
+			"CgkIkavI79INEAIQAQ",
+			(bool success) =>
+			{
+				Debug.Log("LeaderBoard Update: " + success);
+			});
+
 	}
+
+
 
 	// Update is called once per frame
 	void Update () {

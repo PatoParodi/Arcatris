@@ -83,6 +83,20 @@ public class paddle : MonoBehaviour {
 		}
 	}
 
+	public void OnTriggerEnter2D(Collider2D col){
+
+		if (col.gameObject.tag == "lineaSpawn") {
+			//GameOVer
+
+			controller.ballInPlay = false;
+
+			controller.UI_inGame.SetActive (false);
+
+			controller.PantallaInicial.GetComponent<MenuController> ().MostrarPlay (true);
+		}
+
+	}
+
 	public IEnumerator reiniciarFlotacion(float duracion){
 
 		//Esperar que termine la animacion actual

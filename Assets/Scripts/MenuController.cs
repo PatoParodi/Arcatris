@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.Analytics;
 using UnityEngine.Advertisements;
 using Language;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
 
 
 [System.Serializable]
@@ -449,13 +451,45 @@ public class MenuController : MonoBehaviour {
 	}
 
 	public void GoToMarket(){
-	
-//		Application.OpenURL ("market://details?id=" + "Limbo"); //Application.productName);
 
 		Application.OpenURL ("https://play.google.com/store/apps/details?id=com.PardeSotas.Arcatris");
 
 		PlayerPrefs.SetString (LevelManager.levelManager.s_Rated, "Si");
 
 	}
+
+
+	public void ShowLeaderboards(){
+	
+		if (PlayGamesPlatform.Instance.localUser.authenticated) {
+			PlayGamesPlatform.Instance.SetDefaultLeaderboardForUI ("CgkIkavI79INEAIQAQ");
+			PlayGamesPlatform.Instance.ShowLeaderboardUI ();
+
+		
+		} else {
+			PlayGamesPlatform.Instance.Authenticate (controller.googlePlayServicesSignInCallBack, false);	
+//			StartCoroutine(MostrarLeaderBoardsAfterAuth ());
+
+		}
+	
+	}
+
+//	public void isAuthenticated(bool success){
+//
+//		success = false;
+//
+//		if (PlayGamesPlatform.Instance.localUser.authenticated)
+//			success = true;
+//
+//	}
+//
+//	public IEnumerator MostrarLeaderBoardsAfterAuth(){
+//	
+//		yield return new WaitUntil (isAuthenticated);
+//
+//		PlayGamesPlatform.Instance.SetDefaultLeaderboardForUI ("CgkIkavI79INEAIQAQ");
+//		PlayGamesPlatform.Instance.ShowLeaderboardUI ();
+//	
+//	}
 		
 }

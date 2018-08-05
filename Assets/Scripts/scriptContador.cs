@@ -86,6 +86,8 @@ public class scriptContador : MonoBehaviour {
 			
 			GetComponent<Text> ().text = i.ToString();
 
+			SoundManager.soundManager.playSound(GetComponent<AudioSource> ());
+
 			yield return new WaitForSecondsRealtime (1);
 
 		}

@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Analytics;
 using Language;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
 
 //Para que Unity reconozca esta clase es necesaria esta sentencia
 [System.Serializable]
@@ -73,6 +75,10 @@ public class GameController : MonoBehaviour {
 	public int multiplicadorVelocidad;
 	private GameObject pelotaViva;
 	private bool validarTouchInicial = false;
+	private float antiguaPosicionPaddle;
+	private float contadorTiempoTapToStart = 0;
+	public GameObject mensajeTapToStart;
+
 	public bool ballInPlay = false;
 	private int Puntaje;
 	private int Monedas;
@@ -136,6 +142,11 @@ public class GameController : MonoBehaviour {
 		//Puntaje a cero
 		textosEnPantalla.puntajeText.text = "0";
 
+		//Google Play Services
+		googlePlayServicesStart ();
+
+		googlePlayServicesSignIn ();
+
 		// Buscar variable de primera vez que juega
 		string strJugoAntes = PlayerPrefs.GetString ("jugoAntes");
 
@@ -195,6 +206,39 @@ public class GameController : MonoBehaviour {
 		textosEnPantalla.extraBallsValue.text = extraBalls.ToString ();
 //		mostrarVidas(extraBalls,"ExtraBall");
 
+	}
+
+	void googlePlayServicesStart(){
+		
+		//Create client configuration
+		PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().Build();
+
+		//Enable debugging output 
+		PlayGamesPlatform.DebugLogEnabled = true;
+
+		//Initialiaze and activate the platform
+		PlayGamesPlatform.InitializeInstance(config);
+		PlayGamesPlatform.Activate ();
+	
+	}
+
+	void googlePlayServicesSignIn (){
+
+		PlayGamesPlatform.Instance.SignOut ();
+
+		if (!PlayGamesPlatform.Instance.localUser.authenticated) {
+			//Sign in with PlayGame Services
+			PlayGamesPlatform.Instance.Authenticate (googlePlayServicesSignInCallBack, false);
+		
+		} 
+
+	}
+
+	public void googlePlayServicesSignInCallBack (bool success){
+	
+		if (success)
+			Debug.Log ("Signed in!");
+	
 	}
 
 	public void mostrarVidas(int vidas, string objeto){
@@ -277,7 +321,7 @@ public class GameController : MonoBehaviour {
 
 		//Texto Your challenge starts now
 		tutorialObjetos.challengeText.SetActive (true);
-		yield return new WaitForSecondsRealtime (2.0f);
+		yield return new WaitForSecondsRealtime (2.5f);
 		tutorialObjetos.challengeText.SetActive (false);
 
 		//Setear nivel inicial como 4 para que la nueva partida arranque en 3
@@ -346,16 +390,37 @@ public class GameController : MonoBehaviour {
 			
 
 		//Verificar toque inicial para soltar pelota
-		if (ballInPlay == false)
-			if (pelotaViva != null)
-				if (pelotaViva.GetComponent<ballScript> ().pelotaSpawneada == true)
-					if (Input.touchCount > 0)
-						if(Input.touches[0].phase == TouchPhase.Ended)
+		if (ballInPlay == false) {
+			if (pelotaViva != null) {
+				if (pelotaViva.GetComponent<ballScript> ().pelotaSpawneada == true) { //Esto es true cuando termina la animacion de Spawn
+					if (contadorTiempoTapToStart == 0) {
+						contadorTiempoTapToStart = Time.time;
+					}
+
+					if (Input.touchCount > 0) {
+						contadorTiempoTapToStart = 0;
+						//Verificar que se haga un toque "rapido" sin mover el pad
+						if (Input.touches [0].phase == TouchPhase.Began) {
+							antiguaPosicionPaddle = paddleVivo.transform.position.x;
+						} else if (Input.touches [0].phase == TouchPhase.Ended &&
+						           (antiguaPosicionPaddle == paddleVivo.transform.position.x)) {
+			
 							validarTouchInicial = true;
-
-		if (ballInPlay == true)
+							mensajeTapToStart.GetComponent<Animator>().SetBool("Mostrar",false);
+						
+						}
+					} else {
+						if (Time.time - contadorTiempoTapToStart > 3) { //3 segundos
+						//Tap to Start Message
+							mensajeTapToStart.GetComponent<Animator>().SetBool("Mostrar",true);
+						}
+					
+					}
+				}
+			}
+		}else{
 			validarTouchInicial = false;
-
+		}
 	}
 
 	void FixedUpdate(){
