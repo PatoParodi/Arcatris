@@ -12,11 +12,22 @@ public static class LanguageManager {
 
 	public static int posicion;
 
+	public static string[] languages = new string[2];
+		public static string lanElegido;
 
 //	public string _settingsTitle, _language, _sound, _vintageEffect, _control;
 
+	public static void populateLanguages(){
+		
+		//Llenar array con idiomas posibles
+		languages [0] = ingles;
+		languages [1] = espanol;
+		
+	}
 
 	public static void setLanguage(string language){
+
+		lanElegido = language;
 
 		setStrings (language);
 	

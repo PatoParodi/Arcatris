@@ -149,9 +149,9 @@ public class MenuController : MonoBehaviour {
 			controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
 		
 		//Mostrar HighScore si corresponde
-		if (controller.getHighScore () > PlayerPrefs.GetInt ("High Score")) {
+		if (controller.getHighScore () > PlayerPrefs.GetInt (LevelManager.levelManager.s_HighScore)) {
 
-			PlayerPrefs.SetInt ("High Score", controller.getHighScore ());
+			PlayerPrefs.SetInt (LevelManager.levelManager.s_HighScore, controller.getHighScore ());
 
 			//Actualizar texto de Pantalla Inicial
 			controller.textosEnPantalla.highScoreValue.text = controller.getHighScore ().ToString ();
@@ -462,6 +462,10 @@ public class MenuController : MonoBehaviour {
 	public void ShowLeaderboards(){
 	
 		if (PlayGamesPlatform.Instance.localUser.authenticated) {
+			//Submit Score to Play Services
+			if(controller.getHighScore() > 0)
+				controller.SubmitScoreToPlayServices(controller.getHighScore());
+
 			PlayGamesPlatform.Instance.SetDefaultLeaderboardForUI ("CgkIkavI79INEAIQAQ");
 			PlayGamesPlatform.Instance.ShowLeaderboardUI ();
 

@@ -41,7 +41,14 @@ public class ballScript : MonoBehaviour {
 	/// <param name="tipoDeBola">Nombre del tipo de bola.</param>
 	public void SetTipoDeBola(string tipoDeBola){
 
-		GetComponentInChildren<Animator> ().SetTrigger (tipoDeBola);
+		if (tipoDeBola == "WhiteBall") {
+
+			GetComponentInChildren<Animator> ().SetInteger("NumeroDeBola",levelManager.numeroBolaElegida);
+
+		} else {
+
+			GetComponentInChildren<Animator> ().SetTrigger (tipoDeBola);
+		}
 
 	}
 

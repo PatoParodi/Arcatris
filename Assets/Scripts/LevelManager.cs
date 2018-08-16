@@ -15,6 +15,7 @@ namespace LevelManager
 		public static float velocidadPelotaAumento = 0.4f; //10% por nivel
 		public static int dificultadActual = 1;
 		public static int dificultadMaxima = 7;
+		public static int numeroBolaElegida;
 
 		//Cajas
 		private static float velocidadCajasBase = 0.2f;  //Original 0.22f
@@ -61,6 +62,11 @@ namespace LevelManager
 		public static string s_PowerUpRebBallDurac 		= "PowerUpRedBallDurac";
 		public static string s_PowerUpMultipleBallCant 	= "PowerUpMultipleBallCant";
 		public static string s_PowerUpBajarBreaProb 	= "PowerUpBajarBreaProb";
+		public static string s_Language	= "Idioma";
+		public static string s_UltimoInicioSesion	= "UltimoInicioSesion";
+		public static string s_BolasDesbloqueadas = "Bolas_Desbloqueadas";
+		public static string s_HighScore	= "New_High_Score";
+		public static string s_BolaElegida = "Bola_Elegida";
 
 
 		public static string s_On = "On";

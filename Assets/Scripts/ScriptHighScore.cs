@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Analytics;
 using GooglePlayGames;
+using System.IO;
 
 public class ScriptHighScore : MonoBehaviour {
 
@@ -44,19 +45,14 @@ public class ScriptHighScore : MonoBehaviour {
 			});
 
 	}
+		
 
 	void OnEnable(){
 		
 		SoundManager.soundManager.playSound (GetComponent<AudioSource> ());
 
 		//Submit Score to Play Services
-		// Note: make sure to add 'using GooglePlayGames'
-		PlayGamesPlatform.Instance.ReportScore(controller.getHighScore(),
-			"CgkIkavI79INEAIQAQ",
-			(bool success) =>
-			{
-				Debug.Log("LeaderBoard Update: " + success);
-			});
+		controller.SubmitScoreToPlayServices(controller.getHighScore());
 
 	}
 
@@ -70,30 +66,156 @@ public class ScriptHighScore : MonoBehaviour {
 
 	}
 
-	public void ShareAndroid(){
+//	public void ShareAndroid(){
+//
+//		// Create Refernece of AndroidJavaClass class for intent
+//		AndroidJavaClass intentClass = new AndroidJavaClass("android.content.Intent");
+//		// Create Refernece of AndroidJavaObject class intent
+//		AndroidJavaObject intentObject = new AndroidJavaObject("android.content.Intent");
+//
+//		// Set action for intent
+//		intentObject.Call("setAction", intentClass.GetStatic<string>("ACTION_SEND"));
+//
+//		intentObject.Call<AndroidJavaObject>("setType", "text/plain");
+//
+//		//Set Subject of action
+//		intentObject.Call("putExtra", intentClass.GetStatic<string>("EXTRA_SUBJECT"), "Text Sharing ");
+//		//Set title of action or intent
+//		intentObject.Call("putExtra", intentClass.GetStatic<string>("EXTRA_TITLE"), "Text Sharing ");
+//		// Set actual data which you want to share
+//		intentObject.Call("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"), "Text Sharing Android Demo");
+//
+//		AndroidJavaClass unity = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+//		AndroidJavaObject currentActivity = unity.GetStatic<AndroidJavaObject>("currentActivity");
+//		// Invoke android activity for passing intent to share data
+//		currentActivity.Call("startActivity", intentObject);
+//
+//
+//	}
 
-		// Create Refernece of AndroidJavaClass class for intent
-		AndroidJavaClass intentClass = new AndroidJavaClass("android.content.Intent");
-		// Create Refernece of AndroidJavaObject class intent
-		AndroidJavaObject intentObject = new AndroidJavaObject("android.content.Intent");
 
-		// Set action for intent
-		intentObject.Call("setAction", intentClass.GetStatic<string>("ACTION_SEND"));
+//	public GameObject CanvasShareObj;
 
+//	private bool isProcessing = false;
+//	private bool isFocus = false;
+//
+//	public void ShareBtnPress()
+//	{
+//		if (!isProcessing)
+//		{
+////			CanvasShareObj.SetActive(true);
+//			StartCoroutine(ShareScreenshot());
+//		}
+//	}
+//
+//	IEnumerator ShareScreenshot()
+//	{
+//		isProcessing = true;
+//
+//		yield return new WaitForEndOfFrame();
+//
+//		ScreenCapture.CaptureScreenshot ("screenshot.png", 2);
+//		string destination = Path.Combine(Application.persistentDataPath, "screenshot.png");
+//
+//		yield return new WaitForSecondsRealtime(0.3f);
+//
+//		if (!Application.isEditor)
+//		{
+//			AndroidJavaClass intentClass = new AndroidJavaClass("android.content.Intent");
+//			AndroidJavaObject intentObject = new AndroidJavaObject("android.content.Intent");
+//			intentObject.Call<AndroidJavaObject>("setAction", intentClass.GetStatic<string>("ACTION_SEND"));
+//			AndroidJavaClass uriClass = new AndroidJavaClass("android.net.Uri");
+//			AndroidJavaObject uriObject = uriClass.CallStatic<AndroidJavaObject>("parse", "file://" + destination);
+//			intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_STREAM"),
+//				uriObject);
+//			intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"),
+//				"Can you beat my score?");
+//			intentObject.Call<AndroidJavaObject>("setType", "image/jpeg");
+//			AndroidJavaClass unity = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+//			AndroidJavaObject currentActivity = unity.GetStatic<AndroidJavaObject>("currentActivity");
+//			AndroidJavaObject chooser = intentClass.CallStatic<AndroidJavaObject>("createChooser",
+//				intentObject, "Share your new score");
+//			currentActivity.Call("startActivity", chooser);
+//
+//			yield return new WaitForSecondsRealtime(1);
+//		}
+//
+//		yield return new WaitUntil(() => isFocus);
+////		CanvasShareObj.SetActive(false);
+//		isProcessing = false;
+//	}
+//
+//	private void OnApplicationFocus(bool focus)
+//	{
+//		isFocus = focus;
+//	}
+
+
+
+	string subject = "Arcatrix Game"; //Asunto del mail
+	string body = "Show the world what you are made of! Try your best at Arcatrix! https://play.google.com/store/apps/details?id=com.PardeSotas.Arcatris"; //Se pasa al mensaje en Whatsapp / Instagram por mensaje / Cuerpo del mail
+
+		private bool isProcessing = false;
+		private bool isFocus = false;
+
+
+	public void shareText()
+	{
+
+		if (!isProcessing)
+		{
+			//			CanvasShareObj.SetActive(true);
+			StartCoroutine(ShareScreenshot());
+		}
+	}
+
+	IEnumerator ShareScreenshot()
+	{
+		isProcessing = true;
+
+//		yield return new WaitForEndOfFrame();
+
+		ScreenCapture.CaptureScreenshot ("screenshot.png", 2);
+		string destination = Path.Combine(Application.persistentDataPath, "screenshot.png");
+
+		yield return new WaitForSecondsRealtime(0.5f);
+
+		
+		//execute the below lines if being run on a Android device
+//		#if UNITY_ANDROID
+
+		//Reference of AndroidJavaClass class for intent
+		AndroidJavaClass intentClass = new AndroidJavaClass ("android.content.Intent");
+		//Reference of AndroidJavaObject class for intent
+		AndroidJavaObject intentObject = new AndroidJavaObject ("android.content.Intent");
+		//call setAction method of the Intent object created
+		intentObject.Call<AndroidJavaObject>("setAction", intentClass.GetStatic<string>("ACTION_SEND"));
+
+		//set the type of sharing that is happening
 		intentObject.Call<AndroidJavaObject>("setType", "text/plain");
+//		intentObject.Call<AndroidJavaObject>("setType", "image/png");
+//		AndroidJavaClass uriClass = new AndroidJavaClass("android.net.Uri");
+//		AndroidJavaObject uriObject = uriClass.CallStatic<AndroidJavaObject>("parse", "file://" + destination);
+//		intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_STREAM"),
+//			uriObject);
 
-		//Set Subject of action
-		intentObject.Call("putExtra", intentClass.GetStatic<string>("EXTRA_SUBJECT"), "Text Sharing ");
-		//Set title of action or intent
-		intentObject.Call("putExtra", intentClass.GetStatic<string>("EXTRA_TITLE"), "Text Sharing ");
-		// Set actual data which you want to share
-		intentObject.Call("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"), "Text Sharing Android Demo");
+		//add data to be passed to the other activity i.e., the data to be sent
+		intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_SUBJECT"), subject);
+		intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"), body);
 
-		AndroidJavaClass unity = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+		//get the current activity
+		AndroidJavaClass unity = new AndroidJavaClass ("com.unity3d.player.UnityPlayer");
 		AndroidJavaObject currentActivity = unity.GetStatic<AndroidJavaObject>("currentActivity");
-		// Invoke android activity for passing intent to share data
-		currentActivity.Call("startActivity", intentObject);
 
+		//start the activity by sending the intent data
+		AndroidJavaObject jChooser = intentClass.CallStatic<AndroidJavaObject>("createChooser", intentObject, "Share Via");
+		currentActivity.Call("startActivity", jChooser);
+
+		isProcessing = false;
+
+//		#endif
 
 	}
+
+
 }

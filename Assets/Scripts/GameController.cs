@@ -122,8 +122,32 @@ public class GameController : MonoBehaviour {
 		//Setear sonido elegido anteriormente
 
 		//Setear idioma elegido anteriormente
-		string _language = PlayerPrefs.GetString("Idioma");
+		//Llenar array con los distintos idiomas
+		LanguageManager.populateLanguages();	
+		//Leer idioma de memoria
+		string _language;
+		if (PlayerPrefs.HasKey (LevelManager.levelManager.s_Language)) {
+		
+			_language = PlayerPrefs.GetString (LevelManager.levelManager.s_Language);
+		
+		} else {
+			_language = "EN";
+		
+		}
+
+		//Setear idioma
 		LanguageManager.setLanguage (_language);
+
+		//Leer bola elegida
+		if (PlayerPrefs.HasKey (LevelManager.levelManager.s_BolaElegida)) {
+
+			LevelManager.levelManager.numeroBolaElegida = PlayerPrefs.GetInt (LevelManager.levelManager.s_BolaElegida);
+
+		} else {
+
+			LevelManager.levelManager.numeroBolaElegida = 0;
+		
+		}
 
 		//Leer info de Power Ups
 		//Red Ball
@@ -187,13 +211,19 @@ public class GameController : MonoBehaviour {
 			PantallaInicial.SetActive (true);
 
 		}
-		// Buscar High Score
-		textosEnPantalla.highScoreValue.text = PlayerPrefs.GetInt ("High Score").ToString();
-		if (textosEnPantalla.highScoreValue.text == "")
-			textosEnPantalla.highScoreValue.text = "Get one!";
 
-		// Vidas
-//		vidas = 1;
+		// Buscar High Score
+		if (PlayerPrefs.HasKey (LevelManager.levelManager.s_HighScore)) {
+
+			textosEnPantalla.highScoreValue.text = PlayerPrefs.GetInt (LevelManager.levelManager.s_HighScore).ToString();
+
+			SubmitScoreToPlayServices (int.Parse(textosEnPantalla.highScoreValue.text));
+
+		} else {
+		
+			textosEnPantalla.highScoreValue.text = "-";
+		}
+						
 
 		// Monedas
 		Monedas = 0;
@@ -205,6 +235,17 @@ public class GameController : MonoBehaviour {
 		extraBalls = PlayerPrefs.GetInt ("ExtraBall");
 		textosEnPantalla.extraBallsValue.text = extraBalls.ToString ();
 //		mostrarVidas(extraBalls,"ExtraBall");
+
+	}
+
+	public void SubmitScoreToPlayServices(int score){
+
+		PlayGamesPlatform.Instance.ReportScore(score,
+			"CgkIkavI79INEAIQAQ",
+			(bool success) =>
+			{
+				Debug.Log("LeaderBoard Update: " + success);
+			});
 
 	}
 
@@ -668,7 +709,9 @@ public class GameController : MonoBehaviour {
 		}
 		paddleVivo.transform.position = new Vector2 (paddleVivo.transform.position.x, GameObject.FindGameObjectWithTag ("padPosition").transform.position.y);
 		pelotaViva  = Instantiate (pelota,new Vector3 (paddleVivo.transform.position.x,ballSpawn.transform.position.y,ballSpawn.transform.position.z),Quaternion.identity) as GameObject;
-//		pelotaViva.GetComponent<ballScript> ().animarSpawning ();
+
+		//Identificar bola seleccionada y devolver el numero en string
+
 		pelotaViva.GetComponent<ballScript>().SetTipoDeBola(ballType);
 
 		SoundManager.soundManager.playSound (ballSpawn.GetComponent<AudioSource> ());
@@ -760,7 +803,6 @@ public class GameController : MonoBehaviour {
 
 
 	}
-		
 
 	public void breaPosicionInicial(){
 	//Llevar brea a su posicion inicial
