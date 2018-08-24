@@ -10,5 +10,5 @@ public class ballScript2 : MonoBehaviour {
 		GetComponentInParent<ballScript> ().pelotaSpawneada = true;
 
 	}
-
+		
 }

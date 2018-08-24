@@ -42,6 +42,7 @@ public class MenuController : MonoBehaviour {
 	public Text _txtNivel;
 	public AudioSource musicaMenu;
 	public bool tieneSonidos;
+	public Toggle SolapaBolas;
 //	public Text _velocidadPelotaText;
 
 
@@ -464,7 +465,7 @@ public class MenuController : MonoBehaviour {
 		if (PlayGamesPlatform.Instance.localUser.authenticated) {
 			//Submit Score to Play Services
 			if(controller.getHighScore() > 0)
-				controller.SubmitScoreToPlayServices(controller.getHighScore());
+				controller.SubmitScoreToPlayServices(PlayerPrefs.GetInt (LevelManager.levelManager.s_HighScore));
 
 			PlayGamesPlatform.Instance.SetDefaultLeaderboardForUI ("CgkIkavI79INEAIQAQ");
 			PlayGamesPlatform.Instance.ShowLeaderboardUI ();
@@ -475,6 +476,12 @@ public class MenuController : MonoBehaviour {
 //			StartCoroutine(MostrarLeaderBoardsAfterAuth ());
 
 		}
+	
+	}
+
+	public void AbrirShopBolas(){
+	
+		SolapaBolas.isOn = true;
 	
 	}
 

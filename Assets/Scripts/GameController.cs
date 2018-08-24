@@ -110,6 +110,7 @@ public class GameController : MonoBehaviour {
 // &*&*&*&*&*&*&**&*&*&*&*&*&*&*&*&*&*&*&*&*&*
 ///////////// TEST MODE ONLY ///////////////////////////
 //		PlayerPrefs.DeleteAll();
+//		PlayerPrefs.SetString ("jugoAntes","Si");
 //		PlayerPrefs.SetInt ("High Score", 0);
 //		PlayerPrefs.SetInt ("ArcatrisMonedas", 1000);
 //		PlayerPrefs.SetString ("jugoAntes", "Si");
@@ -959,7 +960,7 @@ public class GameController : MonoBehaviour {
 
 	public int getHighScore(){
 	
-		return Puntaje;
+		return Puntaje; 
 
 	}
 

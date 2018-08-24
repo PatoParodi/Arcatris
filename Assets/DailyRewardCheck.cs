@@ -13,7 +13,7 @@ public class DailyRewardCheck : MonoBehaviour {
 	
 		UltimaBolaDesbloqueada = PlayerPrefs.GetInt (LevelManager.levelManager.s_BolasDesbloqueadas);
 
-		if(UltimaBolaDesbloqueada == NumeroDeBola){
+		if(UltimaBolaDesbloqueada >= NumeroDeBola){
 			//Desbloquear
 			GetComponent<Toggle>().interactable = true;
 		

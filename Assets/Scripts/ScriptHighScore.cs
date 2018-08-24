@@ -153,6 +153,8 @@ public class ScriptHighScore : MonoBehaviour {
 
 
 	string subject = "Arcatrix Game"; //Asunto del mail
+	string justMadeText ="I've just made ";
+	string pointsText = " points. ";
 	string body = "Show the world what you are made of! Try your best at Arcatrix! https://play.google.com/store/apps/details?id=com.PardeSotas.Arcatris"; //Se pasa al mensaje en Whatsapp / Instagram por mensaje / Cuerpo del mail
 
 		private bool isProcessing = false;
@@ -201,7 +203,7 @@ public class ScriptHighScore : MonoBehaviour {
 
 		//add data to be passed to the other activity i.e., the data to be sent
 		intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_SUBJECT"), subject);
-		intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"), body);
+		intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"), justMadeText + controller.getHighScore().ToString() + pointsText + body);
 
 		//get the current activity
 		AndroidJavaClass unity = new AndroidJavaClass ("com.unity3d.player.UnityPlayer");

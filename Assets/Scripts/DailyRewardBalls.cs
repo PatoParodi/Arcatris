@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class DailyRewardBalls : MonoBehaviour {
 
+
 	private System.DateTime UltimoInicioSesion;
 
 	public int BolasDesbloqueadas; //Numero de ultima bola desbloqueada
-
+	public GameObject AvisoPopUp;
+	public GameObject PantallaInicial;
 
 	void Start(){
 
@@ -34,6 +36,12 @@ public class DailyRewardBalls : MonoBehaviour {
 
 			//Guardar nuevo dia y horario para contar 1 dia desde este momento.
 			PlayerPrefs.SetString (LevelManager.levelManager.s_UltimoInicioSesion, System.DateTime.Now.ToString ());
+
+			//Desactivar botones de PantallaInicial
+			PantallaInicial.GetComponent<PantallaInicial>().DesactivarBotones();
+
+			//Mostrar Pop Up de aviso
+			AvisoPopUp.SetActive(true);
 
 		}
 

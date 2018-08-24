@@ -27,7 +27,7 @@ public class ballScript : MonoBehaviour {
 
 	}
 
-	//Animacion de spawn
+	//Animacion de spawn - - OBSOLETO
 	public void animarSpawning(){
 		
 		GetComponentInChildren<Animator> ().SetTrigger ("Instanciar");
@@ -56,6 +56,17 @@ public class ballScript : MonoBehaviour {
 	void Update(){
 	
 		gameObject.GetComponent<Rigidbody2D> ().velocity = velocidadConstante * (gameObject.GetComponent<Rigidbody2D> ().velocity.normalized);
+
+		//Para que al spawnear la skin no inicie girando
+		if (!controller.ballInPlay) {
+			if (pelotaSpawneada)
+				GetComponentInChildren<Animator> ().speed = 0;
+			
+		} else {
+
+			GetComponentInChildren<Animator> ().speed = 1;
+
+		}
 
 //		if(_colaExtraBall != null)
 //			if (controller.ballInPlay)
