@@ -38,6 +38,7 @@ public class BallManager : MonoBehaviour {
 		} else {
 
 			LevelManager.levelManager.numeroBolaElegida = "00";
+			PlayerPrefs.SetString (LevelManager.levelManager.s_BolaElegida, "00");
 			PlayerPrefs.SetInt ("Pelota_00", 1);
 
 		}
@@ -50,7 +51,8 @@ public class BallManager : MonoBehaviour {
 			if (estaDesbloqueada == 1) {
 
 				boton.interactable = true; //Activar Toggle
-				boton.GetComponent<SkinDePelotas>().btnComprar.SetActive(false); //Apagar boton de compra
+				if(boton.GetComponent<SkinDePelotas>().btnComprar != null)
+					boton.GetComponent<SkinDePelotas>().btnComprar.SetActive(false); //Apagar boton de compra
 
 				//Prender la ultima seleccionada
 				if(boton.GetComponent<SkinDePelotas> ().NumeroDeBola == LevelManager.levelManager.numeroBolaElegida)

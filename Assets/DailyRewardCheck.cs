@@ -7,34 +7,23 @@ public class DailyRewardCheck : MonoBehaviour {
 
 	public int NumeroDeGift;
 
-	void Awake(){
+	void OnEnable(){
 
-		if(NumeroDeGift <= DailyRewardManager.Instance.GiftCounter){
+		Image im = GetComponent<Image> ();
+		Text texto = GetComponentInChildren<Text> ();
 
-			GetComponent<Image> ().color = new Color (GetComponent<Image> ().color.r, GetComponent<Image> ().color.g, GetComponent<Image> ().color.b, 255);
-			GetComponentInChildren<Text> ().color = new Color (GetComponentInChildren<Text> ().color.r, GetComponentInChildren<Text> ().color.g, GetComponentInChildren<Text> ().color.b, 255);
+		if (NumeroDeGift <= DailyRewardManager.Instance.GiftCounter) {
 
+			im.color = new Color (im.color.r, im.color.g, im.color.b, 1f);
+			texto.color = new Color (texto.color.r, texto.color.g, texto.color.b, 1f);
+
+		} else {
+		
+			im.color = new Color (im.color.r, im.color.g, im.color.b, 0.5f);
+			texto.color = new Color (texto.color.r, texto.color.g, texto.color.b, 0.5f);
+		
 		}
 
-//		UltimaBolaDesbloqueada = PlayerPrefs.GetInt (LevelManager.levelManager.s_BolasDesbloqueadas);
-//
-//		if(UltimaBolaDesbloqueada >= NumeroDeBola){
-//			//Desbloquear
-//			GetComponent<Toggle>().interactable = true;
-//		
-//		}
-//
-//		//Seleccionar la ultima guardada
-//		if (NumeroDeBola.ToString () == PlayerPrefs.GetString (LevelManager.levelManager.s_BolaElegida)) {
-//
-//			GetComponent<Toggle> ().isOn = true;
-//
-//		} else {
-//
-//			GetComponent<Toggle> ().isOn = false;
-//
-//		}
-//	
 	}
 
 

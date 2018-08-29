@@ -34,7 +34,7 @@ public class DailyRewardManager : MonoBehaviour {
 
 
 		//Limpiar Pelotas compradas
-//		PlayerPrefs.DeleteKey("Pelota_00");
+//		PlayerPrefs.SetInt("Pelota_00",1);
 //		PlayerPrefs.DeleteKey("Pelota_01");
 //		PlayerPrefs.DeleteKey("Pelota_02");
 //		PlayerPrefs.DeleteKey("Pelota_03");
@@ -64,8 +64,15 @@ public class DailyRewardManager : MonoBehaviour {
 		if ((System.DateTime.Now - UltimoInicioSesion).TotalHours > 24 &&
 			(System.DateTime.Now - UltimoInicioSesion).TotalHours < 48) {
 
+			GiftCounter = PlayerPrefs.GetInt (LevelManager.levelManager.s_GiftCounter);
 
 			DesbloquearGift ();
+
+		} else if((System.DateTime.Now - UltimoInicioSesion).TotalHours > 48){
+			//Al pasar 48 horas se reinicializan los Gifts
+			GiftCounter = 0;
+			DesbloquearGift ();
+
 		}
 
 	}
@@ -73,8 +80,17 @@ public class DailyRewardManager : MonoBehaviour {
 
 	public void DesbloquearGift(){
 
-		//Sumo 1 al contador de Gifts
+		////// PARA TEST ONLY
 		GiftCounter = PlayerPrefs.GetInt (LevelManager.levelManager.s_GiftCounter);
+		///// ELIMINAR LUEGO
+
+
+		if (GiftCounter == 5) {
+			//Al llegar al maximo gift, resetear contador
+			GiftCounter = 0;			
+		}
+
+		//Sumo 1 al contador de Gifts
 		GiftCounter++;
 		Debug.Log ("Se desbloqueo Gift " + GiftCounter.ToString ());
 		PlayerPrefs.SetInt (LevelManager.levelManager.s_GiftCounter, GiftCounter);
