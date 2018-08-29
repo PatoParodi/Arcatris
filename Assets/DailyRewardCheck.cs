@@ -5,12 +5,17 @@ using UnityEngine.UI;
 
 public class DailyRewardCheck : MonoBehaviour {
 
-	public string NumeroDeBola;
+	public int NumeroDeGift;
 
-	private int UltimaBolaDesbloqueada;
+	void Awake(){
 
-//	void Awake(){
-//	
+		if(NumeroDeGift <= DailyRewardManager.Instance.GiftCounter){
+
+			GetComponent<Image> ().color = new Color (GetComponent<Image> ().color.r, GetComponent<Image> ().color.g, GetComponent<Image> ().color.b, 255);
+			GetComponentInChildren<Text> ().color = new Color (GetComponentInChildren<Text> ().color.r, GetComponentInChildren<Text> ().color.g, GetComponentInChildren<Text> ().color.b, 255);
+
+		}
+
 //		UltimaBolaDesbloqueada = PlayerPrefs.GetInt (LevelManager.levelManager.s_BolasDesbloqueadas);
 //
 //		if(UltimaBolaDesbloqueada >= NumeroDeBola){
@@ -30,14 +35,8 @@ public class DailyRewardCheck : MonoBehaviour {
 //
 //		}
 //	
-//	}
-//
-//	public void GuardarValorEnMemoria(){
-//	
-//		if (GetComponent<Toggle> ().isOn) {
-//			PlayerPrefs.SetString (LevelManager.levelManager.s_BolaElegida, NumeroDeBola.ToString());
-//			LevelManager.levelManager.numeroBolaElegida = NumeroDeBola.ToString();
-//		}
-//	}
+	}
+
+
 
 }

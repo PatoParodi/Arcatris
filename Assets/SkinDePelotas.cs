@@ -41,8 +41,11 @@ public class SkinDePelotas: MonoBehaviour {
 
 	public void ComprarPelota(){
 
-		Debug.Log ("Comprando pelota");
+		Debug.Log ("Compro pelota " + NumeroDeBola);
 		btnComprar.SetActive(false); //Apagar boton de compra
+		GetComponent<Toggle>().interactable = true;
+
+		PlayerPrefs.SetInt ("Pelota_" + NumeroDeBola, 1); //Ejemplo guardar Pelota_01 si ha sido comprada
 	
 	}
 

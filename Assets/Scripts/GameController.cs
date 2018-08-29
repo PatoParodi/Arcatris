@@ -113,8 +113,8 @@ public class GameController : MonoBehaviour {
 //		PlayerPrefs.SetString ("jugoAntes","Si");
 //		PlayerPrefs.SetInt ("High Score", 0);
 //		PlayerPrefs.SetInt ("ArcatrisMonedas", 1000);
-//		PlayerPrefs.SetString ("jugoAntes", "Si");
 //		PlayerPrefs.SetInt ("ExtraBall", 0);
+		PlayerPrefs.DeleteKey(LevelManager.levelManager.s_UltimoInicioSesion);
 ///////////////////////////////////////////////////////////
 
 		//Cargar array de colores para el multiplicador

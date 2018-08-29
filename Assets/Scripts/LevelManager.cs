@@ -64,7 +64,7 @@ namespace LevelManager
 		public static string s_PowerUpBajarBreaProb 	= "PowerUpBajarBreaProb";
 		public static string s_Language	= "Idioma";
 		public static string s_UltimoInicioSesion	= "UltimoInicioSesion";
-		public static string s_BolasDesbloqueadas = "Bolas_Desbloqueadas";
+		public static string s_GiftCounter = "Gift_Counter";
 		public static string s_HighScore	= "New_High_Score";
 		public static string s_BolaElegida = "Bola_Elegida";
 

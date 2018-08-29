@@ -27,25 +27,6 @@ public class BallManager : MonoBehaviour {
 		DontDestroyOnLoad(gameObject);
 	}
 
-	public string PelotaActiva(){
-
-		string NroDeBola;
-
-		NroDeBola = "00";
-
-		foreach (Toggle boton in botonesPelotas) {
-		
-			if (boton.isOn) {
-				NroDeBola = boton.GetComponent<SkinDePelotas> ().NumeroDeBola;
-				break;
-			}
-				
-		}
-
-		return NroDeBola;
-
-	}
-
 
 	public void VerificarBolasCompradas(){
 
@@ -57,6 +38,7 @@ public class BallManager : MonoBehaviour {
 		} else {
 
 			LevelManager.levelManager.numeroBolaElegida = "00";
+			PlayerPrefs.SetInt ("Pelota_00", 1);
 
 		}
 
@@ -64,7 +46,7 @@ public class BallManager : MonoBehaviour {
 		foreach (Toggle boton in botonesPelotas) {
 
 			int estaDesbloqueada = PlayerPrefs.GetInt ("Pelota_" + boton.GetComponent<SkinDePelotas> ().NumeroDeBola); //Ejemplo verificar si Pelota_01 ha sido comprada
-			
+
 			if (estaDesbloqueada == 1) {
 
 				boton.interactable = true; //Activar Toggle
