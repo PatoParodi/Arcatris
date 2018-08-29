@@ -27,28 +27,17 @@ public class ballScript : MonoBehaviour {
 
 	}
 
-	//Animacion de spawn - - OBSOLETO
-	public void animarSpawning(){
+//	//Animacion de spawn - - OBSOLETO
+//	public void animarSpawning(){
+//		
+//		GetComponentInChildren<Animator> ().SetTrigger ("Instanciar");
+//
+//	}
 		
-		GetComponentInChildren<Animator> ().SetTrigger ("Instanciar");
+	//Se llama desde la animacion de Spawn
+	public void afterSpawn(){
 
-	}
-
-	//Animacion para tipo de bola
-	/// <summary>
-	/// Setear la Animacion para cada tipo de Bola
-	/// </summary>
-	/// <param name="tipoDeBola">Nombre del tipo de bola.</param>
-	public void SetTipoDeBola(string tipoDeBola){
-
-		if (tipoDeBola == "WhiteBall") {
-
-			GetComponentInChildren<Animator> ().SetInteger("NumeroDeBola",levelManager.numeroBolaElegida);
-
-		} else {
-
-			GetComponentInChildren<Animator> ().SetTrigger (tipoDeBola);
-		}
+		GetComponentInChildren<ballScript2> ().mostrarPelota ();
 
 	}
 
@@ -57,16 +46,16 @@ public class ballScript : MonoBehaviour {
 	
 		gameObject.GetComponent<Rigidbody2D> ().velocity = velocidadConstante * (gameObject.GetComponent<Rigidbody2D> ().velocity.normalized);
 
-		//Para que al spawnear la skin no inicie girando
-		if (!controller.ballInPlay) {
-			if (pelotaSpawneada)
-				GetComponentInChildren<Animator> ().speed = 0;
-			
-		} else {
-
-			GetComponentInChildren<Animator> ().speed = 1;
-
-		}
+//		//Para que al spawnear la skin no inicie girando
+//		if (!controller.ballInPlay) {
+//			if (pelotaSpawneada)
+//				GetComponentInChildren<Animator> ().speed = 0;
+//			
+//		} else {
+//
+//			GetComponentInChildren<Animator> ().speed = 1;
+//
+//		}
 
 //		if(_colaExtraBall != null)
 //			if (controller.ballInPlay)
@@ -85,15 +74,19 @@ public class ballScript : MonoBehaviour {
 	public IEnumerator activarPowerUpRedBall(float duracion){
 	
 		//Animar bola para que cambie de color
-		GetComponentInChildren<Animator>().SetBool("RedBall",true);
+//		GetComponentInChildren<Animator>().SetBool("RedBall",true);
+		GetComponentInChildren<ballScript2> ().ActivarBolaRoja ();
 		RedBallFlag = true;
 
 		yield return new WaitForSeconds (duracion);
 
 		RedBallFlag = false;
-		GetComponentInChildren<Animator>().SetBool("RedBall",false);
+//		GetComponentInChildren<Animator>().SetBool("RedBall",false);
+		GetComponentInChildren<ballScript2> ().DesactivarBolaRoja ();
+
 
 	}
+
 
 	void OnCollisionEnter2D(Collision2D col){
 

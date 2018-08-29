@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
+
 
 public class DailyRewardBalls : MonoBehaviour {
 
@@ -16,8 +18,6 @@ public class DailyRewardBalls : MonoBehaviour {
 		if (PlayerPrefs.HasKey (LevelManager.levelManager.s_UltimoInicioSesion)) {
 			
 			System.DateTime.TryParse (PlayerPrefs.GetString (LevelManager.levelManager.s_UltimoInicioSesion), out UltimoInicioSesion);
-			//Calcular diferencia de dias entre Dia De inicio y fecha de hoy
-			Debug.Log((System.DateTime.Now - UltimoInicioSesion).TotalDays);	//ESTE FUNCIONA
 
 		
 		} else {
@@ -26,7 +26,8 @@ public class DailyRewardBalls : MonoBehaviour {
 			PlayerPrefs.SetInt (LevelManager.levelManager.s_BolasDesbloqueadas, 0);
 
 		}
-				
+
+//Calcular diferencia de dias entre Dia De inicio y fecha de hoy
 //Calcular si transcurrio al menos 1 dia desde el ultimo inicio de sesion
 		if ((System.DateTime.Now - UltimoInicioSesion).TotalDays > 1) {
 
@@ -42,6 +43,11 @@ public class DailyRewardBalls : MonoBehaviour {
 
 			//Mostrar Pop Up de aviso
 			AvisoPopUp.SetActive(true);
+
+			//Analytics de nueva bola desbloqueada
+			Analytics.CustomEvent ("BallsShop", new Dictionary<string, object> {
+				{ "CantBolasDesbloqueadas", BolasDesbloqueadas }
+			});
 
 		}
 

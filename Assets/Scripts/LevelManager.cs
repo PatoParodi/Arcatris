@@ -15,7 +15,7 @@ namespace LevelManager
 		public static float velocidadPelotaAumento = 0.4f; //10% por nivel
 		public static int dificultadActual = 1;
 		public static int dificultadMaxima = 7;
-		public static int numeroBolaElegida;
+		public static string numeroBolaElegida;
 
 		//Cajas
 		private static float velocidadCajasBase = 0.2f;  //Original 0.22f

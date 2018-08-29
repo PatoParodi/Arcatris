@@ -183,7 +183,7 @@ public class Caja : MonoBehaviour {
 			GameObject bolaNueva;
 			for (int i = 0; i < LevelManager.levelManager.PowerUpMultipleBallCant; i++) {
 				bolaNueva = Instantiate (Resources.Load ("Prefabs/ball"), transform.position, Quaternion.identity) as GameObject;
-				bolaNueva.GetComponentInChildren<Animator> ().SetTrigger ("MultipleBall");	//Saltar animacion de Spawn
+				bolaNueva.GetComponentInChildren<ballScript2> ().mostrarPelota ();
 				bolaNueva.GetComponent<Rigidbody2D> ().AddForce (controller.obtenerVectorVelocidad (controller.fuerzaPelota, 50f, 130f));
 				bolaNueva.GetComponent<CircleCollider2D> ().enabled = true;
 			}

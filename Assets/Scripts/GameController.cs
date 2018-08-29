@@ -139,16 +139,8 @@ public class GameController : MonoBehaviour {
 		//Setear idioma
 		LanguageManager.setLanguage (_language);
 
-		//Leer bola elegida
-		if (PlayerPrefs.HasKey (LevelManager.levelManager.s_BolaElegida)) {
-
-			LevelManager.levelManager.numeroBolaElegida = PlayerPrefs.GetInt (LevelManager.levelManager.s_BolaElegida);
-
-		} else {
-
-			LevelManager.levelManager.numeroBolaElegida = 0;
-		
-		}
+		//Verificar bolas compradas y ultima elegida
+		BallManager.Instance.VerificarBolasCompradas ();
 
 		//Leer info de Power Ups
 		//Red Ball
@@ -235,7 +227,6 @@ public class GameController : MonoBehaviour {
 		extraBalls = 0;
 		extraBalls = PlayerPrefs.GetInt ("ExtraBall");
 		textosEnPantalla.extraBallsValue.text = extraBalls.ToString ();
-//		mostrarVidas(extraBalls,"ExtraBall");
 
 	}
 
@@ -709,11 +700,11 @@ public class GameController : MonoBehaviour {
 
 		}
 		paddleVivo.transform.position = new Vector2 (paddleVivo.transform.position.x, GameObject.FindGameObjectWithTag ("padPosition").transform.position.y);
-		pelotaViva  = Instantiate (pelota,new Vector3 (paddleVivo.transform.position.x,ballSpawn.transform.position.y,ballSpawn.transform.position.z),Quaternion.identity) as GameObject;
 
 		//Identificar bola seleccionada y devolver el numero en string
 
-		pelotaViva.GetComponent<ballScript>().SetTipoDeBola(ballType);
+//		pelotaViva.GetComponent<ballScript>().SetTipoDeBola(ballType);
+//		LevelManager.levelManager.numeroBolaElegida = ballType;
 
 		SoundManager.soundManager.playSound (ballSpawn.GetComponent<AudioSource> ());
 
@@ -729,6 +720,9 @@ public class GameController : MonoBehaviour {
 
 	// En caso de NO continuar despues de perder
 		if (!continueFlag) {
+
+			LevelManager.levelManager.numeroBolaElegida = PlayerPrefs.GetString(LevelManager.levelManager.s_BolaElegida);
+
 			// Destruir cajas
 			cajas = GameObject.FindGameObjectsWithTag("Caja");
 			foreach (GameObject caja in cajas) {
@@ -785,6 +779,8 @@ public class GameController : MonoBehaviour {
 				limpiarCajas (lineaDestruccion);	
 			}
 		}
+
+		pelotaViva  = Instantiate (pelota,new Vector3 (paddleVivo.transform.position.x,ballSpawn.transform.position.y,ballSpawn.transform.position.z),Quaternion.identity) as GameObject;
 
 		//Posicionar pelota arriba del pad a medida que vaya subiendo
 //		pelotaViva.transform.position = new Vector2(paddleVivo.transform.position.x, paddleVivo.transform.position.y + paddleVivo.GetComponentInChildren<SpriteRenderer>().bounds.size.y/2 + pelotaViva.GetComponentInChildren<SpriteRenderer>().bounds.size.y/2);
@@ -928,6 +924,7 @@ public class GameController : MonoBehaviour {
 		PlayerPrefs.SetInt ("ExtraBall", extraBalls);
 
 		//Continuar Juego con Extra Ball
+		LevelManager.levelManager.numeroBolaElegida = "ExtraBall";
 		ContinuarJuego ("ExtraBall");
 
 	}
