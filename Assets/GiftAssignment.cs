@@ -24,7 +24,6 @@ public class GiftAssignment : MonoBehaviour {
 	//PREMIO BOLAS EXTRA
 		if(cantidadBolasExtra > 0){
 
-//			controller.extraBalls += cantidadBolasExtra;
 			controller.addExtraBallToScreen (cantidadBolasExtra);
 
 		}

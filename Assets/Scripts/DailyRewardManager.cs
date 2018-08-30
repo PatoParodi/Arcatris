@@ -33,15 +33,6 @@ public class DailyRewardManager : MonoBehaviour {
 		//between scenes (this is optional)
 		DontDestroyOnLoad(gameObject);
 
-
-		//Limpiar Pelotas compradas
-//		PlayerPrefs.SetInt("Pelota_00",1);
-//		PlayerPrefs.DeleteKey("Pelota_01");
-//		PlayerPrefs.DeleteKey("Pelota_02");
-//		PlayerPrefs.DeleteKey("Pelota_03");
-//		PlayerPrefs.DeleteKey("Pelota_04");
-//		PlayerPrefs.DeleteKey("Pelota_05");
-//		PlayerPrefs.DeleteKey("Pelota_06");
 	}
 
 	void Start(){

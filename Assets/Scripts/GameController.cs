@@ -700,11 +700,12 @@ public class GameController : MonoBehaviour {
 		}
 		paddleVivo.transform.position = new Vector2 (paddleVivo.transform.position.x, GameObject.FindGameObjectWithTag ("padPosition").transform.position.y);
 
-		//Identificar bola seleccionada y devolver el numero en string
-
-//		pelotaViva.GetComponent<ballScript>().SetTipoDeBola(ballType);
-//		LevelManager.levelManager.numeroBolaElegida = ballType;
-
+		pelotaViva  = Instantiate (pelota,new Vector3 (paddleVivo.transform.position.x,ballSpawn.transform.position.y,ballSpawn.transform.position.z),Quaternion.identity) as GameObject;
+		if (!continueFlag) {
+			//Leer bola seleccionada
+			LevelManager.levelManager.numeroBolaElegida = PlayerPrefs.GetString (LevelManager.levelManager.s_BolaElegida);
+		}
+			
 		SoundManager.soundManager.playSound (ballSpawn.GetComponent<AudioSource> ());
 
 		//Apagar la 
@@ -719,8 +720,6 @@ public class GameController : MonoBehaviour {
 
 	// En caso de NO continuar despues de perder
 		if (!continueFlag) {
-
-			LevelManager.levelManager.numeroBolaElegida = PlayerPrefs.GetString(LevelManager.levelManager.s_BolaElegida);
 
 			// Destruir cajas
 			cajas = GameObject.FindGameObjectsWithTag("Caja");
@@ -778,9 +777,7 @@ public class GameController : MonoBehaviour {
 				limpiarCajas (lineaDestruccion);	
 			}
 		}
-
-		pelotaViva  = Instantiate (pelota,new Vector3 (paddleVivo.transform.position.x,ballSpawn.transform.position.y,ballSpawn.transform.position.z),Quaternion.identity) as GameObject;
-
+			
 		//Posicionar pelota arriba del pad a medida que vaya subiendo
 //		pelotaViva.transform.position = new Vector2(paddleVivo.transform.position.x, paddleVivo.transform.position.y + paddleVivo.GetComponentInChildren<SpriteRenderer>().bounds.size.y/2 + pelotaViva.GetComponentInChildren<SpriteRenderer>().bounds.size.y/2);
 
