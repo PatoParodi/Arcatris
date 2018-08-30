@@ -324,10 +324,10 @@ public class GameController : MonoBehaviour {
 
 	}
 
-	public void addExtraBallToScreen(){
+	public void addExtraBallToScreen(int cantidad){
 
 		//Agregar una Extra Ball
-		extraBalls +=  1;
+		extraBalls +=  cantidad;
 		PlayerPrefs.SetInt ("ExtraBall", extraBalls);
 
 		textosEnPantalla.extraBallsValue.text = extraBalls.ToString ();

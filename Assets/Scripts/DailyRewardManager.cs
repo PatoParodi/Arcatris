@@ -13,9 +13,10 @@ public class DailyRewardManager : MonoBehaviour {
 
 
 	private System.DateTime UltimoInicioSesion;
+	GameObject gift;
 
 	public int GiftCounter; //Numero de ultima bola desbloqueada
-	public GameObject AvisoPopUp;
+	public GameObject DailyAvisoPopUp;
 	public GameObject DailyGifts;	//Pop up con todos los gifts
 	public GameObject PantallaInicial;
 
@@ -102,7 +103,10 @@ public class DailyRewardManager : MonoBehaviour {
 		PantallaInicial.GetComponent<PantallaInicial>().DesactivarBotones();
 
 		//Mostrar Pop Up de aviso
-		AvisoPopUp.SetActive(true);
+		DailyAvisoPopUp.SetActive(true);
+
+		//Buscar prefab del Gift correspondiente
+		gift = Instantiate (Resources.Load ("Gifts/Gift_" + GiftCounter.ToString ()) as GameObject);
 
 //		//Analytics de nueva bola desbloqueada
 //		Analytics.CustomEvent ("DailyGiftShop", new Dictionary<string, object> {
@@ -110,4 +114,29 @@ public class DailyRewardManager : MonoBehaviour {
 //		});
 
 	}
+
+
+	public void AbrirCaja(){
+
+		gift.GetComponent<Animator> ().SetTrigger ("Open");
+
+		StartCoroutine (MostarDailyGifts ());
+
+	}
+
+	public IEnumerator MostarDailyGifts(){
+	
+		yield return new WaitForSecondsRealtime (2);
+
+		DailyAvisoPopUp.SetActive (false);
+		DailyGifts.SetActive (true);
+
+		//Sumar el premio
+		gift.GetComponent<GiftAssignment> ().AsignarPremio ();
+
+		//Destruir objeto
+		Destroy(gift);
+	
+	}
+
 }

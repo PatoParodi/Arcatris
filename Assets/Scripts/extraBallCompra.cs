@@ -35,7 +35,7 @@ public class extraBallCompra : MonoBehaviour {
 
 			Destroy (gameObject);
 			//Agregar Extraball al contador
-			controller.addExtraBallToScreen();
+			controller.addExtraBallToScreen(1);
 
 		}
 
