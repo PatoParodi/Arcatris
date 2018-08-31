@@ -97,10 +97,7 @@ public class DailyRewardManager : MonoBehaviour {
 		//Mostrar Pop Up de aviso
 		DailyAvisoPopUp.SetActive(true);
 
-		//Buscar prefab del Gift correspondiente
-		gift = Instantiate (Resources.Load ("Gifts/Gift_" + GiftCounter.ToString ()) as GameObject);
-		gift.transform.SetParent (DailyAvisoPopUp.transform);
-		gift.transform.localScale = Vector3.one;
+		StartCoroutine (abriendoPopUp (DailyAvisoPopUp.GetComponent<Animator> ().GetCurrentAnimatorStateInfo (0).length));
 			
 //		//Analytics de nueva bola desbloqueada
 //		Analytics.CustomEvent ("DailyGiftShop", new Dictionary<string, object> {
@@ -109,6 +106,16 @@ public class DailyRewardManager : MonoBehaviour {
 
 	}
 
+	public IEnumerator abriendoPopUp(float tiempo){
+	
+		yield return new WaitForSecondsRealtime (tiempo);
+
+		//Buscar prefab del Gift correspondiente
+		gift = Instantiate (Resources.Load ("Gifts/Gift_" + GiftCounter.ToString ()) as GameObject);
+		gift.transform.SetParent (DailyAvisoPopUp.transform);
+		gift.transform.localScale = Vector3.one;
+	
+	}
 
 	public void AbrirCaja(){
 		//Abrir caja
