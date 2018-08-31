@@ -9,19 +9,27 @@ public class DailyRewardCheck : MonoBehaviour {
 
 	void OnEnable(){
 
-		Image im = GetComponent<Image> ();
-		Text texto = GetComponentInChildren<Text> ();
+		Image[] images = GetComponentsInChildren<Image> ();
+		Text[] textos = GetComponentsInChildren<Text> ();
 
 		if (NumeroDeGift <= DailyRewardManager.Instance.GiftCounter) {
 
-			im.color = new Color (im.color.r, im.color.g, im.color.b, 1f);
-			texto.color = new Color (texto.color.r, texto.color.g, texto.color.b, 1f);
+			foreach (Image image in images) {
+				image.color = new Color (image.color.r, image.color.g, image.color.b, 1f);
+			}
+			foreach (Text texto in textos) {
+				texto.color = new Color (texto.color.r, texto.color.g, texto.color.b, 1f);
+			}
 
 		} else {
 		
-			im.color = new Color (im.color.r, im.color.g, im.color.b, 0.5f);
-			texto.color = new Color (texto.color.r, texto.color.g, texto.color.b, 0.5f);
-		
+			foreach (Image image in images) {
+				image.color = new Color (image.color.r, image.color.g, image.color.b, 0.5f);
+			}	
+			foreach (Text texto in textos) {
+				texto.color = new Color (texto.color.r, texto.color.g, texto.color.b, 0.5f);
+			}
+
 		}
 
 	}

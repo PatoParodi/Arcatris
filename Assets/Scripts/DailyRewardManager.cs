@@ -17,6 +17,7 @@ public class DailyRewardManager : MonoBehaviour {
 
 	public int GiftCounter; //Numero de ultima bola desbloqueada
 	public GameObject DailyAvisoPopUp;
+	public float OpeningBoxTime = 2.5f;	//Tiempo de animacion al abrir la caja
 	public GameObject DailyGifts;	//Pop up con todos los gifts
 	public GameObject PantallaInicial;
 
@@ -98,7 +99,9 @@ public class DailyRewardManager : MonoBehaviour {
 
 		//Buscar prefab del Gift correspondiente
 		gift = Instantiate (Resources.Load ("Gifts/Gift_" + GiftCounter.ToString ()) as GameObject);
-
+		gift.transform.SetParent (DailyAvisoPopUp.transform);
+		gift.transform.localScale = Vector3.one;
+			
 //		//Analytics de nueva bola desbloqueada
 //		Analytics.CustomEvent ("DailyGiftShop", new Dictionary<string, object> {
 //			{ "DiaGiftDesbloqueado", GiftCounter }
@@ -108,16 +111,20 @@ public class DailyRewardManager : MonoBehaviour {
 
 
 	public void AbrirCaja(){
-
+		//Abrir caja
 		gift.GetComponent<Animator> ().SetTrigger ("Open");
 
+		//Atenuar pop up
+		DailyAvisoPopUp.GetComponent<Animator> ().SetTrigger ("FadeOut");
+
+		//Contar tiempo hasta mostrar la siguiente pantalla con los gift por dia
 		StartCoroutine (MostarDailyGifts ());
 
 	}
 
 	public IEnumerator MostarDailyGifts(){
 	
-		yield return new WaitForSecondsRealtime (2);
+		yield return new WaitForSecondsRealtime (OpeningBoxTime);
 
 		DailyAvisoPopUp.SetActive (false);
 		DailyGifts.SetActive (true);

@@ -11,7 +11,7 @@ public class BallManager : MonoBehaviour {
 		private set;
 	}
 
-	public Toggle[] botonesPelotas;
+	public GameObject[] botonesPelotas;
 
 	void Awake(){
 		//First we check if there are any other instances conflicting
@@ -44,22 +44,28 @@ public class BallManager : MonoBehaviour {
 		}
 
 
-		foreach (Toggle boton in botonesPelotas) {
+		foreach (GameObject boton in botonesPelotas) {
 
 			int estaDesbloqueada = PlayerPrefs.GetInt ("Pelota_" + boton.GetComponent<SkinDePelotas> ().NumeroDeBola); //Ejemplo verificar si Pelota_01 ha sido comprada
 
 			if (estaDesbloqueada == 1) {
 
-				boton.interactable = true; //Activar Toggle
-				if(boton.GetComponent<SkinDePelotas>().btnComprar != null)
-					boton.GetComponent<SkinDePelotas>().btnComprar.SetActive(false); //Apagar boton de compra
+				boton.GetComponent<Toggle> ().interactable = true; //Activar Toggle
+				if (boton.GetComponent<SkinDePelotas> ().btnComprar != null) {
+					boton.GetComponent<SkinDePelotas> ().btnComprar.SetActive (false); //Apagar boton de compra
+					boton.SetActive (true);	//Prender el selector
+				}
 
 				//Prender la ultima seleccionada
-				if(boton.GetComponent<SkinDePelotas> ().NumeroDeBola == LevelManager.levelManager.numeroBolaElegida)
-					boton.isOn = true;
+				if (boton.GetComponent<SkinDePelotas> ().NumeroDeBola == LevelManager.levelManager.numeroBolaElegida)
+					boton.GetComponent<Toggle> ().isOn = true;
 				else
-					boton.isOn = false;
+					boton.GetComponent<Toggle> ().isOn = false;
 
+			} else {
+			//Actualizar precio en boton
+				boton.GetComponent<SkinDePelotas>().txtPrecio.text = boton.GetComponent<SkinDePelotas>().Precio.ToString ();
+			
 			}
 
 		}

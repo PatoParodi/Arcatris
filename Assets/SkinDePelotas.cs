@@ -10,25 +10,10 @@ public class SkinDePelotas: MonoBehaviour {
 	public int Precio;
 	public Text txtPrecio;
 	public GameObject btnComprar;
+	public GameObject _txtPopUpNotYet;
 
-
-	void Awake(){
-
-		if(txtPrecio != null)
-			txtPrecio.text = Precio.ToString ();
-
-//		//Seleccionar la ultima guardada
-//		if (NumeroDeBola.ToString () == PlayerPrefs.GetString (LevelManager.levelManager.s_BolaElegida)) {
-//
-//			GetComponent<Toggle> ().isOn = true;
-//
-//		} else {
-//
-//			GetComponent<Toggle> ().isOn = false;
-//
-//		}
-	
-	}
+	private GameController _controller;
+ 
 
 	public void GuardarValorEnMemoria(){
 	
@@ -41,12 +26,24 @@ public class SkinDePelotas: MonoBehaviour {
 
 	public void ComprarPelota(){
 
-		Debug.Log ("Compro pelota " + NumeroDeBola);
-		btnComprar.SetActive(false); //Apagar boton de compra
-		GetComponent<Toggle>().interactable = true;
+		_controller =  GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
 
-		PlayerPrefs.SetInt ("Pelota_" + NumeroDeBola, 1); //Ejemplo guardar Pelota_01 si ha sido comprada
-	
+		//Determiniar si tiene suficientes diamantes
+		if(_controller.Comprar(Precio)){
+			
+			Debug.Log ("Compro pelota " + NumeroDeBola);
+			btnComprar.SetActive(false); //Apagar boton de compra
+			//Prendo y activo el Toggle
+			gameObject.SetActive (true);
+			GetComponent<Toggle>().interactable = true;
+
+			PlayerPrefs.SetInt ("Pelota_" + NumeroDeBola, 1); //Ejemplo guardar Pelota_01 si ha sido comprada
+
+		} else {
+
+			_txtPopUpNotYet.GetComponent<Animator> ().SetTrigger ("Show");
+
+		}
 	}
 
 }
