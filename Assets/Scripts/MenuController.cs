@@ -148,14 +148,17 @@ public class MenuController : MonoBehaviour {
 		//Buscar GameController si aun no se recupero
 		if(controller == null)
 			controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
-		
-		//Mostrar HighScore si corresponde
-		if (controller.getHighScore () > PlayerPrefs.GetInt (LevelManager.levelManager.s_HighScore)) {
 
-			PlayerPrefs.SetInt (LevelManager.levelManager.s_HighScore, controller.getHighScore ());
+		//Enviar Score a Google Services
+		controller.SubmitScoreToPlayServices(controller.getScore());
+
+		//Mostrar HighScore si corresponde
+		if (controller.getScore () > PlayerPrefs.GetInt (LevelManager.levelManager.s_HighScore)) {
+
+			PlayerPrefs.SetInt (LevelManager.levelManager.s_HighScore, controller.getScore ());
 
 			//Actualizar texto de Pantalla Inicial
-			controller.textosEnPantalla.highScoreValue.text = controller.getHighScore ().ToString ();
+			controller.textosEnPantalla.highScoreValue.text = controller.getScore ().ToString ();
 
 			popUp = true;
 
@@ -464,7 +467,7 @@ public class MenuController : MonoBehaviour {
 	
 		if (PlayGamesPlatform.Instance.localUser.authenticated) {
 			//Submit Score to Play Services
-			if(controller.getHighScore() > 0)
+			if(controller.getScore() > 0)
 				controller.SubmitScoreToPlayServices(PlayerPrefs.GetInt (LevelManager.levelManager.s_HighScore));
 
 			PlayGamesPlatform.Instance.SetDefaultLeaderboardForUI ("CgkIkavI79INEAIQAQ");

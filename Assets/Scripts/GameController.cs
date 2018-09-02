@@ -36,12 +36,6 @@ public class tutorial{
 
 }
 
-[System.Serializable]
-public class SelectorControl{
-	public Toggle 	sw_Botones,
-					sw_TouchPad;
-}
-
 public class GameController : MonoBehaviour {
 
 	public GameObject paddle;
@@ -94,11 +88,6 @@ public class GameController : MonoBehaviour {
 	public bool c_TutorialTest;
 
 	public tutorial tutorialObjetos;
-	public SelectorControl Controles;
-//	public float areaMuerta;
-//	public Coroutine spawneoCajas;
-
-//	private static LanguageManager _languageManager;
 
 	private int _BloquesSpawneados = 0;
 
@@ -182,8 +171,6 @@ public class GameController : MonoBehaviour {
 			_BloquesSpawneados++;
 
 			paddleVivo = Instantiate (paddle, new Vector2(paddleSpawnInicial.transform.position.x,paddleSpawnInicial.transform.position.y), Quaternion.identity) as GameObject;
-
-			Controles.sw_TouchPad.isOn = true;
 
 			PlayerPrefs.SetInt ("ExtraBall", 1);
 
@@ -460,22 +447,8 @@ public class GameController : MonoBehaviour {
 
 		if (paddleVivo != null) {
 			// Verificar control elegido
-			if (Controles.sw_TouchPad.isOn) {
-				// TouchPad
-				//				touchPadSlider.gameObject.SetActive (true);
-				//				BotonesEnPantalla.derecha.SetActive (false);
-				//				BotonesEnPantalla.izquierda.SetActive (false);
+//			if (Controles.sw_TouchPad.isOn) {
 
-				//				float diferencia = (handleSlider.transform.position.x * 1.3f) - paddleVivo.transform.position.x;
-				//
-				//				// Si la diferencia es mayor a 0.3 empezar a mover el pad
-				//				if (Mathf.Abs (diferencia) < areaMuerta)
-				//					movimientoPaddle = 0;
-				//				else if (diferencia > 0)
-				//					movimientoPaddle = velocidadPaddle;
-				//				else if (diferencia < 0)
-				//					movimientoPaddle = -velocidadPaddle;
-				//
 				float _FuerzaDrag = 0;
 
 				if (Input.touchCount == 0){
@@ -522,54 +495,55 @@ public class GameController : MonoBehaviour {
 
 
 
-			} else if (Controles.sw_Botones.isOn) {
-				//Botones de media pantalla
-				//				BotonesEnPantalla.derecha.SetActive (true);
-				//				BotonesEnPantalla.izquierda.SetActive (true);
-				//				touchPadSlider.gameObject.SetActive (false);
-
-
-				Vector3 touchPosWorld;
-
-
-				//Verificar si esta tocando la pantalla para mover el pad
-				if (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Began || Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetTouch(0).phase == TouchPhase.Stationary)) {
-
-					if (Input.touches.Length > 1) {
-						touchPosWorld = Camera.main.ScreenToWorldPoint (Input.touches [1].position);
-					} else {
-						//We transform the touch position into world space from screen space and store it.
-						touchPosWorld = Camera.main.ScreenToWorldPoint (Input.GetTouch (0).position);
-					}
-
-//					if (tiempoPresionando == 0)
-//						tiempoPresionando = Time.deltaTime;
-//					else
-
-					if (touchPosWorld.x > 0) {
-//						movimientoPaddle = velocidadPaddle;
-						tiempoPresionandoR = tiempoPresionandoR + (Time.deltaTime * multiplicadorVelocidad);
-						tiempoPresionandoL = 0;
-						movimientoPaddle = LevelManager.levelManager.VelocidadPaddle * tiempoPresionandoR;
-
-					}else if (touchPosWorld.x < 0){
-//						movimientoPaddle = -velocidadPaddle;
-						tiempoPresionandoL = tiempoPresionandoL + (Time.deltaTime * multiplicadorVelocidad);
-						tiempoPresionandoR = 0;
-						movimientoPaddle = -LevelManager.levelManager.VelocidadPaddle * tiempoPresionandoL;
-					}
-				}
-
-				if (Input.touchCount == 0) {
-					movimientoPaddle = 0;
-					//					tiempoPresionando = 0;
-
-				}
-
-				Debug.Log (movimientoPaddle);
-
-
-			}
+//			} 
+//			else if (Controles.sw_Botones.isOn) {
+//				//Botones de media pantalla
+//				//				BotonesEnPantalla.derecha.SetActive (true);
+//				//				BotonesEnPantalla.izquierda.SetActive (true);
+//				//				touchPadSlider.gameObject.SetActive (false);
+//
+//
+//				Vector3 touchPosWorld;
+//
+//
+//				//Verificar si esta tocando la pantalla para mover el pad
+//				if (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Began || Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetTouch(0).phase == TouchPhase.Stationary)) {
+//
+//					if (Input.touches.Length > 1) {
+//						touchPosWorld = Camera.main.ScreenToWorldPoint (Input.touches [1].position);
+//					} else {
+//						//We transform the touch position into world space from screen space and store it.
+//						touchPosWorld = Camera.main.ScreenToWorldPoint (Input.GetTouch (0).position);
+//					}
+//
+////					if (tiempoPresionando == 0)
+////						tiempoPresionando = Time.deltaTime;
+////					else
+//
+//					if (touchPosWorld.x > 0) {
+////						movimientoPaddle = velocidadPaddle;
+//						tiempoPresionandoR = tiempoPresionandoR + (Time.deltaTime * multiplicadorVelocidad);
+//						tiempoPresionandoL = 0;
+//						movimientoPaddle = LevelManager.levelManager.VelocidadPaddle * tiempoPresionandoR;
+//
+//					}else if (touchPosWorld.x < 0){
+////						movimientoPaddle = -velocidadPaddle;
+//						tiempoPresionandoL = tiempoPresionandoL + (Time.deltaTime * multiplicadorVelocidad);
+//						tiempoPresionandoR = 0;
+//						movimientoPaddle = -LevelManager.levelManager.VelocidadPaddle * tiempoPresionandoL;
+//					}
+//				}
+//
+//				if (Input.touchCount == 0) {
+//					movimientoPaddle = 0;
+//					//					tiempoPresionando = 0;
+//
+//				}
+//
+//				Debug.Log (movimientoPaddle);
+//
+//
+//			}
 
 			//Clamp manual
 			if (movimientoPaddle > LevelManager.levelManager.MaxVelocidadPaddle)
@@ -631,22 +605,10 @@ public class GameController : MonoBehaviour {
 
 	public void IniciarJuego(bool continueFlag){
 //Comienza el juego desde el principio
-		string _controlElegido = "1";
 
 		if(!continueFlag){
 			//Nueva partida
-		
-			//Alimentar analytics
-			if(Controles.sw_TouchPad.isOn)
-				_controlElegido = "TouchPad";
-			else if(Controles.sw_Botones.isOn)
-				_controlElegido = "Botones";
-
-			Analytics.CustomEvent ("NuevaPartida", new Dictionary<string, object> {
-				{ "Sonido", SoundManager.soundManager.soundEnabled },
-				{ "ControlElegido", _controlElegido},
-				{ "Dificultad", LevelManager.levelManager.dificultadActual}
-			});
+			AnalyticsManager.Instance.NuevoJuego ();
 		
 		}
 
@@ -951,7 +913,7 @@ public class GameController : MonoBehaviour {
 
 	}
 
-	public int getHighScore(){
+	public int getScore(){
 	
 		return Puntaje; 
 

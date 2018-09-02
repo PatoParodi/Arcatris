@@ -16,29 +16,29 @@ public class ScriptHighScore : MonoBehaviour {
 
 		controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
 
-		highScore.text = controller.getHighScore ().ToString();
+		highScore.text = controller.getScore ().ToString();
 
-		if(controller.getHighScore () > 100000)
+		if(controller.getScore () > 100000)
 			//Metricas - Analytics - Checkpoints de HighScore
 			Analytics.CustomEvent ("HighScore", new Dictionary<string, object> {
 				{ "MayorA100.000", 1}
 			});
-		else if(controller.getHighScore () > 50000)
+		else if(controller.getScore () > 50000)
 			//Metricas - Analytics - Checkpoints de HighScore
 			Analytics.CustomEvent ("HighScore", new Dictionary<string, object> {
 				{ "MayorA50.000", 1}
 			});
-		else if(controller.getHighScore () > 25000)
+		else if(controller.getScore () > 25000)
 			//Metricas - Analytics - Checkpoints de HighScore
 			Analytics.CustomEvent ("HighScore", new Dictionary<string, object> {
 				{ "MayorA25.000", 1}
 			});
-		else if(controller.getHighScore () > 10000)
+		else if(controller.getScore () > 10000)
 			//Metricas - Analytics - Checkpoints de HighScore
 			Analytics.CustomEvent ("HighScore", new Dictionary<string, object> {
 				{ "MayorA10.000", 1}
 			});
-		else if(controller.getHighScore () > 5000)
+		else if(controller.getScore () > 5000)
 			//Metricas - Analytics - Checkpoints de HighScore
 			Analytics.CustomEvent ("HighScore", new Dictionary<string, object> {
 				{ "MayorA5.000", 1}
@@ -51,9 +51,6 @@ public class ScriptHighScore : MonoBehaviour {
 		
 		SoundManager.soundManager.playSound (GetComponent<AudioSource> ());
 
-		//Submit Score to Play Services
-		controller.SubmitScoreToPlayServices(controller.getHighScore());
-
 	}
 
 
@@ -62,7 +59,7 @@ public class ScriptHighScore : MonoBehaviour {
 	void Update () {
 		
 		//Recuperar High Score del Game Controller
-		highScore.text = controller.getHighScore ().ToString();
+		highScore.text = controller.getScore ().ToString();
 
 	}
 
@@ -203,7 +200,7 @@ public class ScriptHighScore : MonoBehaviour {
 
 		//add data to be passed to the other activity i.e., the data to be sent
 		intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_SUBJECT"), subject);
-		intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"), justMadeText + controller.getHighScore().ToString() + pointsText + body);
+		intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"), justMadeText + controller.getScore().ToString() + pointsText + body);
 
 		//get the current activity
 		AndroidJavaClass unity = new AndroidJavaClass ("com.unity3d.player.UnityPlayer");
