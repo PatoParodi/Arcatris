@@ -41,7 +41,6 @@ public class paddle : MonoBehaviour {
 
 			if (col.gameObject.tag == "pelota" && controller.ballInPlay) {
 
-
 			//LevelManager -> Sumar rebote
 			LevelManager.levelManager.addRebote ();
 

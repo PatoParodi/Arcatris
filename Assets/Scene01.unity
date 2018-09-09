@@ -716,7 +716,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 77f54b430f3dd45aab28a83df88988e7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8439f0feb9e03469e9ef63f30848963f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3928,7 +3928,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 77f54b430f3dd45aab28a83df88988e7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c47fd2d8fdc1d4c3f952ae899178b3c0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4789,7 +4789,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Beach Ball
+  m_Text: 'Plutonium
+
+'
 --- !u!222 &220703709
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5461,10 +5463,10 @@ RectTransform:
   m_Father: {fileID: 1645389584}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1270, y: -150}
+  m_SizeDelta: {x: 220, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &250803461
 MonoBehaviour:
@@ -6152,7 +6154,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 272320019}
   toggleTransition: 1
   graphic: {fileID: 1737477878}
@@ -6977,10 +6979,10 @@ RectTransform:
   m_Father: {fileID: 1645389584}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1000, y: -150}
+  m_SizeDelta: {x: 220, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &339598917
 MonoBehaviour:
@@ -8293,7 +8295,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 277696728}
   toggleTransition: 1
   graphic: {fileID: 1794109456}
@@ -8484,7 +8486,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: d89958743ba7d478dadc8c4c896982e7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fe51de357896f4ce7b21854000552b69, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9522,7 +9524,7 @@ Transform:
   m_GameObject: {fileID: 457122403}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 157.3, y: 626.1, z: -0.9999721}
-  m_LocalScale: {x: 24.122276, y: 24.122276, z: 24.122276}
+  m_LocalScale: {x: 80, y: 80, z: 80}
   m_Children: []
   m_Father: {fileID: 1540885170}
   m_RootOrder: 1
@@ -11355,7 +11357,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 0617a3082e59549ca9333f2aa0e2ca31, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9e50b60af9ddc4834839001ddcca2c2e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11460,61 +11462,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!1 &536843618
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 536843620}
-  - component: {fileID: 536843619}
-  m_Layer: 5
-  m_Name: SliderController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &536843619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 536843618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75347468fd7a44940a59ba4e5e21b0fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 1645389584}
-  panelFather: {fileID: 569093371}
-  bttn:
-  - {fileID: 1304862154}
-  - {fileID: 1467279445}
-  - {fileID: 339598913}
-  - {fileID: 250803457}
-  center: {fileID: 506325362}
-  lerpVelocityToCenter: 3
-  minButtonNum: 0
---- !u!224 &536843620
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 536843618}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9154514, y: 0.9154514, z: 0.9154514}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 16
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 359.93173, y: 640.12134}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &545687870
 GameObject:
   m_ObjectHideFlags: 0
@@ -14078,7 +14025,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &701363755
 GameObject:
@@ -14147,7 +14094,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Beach Ball
+  m_Text: 'Wood
+
+'
 --- !u!222 &701363758
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14366,7 +14315,7 @@ MonoBehaviour:
   paddle: {fileID: 1777835930361310, guid: 202668d558a144ccfbf08f24d5ba284a, type: 2}
   velocidadPaddle: 550
   paddleSpawnInicial: {fileID: 422388538}
-  pelota: {fileID: 1663774087615784, guid: bd7253ecbd898451aa05c02bdf6cead7, type: 2}
+  pelota: {fileID: 1979514308422336, guid: 1a34614d3df84427e81e4476a908f952, type: 2}
   fuerzaPelota: 22
   ballSpawn: {fileID: 1148745240}
   velocidadCaja: 22
@@ -20485,7 +20434,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 1313231477}
   toggleTransition: 1
   graphic: {fileID: 1666713168}
@@ -21605,7 +21554,7 @@ Transform:
   m_GameObject: {fileID: 951755324}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 133.68994, y: 626.1, z: -0.9999721}
-  m_LocalScale: {x: 24.122276, y: 24.122276, z: 24.122276}
+  m_LocalScale: {x: 80, y: 80, z: 80}
   m_Children: []
   m_Father: {fileID: 1540885170}
   m_RootOrder: 2
@@ -21767,7 +21716,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Beach Ball
+  m_Text: Plasma
 --- !u!222 &958029421
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -22367,10 +22316,10 @@ RectTransform:
   m_Father: {fileID: 1645389584}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 190, y: -150}
+  m_SizeDelta: {x: 220, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &986489833
 MonoBehaviour:
@@ -22630,7 +22579,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Beach Ball
+  m_Text: Volcanic
 --- !u!222 &999941362
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -24685,7 +24634,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 556602483}
   toggleTransition: 1
   graphic: {fileID: 1951159852}
@@ -26427,7 +26376,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 716426776}
   toggleTransition: 1
   graphic: {fileID: 1820922116}
@@ -26576,10 +26525,10 @@ RectTransform:
   m_Father: {fileID: 1645389584}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 460, y: -150}
+  m_SizeDelta: {x: 220, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1304862154
 MonoBehaviour:
@@ -27692,7 +27641,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 321132303}
   toggleTransition: 1
   graphic: {fileID: 2015817583}
@@ -28735,7 +28684,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1413633568
 GameObject:
@@ -29166,7 +29115,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 77f54b430f3dd45aab28a83df88988e7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e79113787f61b4a60a3ae628cdb6414c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -29439,7 +29388,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1459665740
 GameObject:
@@ -29635,10 +29584,10 @@ RectTransform:
   m_Father: {fileID: 1645389584}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 730, y: -150}
+  m_SizeDelta: {x: 220, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1467279449
 MonoBehaviour:
@@ -30274,7 +30223,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1492117648
 GameObject:
@@ -30434,7 +30383,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Beach Ball
+  m_Text: Dragon
 --- !u!222 &1496224688
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -30602,7 +30551,7 @@ Transform:
   m_GameObject: {fileID: 1509536326}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 181.29999, y: 626.1, z: -1}
-  m_LocalScale: {x: 24.122452, y: 24.122448, z: 24.122448}
+  m_LocalScale: {x: 80, y: 80, z: 80}
   m_Children: []
   m_Father: {fileID: 1540885170}
   m_RootOrder: 0
@@ -34074,7 +34023,7 @@ RectTransform:
   - {fileID: 788627776}
   - {fileID: 1715673746}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -35187,7 +35136,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 77f54b430f3dd45aab28a83df88988e7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d53886b346ed940aebfe86cc60eff3d6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -37099,7 +37048,7 @@ Transform:
   - {fileID: 1655815644}
   - {fileID: 1432058254}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1902640319
 GameObject:
@@ -42197,7 +42146,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Tennis Ball
+  m_Text: Alien
 --- !u!222 &2015627676
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -42792,7 +42741,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2062701114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44139,7 +44088,7 @@ RectTransform:
   - {fileID: 2002152295}
   - {fileID: 324720571}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

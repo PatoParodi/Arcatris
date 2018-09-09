@@ -157,7 +157,7 @@ AnimationClip:
   m_GenerateMotionCurves: 0
   m_Events:
   - time: 1.25
-    functionName: afterSpawn
+    functionName: LoadSkin
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

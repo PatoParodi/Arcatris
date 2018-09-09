@@ -28,11 +28,20 @@ public class AnalyticsManager : MonoBehaviour {
 	}
 
 
-	public void NuevoJuego(){
+	public void NuevoJuego(string BolaElegida){
 	
 		Analytics.CustomEvent ("NuevaPartida", new Dictionary<string, object> {
 			{ "Sonido", SoundManager.soundManager.soundEnabled },
-			{ "Dificultad", LevelManager.levelManager.dificultadActual}
+			{ "Dificultad", LevelManager.levelManager.dificultadActual},
+			{ "BolaElegida", BolaElegida}
+		});
+	
+	}
+
+	public void ComprarPelota(string numeroDePelota){
+	
+		Analytics.CustomEvent ("CompraNuevaPelota", new Dictionary<string, object> {
+			{ "NumeroDePelota", numeroDePelota }
 		});
 	
 	}

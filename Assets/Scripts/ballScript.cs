@@ -14,6 +14,9 @@ public class ballScript : MonoBehaviour {
 
 	public bool RedBallFlag = false;
 
+	private GameObject ballSkin;
+
+	private BallSpinManager ballSkinManager;
 
 	void Awake(){
 	
@@ -24,23 +27,25 @@ public class ballScript : MonoBehaviour {
 
 		controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
 
+	}
+
+	public void LoadSkin(){
+
+		pelotaSpawneada = true;
+
+		ballSkin = Instantiate (Resources.Load ("Pelotas/" + levelManager.numeroBolaElegida) as GameObject, transform.position, Quaternion.identity, gameObject.transform);
+
+		ballSkinManager = ballSkin.GetComponent<BallSpinManager>();
+
+//		ballSkin.transform.position = Vector3.zero;
 
 	}
 
-//	//Animacion de spawn - - OBSOLETO
-//	public void animarSpawning(){
-//		
-//		GetComponentInChildren<Animator> ().SetTrigger ("Instanciar");
-//
-//	}
-		
-	//Se llama desde la animacion de Spawn
-	public void afterSpawn(){
-
-		GetComponentInChildren<ballScript2> ().mostrarPelota ();
-
+	public void StartSpinning(){
+	
+		ballSkinManager.StartSpinning();
+	
 	}
-
 
 	void Update(){
 	
@@ -74,21 +79,26 @@ public class ballScript : MonoBehaviour {
 	public IEnumerator activarPowerUpRedBall(float duracion){
 	
 		//Animar bola para que cambie de color
-//		GetComponentInChildren<Animator>().SetBool("RedBall",true);
-		GetComponentInChildren<ballScript2> ().ActivarBolaRoja ();
+		ballSkinManager.ActivarBolaRoja ();
 		RedBallFlag = true;
 
 		yield return new WaitForSeconds (duracion);
 
 		RedBallFlag = false;
-//		GetComponentInChildren<Animator>().SetBool("RedBall",false);
-		GetComponentInChildren<ballScript2> ().DesactivarBolaRoja ();
-
+		ballSkinManager.DesactivarBolaRoja ();
 
 	}
 
 
 	void OnCollisionEnter2D(Collision2D col){
+
+		//Hacer girar la pelota al chocar con el marco
+		if (col.gameObject.tag == "Marco"){
+
+			GetComponentInChildren<BallSpinManager> ().spin = 2 * (GetComponent<Rigidbody2D> ().velocity.x / GetComponent<Rigidbody2D> ().velocity.y);
+
+		}
+
 
 		// Evitar que al chocar con poco angulo contra algun marco la pelota quede pegada a la pared
 		if (col.gameObject.tag == "Marco" &&

@@ -101,7 +101,7 @@ public class GameController : MonoBehaviour {
 //		PlayerPrefs.DeleteAll();
 //		PlayerPrefs.SetString ("jugoAntes","Si");
 //		PlayerPrefs.SetInt ("High Score", 0);
-//		PlayerPrefs.SetInt ("ArcatrisMonedas", 1000);
+//		PlayerPrefs.SetInt ("ArcatrisMonedas", 3000);
 //		PlayerPrefs.SetInt ("ExtraBall", 0);
 ///////////////////////////////////////////////////////////
 
@@ -608,7 +608,7 @@ public class GameController : MonoBehaviour {
 
 		if(!continueFlag){
 			//Nueva partida
-			AnalyticsManager.Instance.NuevoJuego ();
+			AnalyticsManager.Instance.NuevoJuego (LevelManager.levelManager.numeroBolaElegida);
 		
 		}
 
@@ -630,6 +630,9 @@ public class GameController : MonoBehaviour {
 
 		//Determinar Dificultad
 		LevelManager.levelManager.determinarDificultad();
+
+		//Setear ultima Bola Elegida
+		LevelManager.levelManager.numeroBolaElegida = PlayerPrefs.GetString(LevelManager.levelManager.s_BolaElegida);
 
 		//Inicializar Objetos
 		StartCoroutine(inicializarObjetos(countdownInicial, continueFlag, "WhiteBall")); //WhiteBall
@@ -663,9 +666,12 @@ public class GameController : MonoBehaviour {
 		paddleVivo.transform.position = new Vector2 (paddleVivo.transform.position.x, GameObject.FindGameObjectWithTag ("padPosition").transform.position.y);
 
 		pelotaViva  = Instantiate (pelota,new Vector3 (paddleVivo.transform.position.x,ballSpawn.transform.position.y,ballSpawn.transform.position.z),Quaternion.identity) as GameObject;
+		//Animacion de Spawn
+		pelotaViva.GetComponent<Animator> ().SetTrigger ("Spawn");
+
 		if (!continueFlag) {
 			//Leer bola seleccionada
-			LevelManager.levelManager.numeroBolaElegida = PlayerPrefs.GetString (LevelManager.levelManager.s_BolaElegida);
+//			LevelManager.levelManager.numeroBolaElegida = PlayerPrefs.GetString (LevelManager.levelManager.s_BolaElegida);
 		}
 			
 		SoundManager.soundManager.playSound (ballSpawn.GetComponent<AudioSource> ());
@@ -753,6 +759,7 @@ public class GameController : MonoBehaviour {
 		// Dar fuerza inicial a la pelota
 		pelotaViva.GetComponent<Rigidbody2D>().AddForce (obtenerVectorVelocidad(fuerzaPelota,50f,130f));
 		pelotaViva.GetComponent<CircleCollider2D> ().enabled = true;
+		pelotaViva.GetComponent<ballScript> ().StartSpinning ();
 
 		ballInPlay = true;
 

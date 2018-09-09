@@ -31,13 +31,15 @@ public class SkinDePelotas: MonoBehaviour {
 		//Determiniar si tiene suficientes diamantes
 		if(_controller.Comprar(Precio)){
 			
-			Debug.Log ("Compro pelota " + NumeroDeBola);
 			btnComprar.SetActive(false); //Apagar boton de compra
 			//Prendo y activo el Toggle
 			gameObject.SetActive (true);
 			GetComponent<Toggle>().interactable = true;
 
-			PlayerPrefs.SetInt ("Pelota_" + NumeroDeBola, 1); //Ejemplo guardar Pelota_01 si ha sido comprada
+			PlayerPrefs.SetInt (NumeroDeBola, 1); //Ejemplo guardar (Pelota) 01 si ha sido comprada (0 NO, 1 SI)
+
+			//Analytics
+			AnalyticsManager.Instance.ComprarPelota(NumeroDeBola);
 
 		} else {
 

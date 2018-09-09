@@ -39,14 +39,14 @@ public class BallManager : MonoBehaviour {
 
 			LevelManager.levelManager.numeroBolaElegida = "00";
 			PlayerPrefs.SetString (LevelManager.levelManager.s_BolaElegida, "00");
-			PlayerPrefs.SetInt ("Pelota_00", 1);
+			PlayerPrefs.SetInt (LevelManager.levelManager.numeroBolaElegida, 1);
 
 		}
 
 
 		foreach (GameObject boton in botonesPelotas) {
-
-			int estaDesbloqueada = PlayerPrefs.GetInt ("Pelota_" + boton.GetComponent<SkinDePelotas> ().NumeroDeBola); //Ejemplo verificar si Pelota_01 ha sido comprada
+			//El nombre de la variable guardada es el numero de bola
+			int estaDesbloqueada = PlayerPrefs.GetInt (boton.GetComponent<SkinDePelotas> ().NumeroDeBola); //Ejemplo verificar si (Pelota) 01 ha sido comprada (0 NO, 1 SI)
 
 			if (estaDesbloqueada == 1) {
 
