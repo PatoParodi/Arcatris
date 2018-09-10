@@ -153,6 +153,7 @@ MonoBehaviour:
   cantidadDiamantes: 0
   cantidadBolasExtra: 0
   cantidadPelotas: 1
+  bolaDesbloqueada: {fileID: 114559179446985710}
 --- !u!114 &114331217767076948
 MonoBehaviour:
   m_ObjectHideFlags: 1

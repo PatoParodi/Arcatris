@@ -70,12 +70,16 @@ public class DailyRewardManager : MonoBehaviour {
 
 	}
 
+	public void LeerNumeroGiftDeMemoria(){
+	
+		////// PARA TEST ONLY
+//		GiftCounter = 2;
+//		GiftCounter = PlayerPrefs.GetInt (LevelManager.levelManager.s_GiftCounter);
+		///// ELIMINAR LUEGO
+	
+	}
 
 	public void DesbloquearGift(){
-
-		////// PARA TEST ONLY
-		GiftCounter = PlayerPrefs.GetInt (LevelManager.levelManager.s_GiftCounter);
-		///// ELIMINAR LUEGO
 
 
 		if (GiftCounter == 5) {
@@ -99,10 +103,8 @@ public class DailyRewardManager : MonoBehaviour {
 
 		StartCoroutine (abriendoPopUp (DailyAvisoPopUp.GetComponent<Animator> ().GetCurrentAnimatorStateInfo (0).length));
 			
-//		//Analytics de nueva bola desbloqueada
-//		Analytics.CustomEvent ("DailyGiftShop", new Dictionary<string, object> {
-//			{ "DiaGiftDesbloqueado", GiftCounter }
-//		});
+		//Analytics
+		AnalyticsManager.Instance.GiftDesbloqueado(GiftCounter);
 
 	}
 

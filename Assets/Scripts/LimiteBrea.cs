@@ -100,6 +100,10 @@ public class LimiteBrea : MonoBehaviour {
 
 		particulasBrea.Play ();
 
+		//Reproducir Sonido
+		SoundManager.soundManager.playSound(GetComponent<AudioSource>());
+
+		//Bajar brea
 		nuevaPosicion -= Vector3.up * movimientoPiso * multiplicador;
 
 		//Validar que la nueva posicion no quede abajo del minimo

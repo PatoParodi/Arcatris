@@ -50,10 +50,10 @@ public class BallManager : MonoBehaviour {
 
 			if (estaDesbloqueada == 1) {
 
+				boton.SetActive (true);	//Prender el selector
 				boton.GetComponent<Toggle> ().interactable = true; //Activar Toggle
 				if (boton.GetComponent<SkinDePelotas> ().btnComprar != null) {
 					boton.GetComponent<SkinDePelotas> ().btnComprar.SetActive (false); //Apagar boton de compra
-					boton.SetActive (true);	//Prender el selector
 				}
 
 				//Prender la ultima seleccionada
@@ -69,6 +69,36 @@ public class BallManager : MonoBehaviour {
 			}
 
 		}
+
+	}
+
+	public string ObtenerNuevaBolaAlAzar(){
+	//Devuelve el nombre del Sprite de la bola elegida
+
+		string Salvavidas = "NO";
+
+		foreach (GameObject boton in botonesPelotas) {
+			//Solo aplica para las NO desbloqueadas
+			if (boton.activeSelf == false) {
+
+				if (Salvavidas == "NO") {
+					//En caso de que la logica no devuelva ninguna, la primera encontrada sera el "salvavidas"
+					Salvavidas = boton.GetComponent<SkinDePelotas> ().NumeroDeBola;
+				}
+
+				//Seleccionar un numero de bola al azar
+				int numeroAlAzar = Random.Range(0,2);
+				if (numeroAlAzar == 1) { 
+
+					return boton.GetComponent<SkinDePelotas> ().NumeroDeBola;
+				
+				}
+
+			}
+		
+		}
+	//Si no se encontro bola para devolver, devolver la primera encontrada
+		return Salvavidas;
 
 	}
 

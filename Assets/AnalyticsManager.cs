@@ -46,4 +46,13 @@ public class AnalyticsManager : MonoBehaviour {
 	
 	}
 
+	public void GiftDesbloqueado(int DiaDesbloqueado){
+	
+		//Analytics de nueva bola desbloqueada
+		Analytics.CustomEvent ("DailyGiftShop", new Dictionary<string, object> {
+			{ "GiftDesbloqueado", DiaDesbloqueado.ToString() }
+		});
+	
+	}
+
 }

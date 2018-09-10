@@ -1,13 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GiftAssignment : MonoBehaviour {
 
 	public int cantidadDiamantes;
 	public int cantidadBolasExtra;
 	public int cantidadPelotas;
+	public Image bolaDesbloqueada;
 
+	string numeroDeBola;
+
+	void Awake(){
+	
+		//PREMIO SKIN DE PELOTA
+		if (cantidadPelotas > 0) {
+
+			//Obtener al azar un numero de bola que NO haya sido desbloqueado aun
+			numeroDeBola = BallManager.Instance.ObtenerNuevaBolaAlAzar ();
+
+			if (numeroDeBola != "NO") {
+				//Cargar sprite de la bola elegida
+				bolaDesbloqueada.sprite = Resources.Load ("Images/" + numeroDeBola, typeof(Sprite)) as Sprite;
+
+//				//Guardar nueva bola en BD
+//				PlayerPrefs.SetInt (numeroDeBola, 1);
+//				//Para habilitar el nuevo boton en el shop
+//				BallManager.Instance.VerificarBolasCompradas ();
+
+			}
+	
+		}
+	}
 
 	public void AsignarPremio(){
 	
@@ -31,8 +56,21 @@ public class GiftAssignment : MonoBehaviour {
 	//PREMIO SKIN DE PELOTA
 		if(cantidadPelotas > 0){
 
+			//Obtener al azar un numero de bola que NO haya sido desbloqueado aun
+//			string numeroDeBola = BallManager.Instance.ObtenerNuevaBolaAlAzar();
+			if(numeroDeBola != "NO"){
+				//Cargar sprite de la bola elegida
+//				bolaDesbloqueada = Resources.Load("Images/" + numeroDeBola, typeof(Image)) as Image;
+
+				//Guardar nueva bola en BD
+				PlayerPrefs.SetInt (numeroDeBola, 1);
+				//Para habilitar el nuevo boton en el shop
+				BallManager.Instance.VerificarBolasCompradas ();
+				
+			}
 		}
 
 	}
+		
 
 }
