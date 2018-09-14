@@ -131,6 +131,8 @@ public class GameController : MonoBehaviour {
 		BallManager.Instance.VerificarBolasCompradas ();
 
 		//Leer info de Power Ups
+		PowerUpManager.Instance.LeerNiveles();
+
 		//Red Ball
 		leerDataPowerUps(LevelManager.levelManager.s_PowerUpRebBallProb, ref LevelManager.levelManager.PowerUpRedBall);
 		leerDataPowerUps(LevelManager.levelManager.s_PowerUpRebBallDurac, ref LevelManager.levelManager.PowerUpRedBallDuracion);

@@ -815,8 +815,9 @@ GameObject:
   - component: {fileID: 59889367}
   - component: {fileID: 59889366}
   - component: {fileID: 59889365}
-  - component: {fileID: 59889364}
   - component: {fileID: 59889363}
+  - component: {fileID: 59889368}
+  - component: {fileID: 59889364}
   m_Layer: 5
   m_Name: button1
   m_TagString: Untagged
@@ -837,6 +838,7 @@ RectTransform:
   - {fileID: 1127741739}
   - {fileID: 86534094}
   - {fileID: 1478943689}
+  - {fileID: 97311071}
   m_Father: {fileID: 1824939465}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -925,32 +927,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &59889364
-MonoBehaviour:
+--- !u!95 &59889364
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 59889361}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7da4f7ddb33f64f9dacbdbceb987fb5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  titleConfigMenu: {fileID: 0}
-  soundOnOff: {fileID: 0}
-  TouchPad: {fileID: 0}
-  Botones: {fileID: 0}
-  _pantallaInicial: {fileID: 0}
-  _inGame: {fileID: 0}
-  _UI_RateUs: {fileID: 0}
-  _monedas: {fileID: 377549637}
-  _extraBalls: {fileID: 2067227977}
-  _txtPopUp: {fileID: 461811754}
-  _UI_RateUS: {fileID: 0}
-  _txtNivel: {fileID: 0}
-  musicaMenu: {fileID: 0}
-  tieneSonidos: 0
-  SolapaBolas: {fileID: 0}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2acce1f25974a449585f38472e17b527, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &59889365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -968,7 +961,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -982,7 +975,7 @@ MonoBehaviour:
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
+    m_HighlightedTrigger: 
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
@@ -990,8 +983,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 59889364}
-        m_MethodName: comprarPowerUp1
+      - m_Target: {fileID: 59889368}
+        m_MethodName: ComprarPowerUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1036,6 +1029,27 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 59889361}
+--- !u!114 &59889368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 59889361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0080893ea8b004a7c991769ac2f33337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxNivel: 4
+  color: {r: 0.8745098, g: 0, b: 0.1764706, a: 1}
+  contenedor: {fileID: 97311070}
+  Frecuencia: 0
+  Poder: 1
+  RedBall: 1
+  MultipleBall: 0
+  BajarBrea: 0
+  Precio: 0
+  _NoCoinsPopUp: {fileID: 461811754}
 --- !u!1 &60393448
 GameObject:
   m_ObjectHideFlags: 0
@@ -2094,9 +2108,9 @@ GameObject:
   - component: {fileID: 90743267}
   - component: {fileID: 90743266}
   - component: {fileID: 90743265}
-  - component: {fileID: 90743264}
   - component: {fileID: 90743263}
   - component: {fileID: 90743262}
+  - component: {fileID: 90743268}
   m_Layer: 5
   m_Name: button2
   m_TagString: Untagged
@@ -2117,6 +2131,7 @@ RectTransform:
   - {fileID: 1764093830}
   - {fileID: 496501113}
   - {fileID: 1148525216}
+  - {fileID: 841042522}
   m_Father: {fileID: 1824939465}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2222,32 +2237,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &90743264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 90743260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7da4f7ddb33f64f9dacbdbceb987fb5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  titleConfigMenu: {fileID: 0}
-  soundOnOff: {fileID: 0}
-  TouchPad: {fileID: 0}
-  Botones: {fileID: 0}
-  _pantallaInicial: {fileID: 0}
-  _inGame: {fileID: 0}
-  _UI_RateUs: {fileID: 0}
-  _monedas: {fileID: 377549637}
-  _extraBalls: {fileID: 2067227977}
-  _txtPopUp: {fileID: 461811754}
-  _UI_RateUS: {fileID: 0}
-  _txtNivel: {fileID: 0}
-  musicaMenu: {fileID: 0}
-  tieneSonidos: 0
-  SolapaBolas: {fileID: 0}
 --- !u!114 &90743265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2287,8 +2276,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 90743264}
-        m_MethodName: comprarPowerUp2
+      - m_Target: {fileID: 90743268}
+        m_MethodName: ComprarPowerUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2333,6 +2322,27 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 90743260}
+--- !u!114 &90743268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 90743260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0080893ea8b004a7c991769ac2f33337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxNivel: 5
+  color: {r: 0, g: 0.5803922, b: 0.8745098, a: 1}
+  contenedor: {fileID: 841042521}
+  Frecuencia: 1
+  Poder: 0
+  RedBall: 0
+  MultipleBall: 0
+  BajarBrea: 1
+  Precio: 250
+  _NoCoinsPopUp: {fileID: 461811754}
 --- !u!1 &95782812
 GameObject:
   m_ObjectHideFlags: 0
@@ -2441,6 +2451,63 @@ RectTransform:
   m_AnchoredPosition: {x: 14.5, y: -0.0000076293945}
   m_SizeDelta: {x: 73, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &97311070
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 97311071}
+  - component: {fileID: 97311072}
+  m_Layer: 5
+  m_Name: Barras
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &97311071
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 97311070}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 59889362}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.000026702997, y: -186.8883}
+  m_SizeDelta: {x: 2.2, y: 0.37}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &97311072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 97311070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2095666955, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 75
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 36, y: 10}
+  m_Spacing: {x: 10, y: 0}
+  m_Constraint: 2
+  m_ConstraintCount: 1
 --- !u!1 &99517538
 GameObject:
   m_ObjectHideFlags: 0
@@ -2917,9 +2984,9 @@ GameObject:
   - component: {fileID: 118316449}
   - component: {fileID: 118316448}
   - component: {fileID: 118316447}
-  - component: {fileID: 118316446}
   - component: {fileID: 118316445}
   - component: {fileID: 118316444}
+  - component: {fileID: 118316450}
   m_Layer: 5
   m_Name: button5
   m_TagString: Untagged
@@ -2940,6 +3007,7 @@ RectTransform:
   - {fileID: 423231393}
   - {fileID: 575091044}
   - {fileID: 192068375}
+  - {fileID: 1343631830}
   m_Father: {fileID: 1824939465}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3045,32 +3113,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &118316446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 118316442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7da4f7ddb33f64f9dacbdbceb987fb5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  titleConfigMenu: {fileID: 0}
-  soundOnOff: {fileID: 0}
-  TouchPad: {fileID: 0}
-  Botones: {fileID: 0}
-  _pantallaInicial: {fileID: 0}
-  _inGame: {fileID: 0}
-  _UI_RateUs: {fileID: 0}
-  _monedas: {fileID: 377549637}
-  _extraBalls: {fileID: 2067227977}
-  _txtPopUp: {fileID: 461811754}
-  _UI_RateUS: {fileID: 0}
-  _txtNivel: {fileID: 0}
-  musicaMenu: {fileID: 0}
-  tieneSonidos: 0
-  SolapaBolas: {fileID: 0}
 --- !u!114 &118316447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3110,8 +3152,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 118316446}
-        m_MethodName: comprarPowerUp5
+      - m_Target: {fileID: 118316450}
+        m_MethodName: ComprarPowerUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3156,6 +3198,27 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 118316442}
+--- !u!114 &118316450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 118316442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0080893ea8b004a7c991769ac2f33337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxNivel: 2
+  color: {r: 0, g: 0.5803922, b: 0.8745098, a: 1}
+  contenedor: {fileID: 1343631829}
+  Frecuencia: 1
+  Poder: 0
+  RedBall: 0
+  MultipleBall: 0
+  BajarBrea: 1
+  Precio: 250
+  _NoCoinsPopUp: {fileID: 461811754}
 --- !u!1 &125078938
 GameObject:
   m_ObjectHideFlags: 0
@@ -4470,9 +4533,9 @@ GameObject:
   - component: {fileID: 207406533}
   - component: {fileID: 207406532}
   - component: {fileID: 207406531}
-  - component: {fileID: 207406530}
   - component: {fileID: 207406529}
   - component: {fileID: 207406528}
+  - component: {fileID: 207406534}
   m_Layer: 5
   m_Name: button4
   m_TagString: Untagged
@@ -4493,6 +4556,7 @@ RectTransform:
   - {fileID: 628895723}
   - {fileID: 1215322868}
   - {fileID: 95782813}
+  - {fileID: 992431424}
   m_Father: {fileID: 1824939465}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4598,32 +4662,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &207406530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 207406526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7da4f7ddb33f64f9dacbdbceb987fb5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  titleConfigMenu: {fileID: 0}
-  soundOnOff: {fileID: 0}
-  TouchPad: {fileID: 0}
-  Botones: {fileID: 0}
-  _pantallaInicial: {fileID: 0}
-  _inGame: {fileID: 0}
-  _UI_RateUs: {fileID: 0}
-  _monedas: {fileID: 377549637}
-  _extraBalls: {fileID: 2067227977}
-  _txtPopUp: {fileID: 461811754}
-  _UI_RateUS: {fileID: 0}
-  _txtNivel: {fileID: 0}
-  musicaMenu: {fileID: 0}
-  tieneSonidos: 0
-  SolapaBolas: {fileID: 0}
 --- !u!114 &207406531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4663,8 +4701,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 207406530}
-        m_MethodName: comprarPowerUp4
+      - m_Target: {fileID: 207406534}
+        m_MethodName: ComprarPowerUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4709,6 +4747,27 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 207406526}
+--- !u!114 &207406534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 207406526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0080893ea8b004a7c991769ac2f33337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxNivel: 3
+  color: {r: 0.8745098, g: 0, b: 0.1764706, a: 1}
+  contenedor: {fileID: 992431423}
+  Frecuencia: 0
+  Poder: 1
+  RedBall: 0
+  MultipleBall: 1
+  BajarBrea: 0
+  Precio: 250
+  _NoCoinsPopUp: {fileID: 461811754}
 --- !u!1 &207863808
 GameObject:
   m_ObjectHideFlags: 0
@@ -11227,6 +11286,7 @@ GameObject:
   - component: {fileID: 509764193}
   - component: {fileID: 509764195}
   - component: {fileID: 509764194}
+  - component: {fileID: 509764196}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -11291,6 +11351,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 509764192}
+--- !u!114 &509764196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 509764192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef445fb7df39149d79fea218ba91bb93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boton: {fileID: 207406526}
 --- !u!1 &510017004
 GameObject:
   m_ObjectHideFlags: 0
@@ -15409,6 +15481,63 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 772785696}
+--- !u!1 &783909963
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 783909964}
+  - component: {fileID: 783909965}
+  m_Layer: 5
+  m_Name: Barras
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &783909964
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 783909963}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.99994314, y: 0.99994314, z: 0.99994314}
+  m_Children: []
+  m_Father: {fileID: 1653602383}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -186.81741}
+  m_SizeDelta: {x: 2.2, y: 0.37}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &783909965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 783909963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2095666955, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 75
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 36, y: 10}
+  m_Spacing: {x: 10, y: 0}
+  m_Constraint: 2
+  m_ConstraintCount: 1
 --- !u!1 &788458770
 GameObject:
   m_ObjectHideFlags: 0
@@ -19384,6 +19513,63 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 833545071}
+--- !u!1 &841042521
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 841042522}
+  - component: {fileID: 841042523}
+  m_Layer: 5
+  m_Name: Barras
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &841042522
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 841042521}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.99991655, y: 0.99991655, z: 0.99991655}
+  m_Children: []
+  m_Father: {fileID: 90743261}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -186.81248}
+  m_SizeDelta: {x: 2.2, y: 0.37}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &841042523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 841042521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2095666955, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 75
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 36, y: 10}
+  m_Spacing: {x: 10, y: 0}
+  m_Constraint: 2
+  m_ConstraintCount: 1
 --- !u!1 &849568491
 GameObject:
   m_ObjectHideFlags: 0
@@ -23185,6 +23371,63 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!1 &992431423
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 992431424}
+  - component: {fileID: 992431425}
+  m_Layer: 5
+  m_Name: Barras
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &992431424
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 992431423}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.99994326, y: 0.99994326, z: 0.99994326}
+  m_Children: []
+  m_Father: {fileID: 207406527}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -186.8174}
+  m_SizeDelta: {x: 2.2, y: 0.37}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &992431425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 992431423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2095666955, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 75
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 36, y: 10}
+  m_Spacing: {x: 10, y: 0}
+  m_Constraint: 2
+  m_ConstraintCount: 1
 --- !u!1 &999941359
 GameObject:
   m_ObjectHideFlags: 0
@@ -25190,7 +25433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.5803922, b: 0.8745098, a: 1}
+  m_Color: {r: 0.8745098, g: 0, b: 0.1764706, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -25210,7 +25453,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: +3%
+  m_Text: +0,5"
 --- !u!222 &1127741741
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -26963,6 +27206,7 @@ GameObject:
   - component: {fileID: 1271771683}
   - component: {fileID: 1271771685}
   - component: {fileID: 1271771684}
+  - component: {fileID: 1271771686}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -27027,6 +27271,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1271771682}
+--- !u!114 &1271771686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1271771682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef445fb7df39149d79fea218ba91bb93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boton: {fileID: 1653602382}
 --- !u!1 &1280400271
 GameObject:
   m_ObjectHideFlags: 0
@@ -28134,6 +28390,63 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &1343631829
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1343631830}
+  - component: {fileID: 1343631831}
+  m_Layer: 5
+  m_Name: Barras
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1343631830
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1343631829}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.99994326, y: 0.99994326, z: 0.99994326}
+  m_Children: []
+  m_Father: {fileID: 118316443}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -186.8174}
+  m_SizeDelta: {x: 2.2, y: 0.37}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1343631831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1343631829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2095666955, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 75
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 36, y: 10}
+  m_Spacing: {x: 10, y: 0}
+  m_Constraint: 2
+  m_ConstraintCount: 1
 --- !u!1 &1344446268
 GameObject:
   m_ObjectHideFlags: 0
@@ -28212,6 +28525,7 @@ GameObject:
   - component: {fileID: 1350191128}
   - component: {fileID: 1350191130}
   - component: {fileID: 1350191129}
+  - component: {fileID: 1350191131}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -28276,6 +28590,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1350191127}
+--- !u!114 &1350191131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1350191127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef445fb7df39149d79fea218ba91bb93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boton: {fileID: 118316442}
 --- !u!1 &1357533347
 GameObject:
   m_ObjectHideFlags: 0
@@ -28864,6 +29190,49 @@ Canvas:
   m_SortingLayerID: 141439165
   m_SortingOrder: 1
   m_TargetDisplay: 0
+--- !u!1 &1394574974
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1394574976}
+  - component: {fileID: 1394574975}
+  m_Layer: 0
+  m_Name: PowerUpManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1394574975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1394574974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aeda823269f943d397f17baf9ee9fdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RedBall: {fileID: 0}
+  MultipleBall: {fileID: 0}
+  BajarBrea: {fileID: 0}
+--- !u!4 &1394574976
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1394574974}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.009271964, y: -0.44594276, z: 0.33989054}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1397776215
 GameObject:
   m_ObjectHideFlags: 0
@@ -33329,9 +33698,9 @@ GameObject:
   - component: {fileID: 1653602389}
   - component: {fileID: 1653602388}
   - component: {fileID: 1653602387}
-  - component: {fileID: 1653602386}
   - component: {fileID: 1653602385}
   - component: {fileID: 1653602384}
+  - component: {fileID: 1653602390}
   m_Layer: 5
   m_Name: button3
   m_TagString: Untagged
@@ -33352,6 +33721,7 @@ RectTransform:
   - {fileID: 1695650469}
   - {fileID: 252368847}
   - {fileID: 18925368}
+  - {fileID: 783909964}
   m_Father: {fileID: 1824939465}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -33457,32 +33827,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &1653602386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1653602382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7da4f7ddb33f64f9dacbdbceb987fb5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  titleConfigMenu: {fileID: 0}
-  soundOnOff: {fileID: 0}
-  TouchPad: {fileID: 0}
-  Botones: {fileID: 0}
-  _pantallaInicial: {fileID: 0}
-  _inGame: {fileID: 0}
-  _UI_RateUs: {fileID: 0}
-  _monedas: {fileID: 377549637}
-  _extraBalls: {fileID: 2067227977}
-  _txtPopUp: {fileID: 461811754}
-  _UI_RateUS: {fileID: 0}
-  _txtNivel: {fileID: 0}
-  musicaMenu: {fileID: 0}
-  tieneSonidos: 0
-  SolapaBolas: {fileID: 0}
 --- !u!114 &1653602387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33522,8 +33866,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1653602386}
-        m_MethodName: comprarPowerUp3
+      - m_Target: {fileID: 1653602390}
+        m_MethodName: ComprarPowerUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -33568,6 +33912,27 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1653602382}
+--- !u!114 &1653602390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1653602382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0080893ea8b004a7c991769ac2f33337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxNivel: 4
+  color: {r: 0.8745098, g: 0, b: 0.1764706, a: 1}
+  contenedor: {fileID: 783909963}
+  Frecuencia: 0
+  Poder: 1
+  RedBall: 1
+  MultipleBall: 0
+  BajarBrea: 0
+  Precio: 250
+  _NoCoinsPopUp: {fileID: 461811754}
 --- !u!1 &1655815643
 GameObject:
   m_ObjectHideFlags: 0
@@ -38992,6 +39357,7 @@ GameObject:
   - component: {fileID: 1962226910}
   - component: {fileID: 1962226912}
   - component: {fileID: 1962226911}
+  - component: {fileID: 1962226913}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -39056,6 +39422,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1962226909}
+--- !u!114 &1962226913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1962226909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef445fb7df39149d79fea218ba91bb93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boton: {fileID: 90743260}
 --- !u!1 &1980092464
 GameObject:
   m_ObjectHideFlags: 0

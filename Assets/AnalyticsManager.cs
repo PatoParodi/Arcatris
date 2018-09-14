@@ -46,6 +46,16 @@ public class AnalyticsManager : MonoBehaviour {
 	
 	}
 
+	public void ComprarPowerUp(string tipoMejora, string powerup){
+	
+		//Analytics de nueva compra de Mejora de Power Up
+		Analytics.CustomEvent ("CompraMejoraPowerUp", new Dictionary<string, object> {
+			{ "TipoMejora", tipoMejora },
+			{ "PowerUp", powerup }
+		});
+	
+	}
+
 	public void GiftDesbloqueado(int DiaDesbloqueado){
 	
 		//Analytics de nueva bola desbloqueada

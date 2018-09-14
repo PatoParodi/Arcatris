@@ -30,10 +30,6 @@ namespace LevelManager
 		public static float MaxVelocidadPaddle = 300;
 
 		//Customizing: Variables globales configuracion del juego
-		// Aumento de niveles
-		private static float porcentajeAumentoNivel = 0.025f;	// 2.5%
-		private static float factorDif = 0.04f; // Aumento progresivo de dificultad 4%
-
 		//POWER UPS
 		//Red Ball
 		public static float PowerUpRedBallDuracion 	= 6f;
