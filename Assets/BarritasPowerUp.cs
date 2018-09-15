@@ -146,7 +146,7 @@ public class BarritasPowerUp : MonoBehaviour {
 
 	public void isNivelMaximoAlcanzado(int nivel){
 	
-		if (nivel == MaxNivel)
+		if (nivel >= MaxNivel)
 			GetComponent<Button> ().interactable = false;
 	
 	}
