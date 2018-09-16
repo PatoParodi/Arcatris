@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Glow
+  m_Name: 04_ball_skin
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:
@@ -40,7 +40,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: cb02c78e78e094b5098301eb0ad73eff, type: 2}
+  m_Motion: {fileID: 7400000, guid: 4aad8311af3241d4799ddca8f8257227, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
