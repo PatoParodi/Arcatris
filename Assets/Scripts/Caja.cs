@@ -37,17 +37,17 @@ public class Caja : MonoBehaviour {
 			if (gameObject.tag == "Caja") {
 				if (LevelManager.levelManager.contadorCajasDerretidas > 5)
 				//Verificar si sera una caja Power Up Bajar Brea
-				if (probabilidad (LevelManager.levelManager.PowerUpBajarBrea)) {
+				if (probabilidad (PowerUpManager.Instance.BajarBrea.Frecuencia)) {
 					GetComponent<Animator> ().SetBool ("BreaDown", true);
 					powerUpBajarBrea = true;
 				}
 
-				if (!powerUpBajarBrea && !powerUpRedBall && probabilidad (LevelManager.levelManager.PowerUpMultipleBallProb)) {
+				if (!powerUpBajarBrea && !powerUpRedBall && probabilidad (PowerUpManager.Instance.MultipleBall.Frecuencia)) {
 					powerUpMB = true;
 
 				}
 
-				if (!powerUpBajarBrea && !powerUpMB && probabilidad (LevelManager.levelManager.PowerUpRedBall)) {
+				if (!powerUpBajarBrea && !powerUpMB && probabilidad (PowerUpManager.Instance.RedBall.Frecuencia)) {
 					powerUpRedBall = true;
 
 				}
@@ -146,7 +146,7 @@ public class Caja : MonoBehaviour {
 
 		GameObject brea = GameObject.FindGameObjectWithTag ("Brea");
 
-		brea.GetComponent<LimiteBrea> ().bajarBrea(4);
+		brea.GetComponent<LimiteBrea> ().bajarBrea(PowerUpManager.Instance.BajarBrea.PoderBajar);
 
 	}
 
@@ -181,7 +181,7 @@ public class Caja : MonoBehaviour {
 			//Multiple Balls
 			//Instanciar bola extra
 			GameObject bolaNueva;
-			for (int i = 0; i < LevelManager.levelManager.PowerUpMultipleBallCant; i++) {
+			for (int i = 0; i < PowerUpManager.Instance.MultipleBall.PoderCantidad; i++) {
 				bolaNueva = Instantiate (Resources.Load ("Prefabs/NewBall"), transform.position, Quaternion.identity) as GameObject;
 				bolaNueva.GetComponent<ballScript> ().LoadSkin ();
 				bolaNueva.GetComponent<ballScript> ().StartSpinning ();
@@ -191,7 +191,7 @@ public class Caja : MonoBehaviour {
 
 		} else if (powerUpRedBall) {
 			//Red Ball
-			objeto.GetComponent<ballScript>().PowerUpRedBall(LevelManager.levelManager.PowerUpRedBallDuracion);
+			objeto.GetComponent<ballScript>().PowerUpRedBall(PowerUpManager.Instance.RedBall.PoderDuracion);
 		}
 
 		else{

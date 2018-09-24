@@ -132,6 +132,9 @@ MonoBehaviour:
   spin: 0
   HasGlow: 0
   Glow: {fileID: 0}
+  HasLights: 0
+  Light_1: {fileID: 0}
+  Light_2: {fileID: 0}
 --- !u!212 &212281014285237544
 SpriteRenderer:
   m_ObjectHideFlags: 1

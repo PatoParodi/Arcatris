@@ -64,13 +64,9 @@ public class GameController : MonoBehaviour {
 	private GameObject paddleVivo;
 	private float movimientoPaddle;
 	private float movimientoTouchPad;
-	private float tiempoPresionandoR = 0;
-	private float tiempoPresionandoL = 0;
 	public int multiplicadorVelocidad;
 	private GameObject pelotaViva;
-	private bool validarTouchInicial = false;
 	private float antiguaPosicionPaddle;
-	private float contadorTiempoTapToStart = 0;
 	public GameObject mensajeTapToStart;
 
 	public bool ballInPlay = false;
@@ -89,27 +85,31 @@ public class GameController : MonoBehaviour {
 
 	public tutorial tutorialObjetos;
 
-	private int _BloquesSpawneados = 0;
+	private float FactorPantalla;
+
+//	private int _BloquesSpawneados = 0;
 
 	// Use this for initialization
 	void Start () {
 
 // &*&*&*&*&*&*&**&*&*&*&*&*&*&*&*&*&*&*&*&*&*
-// PARA PRUEBAS  de TUTORIAL SOLAMENTE!!!!!!! !! ! ! ! !! !! ! !!! !!!
+// PARA PRUEBAS SOLAMENTE!!!!!!! !! ! ! ! !! !! ! !!! !!!
 // &*&*&*&*&*&*&**&*&*&*&*&*&*&*&*&*&*&*&*&*&*
 ///////////// TEST MODE ONLY ///////////////////////////
 //		PlayerPrefs.DeleteAll();
 //		PlayerPrefs.SetString ("jugoAntes","Si");
 //		PlayerPrefs.SetInt ("High Score", 0);
-//		PlayerPrefs.SetInt ("ArcatrisMonedas", 3000);
+		PlayerPrefs.SetInt ("ArcatrisMonedas", 20000);
 //		PlayerPrefs.SetInt ("ExtraBall", 0);
 ///////////////////////////////////////////////////////////
+		float widthPantalla = Screen.width;
+		FactorPantalla = 720f / widthPantalla;
 
 		//Cargar array de colores para el multiplicador
 		LevelManager.levelManager.llenarColoresMultiplicador();
 
 		//Setear sonido elegido anteriormente
-
+			
 		//Setear idioma elegido anteriormente
 		//Llenar array con los distintos idiomas
 		LanguageManager.populateLanguages();	
@@ -133,14 +133,14 @@ public class GameController : MonoBehaviour {
 		//Leer info de Power Ups
 		PowerUpManager.Instance.LeerNiveles();
 
-		//Red Ball
-		leerDataPowerUps(LevelManager.levelManager.s_PowerUpRebBallProb, ref LevelManager.levelManager.PowerUpRedBall);
-		leerDataPowerUps(LevelManager.levelManager.s_PowerUpRebBallDurac, ref LevelManager.levelManager.PowerUpRedBallDuracion);
-		//Bajar Brea
-		leerDataPowerUps(LevelManager.levelManager.s_PowerUpBajarBreaProb, ref LevelManager.levelManager.PowerUpBajarBrea);
-		//Multiple Ball
-		leerDataPowerUps(LevelManager.levelManager.s_PowerUpMultipleBallCant, ref LevelManager.levelManager.PowerUpMultipleBallCant);
-
+//		//Red Ball
+//		leerDataPowerUps(LevelManager.levelManager.s_PowerUpRebBallProb, ref LevelManager.levelManager.PowerUpRedBall);
+//		leerDataPowerUps(LevelManager.levelManager.s_PowerUpRebBallDurac, ref LevelManager.levelManager.PowerUpRedBallDuracion);
+//		//Bajar Brea
+//		leerDataPowerUps(LevelManager.levelManager.s_PowerUpBajarBreaProb, ref LevelManager.levelManager.PowerUpBajarBrea);
+//		//Multiple Ball
+//		leerDataPowerUps(LevelManager.levelManager.s_PowerUpMultipleBallCant, ref LevelManager.levelManager.PowerUpMultipleBallCant);
+//
 		velocidadCaja = velocidadCaja / 100;
 
 		//Inicializar Nivel y leer Dificultad
@@ -170,7 +170,7 @@ public class GameController : MonoBehaviour {
 		if (firstTimeEverToPlay) {
 
 //			LevelManager.levelManager.nivelActual++;
-			_BloquesSpawneados++;
+//			_BloquesSpawneados++;
 
 			paddleVivo = Instantiate (paddle, new Vector2(paddleSpawnInicial.transform.position.x,paddleSpawnInicial.transform.position.y), Quaternion.identity) as GameObject;
 
@@ -179,7 +179,6 @@ public class GameController : MonoBehaviour {
 
 			tutorialObjetos.swipeText.SetActive (true);
 			tutorialObjetos.arrows.SetActive (true);
-			tutorialObjetos.ladrillos.SetActive (true);
 			tutorialObjetos.forceField.SetActive (false);
 
 			//En el Update() se apagan estos objetos al tocar
@@ -345,13 +344,15 @@ public class GameController : MonoBehaviour {
 		yield return new WaitForSecondsRealtime (2.5f);
 		tutorialObjetos.challengeText.SetActive (false);
 
+		tutorialObjetos.ladrillos.SetActive (true);
+
 		//Setear nivel inicial como 4 para que la nueva partida arranque en 3
 //		PlayerPrefs.SetInt (LevelManager.levelManager.s_Level, 5);
 		//Ajustar el nivel
 //		LevelManager.levelManager.determinarNivel (false);
 		LevelManager.levelManager.ReinicializarNivel ();
 		//Por el prefab que ya esta generado
-		_BloquesSpawneados = 0;
+//		_BloquesSpawneados = 0;
 
 		//Mostrar pantalla inicial
 		IniciarJuego(true);
@@ -411,37 +412,37 @@ public class GameController : MonoBehaviour {
 			
 
 		//Verificar toque inicial para soltar pelota
-		if (ballInPlay == false) {
-			if (pelotaViva != null) {
-				if (pelotaViva.GetComponent<ballScript> ().pelotaSpawneada == true) { //Esto es true cuando termina la animacion de Spawn
-					if (contadorTiempoTapToStart == 0) {
-						contadorTiempoTapToStart = Time.time;
-					}
-
-					if (Input.touchCount > 0) {
-						contadorTiempoTapToStart = 0;
-						//Verificar que se haga un toque "rapido" sin mover el pad
-						if (Input.touches [0].phase == TouchPhase.Began) {
-							antiguaPosicionPaddle = paddleVivo.transform.position.x;
-						} else if (Input.touches [0].phase == TouchPhase.Ended &&
-						           (antiguaPosicionPaddle == paddleVivo.transform.position.x)) {
-			
-							validarTouchInicial = true;
-							mensajeTapToStart.GetComponent<Animator>().SetBool("Mostrar",false);
-						
-						}
-					} else {
-						if (Time.time - contadorTiempoTapToStart > 3) { //3 segundos
-						//Tap to Start Message
-							mensajeTapToStart.GetComponent<Animator>().SetBool("Mostrar",true);
-						}
-					
-					}
-				}
-			}
-		}else{
-			validarTouchInicial = false;
-		}
+//		if (ballInPlay == false) {
+//			if (pelotaViva != null) {
+//				if (pelotaViva.GetComponent<ballScript> ().pelotaSpawneada == true) { //Esto es true cuando termina la animacion de Spawn
+//					if (contadorTiempoTapToStart == 0) {
+//						contadorTiempoTapToStart = Time.time;
+//					}
+//
+//					if (Input.touchCount > 0) {
+//						contadorTiempoTapToStart = 0;
+//						//Verificar que se haga un toque "rapido" sin mover el pad
+//						if (Input.touches [0].phase == TouchPhase.Began) {
+//							antiguaPosicionPaddle = paddleVivo.transform.position.x;
+//						} else if (Input.touches [0].phase == TouchPhase.Ended &&
+//						           (antiguaPosicionPaddle == paddleVivo.transform.position.x)) {
+//			
+//							validarTouchInicial = true;
+//							mensajeTapToStart.GetComponent<Animator>().SetBool("Mostrar",false);
+//						
+//						}
+//					} else {
+//						if (Time.time - contadorTiempoTapToStart > 3) { //3 segundos
+//						//Tap to Start Message
+//							mensajeTapToStart.GetComponent<Animator>().SetBool("Mostrar",true);
+//						}
+//					
+//					}
+//				}
+//			}
+//		}else{
+//			validarTouchInicial = false;
+//		}
 	}
 
 	void FixedUpdate(){
@@ -462,17 +463,16 @@ public class GameController : MonoBehaviour {
 				}
 				else {
 
-					if (Mathf.Abs (paddleVivo.GetComponent<Rigidbody2D> ().velocity.x) > 0) {
+//					if (Mathf.Abs (paddleVivo.GetComponent<Rigidbody2D> ().velocity.x) > 0) {
+				if (Input.GetTouch (0).deltaPosition.x > 0) {
 						if (Mathf.Abs (Input.GetTouch (0).deltaPosition.x) > 0.5f) {
-//							_FuerzaDrag = Input.GetTouch (0).deltaPosition.x * paddleVivo.GetComponent<paddle> ().VelocidadControl;
-							_FuerzaDrag = Input.GetTouch (0).deltaPosition.x * LevelManager.levelManager.VelocidadPaddle;
-
+						_FuerzaDrag = Input.GetTouch (0).deltaPosition.x * LevelManager.levelManager.VelocidadPaddle;
+//						_FuerzaDrag = Input.GetTouch (0).deltaPosition.magnitude / Input.GetTouch (0).deltaTime / LevelManager.levelManager.SensibilidadPaddle;
 						}
 
-					} else{
-//						_FuerzaDrag = Input.GetTouch (0).deltaPosition.x * paddleVivo.GetComponent<paddle> ().VelocidadControl;
+					} else{	//MOVER HACIA LA IZQUIERDA
 						_FuerzaDrag = Input.GetTouch (0).deltaPosition.x * LevelManager.levelManager.VelocidadPaddle;
-
+//					_FuerzaDrag = - Input.GetTouch (0).deltaPosition.magnitude / Input.GetTouch (0).deltaTime / LevelManager.levelManager.SensibilidadPaddle;
 					}
 
 					//					Mathf.Clamp (movimientoPaddle, -velocidadPaddle, velocidadPaddle);
@@ -480,7 +480,8 @@ public class GameController : MonoBehaviour {
 				}
 
 				//				if(Mathf.Abs(_FuerzaDrag) > Mathf.Abs(movimientoPaddle))
-				movimientoPaddle = _FuerzaDrag;
+				//Multiplicar por valor de proporcion contra 720px
+				movimientoPaddle = _FuerzaDrag * FactorPantalla;
 
 //				//Clamp manual
 //				if (movimientoPaddle > LevelManager.levelManager.MaxVelocidadPaddle)
@@ -710,7 +711,7 @@ public class GameController : MonoBehaviour {
 			LevelManager.levelManager.ReinicializarNivel ();
 
 			//Reinicializar contador de Spawns de prefabs antes del Boss
-			_BloquesSpawneados = 0;
+//			_BloquesSpawneados = 0;
 
 			//Contador de partidas
 			contadorPartidas ++;
@@ -751,11 +752,13 @@ public class GameController : MonoBehaviour {
 		//Posicionar pelota arriba del pad a medida que vaya subiendo
 //		pelotaViva.transform.position = new Vector2(paddleVivo.transform.position.x, paddleVivo.transform.position.y + paddleVivo.GetComponentInChildren<SpriteRenderer>().bounds.size.y/2 + pelotaViva.GetComponentInChildren<SpriteRenderer>().bounds.size.y/2);
 
-		yield return new WaitUntil (() => validarTouchInicial == true);
+//		StartCoroutine (TiempoDisparoPelota (2f));
+//		yield return new WaitUntil (() => validarTouchInicial == true);
 
-		validarTouchInicial = false;
+
+//		validarTouchInicial = false;
 			
-//		yield return new WaitForSeconds(seconds);
+		yield return new WaitForSeconds(seconds);
 
 
 		// Dar fuerza inicial a la pelota
@@ -767,6 +770,14 @@ public class GameController : MonoBehaviour {
 
 
 	}
+
+//	IEnumerator TiempoDisparoPelota(float segundos){
+//	
+//		yield return new WaitForSeconds (segundos);
+//
+//		validarTouchInicial = true;
+//	
+//	}
 
 	public void breaPosicionInicial(){
 	//Llevar brea a su posicion inicial

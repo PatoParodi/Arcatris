@@ -64,8 +64,9 @@ public class paddle : MonoBehaviour {
 				//Verifico de que lado reboto para la animacion correspondiente
 				move = (porc / 100) + 0.5f;
 				GetComponent<Animator> ().SetFloat ("Move", move);
-				GetComponent<Animator> ().SetBool ("Impacto", true);
-				StartCoroutine (reiniciarFlotacion (1f));
+//				GetComponent<Animator> ().SetBool ("Impacto", true);
+				GetComponent<Animator> ().SetTrigger ("Impacto");
+//				StartCoroutine (reiniciarFlotacion (1f));
 
 				// Parto de los 90 grados como mi 0
 				porc = 90 - porc;
@@ -76,8 +77,9 @@ public class paddle : MonoBehaviour {
 			} else {
 				//Animar aunque no encuentre punto de contacto
 				GetComponent<Animator> ().SetFloat ("Move", 0.5f);
-				GetComponent<Animator> ().SetBool ("Impacto", true);
-				StartCoroutine (reiniciarFlotacion (1f));
+//				GetComponent<Animator> ().SetBool ("Impacto", true);
+				GetComponent<Animator> ().SetTrigger ("Impacto");
+//				StartCoroutine (reiniciarFlotacion (1f));
 			}
 		}
 	}

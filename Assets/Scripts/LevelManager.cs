@@ -28,6 +28,7 @@ namespace LevelManager
 		//Paddle
 		public static float VelocidadPaddle = 3;
 		public static float MaxVelocidadPaddle = 300;
+		public static float SensibilidadPaddle = 9;
 
 		//Customizing: Variables globales configuracion del juego
 		//POWER UPS

@@ -8,8 +8,10 @@ public class PowerUp : ScriptableObject {
 	public int NivelFrecuencia = 1, NivelPoder = 1, PoderCantidad;
 	public float Frecuencia, PoderDuracion, PoderBajar;
 
-	float FactorFrecuencia = 2.5f, FactorPoder;
+	float FactorFrecuencia = 2.5f, FactorPoder = 0.2f; //20%
 	string s_freq, s_poder;
+
+	float BajarBreaBase = 4;
 
 	//Constructor
 	public PowerUp(string nombre){
@@ -35,6 +37,7 @@ public class PowerUp : ScriptableObject {
 	}
 
 	public void SubirNivelFrecuencia(){
+		
 		NivelFrecuencia++;
 		PlayerPrefs.SetInt (s_freq, NivelFrecuencia);
 
@@ -55,24 +58,14 @@ public class PowerUp : ScriptableObject {
 		//Calcular Frecuencia
 		Frecuencia += FactorFrecuencia * NivelFrecuencia;
 
-		//Calcular Poder
-		if(PoderBajar != null){
+		//Se adiciona un FactorPoder% por cada nivel
+		PoderBajar = BajarBreaBase + (BajarBreaBase * NivelPoder * FactorPoder);
 
-			PoderBajar = 3 * NivelPoder;
-		
-		}
+		//El nivel determina la cantidad de Bolas
+		PoderCantidad = 1 * NivelPoder;
 
-		if (PoderCantidad != null) {
-
-			PoderCantidad = 1 * NivelPoder;
-		
-		}
-
-		if (PoderDuracion != null) {
-
-			PoderDuracion = 6 * NivelPoder;
-		
-		}
+		//Un segundo extra por nivel
+		PoderDuracion = 6 + NivelPoder;
 
 	}
 

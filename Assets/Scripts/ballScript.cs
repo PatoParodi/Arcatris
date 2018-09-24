@@ -70,8 +70,11 @@ public class ballScript : MonoBehaviour {
 
 	public void PowerUpRedBall(float duracion){
 
+		StopAllCoroutines ();
+
 		//Iniciar comportamiento durante "duracion" segundos
 		StartCoroutine (activarPowerUpRedBall (duracion));
+
 
 	}
 
