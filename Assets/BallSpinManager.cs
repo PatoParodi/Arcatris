@@ -10,7 +10,7 @@ public class BallSpinManager : MonoBehaviour {
 	public GameObject Glow;
 	public bool HasLights = false;
 	public GameObject Light_1;
-	public GameObject Light_2;
+//	public GameObject Light_2;
 
 
 	void Awake(){
@@ -42,7 +42,7 @@ public class BallSpinManager : MonoBehaviour {
 		//Apagar el glow durante PowerUp
 		if (HasLights) {
 			Light_1.SetActive (false);
-			Light_2.SetActive (false);
+//			Light_2.SetActive (false);
 		}
 		
 
@@ -54,7 +54,13 @@ public class BallSpinManager : MonoBehaviour {
 		//Re-Activar el glow durante PowerUp
 		if (HasGlow)
 			Glow.SetActive (true);
-		
+
+		//Re-Activar el glow durante PowerUp
+		if (HasLights) {
+			Light_1.SetActive (true);
+//			Light_2.SetActive (true);
+		}
+
 		GetComponent<Animator>().SetBool ("Red Ball", false);
 	}
 
