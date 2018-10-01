@@ -132,8 +132,10 @@ public class BarritasPowerUp : MonoBehaviour {
 			//Verificar si se alcanza el nivel maximo
 			isNivelMaximoAlcanzado(nivel);
 
-			//Analytics
-//			AnalyticsManager.Instance.ComprarPelota(NumeroDeBola);
+			//Reproducir sonido
+			SoundManager.soundManager.playSound(GetComponent<AudioSource>());
+
+			//Analytics estan en los metodos de SubirNivelPoder y SubirNivelFrecuencia
 
 		} else {
 
@@ -141,7 +143,6 @@ public class BarritasPowerUp : MonoBehaviour {
 
 		}
 
-	
 	}
 
 	public void isNivelMaximoAlcanzado(int nivel){

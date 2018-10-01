@@ -98,7 +98,7 @@ public class ballScript : MonoBehaviour {
 		//Hacer girar la pelota al chocar con el marco
 		if (col.gameObject.tag == "Marco"){
 
-			GetComponentInChildren<BallSpinManager> ().spin = 2 * (GetComponent<Rigidbody2D> ().velocity.x / GetComponent<Rigidbody2D> ().velocity.y);
+			GetComponentInChildren<BallSpinManager> ().spin = (GetComponent<Rigidbody2D> ().velocity.x / GetComponent<Rigidbody2D> ().velocity.y) + 0.5f;
 
 		}
 
