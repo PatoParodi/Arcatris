@@ -35,8 +35,14 @@ public class SkinDePelotas: MonoBehaviour {
 			//Prendo y activo el Toggle
 			gameObject.SetActive (true);
 			GetComponent<Toggle>().interactable = true;
+			//Seleccionar Pelota comprada
+			GetComponent<Toggle> ().isOn = true;
 
+			//Guardar compra en BD
 			PlayerPrefs.SetInt (NumeroDeBola, 1); //Ejemplo guardar (Pelota) 01 si ha sido comprada (0 NO, 1 SI)
+
+			//Reproducir sonido
+			SoundManager.soundManager.playSound(GetComponent<AudioSource>());
 
 			//Analytics
 			AnalyticsManager.Instance.ComprarPelota(NumeroDeBola);
