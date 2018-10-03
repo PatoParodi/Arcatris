@@ -8,6 +8,8 @@ public class PantallaInicial : MonoBehaviour {
 	public Button btnPlay, btnLeaderboard, btnSettings, btnShop;
 	private bool BotonesActivos = true;
 
+	public GameObject UIConfiguracion;
+
 	// Activar o desactivar botones para que no funcionen cuando tienen un PopUp encima
 	void Update(){
 	
@@ -40,4 +42,11 @@ public class PantallaInicial : MonoBehaviour {
 		BotonesActivos = true;
 
 	}
+
+	public void Configuracion(){
+
+		UIConfiguracion.GetComponent<Animator> ().SetTrigger ("Config");
+
+	}
+
 }

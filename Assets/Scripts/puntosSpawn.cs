@@ -29,6 +29,11 @@ public class puntosSpawn : MonoBehaviour {
 
 		transform.position = Vector2.MoveTowards (transform.position, _diamanteTarget.position, _step);
 
+		if (!_controller.ballInPlay) {
+			_destruido = true;
+			Destroy (gameObject);
+		}
+
 		if (!_destruido) {
 			if (Vector2.Distance (transform.position, _diamanteTarget.position) < 0.1f) {
 

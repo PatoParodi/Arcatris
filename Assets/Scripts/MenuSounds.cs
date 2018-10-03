@@ -6,7 +6,7 @@ public class MenuSounds : MonoBehaviour {
 
 	public void ReproducirSonidoOnEnable(){
 
-		SoundManager.soundManager.playSound (GetComponent<AudioSource> ());
+//		SoundManager.soundManager.playSound (GetComponent<AudioSource> ());
 
 	}
 

@@ -127,6 +127,8 @@ public class MenuController : MonoBehaviour {
 
 		_juegoPausado = false;
 
+		GetComponent<Animator> ().SetTrigger ("Apagar");
+
 	}
 
 	public void pauseGame(){
@@ -136,6 +138,8 @@ public class MenuController : MonoBehaviour {
 		Time.timeScale = 0;
 
 		titleConfigMenu.GetComponent<LanguageGetText> ().posicion = 10;
+
+		GetComponent<Animator> ().SetTrigger ("Pausa");
 	
 	}
 

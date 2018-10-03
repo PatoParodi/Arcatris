@@ -166,7 +166,6 @@ public class scriptContador : MonoBehaviour {
 		//Ocultar Canvas UI de inGame
 		controller.UI_inGame.SetActive (false);
 
-
 		pantallaInicial.GetComponent<MenuController> ().MostrarPlay (true);
 
 

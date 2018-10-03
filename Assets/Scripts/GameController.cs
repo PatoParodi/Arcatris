@@ -572,7 +572,22 @@ public class GameController : MonoBehaviour {
 	
 	}
 
-		
+
+	public void TerminarPartida (){
+	
+		ballInPlay = false;
+		if(pelotaViva != null)
+			Destroy(pelotaViva);
+
+		UI_inGame.SetActive (false);
+
+//		PantallaInicial.GetComponent<MenuController> ().MostrarPlay (false);
+		// Al ir a pantalla de Play siempre volver la Brea a su posicion inicial
+		breaPosicionInicial ();
+		PantallaInicial.SetActive (true);
+	
+	}
+
 	public void gameOver(){
 		// GameOver
 		ballInPlay = false;
