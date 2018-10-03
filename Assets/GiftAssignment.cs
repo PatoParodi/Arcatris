@@ -8,7 +8,7 @@ public class GiftAssignment : MonoBehaviour {
 	public int cantidadDiamantes;
 	public int cantidadBolasExtra;
 	public int cantidadPelotas;
-	public Image bolaDesbloqueada;
+	public GameObject posicionBola;
 
 	string numeroDeBola;
 
@@ -22,7 +22,19 @@ public class GiftAssignment : MonoBehaviour {
 
 			if (numeroDeBola != "NO") {
 				//Cargar sprite de la bola elegida
-				bolaDesbloqueada.sprite = Resources.Load ("Images/" + numeroDeBola, typeof(Sprite)) as Sprite;
+//				bolaDesbloqueada.sprite = Resources.Load ("Images/" + numeroDeBola, typeof(Sprite)) as Sprite;
+				//Instanciar bola 
+				GameObject bolaInstanciada = Instantiate (Resources.Load ("Pelotas/" + numeroDeBola) as GameObject, posicionBola.transform);
+				bolaInstanciada.transform.localScale = new Vector3 (350, 350, 0);
+				bolaInstanciada.transform.position = Vector3.zero;
+
+				//Modificar los sorting layers
+				SpriteRenderer[] sprites = bolaInstanciada.GetComponentsInChildren<SpriteRenderer>();
+				foreach (SpriteRenderer sprite in sprites) {
+
+					sprite.sortingOrder -= 4;
+
+				}
 
 //				//Guardar nueva bola en BD
 //				PlayerPrefs.SetInt (numeroDeBola, 1);
