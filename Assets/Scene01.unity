@@ -905,7 +905,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &58853126
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4251,7 +4251,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &184554628
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6554,7 +6554,6 @@ MonoBehaviour:
   Precio: 750
   txtPrecio: {fileID: 2136238412}
   btnComprar: {fileID: 871128321}
-  _txtPopUpNotYet: {fileID: 461811754}
 --- !u!114 &316769148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6713,7 +6712,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &319078547
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7420,7 +7419,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &334508852
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7557,7 +7556,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &335934232
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8895,6 +8894,7 @@ GameObject:
   - component: {fileID: 368865370}
   - component: {fileID: 368865369}
   - component: {fileID: 368865368}
+  - component: {fileID: 368865372}
   m_Layer: 5
   m_Name: btnCompra2
   m_TagString: Untagged
@@ -9060,7 +9060,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 873265538}
+      - m_Target: {fileID: 368865372}
         m_MethodName: ComprarPelota
         m_Mode: 1
         m_Arguments:
@@ -9079,6 +9079,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 368865366}
+--- !u!114 &368865372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 368865366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 274e7c225938e4a10bbbfb9131f82e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  btnTogglePelota: {fileID: 873265536}
+  _txtPopUpNotYet: {fileID: 461811754}
+  PopUpNewBall: {fileID: 1006729014}
 --- !u!1 &376747654
 GameObject:
   m_ObjectHideFlags: 0
@@ -9205,7 +9219,6 @@ MonoBehaviour:
   Precio: 750
   txtPrecio: {fileID: 339621250}
   btnComprar: {fileID: 414113800}
-  _txtPopUpNotYet: {fileID: 461811754}
 --- !u!114 &377022718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9473,7 +9486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &390457169
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9525,53 +9538,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 390457168}
---- !u!1001 &400857996
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4889957026041690, guid: 8e9ae257cd4b04b4db977a797b648862, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 10.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 4889957026041690, guid: 8e9ae257cd4b04b4db977a797b648862, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4889957026041690, guid: 8e9ae257cd4b04b4db977a797b648862, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4889957026041690, guid: 8e9ae257cd4b04b4db977a797b648862, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4889957026041690, guid: 8e9ae257cd4b04b4db977a797b648862, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4889957026041690, guid: 8e9ae257cd4b04b4db977a797b648862, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4889957026041690, guid: 8e9ae257cd4b04b4db977a797b648862, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4889957026041690, guid: 8e9ae257cd4b04b4db977a797b648862, type: 2}
-      propertyPath: m_RootOrder
-      value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 212170269855789218, guid: 8e9ae257cd4b04b4db977a797b648862,
-        type: 2}
-      propertyPath: m_WasSpriteAssigned
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 8e9ae257cd4b04b4db977a797b648862, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &402726869
 GameObject:
   m_ObjectHideFlags: 0
@@ -9862,6 +9828,7 @@ GameObject:
   - component: {fileID: 410384611}
   - component: {fileID: 410384610}
   - component: {fileID: 410384609}
+  - component: {fileID: 410384613}
   m_Layer: 5
   m_Name: btnCompra7
   m_TagString: Untagged
@@ -10027,7 +9994,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 890234290}
+      - m_Target: {fileID: 410384613}
         m_MethodName: ComprarPelota
         m_Mode: 1
         m_Arguments:
@@ -10046,6 +10013,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 410384607}
+--- !u!114 &410384613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 410384607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 274e7c225938e4a10bbbfb9131f82e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  btnTogglePelota: {fileID: 890234289}
+  _txtPopUpNotYet: {fileID: 461811754}
+  PopUpNewBall: {fileID: 1006729014}
 --- !u!1 &414113800
 GameObject:
   m_ObjectHideFlags: 0
@@ -10058,6 +10039,7 @@ GameObject:
   - component: {fileID: 414113804}
   - component: {fileID: 414113803}
   - component: {fileID: 414113802}
+  - component: {fileID: 414113806}
   m_Layer: 5
   m_Name: btnCompra5
   m_TagString: Untagged
@@ -10223,7 +10205,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 377022717}
+      - m_Target: {fileID: 414113806}
         m_MethodName: ComprarPelota
         m_Mode: 1
         m_Arguments:
@@ -10242,6 +10224,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 414113800}
+--- !u!114 &414113806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 414113800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 274e7c225938e4a10bbbfb9131f82e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  btnTogglePelota: {fileID: 377022715}
+  _txtPopUpNotYet: {fileID: 461811754}
+  PopUpNewBall: {fileID: 1006729014}
 --- !u!1 &420152152
 GameObject:
   m_ObjectHideFlags: 0
@@ -12078,6 +12074,7 @@ GameObject:
   - component: {fileID: 502734382}
   - component: {fileID: 502734381}
   - component: {fileID: 502734380}
+  - component: {fileID: 502734384}
   m_Layer: 5
   m_Name: btnCompra4
   m_TagString: Untagged
@@ -12243,7 +12240,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1280400273}
+      - m_Target: {fileID: 502734384}
         m_MethodName: ComprarPelota
         m_Mode: 1
         m_Arguments:
@@ -12262,6 +12259,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 502734378}
+--- !u!114 &502734384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 502734378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 274e7c225938e4a10bbbfb9131f82e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  btnTogglePelota: {fileID: 1280400271}
+  _txtPopUpNotYet: {fileID: 461811754}
+  PopUpNewBall: {fileID: 1006729014}
 --- !u!1 &506325361
 GameObject:
   m_ObjectHideFlags: 0
@@ -12748,7 +12759,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &526722597
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13649,6 +13660,7 @@ GameObject:
   - component: {fileID: 584566036}
   - component: {fileID: 584566035}
   - component: {fileID: 584566034}
+  - component: {fileID: 584566038}
   m_Layer: 5
   m_Name: btnCompra3
   m_TagString: Untagged
@@ -13814,7 +13826,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1358429988}
+      - m_Target: {fileID: 584566038}
         m_MethodName: ComprarPelota
         m_Mode: 1
         m_Arguments:
@@ -13833,6 +13845,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 584566032}
+--- !u!114 &584566038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 584566032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 274e7c225938e4a10bbbfb9131f82e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  btnTogglePelota: {fileID: 1358429986}
+  _txtPopUpNotYet: {fileID: 461811754}
+  PopUpNewBall: {fileID: 1006729014}
 --- !u!1 &592922286
 GameObject:
   m_ObjectHideFlags: 0
@@ -14942,7 +14968,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.43145627, y: -62.04158}
+  m_AnchoredPosition: {x: 0.43145627, y: -99}
   m_SizeDelta: {x: 190.55, y: 103.14}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &658886801
@@ -15595,7 +15621,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &714545756
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21963,6 +21989,7 @@ GameObject:
   - component: {fileID: 871128325}
   - component: {fileID: 871128324}
   - component: {fileID: 871128323}
+  - component: {fileID: 871128326}
   m_Layer: 5
   m_Name: btnCompra1
   m_TagString: Untagged
@@ -22128,7 +22155,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 316769147}
+      - m_Target: {fileID: 871128326}
         m_MethodName: ComprarPelota
         m_Mode: 1
         m_Arguments:
@@ -22141,6 +22168,20 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &871128326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 871128321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 274e7c225938e4a10bbbfb9131f82e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  btnTogglePelota: {fileID: 316769145}
+  _txtPopUpNotYet: {fileID: 461811754}
+  PopUpNewBall: {fileID: 1006729014}
 --- !u!222 &871128327
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -22277,7 +22318,6 @@ MonoBehaviour:
   Precio: 750
   txtPrecio: {fileID: 1440975708}
   btnComprar: {fileID: 368865366}
-  _txtPopUpNotYet: {fileID: 461811754}
 --- !u!114 &873265539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23005,7 +23045,6 @@ MonoBehaviour:
   Precio: 750
   txtPrecio: {fileID: 1083342}
   btnComprar: {fileID: 410384607}
-  _txtPopUpNotYet: {fileID: 461811754}
 --- !u!114 &890234291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23187,7 +23226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &911496796
 Transform:
   m_ObjectHideFlags: 0
@@ -24266,7 +24305,6 @@ MonoBehaviour:
   Precio: 250
   txtPrecio: {fileID: 0}
   btnComprar: {fileID: 0}
-  _txtPopUpNotYet: {fileID: 0}
 --- !u!114 &966882648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25006,6 +25044,73 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 999941359}
+--- !u!1 &1006729014
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1006729020}
+  - component: {fileID: 1006729016}
+  - component: {fileID: 1006729017}
+  m_Layer: 9
+  m_Name: PopUp New Ball
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1006729016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1006729014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fba6d107092784467a438ca0ee75ac1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NumeroDeBola: 99
+  ballPosition: {fileID: 1365253270}
+--- !u!95 &1006729017
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1006729014}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4b71cef433a474633ac66fa67ff69fc2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!224 &1006729020
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1006729014}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1880867740}
+  - {fileID: 1365253270}
+  m_Father: {fileID: 2062701117}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1011936520
 GameObject:
   m_ObjectHideFlags: 0
@@ -25136,7 +25241,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 141439165
   m_SortingLayer: 3
-  m_SortingOrder: 11
+  m_SortingOrder: 20
   m_Sprite: {fileID: 21300000, guid: ddcac372c2cfc428fb0aa5f0fde651f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -25552,7 +25657,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 141439165
   m_SortingLayer: 3
-  m_SortingOrder: 11
+  m_SortingOrder: 20
   m_Sprite: {fileID: 21300000, guid: ddcac372c2cfc428fb0aa5f0fde651f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -27319,7 +27424,6 @@ MonoBehaviour:
   Precio: 750
   txtPrecio: {fileID: 1364905234}
   btnComprar: {fileID: 1413633568}
-  _txtPopUpNotYet: {fileID: 461811754}
 --- !u!114 &1133312088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27964,7 +28068,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1162323185
 Animator:
   serializedVersion: 3
@@ -29649,7 +29753,6 @@ MonoBehaviour:
   Precio: 750
   txtPrecio: {fileID: 1994180614}
   btnComprar: {fileID: 502734378}
-  _txtPopUpNotYet: {fileID: 461811754}
 --- !u!114 &1280400274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31212,7 +31315,6 @@ MonoBehaviour:
   Precio: 750
   txtPrecio: {fileID: 1165388752}
   btnComprar: {fileID: 584566032}
-  _txtPopUpNotYet: {fileID: 461811754}
 --- !u!114 &1358429989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31520,6 +31622,34 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 100
+--- !u!1 &1365253269
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1365253270}
+  m_Layer: 9
+  m_Name: ball Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1365253270
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1365253269}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1006729020}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1366611887
 GameObject:
   m_ObjectHideFlags: 0
@@ -31940,7 +32070,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1398867620
 Transform:
   m_ObjectHideFlags: 0
@@ -32478,6 +32608,7 @@ GameObject:
   - component: {fileID: 1413633571}
   - component: {fileID: 1413633570}
   - component: {fileID: 1413633569}
+  - component: {fileID: 1413633574}
   m_Layer: 5
   m_Name: btnCompra6
   m_TagString: Untagged
@@ -32621,7 +32752,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1133312087}
+      - m_Target: {fileID: 1413633574}
         m_MethodName: ComprarPelota
         m_Mode: 1
         m_Arguments:
@@ -32662,6 +32793,20 @@ RectTransform:
   m_AnchoredPosition: {x: 1810, y: -150}
   m_SizeDelta: {x: 220, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1413633574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1413633568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 274e7c225938e4a10bbbfb9131f82e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  btnTogglePelota: {fileID: 1133312085}
+  _txtPopUpNotYet: {fileID: 461811754}
+  PopUpNewBall: {fileID: 1006729014}
 --- !u!1 &1419060315
 GameObject:
   m_ObjectHideFlags: 0
@@ -33840,8 +33985,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 1136.5006, y: -4}
-  m_SizeDelta: {x: 2273, y: 325}
+  m_AnchoredPosition: {x: 1209.2268, y: -4}
+  m_SizeDelta: {x: 2418.5, y: 325}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1486898428
 MonoBehaviour:
@@ -41289,6 +41434,79 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   posicion: 2
+--- !u!1 &1880867739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1880867740}
+  - component: {fileID: 1880867741}
+  m_Layer: 9
+  m_Name: Background
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1880867740
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1880867739}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1006729020}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1880867741
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1880867739}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 141439165
+  m_SortingLayer: 3
+  m_SortingOrder: 20
+  m_Sprite: {fileID: 21300000, guid: bb9b21be8a20e4589b4de8cfd0f598e5, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 7.2, y: 9.09}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &1881225527
 GameObject:
   m_ObjectHideFlags: 0
@@ -41564,6 +41782,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1910822744}
   - component: {fileID: 1910822745}
+  - component: {fileID: 1910822747}
   m_Layer: 0
   m_Name: 03_flap_line
   m_TagString: Untagged
@@ -41571,19 +41790,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1910822744
-Transform:
+--- !u!224 &1910822744
+RectTransform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1910822743}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -292, z: -0.07876587}
-  m_LocalScale: {x: 129.81746, y: 129.81746, z: 129.81746}
+  m_LocalPosition: {x: 0, y: 0, z: -0.07876587}
+  m_LocalScale: {x: 125, y: 125, z: 1}
   m_Children: []
   m_Father: {fileID: 738134169}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 1.6747773, y: -292}
+  m_SizeDelta: {x: 673.4, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &1910822745
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -41628,6 +41852,12 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!222 &1910822747
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1910822743}
 --- !u!1 &1916149444
 GameObject:
   m_ObjectHideFlags: 0
@@ -47551,6 +47781,7 @@ RectTransform:
   - {fileID: 738134169}
   - {fileID: 1013637501}
   - {fileID: 1034213918}
+  - {fileID: 1006729020}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
