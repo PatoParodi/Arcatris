@@ -26,7 +26,7 @@ public class GiftAssignment : MonoBehaviour {
 				//Instanciar bola 
 				GameObject bolaInstanciada = Instantiate (Resources.Load ("Pelotas/" + numeroDeBola) as GameObject, posicionBola.transform);
 				bolaInstanciada.transform.localScale = new Vector3 (350, 350, 0);
-				bolaInstanciada.transform.position = Vector3.zero;
+//				bolaInstanciada.transform.position = Vector3.zero;
 
 				//Modificar los sorting layers
 				SpriteRenderer[] sprites = bolaInstanciada.GetComponentsInChildren<SpriteRenderer>();
