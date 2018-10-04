@@ -99,7 +99,7 @@ public class GameController : MonoBehaviour {
 //		PlayerPrefs.DeleteAll();
 //		PlayerPrefs.SetString ("jugoAntes","Si");
 //		PlayerPrefs.SetInt ("High Score", 0);
-		PlayerPrefs.SetInt ("ArcatrisMonedas", 20000);
+//		PlayerPrefs.SetInt ("ArcatrisMonedas", 20000);
 //		PlayerPrefs.SetInt ("ExtraBall", 0);
 ///////////////////////////////////////////////////////////
 		float widthPantalla = Screen.width;
