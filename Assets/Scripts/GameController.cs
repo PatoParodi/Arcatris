@@ -449,11 +449,24 @@ public class GameController : MonoBehaviour {
 	
 
 		if (paddleVivo != null) {
-			// Verificar control elegido
-//			if (Controles.sw_TouchPad.isOn) {
 
 				float _FuerzaDrag = 0;
 
+			#if UNITY_EDITOR
+
+//			if(Input.GetAxis("Horizontal") == 0){
+//
+//				_FuerzaDrag = 0;
+//
+//			}
+//
+//			else if(Input.GetAxis("Horizontal") > 0){
+//
+				_FuerzaDrag = Input.GetAxis("Horizontal")  * LevelManager.levelManager.VelocidadPaddle * 18;
+
+//			}
+
+			#else
 				if (Input.touchCount == 0){
 					movimientoPaddle = 0;
 					_FuerzaDrag = 0;
@@ -478,6 +491,8 @@ public class GameController : MonoBehaviour {
 					//					Mathf.Clamp (movimientoPaddle, -velocidadPaddle, velocidadPaddle);
 
 				}
+
+			#endif
 
 				//				if(Mathf.Abs(_FuerzaDrag) > Mathf.Abs(movimientoPaddle))
 				//Multiplicar por valor de proporcion contra 720px
