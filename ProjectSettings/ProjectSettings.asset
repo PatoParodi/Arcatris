@@ -777,9 +777,9 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.1
   apiCompatibilityLevel: 2
-  cloudProjectId: 19fc567f-5b1f-427b-9a79-eebccf05402c
-  projectName: Arcatrix
-  organizationId: magoparodi
+  cloudProjectId: fe33018a-3a67-4906-ae23-f1b7fc37e640
+  projectName: Arcatrix v1.0
+  organizationId: pardesotas
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

@@ -16,6 +16,14 @@ public class SkinDePelotas: MonoBehaviour {
 	
 			GameObject ballSkin = Instantiate (Resources.Load ("Pelotas/" + NumeroDeBola) as GameObject, gameObject.transform);
 			ballSkin.transform.localScale = new Vector3 (350, 350, 0);
+			//Modificar los sorting layers
+			SpriteRenderer[] sprites = ballSkin.GetComponentsInChildren<SpriteRenderer>();
+			foreach (SpriteRenderer sprite in sprites) {
+
+				sprite.sortingOrder += 13;
+
+			}
+
 
 	}
 
