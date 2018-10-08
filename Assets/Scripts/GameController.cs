@@ -179,7 +179,7 @@ public class GameController : MonoBehaviour {
 
 			tutorialObjetos.swipeText.SetActive (true);
 			tutorialObjetos.arrows.SetActive (true);
-			tutorialObjetos.forceField.SetActive (false);
+			tutorialObjetos.forceField.SetActive (true);
 
 			//En el Update() se apagan estos objetos al tocar
 		} else {
@@ -336,12 +336,12 @@ public class GameController : MonoBehaviour {
 		//Text del Objetivo
 		tutorialObjetos.objectiveText.SetActive (true);
 		tutorialObjetos.forceField.SetActive (true);
-		yield return new WaitForSecondsRealtime (2.3f);
+		yield return new WaitForSecondsRealtime (3.3f);
 		tutorialObjetos.objectiveText.SetActive (false);
 
 		//Texto Your challenge starts now
 		tutorialObjetos.challengeText.SetActive (true);
-		yield return new WaitForSecondsRealtime (2.5f);
+		yield return new WaitForSecondsRealtime (3f);
 		tutorialObjetos.challengeText.SetActive (false);
 
 		tutorialObjetos.ladrillos.SetActive (true);
