@@ -86,8 +86,8 @@ public class GiftAssignment : MonoBehaviour {
 
 	public void ReproducirSonido(){
 
-		//Sonido al moverse la caja
-		SoundManager.soundManager.playSound (GetComponent<AudioSource> ());
+//		//Sonido al moverse la caja
+//		SoundManager.soundManager.playSound (GetComponent<AudioSource> ());
 
 	}
 		

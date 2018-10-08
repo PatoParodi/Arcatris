@@ -22900,7 +22900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b976f60886284de7bf5be08f1a49f53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumeroDeBola: 03
+  NumeroDeBola: 07
   Precio: 750
   txtPrecio: {fileID: 1083342}
   btnComprar: {fileID: 410384607}
@@ -31210,7 +31210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b976f60886284de7bf5be08f1a49f53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumeroDeBola: 07
+  NumeroDeBola: 03
   Precio: 750
   txtPrecio: {fileID: 1165388752}
   btnComprar: {fileID: 584566032}
