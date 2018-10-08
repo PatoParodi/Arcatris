@@ -15,7 +15,7 @@ public class DailyRewardManager : MonoBehaviour {
 	private System.DateTime UltimoInicioSesion;
 	GameObject gift;
 
-	public int GiftCounter; //Numero de ultima bola desbloqueada
+	public int GiftCounter; //Numero de ultimo gift desbloqueada
 	public GameObject DailyAvisoPopUp;
 	public float OpeningBoxTime = 2.5f;	//Tiempo de animacion al abrir la caja
 	public GameObject DailyGifts;	//Pop up con todos los gifts
@@ -46,12 +46,14 @@ public class DailyRewardManager : MonoBehaviour {
 		} else {
 			//En caso sea el primer inicio de sesion
 			UltimoInicioSesion = System.DateTime.Now;
-			PlayerPrefs.SetString (LevelManager.levelManager.s_UltimoInicioSesion, UltimoInicioSesion.ToString());
+			PlayerPrefs.SetString (LevelManager.levelManager.s_UltimoInicioSesion, UltimoInicioSesion.ToString ());
 			GiftCounter = 0;
 			PlayerPrefs.SetInt (LevelManager.levelManager.s_GiftCounter, GiftCounter);
 
 		}
+	}
 
+	void Update(){
 //Calcular diferencia de dias entre Dia De inicio y fecha de hoy
 //Calcular si transcurrio al menos 1 dia y menos de 2 desde el ultimo inicio de sesion
 		if ((System.DateTime.Now - UltimoInicioSesion).TotalHours > 24 &&
@@ -76,7 +78,7 @@ public class DailyRewardManager : MonoBehaviour {
 //		GiftCounter = 2;
 //		GiftCounter = PlayerPrefs.GetInt (LevelManager.levelManager.s_GiftCounter);
 		///// ELIMINAR LUEGO
-	
+
 	}
 
 	public void DesbloquearGift(){
@@ -89,7 +91,6 @@ public class DailyRewardManager : MonoBehaviour {
 
 		//Sumo 1 al contador de Gifts
 		GiftCounter++;
-		Debug.Log ("Se desbloqueo Gift " + GiftCounter.ToString ());
 		PlayerPrefs.SetInt (LevelManager.levelManager.s_GiftCounter, GiftCounter);
 
 		//Guardar nuevo dia y horario para contar 1 dia desde este momento.
