@@ -51,9 +51,7 @@ public class DailyRewardManager : MonoBehaviour {
 			PlayerPrefs.SetInt (LevelManager.levelManager.s_GiftCounter, GiftCounter);
 
 		}
-	}
-
-	void Update(){
+	
 //Calcular diferencia de dias entre Dia De inicio y fecha de hoy
 //Calcular si transcurrio al menos 1 dia y menos de 2 desde el ultimo inicio de sesion
 		if ((System.DateTime.Now - UltimoInicioSesion).TotalHours > 24 &&
