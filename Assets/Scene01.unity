@@ -5087,6 +5087,7 @@ GameObject:
   - component: {fileID: 220703707}
   - component: {fileID: 220703709}
   - component: {fileID: 220703708}
+  - component: {fileID: 220703710}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -5144,15 +5145,25 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Plutonium
-
-'
+  m_Text: Plutonium
 --- !u!222 &220703709
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 220703706}
+--- !u!114 &220703710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 220703706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0078245111a5345a495c9ba91ee56458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posicion: 25
 --- !u!1 &224102832
 GameObject:
   m_ObjectHideFlags: 0
@@ -9538,6 +9549,7 @@ GameObject:
   - component: {fileID: 406760851}
   - component: {fileID: 406760853}
   - component: {fileID: 406760852}
+  - component: {fileID: 406760854}
   m_Layer: 5
   m_Name: TextBarritas
   m_TagString: Untagged
@@ -9602,6 +9614,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 406760850}
+--- !u!114 &406760854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 406760850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0078245111a5345a495c9ba91ee56458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posicion: 19
 --- !u!1 &410384607
 GameObject:
   m_ObjectHideFlags: 0
@@ -11153,6 +11177,7 @@ GameObject:
   - component: {fileID: 483783285}
   - component: {fileID: 483783287}
   - component: {fileID: 483783286}
+  - component: {fileID: 483783288}
   m_Layer: 5
   m_Name: WatchAd
   m_TagString: Untagged
@@ -11219,6 +11244,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 483783284}
+--- !u!114 &483783288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 483783284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0078245111a5345a495c9ba91ee56458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posicion: 17
 --- !u!1 &485681956
 GameObject:
   m_ObjectHideFlags: 0
@@ -11229,6 +11266,7 @@ GameObject:
   - component: {fileID: 485681957}
   - component: {fileID: 485681959}
   - component: {fileID: 485681958}
+  - component: {fileID: 485681960}
   m_Layer: 0
   m_Name: Titulo
   m_TagString: Untagged
@@ -11293,6 +11331,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 485681956}
+--- !u!114 &485681960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 485681956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0078245111a5345a495c9ba91ee56458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posicion: 27
 --- !u!1 &487338276
 GameObject:
   m_ObjectHideFlags: 0
@@ -11651,6 +11701,7 @@ GameObject:
   - component: {fileID: 495579245}
   - component: {fileID: 495579247}
   - component: {fileID: 495579246}
+  - component: {fileID: 495579248}
   m_Layer: 5
   m_Name: TextBarritas
   m_TagString: Untagged
@@ -11715,6 +11766,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 495579244}
+--- !u!114 &495579248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 495579244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0078245111a5345a495c9ba91ee56458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posicion: 18
 --- !u!1 &496501112
 GameObject:
   m_ObjectHideFlags: 0
@@ -14807,6 +14870,7 @@ GameObject:
   - component: {fileID: 658886800}
   - component: {fileID: 658886802}
   - component: {fileID: 658886801}
+  - component: {fileID: 658886803}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -14871,6 +14935,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 658886799}
+--- !u!114 &658886803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 658886799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0078245111a5345a495c9ba91ee56458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posicion: 22
 --- !u!1 &672210150
 GameObject:
   m_ObjectHideFlags: 0
@@ -15286,6 +15362,7 @@ GameObject:
   - component: {fileID: 701363756}
   - component: {fileID: 701363758}
   - component: {fileID: 701363757}
+  - component: {fileID: 701363759}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -15343,15 +15420,25 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Wood
-
-'
+  m_Text: Wood
 --- !u!222 &701363758
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 701363755}
+--- !u!114 &701363759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 701363755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0078245111a5345a495c9ba91ee56458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posicion: 24
 --- !u!1 &714496402
 GameObject:
   m_ObjectHideFlags: 0
@@ -24840,6 +24927,7 @@ GameObject:
   - component: {fileID: 999941360}
   - component: {fileID: 999941362}
   - component: {fileID: 999941361}
+  - component: {fileID: 999941363}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -24904,6 +24992,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 999941359}
+--- !u!114 &999941363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 999941359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0078245111a5345a495c9ba91ee56458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posicion: 23
 --- !u!1 &1006729014
 GameObject:
   m_ObjectHideFlags: 0
@@ -25755,6 +25855,7 @@ GameObject:
   - component: {fileID: 1051896551}
   - component: {fileID: 1051896553}
   - component: {fileID: 1051896552}
+  - component: {fileID: 1051896554}
   m_Layer: 5
   m_Name: TextBarritas
   m_TagString: Untagged
@@ -25812,13 +25913,25 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: DOWN POWER
+  m_Text: BREA DOWN POWER
 --- !u!222 &1051896553
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1051896550}
+--- !u!114 &1051896554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1051896550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0078245111a5345a495c9ba91ee56458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posicion: 20
 --- !u!1 &1063664617
 GameObject:
   m_ObjectHideFlags: 0
@@ -30200,6 +30313,7 @@ GameObject:
   - component: {fileID: 1312128744}
   - component: {fileID: 1312128746}
   - component: {fileID: 1312128745}
+  - component: {fileID: 1312128747}
   m_Layer: 5
   m_Name: TextBarritas
   m_TagString: Untagged
@@ -30264,6 +30378,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1312128743}
+--- !u!114 &1312128747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1312128743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0078245111a5345a495c9ba91ee56458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posicion: 21
 --- !u!1 &1313231475
 GameObject:
   m_ObjectHideFlags: 0
@@ -34220,6 +34346,7 @@ GameObject:
   - component: {fileID: 1496224686}
   - component: {fileID: 1496224688}
   - component: {fileID: 1496224687}
+  - component: {fileID: 1496224689}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -34284,6 +34411,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1496224685}
+--- !u!114 &1496224689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1496224685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0078245111a5345a495c9ba91ee56458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posicion: 26
 --- !u!1 &1499777321
 GameObject:
   m_ObjectHideFlags: 0
@@ -35208,6 +35347,7 @@ GameObject:
   - component: {fileID: 1567195309}
   - component: {fileID: 1567195311}
   - component: {fileID: 1567195310}
+  - component: {fileID: 1567195312}
   m_Layer: 5
   m_Name: TextBarritas
   m_TagString: Untagged
@@ -35272,6 +35412,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1567195308}
+--- !u!114 &1567195312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1567195308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0078245111a5345a495c9ba91ee56458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posicion: 18
 --- !u!1 &1577499015
 GameObject:
   m_ObjectHideFlags: 0
@@ -48884,6 +49036,7 @@ GameObject:
   - component: {fileID: 2107188865}
   - component: {fileID: 2107188867}
   - component: {fileID: 2107188866}
+  - component: {fileID: 2107188868}
   m_Layer: 5
   m_Name: TextBarritas
   m_TagString: Untagged
@@ -48948,6 +49101,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2107188864}
+--- !u!114 &2107188868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2107188864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0078245111a5345a495c9ba91ee56458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posicion: 18
 --- !u!1 &2112310435
 GameObject:
   m_ObjectHideFlags: 0

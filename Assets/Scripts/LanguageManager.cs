@@ -8,7 +8,7 @@ public static class LanguageManager {
 
 	public static string espanol = "ES", ingles = "EN";
 
-	public static string[] textos = new string[30];
+	public static string[] textos = new string[32];
 
 	public static int posicion;
 
@@ -57,7 +57,21 @@ public static class LanguageManager {
 				textos [14] = "THE OIL BRICKS";
 				textos [15] = "BEFORE\nTHEY REACH";
 				textos [16] = "OUR\nFORCE FIELD";
-
+				textos [17] = "Watch ad for\nFree Ball!";
+				textos [18] = "CHANCES";
+				textos [19] = "DURATION";
+				textos [20] = "BREA DOWN POWER";
+				textos [21] = "QUANTITY";
+				textos [22] = "White Ball";
+				textos [23] = "Volcanic";
+				textos [24] = "Wood";
+				textos [25] = "Plutonium";
+				textos [26] = "Dragon";
+				textos [27] = "Choose your Ball";
+				textos [28] = "";
+				textos [29] = "";
+				textos [30] = "";
+				textos [31] = "";
 
 				break;
 
@@ -79,6 +93,21 @@ public static class LanguageManager {
 				textos [14] = "LOS BLOQUES";
 				textos [15] = "ANTES\nQUE ALCANCEN";
 				textos [16] = "NUESTRO\nCAMPO DE FUERZA";
+				textos [17] = "Ver ad para\nBola Gratis!";
+				textos [18] = "PROBABILIDAD";
+				textos [19] = "DURACION";
+				textos [20] = "PODER BAJAR BREA";
+				textos [21] = "CANTIDAD";
+				textos [22] = "Bola Blanca";
+				textos [23] = "Volcanica";
+				textos [24] = "Madera";
+				textos [25] = "Plutonio";
+				textos [26] = "Dragon";
+				textos [27] = "Elige tu bola";
+				textos [28] = "";
+				textos [29] = "";
+				textos [30] = "";
+				textos [31] = "";
 
 
 				break;
