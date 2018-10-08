@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PantallaInicial : MonoBehaviour {
 
-	public Button btnPlay, btnLeaderboard, btnSettings, btnShop;
+	public Button btnPlay, btnLeaderboard, btnSettings, btnShop, btnCreditos;
 	private bool BotonesActivos = true;
 
 	public GameObject UIConfiguracion;
@@ -19,6 +19,7 @@ public class PantallaInicial : MonoBehaviour {
 			btnLeaderboard.interactable = true; 
 			btnSettings.interactable = true; 
 			btnShop.interactable = true;
+			btnCreditos.interactable = true;
 		
 		} else {
 
@@ -26,6 +27,8 @@ public class PantallaInicial : MonoBehaviour {
 			btnLeaderboard.interactable = false; 
 			btnSettings.interactable = false; 
 			btnShop.interactable = false;
+			btnCreditos.interactable = false;
+
 
 		}
 	

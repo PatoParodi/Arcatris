@@ -68,10 +68,10 @@ public static class LanguageManager {
 				textos [25] = "Plutonium";
 				textos [26] = "Dragon";
 				textos [27] = "Choose your Ball";
-				textos [28] = "";
-				textos [29] = "";
-				textos [30] = "";
-				textos [31] = "";
+				textos [28] = "Arcatrix is a Par de Sotas game.";
+				textos [29] = "All rights reserved.";
+				textos [30] = "Collaborators:";
+				textos [31] = "Help: pardesotas@gmail.com";
 
 				break;
 
@@ -104,10 +104,10 @@ public static class LanguageManager {
 				textos [25] = "Plutonio";
 				textos [26] = "Dragon";
 				textos [27] = "Elige tu bola";
-				textos [28] = "";
-				textos [29] = "";
-				textos [30] = "";
-				textos [31] = "";
+				textos [28] = "Arcatrix es un juego de Par de Sotas";
+				textos [29] = "Todos los derechos reservados.";
+				textos [30] = "Colaboradores:";
+				textos [31] = "Ayuda: pardesotas@gmail.com";
 
 
 				break;
