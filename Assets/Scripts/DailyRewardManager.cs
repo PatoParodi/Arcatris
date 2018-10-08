@@ -120,6 +120,7 @@ public class DailyRewardManager : MonoBehaviour {
 	}
 
 	public void AbrirCaja(){
+		
 		//Abrir caja
 		gift.GetComponent<Animator> ().SetTrigger ("Open");
 
@@ -128,6 +129,9 @@ public class DailyRewardManager : MonoBehaviour {
 
 		//Contar tiempo hasta mostrar la siguiente pantalla con los gift por dia
 		StartCoroutine (MostarDailyGifts ());
+
+		//Reproducir sonido al abrir caja
+		SoundManager.soundManager.playSound(GetComponent<AudioSource>());
 
 	}
 
