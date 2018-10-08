@@ -8,7 +8,6 @@ public class Caja : MonoBehaviour {
 
 	public float velocidad;
 	public GameObject moneda;
-	public Sprite _cajaRoja;
 	public bool powerUpBajarBrea; //Determina que es un ladrillo con PowerUp
 	public bool powerUpMB; //Power Up Multiple Balls
 	public bool powerUpRedBall; //Power Up Red Ball
