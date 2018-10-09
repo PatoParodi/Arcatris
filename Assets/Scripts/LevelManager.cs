@@ -16,7 +16,6 @@ namespace LevelManager
 		public static int dificultadActual = 1;
 		public static int dificultadMaxima = 7;
 		public static string numeroBolaElegida;
-		public static int pelotasVivas = 0;
 
 		//Cajas
 		private static float velocidadCajasBase = 0.2f;  //Original 0.22f
@@ -102,13 +101,7 @@ namespace LevelManager
 //			return _CantBloques;
 //
 //		}
-
-		//Sumar o Restar PelotasVivas en la escena
-		public static void AddPelotasVivas(int cantidad){
-
-			pelotasVivas = pelotasVivas + cantidad;
-		
-		}
+	
 
 		public static void ReinicializarNivel(){
 

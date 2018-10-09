@@ -24093,7 +24093,7 @@ GameObject:
   - component: {fileID: 946376217}
   - component: {fileID: 946376215}
   - component: {fileID: 946376219}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Brea
   m_TagString: Brea
   m_Icon: {fileID: 0}
@@ -24135,7 +24135,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 5
 --- !u!4 &946376216
 Transform:

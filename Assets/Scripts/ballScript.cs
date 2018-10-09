@@ -23,11 +23,6 @@ public class ballScript : MonoBehaviour {
 		//Play spawn sound
 		SoundManager.soundManager.playSound(GetComponent<AudioSource>());
 
-		//Agregar nueva bola al contador global de bolas en escena
-		LevelManager.levelManager.AddPelotasVivas (1);
-		Debug.Log (LevelManager.levelManager.pelotasVivas);
-			
-
 		controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
 
 	}

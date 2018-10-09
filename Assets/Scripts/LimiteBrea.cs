@@ -42,8 +42,8 @@ public class LimiteBrea : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other){
 	
 		int cantBolas;
-
-		cantBolas = GameObject.FindGameObjectsWithTag ("pelota").Length;
+		GameObject[] bolasEnEscena;
+		GameObject paddle;
 
 		//Si pasa la pelota, Game Over
 		if (other.gameObject.tag == "pelota") {
@@ -54,13 +54,26 @@ public class LimiteBrea : MonoBehaviour {
 
 //			cantBolas = GameObject.FindGameObjectsWithTag ("pelota").Length;
 
-			//Restar bola al contador global de bolas en escena
-			LevelManager.levelManager.AddPelotasVivas (-1);
-			Debug.Log (LevelManager.levelManager.pelotasVivas);
+			paddle = GameObject.FindWithTag ("paddle") as GameObject;
+
+			bolasEnEscena = GameObject.FindGameObjectsWithTag ("pelota");
+			cantBolas = bolasEnEscena.Length;
+			if (cantBolas > 1) {
+				foreach (GameObject bola in bolasEnEscena) {
+
+					//Si esta tocando el collider de LimiteBrea y NO es ella misma
+					if(other.gameObject.GetInstanceID() != bola.GetInstanceID())
+						if (bola.transform.position.y < (paddle.transform.position.y - 0.2f)) {
+								Debug.Log ("Me estoy muriendo");
+								cantBolas--;
+							}
+
+				}
+			}
 
 			//GameOver al no quedar pelotas vivas
 			if(	!LevelManager.levelManager.gameOver && 
-				LevelManager.levelManager.pelotasVivas == 0){
+				cantBolas == 1){
 
 				LevelManager.levelManager.gameOver = true;
 

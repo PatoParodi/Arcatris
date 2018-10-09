@@ -667,9 +667,6 @@ public class GameController : MonoBehaviour {
 		//Setear ultima Bola Elegida
 		LevelManager.levelManager.numeroBolaElegida = PlayerPrefs.GetString(LevelManager.levelManager.s_BolaElegida);
 
-		//Inicializar cantidad de PelotasVivas en escena
-		LevelManager.levelManager.pelotasVivas = 0;
-
 		//Inicializar Objetos
 		StartCoroutine(inicializarObjetos(countdownInicial, continueFlag, "WhiteBall")); //WhiteBall
 
@@ -704,6 +701,7 @@ public class GameController : MonoBehaviour {
 		paddleVivo.transform.position = new Vector2 (paddleVivo.transform.position.x, GameObject.FindGameObjectWithTag ("padPosition").transform.position.y);
 
 		pelotaViva = Instantiate (pelota, new Vector3 (paddleVivo.transform.position.x, ballSpawn.transform.position.y, ballSpawn.transform.position.z), Quaternion.identity) as GameObject;
+
 		//Animacion de Spawn
 		pelotaViva.GetComponent<Animator> ().SetTrigger ("Spawn");
 
