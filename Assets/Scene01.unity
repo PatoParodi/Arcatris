@@ -8742,7 +8742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef445fb7df39149d79fea218ba91bb93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boton: {fileID: 1653602382}
+  boton: {fileID: 59889361}
 --- !u!114 &362563715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40514,7 +40514,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1743888542
 RectTransform:
   m_ObjectHideFlags: 0
