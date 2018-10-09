@@ -32,7 +32,7 @@ public class GiftAssignment : MonoBehaviour {
 				SpriteRenderer[] sprites = bolaInstanciada.GetComponentsInChildren<SpriteRenderer>();
 				foreach (SpriteRenderer sprite in sprites) {
 
-					sprite.sortingOrder -= 4;
+					sprite.sortingOrder += 10;
 
 				}
 

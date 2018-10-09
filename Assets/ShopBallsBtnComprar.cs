@@ -22,7 +22,8 @@ public class ShopBallsBtnComprar : MonoBehaviour {
 			SoundManager.soundManager.playSound(GetComponent<AudioSource>());
 
 			//Pop Up de Nueva Bola
-			PopUpNewBall.SetActive(true);
+//			PopUpNewBall.SetActive(true);
+			PopUpNewBall.GetComponent<Animator> ().SetTrigger ("Show");
 			PopUpNewBall.GetComponent<PopUpNewBall> ().NumeroDeBola = btnTogglePelota.GetComponent<SkinDePelotas>().NumeroDeBola;
 			PopUpNewBall.GetComponent<PopUpNewBall> ().InstanciarBola ();
 

@@ -195,8 +195,7 @@ public class ScriptHighScore : MonoBehaviour {
 //		intentObject.Call<AndroidJavaObject>("setType", "image/png");
 //		AndroidJavaClass uriClass = new AndroidJavaClass("android.net.Uri");
 //		AndroidJavaObject uriObject = uriClass.CallStatic<AndroidJavaObject>("parse", "file://" + destination);
-//		intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_STREAM"),
-//			uriObject);
+//		intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_STREAM"), uriObject);
 
 		//add data to be passed to the other activity i.e., the data to be sent
 		intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_SUBJECT"), subject);

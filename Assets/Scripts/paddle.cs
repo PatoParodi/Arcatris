@@ -33,6 +33,22 @@ public class paddle : MonoBehaviour {
 //		gameObject.transform.position = Vector3.Lerp (gameObject.transform.position, nuevaPosicion, velocidad * Time.deltaTime);
 		gameObject.transform.position = Vector3.MoveTowards (gameObject.transform.position, nuevaPosicion, velocidad * Time.deltaTime);
 
+		//GameOver solo si la pelota sigue viva
+		if (!LevelManager.levelManager.gameOver && 
+			gameObject.transform.position.y > 3.3f) {
+
+			//Tapar todo de brea
+			GameObject.FindWithTag("Brea").GetComponent<LimiteBrea>().moverBrea(new Vector3(0,4.4f,0));
+
+			LevelManager.levelManager.gameOver = true;
+
+			controller.ballInPlay = false;
+			Destroy(controller.pelotaViva);
+
+			controller.UI_inGame.SetActive (false);
+
+			controller.PantallaInicial.GetComponent<MenuController> ().MostrarPlay (true);
+		}
 	}
 
 
@@ -85,16 +101,16 @@ public class paddle : MonoBehaviour {
 	}
 
 	public void OnTriggerEnter2D(Collider2D col){
-
-		if (col.gameObject.tag == "lineaSpawn") {
-			//GameOVer
-
-			controller.ballInPlay = false;
-
-			controller.UI_inGame.SetActive (false);
-
-			controller.PantallaInicial.GetComponent<MenuController> ().MostrarPlay (true);
-		}
+		
+//		if (col.gameObject.tag == "lineaSpawn") {
+//			//GameOVer
+//
+//			controller.ballInPlay = false;
+//
+//			controller.UI_inGame.SetActive (false);
+//
+//			controller.PantallaInicial.GetComponent<MenuController> ().MostrarPlay (true);
+//		}
 
 	}
 

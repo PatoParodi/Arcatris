@@ -13240,7 +13240,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 141439165
   m_SortingLayer: 3
-  m_SortingOrder: 2
+  m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 77106e1fd655d46c5b40bcbbdd7e8e5c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.653}
   m_FlipX: 0
@@ -16217,6 +16217,7 @@ MonoBehaviour:
   popUpContinue: {fileID: 1376952699}
   Brea: {fileID: 946376213}
   multiplicadorVelocidad: 40
+  pelotaViva: {fileID: 0}
   mensajeTapToStart: {fileID: 109615080}
   ballInPlay: 0
   contadorPartidas: 0
@@ -17802,7 +17803,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 141439165
   m_SortingLayer: 3
-  m_SortingOrder: 3
+  m_SortingOrder: 8
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -24194,7 +24195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movimientoPiso: 0.125
-  velocidadBrea: 0.5
+  velocidadBrea: 0.6
   PosicionInicial: {fileID: 326256155}
   particulasBrea: {fileID: 1989857404}
   BreaEnPosicionInicial: 0
@@ -25022,7 +25023,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 141439165
   m_SortingLayer: 3
-  m_SortingOrder: 1
+  m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 77106e1fd655d46c5b40bcbbdd7e8e5c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.653}
   m_FlipX: 0
@@ -25581,7 +25582,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1006729016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26764,7 +26765,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 141439165
-  m_SortingOrder: 3
+  m_SortingOrder: 8
   m_TargetDisplay: 0
 --- !u!224 &1065287678
 RectTransform:
@@ -32742,7 +32743,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 141439165
-  m_SortingOrder: 1
+  m_SortingOrder: 8
   m_TargetDisplay: 0
 --- !u!1 &1394574974
 GameObject:
@@ -40513,7 +40514,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1743888542
 RectTransform:
   m_ObjectHideFlags: 0
@@ -40691,7 +40692,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 141439165
   m_SortingLayer: 3
-  m_SortingOrder: 3
+  m_SortingOrder: 8
   m_Sprite: {fileID: 21300000, guid: bb9b21be8a20e4589b4de8cfd0f598e5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -42075,7 +42076,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 141439165
   m_SortingLayer: 3
-  m_SortingOrder: 3
+  m_SortingOrder: 8
   m_Sprite: {fileID: 21300000, guid: bb9b21be8a20e4589b4de8cfd0f598e5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -44447,7 +44448,7 @@ Transform:
   m_GameObject: {fileID: 1984995262}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 207.6397}
-  m_LocalScale: {x: 129.77477, y: 129.77477, z: 129.77477}
+  m_LocalScale: {x: 129.77477, y: 129.7748, z: 129.7748}
   m_Children: []
   m_Father: {fileID: 1006729020}
   m_RootOrder: 2
@@ -44560,9 +44561,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingLayerID: 141439165
+  m_SortingLayer: 3
+  m_SortingOrder: 8
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -44641,7 +44642,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 726177088
+  randomSeed: 880799924
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -50623,7 +50624,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 141439165
-  m_SortingOrder: 4
+  m_SortingOrder: 8
   m_TargetDisplay: 0
 --- !u!224 &2135750714
 RectTransform:

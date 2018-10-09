@@ -28,6 +28,9 @@ public class LimiteBrea : MonoBehaviour {
 		else
 			BreaEnPosicionInicial = false;
 
+		if (transform.position.y > 4.4f)
+			transform.position = new Vector3 (transform.position.x, 4.4f, transform.position.z);
+
 	}
 
 	public bool BreaEstaEnPosicionInicial(){
@@ -49,15 +52,21 @@ public class LimiteBrea : MonoBehaviour {
 
 			Destroy (other.gameObject); //, 1.2f);
 
-			cantBolas = GameObject.FindGameObjectsWithTag ("pelota").Length;
+//			cantBolas = GameObject.FindGameObjectsWithTag ("pelota").Length;
 
-//			delayGameOver (0.5f);
-			if(cantBolas == 1) //Solo cuando queda 1 bola
+			//Restar bola al contador global de bolas en escena
+			LevelManager.levelManager.AddPelotasVivas (-1);
+			Debug.Log (LevelManager.levelManager.pelotasVivas);
+
+			//GameOver al no quedar pelotas vivas
+			if(	!LevelManager.levelManager.gameOver && 
+				LevelManager.levelManager.pelotasVivas == 0){
+
+				LevelManager.levelManager.gameOver = true;
+
 				if(GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().ballInPlay)
 					GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().gameOver ();
-			
-			
-
+			}
 		}
 
 		//En caso que llegue al fondo, subir el piso
@@ -85,7 +94,6 @@ public class LimiteBrea : MonoBehaviour {
 	public void moverBrea(Vector3 posicion){
 	//Mueve la brea hacia la nueva posicion
 		nuevaPosicion = posicion;
-//		gameObject.transform.position = Vector3.Lerp (transform.position, nuevaPosicion, velocidadBrea * Time.deltaTime);
 
 	}
 

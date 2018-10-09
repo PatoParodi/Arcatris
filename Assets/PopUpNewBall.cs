@@ -12,7 +12,7 @@ public class PopUpNewBall : MonoBehaviour {
 
 	public void OnEnable(){
 	
-		GetComponent<Animator> ().SetTrigger ("Show");
+
 	
 	}
 
@@ -26,7 +26,7 @@ public class PopUpNewBall : MonoBehaviour {
 		SpriteRenderer[] sprites = bolaInstanciada.GetComponentsInChildren<SpriteRenderer>();
 		foreach (SpriteRenderer sprite in sprites) {
 		
-			sprite.sortingOrder += 10;
+			sprite.sortingOrder += 20;
 		
 		}
 
@@ -35,8 +35,6 @@ public class PopUpNewBall : MonoBehaviour {
 	public void DestruirBolaInstanciada(){
 	//Llamar desde el Animador al terminar
 		Destroy(bolaInstanciada);
-
-		gameObject.SetActive (false);
 
 	}
 
