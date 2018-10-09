@@ -52,8 +52,6 @@ public class LimiteBrea : MonoBehaviour {
 
 			Destroy (other.gameObject); //, 1.2f);
 
-//			cantBolas = GameObject.FindGameObjectsWithTag ("pelota").Length;
-
 			paddle = GameObject.FindWithTag ("paddle") as GameObject;
 
 			bolasEnEscena = GameObject.FindGameObjectsWithTag ("pelota");
@@ -63,8 +61,7 @@ public class LimiteBrea : MonoBehaviour {
 
 					//Si esta tocando el collider de LimiteBrea y NO es ella misma
 					if(other.gameObject.GetInstanceID() != bola.GetInstanceID())
-						if (bola.transform.position.y < (paddle.transform.position.y - 0.2f)) {
-								Debug.Log ("Me estoy muriendo");
+						if (bola.transform.position.y < (paddle.transform.position.y - 0.3f)) {
 								cantBolas--;
 							}
 
