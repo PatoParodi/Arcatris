@@ -8,7 +8,7 @@ public static class LanguageManager {
 
 	public static string espanol = "ES", ingles = "EN";
 
-	public static string[] textos = new string[32];
+	public static string[] textos = new string[40];
 
 	public static int posicion;
 
@@ -45,7 +45,7 @@ public static class LanguageManager {
 				break;
 
 			case "ES":
-				textos [0] = "Configuración";
+				textos [0] = "CONFIGURACIÓN";
 				textos [1] = "Idioma";
 				textos [2] = "Sonido";
 				textos [3] = "Efecto Vintage";
@@ -77,7 +77,14 @@ public static class LanguageManager {
 				textos [29] = "Todos los derechos reservados.";
 				textos [30] = "Colaboradores:";
 				textos [31] = "Ayuda: pardesotas@gmail.com";
-
+				textos [32] = "TU";
+				textos [33] = "DESAFIO";
+				textos [34] = "COMIENZA";
+				textos [35] = "AHORA";
+				textos [36] = "Bolas Extra";
+				textos [37] = "Podrías calificarnos?";
+				textos [38] = "Ahora no";
+				textos [39] = "Calificar";
 
 				break;
 
@@ -91,7 +98,7 @@ public static class LanguageManager {
 
 		static void textosIngles(){
 
-			textos [0] = "Settings";
+			textos [0] = "SETTINGS";
 			textos [1] = "Language";
 			textos [2] = "Sound";
 			textos [3] = "Vintage Effect";
@@ -123,7 +130,14 @@ public static class LanguageManager {
 			textos [29] = "All rights reserved.";
 			textos [30] = "Collaborators:";
 			textos [31] = "Help: pardesotas@gmail.com";
-		
+			textos [32] = "YOUR";
+			textos [33] = "CHALLENGE";
+			textos [34] = "STARTS";
+			textos [35] = "NOW";
+			textos [36] = "Extra Balls";
+			textos [37] = "Do you like it?";
+			textos [38] = "Later";
+			textos [39] = "Rate Us";
 		}
 
 //	void OnEnable(){

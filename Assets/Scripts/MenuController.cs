@@ -170,13 +170,14 @@ public class MenuController : MonoBehaviour {
 
 		}
 
+		string isRated = PlayerPrefs.GetString (LevelManager.levelManager.s_Rated);
+
 		//Mostrar Rate US a las 5 partidas y luego cada 20
-		if (!_RateShowed && !popUp && PlayerPrefs.GetString (LevelManager.levelManager.s_Rated) != "Si") //Si aun no reateo
+		if (!_RateShowed && !popUp && isRated != "Si") //Si aun no reateo
 		if(controller.contadorPartidas == 5 || 
 			(controller.contadorPartidas > 1 && controller.contadorPartidas%20 == 0)) //Mostrar cada 20 partidas
 				{	
 
-//					controller.contadorPartidas++;
 					_RateShowed = true;
 					popUp = true;
 

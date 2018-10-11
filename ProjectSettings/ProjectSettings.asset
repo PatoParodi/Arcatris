@@ -164,7 +164,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.PardeSotas.Arcatris
   buildNumber: {}
-  AndroidBundleVersionCode: 20
+  AndroidBundleVersionCode: 23
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
