@@ -51,17 +51,19 @@ public class DailyRewardManager : MonoBehaviour {
 			PlayerPrefs.SetInt (LevelManager.levelManager.s_GiftCounter, GiftCounter);
 
 		}
-	
+
 //Calcular diferencia de dias entre Dia De inicio y fecha de hoy
 //Calcular si transcurrio al menos 1 dia y menos de 2 desde el ultimo inicio de sesion
-		if ((System.DateTime.Now - UltimoInicioSesion).TotalHours > 24 &&
-			(System.DateTime.Now - UltimoInicioSesion).TotalHours < 48) {
+//		if ((System.DateTime.Now - UltimoInicioSesion).TotalHours > 24 &&
+//			(System.DateTime.Now - UltimoInicioSesion).TotalHours < 48) {
+		if(System.DateTime.Today.DayOfYear > UltimoInicioSesion.DayOfYear &&
+			(System.DateTime.Today.DayOfYear - UltimoInicioSesion.DayOfYear) < 2){
 
 			GiftCounter = PlayerPrefs.GetInt (LevelManager.levelManager.s_GiftCounter);
 
 			DesbloquearGift ();
 
-		} else if((System.DateTime.Now - UltimoInicioSesion).TotalHours > 48){
+		} else if((System.DateTime.Today.DayOfYear - UltimoInicioSesion.DayOfYear) >= 2){
 			//Al pasar 48 horas se reinicializan los Gifts
 			GiftCounter = 0;
 			DesbloquearGift ();

@@ -8,7 +8,7 @@ public static class LanguageManager {
 
 	public static string espanol = "ES", ingles = "EN";
 
-	public static string[] textos = new string[40];
+	public static string[] textos = new string[60];
 
 	public static int posicion;
 
@@ -35,7 +35,7 @@ public static class LanguageManager {
 
 
 	static void setStrings(string language){
-	
+			//á é í ó ú
 		switch (language) 
 		{
 
@@ -58,9 +58,9 @@ public static class LanguageManager {
 				textos [10] = "PAUSA";
 				textos [11] = "No tiene suficientes diamantes";
 				textos [12] = "desliza";
-				textos [13] = "GOLPEA";
+				textos [13] = "DESTRUYE";
 				textos [14] = "LOS BLOQUES";
-				textos [15] = "ANTES\nQUE ALCANCEN";
+				textos [15] = "ANTES DE\nQUE ALCANCEN";
 				textos [16] = "NUESTRO\nCAMPO DE FUERZA";
 				textos [17] = "Ver ad para\nBola Gratis!";
 				textos [18] = "PROBABILIDAD";
@@ -85,6 +85,17 @@ public static class LanguageManager {
 				textos [37] = "Podrías calificarnos?";
 				textos [38] = "Ahora no";
 				textos [39] = "Calificar";
+				textos [40] = "Descubre tu regalo del día!";
+				textos [41] = "abrir";
+				textos [42] = "Vuelve mañana para tu próximo regalo!";
+				textos [43] = "día 1";
+				textos [44] = "día 2";
+				textos [45] = "día 3";
+				textos [46] = "día 4";
+				textos [47] = "día 5";
+				textos [48] = "Wow! Hice ";
+				textos [49] = " puntos. ";
+				textos [50] = "Muéstrale al mundo de qué estás hecho! Da lo mejor de ti en Arcatrix! https://play.google.com/store/apps/details?id=com.PardeSotas.Arcatris";
 
 				break;
 
@@ -138,6 +149,19 @@ public static class LanguageManager {
 			textos [37] = "Do you like it?";
 			textos [38] = "Later";
 			textos [39] = "Rate Us";
+			textos [40] = "Get your daily gift!";
+			textos [41] = "open";
+			textos [42] = "Do not forget to come back tomorrow for your next gift!";
+			textos [43] = "day 1";
+			textos [44] = "day 2";
+			textos [45] = "day 3";
+			textos [46] = "day 4";
+			textos [47] = "day 5";
+			textos [48] = "I've just made ";
+			textos [49] = " points. ";
+			textos [50] = "Show the world what you are made of! Try your best at Arcatrix! https://play.google.com/store/apps/details?id=com.PardeSotas.Arcatris";
+
+
 		}
 
 //	void OnEnable(){

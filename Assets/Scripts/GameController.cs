@@ -120,7 +120,7 @@ public class GameController : MonoBehaviour {
 			_language = PlayerPrefs.GetString (LevelManager.levelManager.s_Language);
 		
 		} else {
-			_language = "EN";
+			_language = "ES";
 		
 		}
 
@@ -154,6 +154,22 @@ public class GameController : MonoBehaviour {
 
 		googlePlayServicesSignIn ();
 
+
+		// Monedas
+		if (PlayerPrefs.HasKey ("ArcatrisMonedas"))
+			Monedas = PlayerPrefs.GetInt ("ArcatrisMonedas");
+		else
+			Monedas = 0;
+		textosEnPantalla.cantidadMonedas.text = Monedas.ToString ();
+
+		// Bolas Extra
+		if(PlayerPrefs.HasKey("ExtraBall"))
+			extraBalls = PlayerPrefs.GetInt ("ExtraBall");
+		else
+			extraBalls = 0;
+		textosEnPantalla.extraBallsValue.text = extraBalls.ToString ();
+
+
 		// Buscar variable de primera vez que juega
 		string strJugoAntes = PlayerPrefs.GetString ("jugoAntes");
 
@@ -169,13 +185,11 @@ public class GameController : MonoBehaviour {
 		//Tutorial How to Play
 		if (firstTimeEverToPlay) {
 
-//			LevelManager.levelManager.nivelActual++;
-//			_BloquesSpawneados++;
+			//Regalo de Tutorial: Agregar 100 diamantes y una bola extra
+			AddMoneda(100);
+			addExtraBallToScreen (1);
 
 			paddleVivo = Instantiate (paddle, new Vector2(paddleSpawnInicial.transform.position.x,paddleSpawnInicial.transform.position.y), Quaternion.identity) as GameObject;
-
-			PlayerPrefs.SetInt ("ExtraBall", 1);
-
 
 			tutorialObjetos.swipeText.SetActive (true);
 			tutorialObjetos.arrows.SetActive (true);
@@ -197,23 +211,13 @@ public class GameController : MonoBehaviour {
 
 			textosEnPantalla.highScoreValue.text = PlayerPrefs.GetInt (LevelManager.levelManager.s_HighScore).ToString();
 
-			SubmitScoreToPlayServices (int.Parse(textosEnPantalla.highScoreValue.text));
+//			SubmitScoreToPlayServices (int.Parse(textosEnPantalla.highScoreValue.text));
 
 		} else {
 		
 			textosEnPantalla.highScoreValue.text = "-";
 		}
 						
-
-		// Monedas
-		Monedas = 0;
-		Monedas = PlayerPrefs.GetInt("ArcatrisMonedas");
-		textosEnPantalla.cantidadMonedas.text = Monedas.ToString ();
-
-		// Bolas Extra
-		extraBalls = 0;
-		extraBalls = PlayerPrefs.GetInt ("ExtraBall");
-		textosEnPantalla.extraBallsValue.text = extraBalls.ToString ();
 
 	}
 
@@ -591,8 +595,12 @@ public class GameController : MonoBehaviour {
 	public void TerminarPartida (){
 	
 		ballInPlay = false;
-		if(pelotaViva != null)
-			Destroy(pelotaViva);
+
+		//Destruir todas las pelotas en juego
+		GameObject[] pelotas = GameObject.FindGameObjectsWithTag ("pelota");
+		foreach (GameObject pelota in pelotas) {
+			Destroy (pelota);
+		}
 
 		UI_inGame.SetActive (false);
 
@@ -689,6 +697,7 @@ public class GameController : MonoBehaviour {
 		LevelManager.levelManager.ReinicializarMultiplicadorPuntos ();
 
 		LevelManager.levelManager.gameOver = false;
+		LevelManager.levelManager.homeButton = false;
 
 		//Habilitar Boton de Pausa
 		BotonesEnPantalla.pausa.SetActive (true);

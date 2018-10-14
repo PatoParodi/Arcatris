@@ -472,8 +472,8 @@ public class MenuController : MonoBehaviour {
 	
 		if (PlayGamesPlatform.Instance.localUser.authenticated) {
 			//Submit Score to Play Services
-			if(controller.getScore() > 0)
-				controller.SubmitScoreToPlayServices(PlayerPrefs.GetInt (LevelManager.levelManager.s_HighScore));
+//			if(controller.getScore() > 0)
+//				controller.SubmitScoreToPlayServices(PlayerPrefs.GetInt (LevelManager.levelManager.s_HighScore));
 
 			PlayGamesPlatform.Instance.SetDefaultLeaderboardForUI ("CgkIkavI79INEAIQAQ");
 			PlayGamesPlatform.Instance.ShowLeaderboardUI ();

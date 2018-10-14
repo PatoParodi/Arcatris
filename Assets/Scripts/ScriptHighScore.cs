@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Analytics;
 using GooglePlayGames;
 using System.IO;
+using Language;
 
 public class ScriptHighScore : MonoBehaviour {
 
@@ -148,11 +149,10 @@ public class ScriptHighScore : MonoBehaviour {
 //	}
 
 
-
-	string subject = "Arcatrix Game"; //Asunto del mail
-	string justMadeText ="I've just made ";
-	string pointsText = " points. ";
-	string body = "Show the world what you are made of! Try your best at Arcatrix! https://play.google.com/store/apps/details?id=com.PardeSotas.Arcatris"; //Se pasa al mensaje en Whatsapp / Instagram por mensaje / Cuerpo del mail
+	string subject = "Arcatrix"; //Asunto del mail
+	string justMadeText;
+	string pointsText;
+	string body; //Se pasa al mensaje en Whatsapp / Instagram por mensaje / Cuerpo del mail
 
 		private bool isProcessing = false;
 		private bool isFocus = false;
@@ -160,6 +160,11 @@ public class ScriptHighScore : MonoBehaviour {
 
 	public void shareText()
 	{
+
+		justMadeText = LanguageManager.textos [48];
+		pointsText = LanguageManager.textos [49];
+		body = LanguageManager.textos [50]; //Se pasa al mensaje en Whatsapp / Instagram por mensaje / Cuerpo del mail
+
 
 		if (!isProcessing)
 		{

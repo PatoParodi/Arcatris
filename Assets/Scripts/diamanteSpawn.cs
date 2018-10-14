@@ -29,8 +29,8 @@ public class diamanteSpawn : MonoBehaviour {
 
 		transform.position = Vector2.MoveTowards (transform.position, _diamanteTarget.position, _step);
 
-		//En caso se salga de la partida
-		if (!_controller.ballInPlay) {
+		//Al ir al Home desde el juego
+		if (LevelManager.levelManager.homeButton) {
 			_destruido = true;
 			Destroy (gameObject);
 		}

@@ -8,6 +8,7 @@ public class popUpMultiplicador : MonoBehaviour {
 	public Text textoMultiplicador;
 
 	private Color newColor;
+	private GameController _controller;
 
 	// Use this for initialization
 	void Start () {
@@ -24,12 +25,24 @@ public class popUpMultiplicador : MonoBehaviour {
 		//Reproducir Sonido
 		SoundManager.soundManager.playSound(GetComponent<AudioSource>());
 
+		//Buscar GameController
+		_controller =  GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
+
 	}
 
 	public void Destruir(){
 	
 		Destroy (gameObject);
 	
+	}
+
+	void Update(){
+	
+		//Al ir al Home desde el juego
+		if (LevelManager.levelManager.homeButton) {
+			Destroy (gameObject);
+		}
+
 	}
 
 	public void LateUpdate(){

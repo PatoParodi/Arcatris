@@ -15,7 +15,9 @@ public class UIConfigMenu : MonoBehaviour {
 	}
 
 	public void BackToMainMenu(){
-	
+
+		LevelManager.levelManager.homeButton = true;
+
 		//Quitar pausa y cerrar ventana
 		GetComponent<MenuController>().buttonCloseConfig();
 

@@ -29,7 +29,8 @@ public class puntosSpawn : MonoBehaviour {
 
 		transform.position = Vector2.MoveTowards (transform.position, _diamanteTarget.position, _step);
 
-		if (!_controller.ballInPlay) {
+		//Al ir al Home desde el juego
+		if (LevelManager.levelManager.homeButton) {
 			_destruido = true;
 			Destroy (gameObject);
 		}

@@ -75,6 +75,8 @@ namespace LevelManager
 
 		public static bool gameOver = false;
 
+		public static bool homeButton = false;
+
 		public static void ReinicializarMultiplicadorPuntos(){
 		
 			multiplicadorPuntosCaja = 0;
