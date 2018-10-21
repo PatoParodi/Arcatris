@@ -43,6 +43,8 @@ public class PowerUp : ScriptableObject {
 
 		//Analytics
 		AnalyticsManager.Instance.ComprarPowerUp("Frecuencia",Nombre);
+
+		CalcularPropiedades ();
 	}
 
 	public void SubirNivelPoder(){
@@ -51,6 +53,8 @@ public class PowerUp : ScriptableObject {
 
 		//Analytics
 		AnalyticsManager.Instance.ComprarPowerUp("Poder",Nombre);
+
+		CalcularPropiedades ();
 	}
 
 	public void CalcularPropiedades(){

@@ -19,12 +19,16 @@ public class scriptContador : MonoBehaviour {
 	private bool contando = false;
 	private GameController controller;
 
-	void Awake(){
+	void Start(){
 	
 //		Advertisement.Initialize("1605669");
 
-		controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
+		//AdMob ID Android: ca-app-pub-2321113512856314~7770392311
+		//video intersticial ca-app-pub-2321113512856314/2122194401
+		//ExtraBall ca-app-pub-2321113512856314/6042377676
 	
+		controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
+
 	}
 
 	void OnEnable(){
@@ -53,20 +57,6 @@ public class scriptContador : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
-//		if (!Advertisement.IsReady ()) {
-//			Deshabilitar boton para ver video
-//			botonSiVideo.gameObject.GetComponent<Button> ().interactable = false;
-//			Image[] graficos = botonSiVideo.GetComponentsInChildren<Image> ();
-//			foreach (Image graf in graficos) {
-//				graf.color = new Color (graf.color.r, graf.color.g, graf.color.b, 100);
-//			}
-//			Text[] textos = botonSiVideo.GetComponentsInChildren<Text> ();
-//			foreach (Text texto in textos) {
-//				texto.color = new Color (texto.color.r, texto.color.g, texto.color.b, 100);
-//			}
-
-//		}
 
 		if (gameObject.activeSelf == true && contando == false) {
 
@@ -112,6 +102,7 @@ public class scriptContador : MonoBehaviour {
 
 	void ManagerShowResult (ShowResult result)
 	{
+		
 		if(result == ShowResult.Finished) {
 			//Utilizar una Bola Extra.
 			controller.extraBalls += 1;
@@ -140,6 +131,7 @@ public class scriptContador : MonoBehaviour {
 			//VER VIDEO PARA GANAR UNA BOLA EXTRA
 			ShowRewardedVideo ();
 			_conVideo++;
+
 		}
 		else{
 		//Utilizar una Bola Extra.

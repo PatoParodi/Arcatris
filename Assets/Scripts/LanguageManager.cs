@@ -95,7 +95,7 @@ public static class LanguageManager {
 				textos [47] = "día 5";
 				textos [48] = "Wow! Hice ";
 				textos [49] = " puntos. ";
-				textos [50] = "Muéstrale al mundo de qué estás hecho! Da lo mejor de ti en Arcatrix! https://play.google.com/store/apps/details?id=com.PardeSotas.Arcatris";
+				textos [50] = "Muéstrale al mundo de qué estás hecho! Da lo mejor de ti en Arcatrix! https://pardesotas.page.link/Arcatrix";
 
 				break;
 
@@ -159,7 +159,7 @@ public static class LanguageManager {
 			textos [47] = "day 5";
 			textos [48] = "I've just made ";
 			textos [49] = " points. ";
-			textos [50] = "Show the world what you are made of! Try your best at Arcatrix! https://play.google.com/store/apps/details?id=com.PardeSotas.Arcatris";
+			textos [50] = "Show the world what you are made of! Try your best at Arcatrix! https://pardesotas.page.link/Arcatrix";
 
 
 		}

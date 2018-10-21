@@ -2688,7 +2688,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.0500245, y: 2.2660522}
+  m_Offset: {x: 1.5233209, y: 2.4971964}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2699,7 +2699,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.500049, y: 0.09996295}
+  m_Size: {x: 4.446643, y: 0.56225157}
   m_EdgeRadius: 0
 --- !u!61 &61880755328128916
 BoxCollider2D:
@@ -5672,7 +5672,6 @@ MonoBehaviour:
   puntos: 100
   velocidad: 0
   moneda: {fileID: 1079388612577362, guid: b30e42ce858d240ecb75bb86dac1a22b, type: 2}
-  _cajaRoja: {fileID: 21300000, guid: eafff8473b5f04154963e44d2cf8feae, type: 3}
   powerUpBajarBrea: 0
   powerUpMB: 0
   powerUpRedBall: 0
@@ -5692,7 +5691,6 @@ MonoBehaviour:
   puntos: 100
   velocidad: 0
   moneda: {fileID: 1079388612577362, guid: b30e42ce858d240ecb75bb86dac1a22b, type: 2}
-  _cajaRoja: {fileID: 21300000, guid: eafff8473b5f04154963e44d2cf8feae, type: 3}
   powerUpBajarBrea: 0
   powerUpMB: 0
   powerUpRedBall: 0
@@ -5712,7 +5710,6 @@ MonoBehaviour:
   puntos: 100
   velocidad: 0
   moneda: {fileID: 1079388612577362, guid: b30e42ce858d240ecb75bb86dac1a22b, type: 2}
-  _cajaRoja: {fileID: 21300000, guid: eafff8473b5f04154963e44d2cf8feae, type: 3}
   powerUpBajarBrea: 0
   powerUpMB: 0
   powerUpRedBall: 0
@@ -5732,7 +5729,6 @@ MonoBehaviour:
   puntos: 100
   velocidad: 0
   moneda: {fileID: 1079388612577362, guid: b30e42ce858d240ecb75bb86dac1a22b, type: 2}
-  _cajaRoja: {fileID: 21300000, guid: eafff8473b5f04154963e44d2cf8feae, type: 3}
   powerUpBajarBrea: 0
   powerUpMB: 0
   powerUpRedBall: 0
@@ -5752,7 +5748,6 @@ MonoBehaviour:
   puntos: 100
   velocidad: 0
   moneda: {fileID: 1079388612577362, guid: b30e42ce858d240ecb75bb86dac1a22b, type: 2}
-  _cajaRoja: {fileID: 21300000, guid: eafff8473b5f04154963e44d2cf8feae, type: 3}
   powerUpBajarBrea: 0
   powerUpMB: 0
   powerUpRedBall: 0
@@ -5772,7 +5767,6 @@ MonoBehaviour:
   puntos: 100
   velocidad: 0
   moneda: {fileID: 1079388612577362, guid: b30e42ce858d240ecb75bb86dac1a22b, type: 2}
-  _cajaRoja: {fileID: 21300000, guid: eafff8473b5f04154963e44d2cf8feae, type: 3}
   powerUpBajarBrea: 0
   powerUpMB: 0
   powerUpRedBall: 0
@@ -5792,7 +5786,6 @@ MonoBehaviour:
   puntos: 100
   velocidad: 0
   moneda: {fileID: 1079388612577362, guid: b30e42ce858d240ecb75bb86dac1a22b, type: 2}
-  _cajaRoja: {fileID: 21300000, guid: eafff8473b5f04154963e44d2cf8feae, type: 3}
   powerUpBajarBrea: 0
   powerUpMB: 0
   powerUpRedBall: 0
@@ -5812,7 +5805,6 @@ MonoBehaviour:
   puntos: 100
   velocidad: 0
   moneda: {fileID: 1079388612577362, guid: b30e42ce858d240ecb75bb86dac1a22b, type: 2}
-  _cajaRoja: {fileID: 21300000, guid: eafff8473b5f04154963e44d2cf8feae, type: 3}
   powerUpBajarBrea: 0
   powerUpMB: 0
   powerUpRedBall: 0
@@ -5832,7 +5824,6 @@ MonoBehaviour:
   puntos: 100
   velocidad: 0
   moneda: {fileID: 1079388612577362, guid: b30e42ce858d240ecb75bb86dac1a22b, type: 2}
-  _cajaRoja: {fileID: 21300000, guid: eafff8473b5f04154963e44d2cf8feae, type: 3}
   powerUpBajarBrea: 0
   powerUpMB: 0
   powerUpRedBall: 0
@@ -5852,7 +5843,6 @@ MonoBehaviour:
   puntos: 100
   velocidad: 0
   moneda: {fileID: 1079388612577362, guid: b30e42ce858d240ecb75bb86dac1a22b, type: 2}
-  _cajaRoja: {fileID: 21300000, guid: eafff8473b5f04154963e44d2cf8feae, type: 3}
   powerUpBajarBrea: 0
   powerUpMB: 0
   powerUpRedBall: 0
@@ -5872,7 +5862,6 @@ MonoBehaviour:
   puntos: 100
   velocidad: 0
   moneda: {fileID: 1079388612577362, guid: b30e42ce858d240ecb75bb86dac1a22b, type: 2}
-  _cajaRoja: {fileID: 21300000, guid: eafff8473b5f04154963e44d2cf8feae, type: 3}
   powerUpBajarBrea: 0
   powerUpMB: 0
   powerUpRedBall: 0
@@ -5892,7 +5881,6 @@ MonoBehaviour:
   puntos: 100
   velocidad: 0
   moneda: {fileID: 1079388612577362, guid: b30e42ce858d240ecb75bb86dac1a22b, type: 2}
-  _cajaRoja: {fileID: 21300000, guid: eafff8473b5f04154963e44d2cf8feae, type: 3}
   powerUpBajarBrea: 0
   powerUpMB: 0
   powerUpRedBall: 0
@@ -5912,7 +5900,6 @@ MonoBehaviour:
   puntos: 100
   velocidad: 0
   moneda: {fileID: 1079388612577362, guid: b30e42ce858d240ecb75bb86dac1a22b, type: 2}
-  _cajaRoja: {fileID: 21300000, guid: eafff8473b5f04154963e44d2cf8feae, type: 3}
   powerUpBajarBrea: 0
   powerUpMB: 0
   powerUpRedBall: 0
@@ -5932,7 +5919,6 @@ MonoBehaviour:
   puntos: 100
   velocidad: 0
   moneda: {fileID: 1079388612577362, guid: b30e42ce858d240ecb75bb86dac1a22b, type: 2}
-  _cajaRoja: {fileID: 21300000, guid: eafff8473b5f04154963e44d2cf8feae, type: 3}
   powerUpBajarBrea: 0
   powerUpMB: 0
   powerUpRedBall: 0
@@ -5952,7 +5938,6 @@ MonoBehaviour:
   puntos: 100
   velocidad: 0
   moneda: {fileID: 1079388612577362, guid: b30e42ce858d240ecb75bb86dac1a22b, type: 2}
-  _cajaRoja: {fileID: 21300000, guid: eafff8473b5f04154963e44d2cf8feae, type: 3}
   powerUpBajarBrea: 0
   powerUpMB: 0
   powerUpRedBall: 0
@@ -5972,7 +5957,6 @@ MonoBehaviour:
   puntos: 100
   velocidad: 0
   moneda: {fileID: 1079388612577362, guid: b30e42ce858d240ecb75bb86dac1a22b, type: 2}
-  _cajaRoja: {fileID: 21300000, guid: eafff8473b5f04154963e44d2cf8feae, type: 3}
   powerUpBajarBrea: 0
   powerUpMB: 0
   powerUpRedBall: 0
@@ -5992,7 +5976,6 @@ MonoBehaviour:
   puntos: 100
   velocidad: 0
   moneda: {fileID: 1079388612577362, guid: b30e42ce858d240ecb75bb86dac1a22b, type: 2}
-  _cajaRoja: {fileID: 21300000, guid: eafff8473b5f04154963e44d2cf8feae, type: 3}
   powerUpBajarBrea: 0
   powerUpMB: 0
   powerUpRedBall: 0
@@ -6012,7 +5995,6 @@ MonoBehaviour:
   puntos: 100
   velocidad: 0
   moneda: {fileID: 1079388612577362, guid: b30e42ce858d240ecb75bb86dac1a22b, type: 2}
-  _cajaRoja: {fileID: 21300000, guid: eafff8473b5f04154963e44d2cf8feae, type: 3}
   powerUpBajarBrea: 0
   powerUpMB: 0
   powerUpRedBall: 0
@@ -6032,7 +6014,6 @@ MonoBehaviour:
   puntos: 100
   velocidad: 0
   moneda: {fileID: 1079388612577362, guid: b30e42ce858d240ecb75bb86dac1a22b, type: 2}
-  _cajaRoja: {fileID: 21300000, guid: eafff8473b5f04154963e44d2cf8feae, type: 3}
   powerUpBajarBrea: 0
   powerUpMB: 0
   powerUpRedBall: 0
@@ -6052,7 +6033,6 @@ MonoBehaviour:
   puntos: 100
   velocidad: 0
   moneda: {fileID: 1079388612577362, guid: b30e42ce858d240ecb75bb86dac1a22b, type: 2}
-  _cajaRoja: {fileID: 21300000, guid: eafff8473b5f04154963e44d2cf8feae, type: 3}
   powerUpBajarBrea: 0
   powerUpMB: 0
   powerUpRedBall: 0
@@ -6072,7 +6052,6 @@ MonoBehaviour:
   puntos: 100
   velocidad: 0
   moneda: {fileID: 1079388612577362, guid: b30e42ce858d240ecb75bb86dac1a22b, type: 2}
-  _cajaRoja: {fileID: 21300000, guid: eafff8473b5f04154963e44d2cf8feae, type: 3}
   powerUpBajarBrea: 0
   powerUpMB: 0
   powerUpRedBall: 0
@@ -6092,7 +6071,6 @@ MonoBehaviour:
   puntos: 100
   velocidad: 0
   moneda: {fileID: 1079388612577362, guid: b30e42ce858d240ecb75bb86dac1a22b, type: 2}
-  _cajaRoja: {fileID: 21300000, guid: eafff8473b5f04154963e44d2cf8feae, type: 3}
   powerUpBajarBrea: 0
   powerUpMB: 0
   powerUpRedBall: 0
@@ -6112,7 +6090,6 @@ MonoBehaviour:
   puntos: 0
   velocidad: 0
   moneda: {fileID: 0}
-  _cajaRoja: {fileID: 0}
   powerUpBajarBrea: 0
   powerUpMB: 0
   powerUpRedBall: 0
@@ -6132,7 +6109,6 @@ MonoBehaviour:
   puntos: 100
   velocidad: 0
   moneda: {fileID: 1079388612577362, guid: b30e42ce858d240ecb75bb86dac1a22b, type: 2}
-  _cajaRoja: {fileID: 21300000, guid: eafff8473b5f04154963e44d2cf8feae, type: 3}
   powerUpBajarBrea: 0
   powerUpMB: 0
   powerUpRedBall: 0
@@ -6152,7 +6128,6 @@ MonoBehaviour:
   puntos: 100
   velocidad: 0
   moneda: {fileID: 1079388612577362, guid: b30e42ce858d240ecb75bb86dac1a22b, type: 2}
-  _cajaRoja: {fileID: 21300000, guid: eafff8473b5f04154963e44d2cf8feae, type: 3}
   powerUpBajarBrea: 0
   powerUpMB: 0
   powerUpRedBall: 0

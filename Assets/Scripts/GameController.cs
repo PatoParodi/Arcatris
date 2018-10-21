@@ -54,6 +54,7 @@ public class GameController : MonoBehaviour {
 //	public float timeBetweenWaves;
 	public botones BotonesEnPantalla;
 	public textos textosEnPantalla;
+	public GameObject UI_Config;
 	public GameObject PantallaInicial;
 	public GameObject UI_inGame;
 	public GameObject UI_highScore;
@@ -105,6 +106,10 @@ public class GameController : MonoBehaviour {
 		float widthPantalla = Screen.width;
 		FactorPantalla = 720f / widthPantalla;
 
+
+//		//Inicializar Google AdMob
+//		AdMobManager.Instance.InitializeAds();
+
 		//Cargar array de colores para el multiplicador
 		LevelManager.levelManager.llenarColoresMultiplicador();
 
@@ -120,7 +125,11 @@ public class GameController : MonoBehaviour {
 			_language = PlayerPrefs.GetString (LevelManager.levelManager.s_Language);
 		
 		} else {
-			_language = "ES";
+			//Leer idioma del dispositivo
+			if (Application.systemLanguage == SystemLanguage.Spanish)
+				_language = "ES";
+			else
+				_language = "EN";
 		
 		}
 
@@ -133,14 +142,6 @@ public class GameController : MonoBehaviour {
 		//Leer info de Power Ups
 		PowerUpManager.Instance.LeerNiveles();
 
-//		//Red Ball
-//		leerDataPowerUps(LevelManager.levelManager.s_PowerUpRebBallProb, ref LevelManager.levelManager.PowerUpRedBall);
-//		leerDataPowerUps(LevelManager.levelManager.s_PowerUpRebBallDurac, ref LevelManager.levelManager.PowerUpRedBallDuracion);
-//		//Bajar Brea
-//		leerDataPowerUps(LevelManager.levelManager.s_PowerUpBajarBreaProb, ref LevelManager.levelManager.PowerUpBajarBrea);
-//		//Multiple Ball
-//		leerDataPowerUps(LevelManager.levelManager.s_PowerUpMultipleBallCant, ref LevelManager.levelManager.PowerUpMultipleBallCant);
-//
 		velocidadCaja = velocidadCaja / 100;
 
 		//Inicializar Nivel y leer Dificultad
@@ -219,6 +220,19 @@ public class GameController : MonoBehaviour {
 		}
 						
 
+	}
+
+	//Al poner la App en segundo plano
+	void OnApplicationPause(bool pauseStatus){
+	
+		if (ballInPlay) {
+			if (pauseStatus) {
+				//Poner el juego en pausa cuando la pelota esta en juego
+				UI_Config.SetActive (true);
+				UI_Config.GetComponent<MenuController> ().pauseGame ();
+			}
+		}
+	
 	}
 
 	public void SubmitScoreToPlayServices(int score){
