@@ -15,10 +15,74 @@ public class BarritasPowerUp : MonoBehaviour {
 	public GameObject _NoCoinsPopUp;
 
 
-	bool barritasGeneradas = false; 
+	bool barritasGeneradas = false;
 
-	// Use this for initialization
-	void OnEnable () {
+    private void Awake()
+    {
+
+        //Calcular precios FRECUENCIA segun Nivel
+        if(Frecuencia)
+        {
+            if (RedBall)
+                Precio = BuscarPrecioFrecuencia(PowerUpManager.Instance.RedBall.NivelFrecuencia + 1);
+            if (BajarBrea)
+                Precio = BuscarPrecioFrecuencia(PowerUpManager.Instance.BajarBrea.NivelFrecuencia + 1);
+            if (MultipleBall)
+                Precio = BuscarPrecioFrecuencia(PowerUpManager.Instance.MultipleBall.NivelFrecuencia + 1);
+        }
+
+        //Calcular precios PODER segun Nivel
+        if (Poder)
+        {
+            if (RedBall)
+                Precio = BuscarPrecioPoder(PowerUpManager.Instance.RedBall.NivelPoder + 1);
+            if (BajarBrea)
+                Precio = BuscarPrecioPoder(PowerUpManager.Instance.BajarBrea.NivelPoder + 1);
+
+        }
+
+    }
+
+    int BuscarPrecioFrecuencia(int nivel){
+
+        switch(nivel){
+            case 1:
+                return 100;
+            case 2:
+                return 200;
+            case 3:
+                return 350;
+            case 4:
+                return 600;
+            case 5:
+                return 900;
+        }
+
+        return 0;
+    }
+
+    int BuscarPrecioPoder(int nivel)
+    {
+
+        switch (nivel)
+        {
+            case 1:
+                return 200;
+            case 2:
+                return 300;
+            case 3:
+                return 425;
+            case 4:
+                return 600;
+            case 5:
+                return 800;
+        }
+
+        return 0;
+    }
+
+    // Use this for initialization
+    void OnEnable () {
 
 		int nivel = 1;
 
@@ -97,7 +161,8 @@ public class BarritasPowerUp : MonoBehaviour {
 				if (RedBall) {
 					PowerUpManager.Instance.RedBall.SubirNivelFrecuencia ();
 					nivel = PowerUpManager.Instance.RedBall.NivelFrecuencia;
-				}
+                    Precio = BuscarPrecioFrecuencia(nivel + 1);
+                }
 
 				if (MultipleBall){
 					PowerUpManager.Instance.MultipleBall.SubirNivelFrecuencia ();
@@ -109,11 +174,15 @@ public class BarritasPowerUp : MonoBehaviour {
 					nivel = PowerUpManager.Instance.BajarBrea.NivelFrecuencia;
 				}
 
-			} else if (Poder) {
+                Precio = BuscarPrecioFrecuencia(nivel + 1);
+
+            }
+            else if (Poder) {
 				if (RedBall){
 					PowerUpManager.Instance.RedBall.SubirNivelPoder ();
 					nivel = PowerUpManager.Instance.RedBall.NivelPoder;
-				}
+                    Precio = BuscarPrecioPoder(nivel + 1);
+                }
 
 				if (MultipleBall){
 					PowerUpManager.Instance.MultipleBall.SubirNivelPoder ();
@@ -123,11 +192,14 @@ public class BarritasPowerUp : MonoBehaviour {
 				if (BajarBrea){
 					PowerUpManager.Instance.BajarBrea.SubirNivelPoder ();
 					nivel = PowerUpManager.Instance.BajarBrea.NivelPoder;
-				}
+                    Precio = BuscarPrecioPoder(nivel + 1);
+                }
 
-			}
 
-			ColorearBarritas (nivel);
+
+            }
+
+            ColorearBarritas (nivel);
 
 			//Verificar si se alcanza el nivel maximo
 			isNivelMaximoAlcanzado(nivel);
@@ -146,9 +218,12 @@ public class BarritasPowerUp : MonoBehaviour {
 	}
 
 	public void isNivelMaximoAlcanzado(int nivel){
-	
-		if (nivel >= MaxNivel)
-			GetComponent<Button> ().interactable = false;
+
+        if (nivel >= MaxNivel)
+        {
+            GetComponent<Button>().interactable = false;
+            Precio = 0;
+        }
 	
 	}
 

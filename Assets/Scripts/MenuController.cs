@@ -174,7 +174,7 @@ public class MenuController : MonoBehaviour {
 
 		//Mostrar Rate US a las 5 partidas y luego cada 20
 		if (!_RateShowed && !popUp && isRated != "Si") //Si aun no reateo
-		if(controller.contadorPartidas == 5 || 
+		if(controller.contadorPartidas == 3 || 
 			(controller.contadorPartidas > 1 && controller.contadorPartidas%20 == 0)) //Mostrar cada 20 partidas
 				{	
 

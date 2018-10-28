@@ -6,6 +6,8 @@ public class UIConfigMenu : MonoBehaviour {
 
 	private GameController controller;
 
+    public GameObject rateUs;
+
 	void Awake(){
 
 		//		Advertisement.Initialize("1605669");
@@ -26,4 +28,11 @@ public class UIConfigMenu : MonoBehaviour {
 
 	}
 
+    public void ShowRateUs(){
+
+        rateUs.SetActive(true);
+
+        GetComponent<Animator>().SetTrigger("Apagar");
+
+    }
 }
