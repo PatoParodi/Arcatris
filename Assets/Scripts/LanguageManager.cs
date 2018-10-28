@@ -82,9 +82,9 @@ public static class LanguageManager {
 				textos [34] = "COMIENZA";
 				textos [35] = "AHORA";
 				textos [36] = "Bolas Extra";
-				textos [37] = "Podrías calificarnos?";
-				textos [38] = "Ahora no";
-				textos [39] = "Calificar";
+				textos [37] = "Eres un crack en Arcatrix! Te agradaría valorar la app?";
+				textos [38] = "Lo haré más tarde";
+				textos [39] = "Sí, claro!";
 				textos [40] = "Descubre tu regalo del día!";
 				textos [41] = "abrir";
 				textos [42] = "Vuelve mañana para tu próximo regalo!";
@@ -146,9 +146,9 @@ public static class LanguageManager {
 			textos [34] = "STARTS";
 			textos [35] = "NOW";
 			textos [36] = "Extra Balls";
-			textos [37] = "Do you like it?";
-			textos [38] = "Later";
-			textos [39] = "Rate Us";
+			textos [37] = "You're doing great at Arcatrix! Would you please rate the app?";
+			textos [38] = "I'll do it later";
+			textos [39] = "Yes, sure!";
 			textos [40] = "Get your daily gift!";
 			textos [41] = "open";
 			textos [42] = "Do not forget to come back tomorrow for your next gift!";

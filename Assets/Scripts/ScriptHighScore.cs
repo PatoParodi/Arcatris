@@ -160,7 +160,7 @@ public class ScriptHighScore : MonoBehaviour {
 
 	public void shareText()
 	{
-
+		
 		justMadeText = LanguageManager.textos [48];
 		pointsText = LanguageManager.textos [49];
 		body = LanguageManager.textos [50]; //Se pasa al mensaje en Whatsapp / Instagram por mensaje / Cuerpo del mail

@@ -17,56 +17,122 @@ public class Caja : MonoBehaviour {
 	private GameController controller;
 	private Vector2 posicionInicial;
 
-	void Start(){
 
-		posicionInicial = transform.position;
+    void Start()
+    {
 
-		controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
+        posicionInicial = transform.position;
 
-		if (gameObject.tag == "Caja") {
-			velocidad = 0;
-		}
-		else {
-			velocidad = LevelManager.levelManager.velocidadCajas;
+        controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
-		}
+        if (gameObject.tag == "Caja")
+        {
+            velocidad = 0;
+        }
+        else
+        {
+            velocidad = LevelManager.levelManager.velocidadCajas;
 
-		if (!NoCalcularPowerUp) {
-			//No determinar si son powerUps para la oleada de Tutorial
-			if (gameObject.tag == "Caja") {
-				if (LevelManager.levelManager.contadorCajasDerretidas > 5)
-				//Verificar si sera una caja Power Up Bajar Brea
-				if (probabilidad (PowerUpManager.Instance.BajarBrea.Frecuencia)) {
-					GetComponent<Animator> ().SetBool ("BreaDown", true);
-					powerUpBajarBrea = true;
-				}
+        }
 
-				if (!powerUpBajarBrea && !powerUpRedBall && probabilidad (PowerUpManager.Instance.MultipleBall.Frecuencia)) {
-					powerUpMB = true;
+        if (gameObject.tag == "Caja")
+        {
+            if (NoCalcularPowerUp){
+                //Para los ladrillos del Tutorial
+                if (powerUpMB)
+                    GetComponent<Animator>().SetBool("PowerUpMB", true);
 
-				}
+                if (powerUpRedBall)
+                    GetComponent<Animator>().SetBool("PowerUpRedBall", true);
 
-				if (!powerUpBajarBrea && !powerUpMB && probabilidad (PowerUpManager.Instance.RedBall.Frecuencia)) {
-					powerUpRedBall = true;
+            }
+            else {
+            //No determinar si son powerUps para la oleada de Tutorial
 
-				}
-		
-			}
-		
-		}
+                //if (LevelManager.levelManager.contadorCajasDerretidas > 5)
+                ////Verificar si sera una caja Power Up Bajar Brea
+                //if (probabilidad (PowerUpManager.Instance.BajarBrea.Frecuencia)) {
+                //	powerUpBajarBrea = true;
+                //}
 
-		if (powerUpMB) {
-			GetComponent<Animator> ().SetBool ("PowerUpMB", true);
-		}
+                //if (!powerUpBajarBrea && !powerUpRedBall && probabilidad (PowerUpManager.Instance.MultipleBall.Frecuencia)) {
+                //	powerUpMB = true;
 
-		if (powerUpRedBall) {
-			GetComponent<Animator> ().SetBool ("PowerUpRedBall", true);
-		}
+                //}
+
+                //if (!powerUpBajarBrea && !powerUpMB && probabilidad (PowerUpManager.Instance.RedBall.Frecuencia)) {
+                //	powerUpRedBall = true;
+
+                //}
+
+                float[] probs = new float[4];
+
+                //Cargar probabilidades
+                probs[1] = PowerUpManager.Instance.MultipleBall.Frecuencia;
+                probs[2] = PowerUpManager.Instance.RedBall.Frecuencia;
+                probs[0] = 100 - probs[1] - probs[2];
+                if (LevelManager.levelManager.contadorCajasDerretidas > 5)
+                {
+                    probs[3] = PowerUpManager.Instance.BajarBrea.Frecuencia;
+                    probs[0] = 100 - probs[1] - probs[2] - probs[3];
+                }
+
+                //Randomizar y calcular donde cae
+                int NroPowerUp = Choose(probs);
+
+                //Asignar Grafico
+                switch (NroPowerUp)
+                {
+                    case 0:
+                        //Caja Negra
+                        break;
+                    case 1:
+                        powerUpMB = true;
+                        GetComponent<Animator>().SetBool("PowerUpMB", true);
+                        break;
+                    case 2:
+                        powerUpRedBall = true;
+                        GetComponent<Animator>().SetBool("PowerUpRedBall", true);
+                        break;
+                    case 3:
+                        powerUpBajarBrea = true;
+                        GetComponent<Animator>().SetBool("BreaDown", true);
+                        break;
+                }
+            }
+
+        }
 
 	}
 
-	// Update is called once per frame
-	void Update () {
+    int Choose(float[] probs)
+    {
+
+        float total = 0;
+
+        foreach (float elem in probs)
+        {
+            total += elem;
+        }
+
+        float randomPoint = Random.value * total;
+
+        for (int i = 0; i < probs.Length; i++)
+        {
+            if (randomPoint < probs[i])
+            {
+                return i;
+            }
+            else
+            {
+                randomPoint -= probs[i];
+            }
+        }
+        return probs.Length - 1;
+    }
+
+    // Update is called once per frame
+    void Update () {
 
 		if (gameObject.tag != "Caja")
 			velocidad = LevelManager.levelManager.velocidadCajas;

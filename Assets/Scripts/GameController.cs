@@ -192,6 +192,8 @@ public class GameController : MonoBehaviour {
 
 			paddleVivo = Instantiate (paddle, new Vector2(paddleSpawnInicial.transform.position.x,paddleSpawnInicial.transform.position.y), Quaternion.identity) as GameObject;
 
+			//Cargar objetos para el tutorial
+
 			tutorialObjetos.swipeText.SetActive (true);
 			tutorialObjetos.arrows.SetActive (true);
 			tutorialObjetos.forceField.SetActive (true);
@@ -349,7 +351,7 @@ public class GameController : MonoBehaviour {
 			firstTimeEverToPlay = false;
 
 		}
-			
+		
 		yield return new WaitForSecondsRealtime (1);
 		//Text del Objetivo
 		tutorialObjetos.objectiveText.SetActive (true);
@@ -728,7 +730,8 @@ public class GameController : MonoBehaviour {
 		//Animacion de Spawn
 		pelotaViva.GetComponent<Animator> ().SetTrigger ("Spawn");
 
-		if (!continueFlag) {
+
+        if (!continueFlag) {
 			//Leer bola seleccionada
 //			LevelManager.levelManager.numeroBolaElegida = PlayerPrefs.GetString (LevelManager.levelManager.s_BolaElegida);
 		}

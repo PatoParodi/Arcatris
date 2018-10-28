@@ -8,7 +8,7 @@ public class PowerUp : ScriptableObject {
 	public int NivelFrecuencia = 1, NivelPoder = 1, PoderCantidad;
 	public float Frecuencia, PoderDuracion, PoderBajar;
 
-	float FactorFrecuencia = 2.5f, FactorPoder = 0.2f; //20%
+	float FactorFrecuencia = 2f, FactorPoder = 0.2f; //20%
 	string s_freq, s_poder;
 
 	float BajarBreaBase = 4;
@@ -60,7 +60,7 @@ public class PowerUp : ScriptableObject {
 	public void CalcularPropiedades(){
 
 		//Calcular Frecuencia
-		Frecuencia += FactorFrecuencia * NivelFrecuencia;
+        Frecuencia = FactorFrecuencia + (NivelFrecuencia * 1.1f); //(1 + FactorFrecuencia * NivelFrecuencia/10);
 
 		//Se adiciona un FactorPoder% por cada nivel
 		PoderBajar = BajarBreaBase + (BajarBreaBase * NivelPoder * FactorPoder);

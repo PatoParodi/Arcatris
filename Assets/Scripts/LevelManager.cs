@@ -20,6 +20,7 @@ namespace LevelManager
 		//Cajas
 		private static float velocidadCajasBase = 0.2f;  //Original 0.22f
 		public static float velocidadCajas = 0.22f;
+		public static float aumentoVelocidadCajas = 0.02f;
 		public static int puntosBaseCaja = 20;
 		public static int multiplicadorPuntosCaja = 0;
 
@@ -139,11 +140,15 @@ namespace LevelManager
 
 		}
 
-		public static void AumentarVelocidadCajas(){
-		
-			velocidadCajas *= 1.05f;
-		
-		}
+        public static void AumentarVelocidadCajas()
+        {
+
+            if (velocidadCajas < 0.7f)
+                velocidadCajas *= 1.05f;
+            else
+                velocidadCajas += aumentoVelocidadCajas;
+
+        }
 
 		public static void ResetearVelocidadCajas(){
 		
