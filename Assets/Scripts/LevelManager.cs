@@ -11,14 +11,14 @@ namespace LevelManager
 
 		//Pelota
 		public static float velocidadPelota = 4.3f;
-		public static float velocidadPelotaBase = 3f;
+		public static float velocidadPelotaBase = 3.4f;
 		public static float velocidadPelotaAumento = 0.4f; //10% por nivel
 		public static int dificultadActual = 1;
 		public static int dificultadMaxima = 7;
 		public static string numeroBolaElegida;
 
 		//Cajas
-		private static float velocidadCajasBase = 0.2f;  //Original 0.22f
+		private static float velocidadCajasBase = 0.24f;
 		public static float velocidadCajas = 0.22f;
 		public static float aumentoVelocidadCajas = 0.02f;
 		public static int puntosBaseCaja = 20;
@@ -27,8 +27,8 @@ namespace LevelManager
 		public static int nivelActual;
 
 		//Paddle
-		public static float VelocidadPaddle = 3;
-		public static float MaxVelocidadPaddle = 300;
+		public static float VelocidadPaddle = 6;
+		public static float MaxVelocidadPaddle = 400;
 		public static float SensibilidadPaddle = 9;
 
 		//Customizing: Variables globales configuracion del juego

@@ -17,7 +17,7 @@ namespace SoundManager
 				audio.Play ();
 		}
 
-		public static void enableSound(bool _enabled){
+        public static void enableSound(bool _enabled){
 
 			soundEnabled = _enabled;
 

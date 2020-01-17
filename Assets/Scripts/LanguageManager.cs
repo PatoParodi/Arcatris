@@ -96,8 +96,9 @@ public static class LanguageManager {
 				textos [48] = "Wow! Hice ";
 				textos [49] = " puntos. ";
 				textos [50] = "Muéstrale al mundo de qué estás hecho! Da lo mejor de ti en Arcatrix! https://pardesotas.page.link/Arcatrix";
+                textos [51] = "Gracias!!";
 
-				break;
+                    break;
 
 			default:
 				textosIngles ();
@@ -160,9 +161,9 @@ public static class LanguageManager {
 			textos [48] = "I've just made ";
 			textos [49] = " points. ";
 			textos [50] = "Show the world what you are made of! Try your best at Arcatrix! https://pardesotas.page.link/Arcatrix";
+            textos [51] = "Thank you!!";
 
-
-		}
+        }
 
 //	void OnEnable(){
 //

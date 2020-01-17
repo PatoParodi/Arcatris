@@ -5,8 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.Analytics;
 using UnityEngine.Advertisements;
 using Language;
-using GooglePlayGames;
-using GooglePlayGames.BasicApi;
 
 
 [System.Serializable]
@@ -38,12 +36,10 @@ public class MenuController : MonoBehaviour {
 	public Text _monedas;
 	public Text _extraBalls;
 	public GameObject _txtPopUp;
-	public GameObject _UI_RateUS;
 	public Text _txtNivel;
 	public AudioSource musicaMenu;
 	public bool tieneSonidos;
 	public Toggle SolapaBolas;
-//	public Text _velocidadPelotaText;
 
 
 	void Start(){
@@ -86,8 +82,11 @@ public class MenuController : MonoBehaviour {
 
 	void OnEnable(){
 
-		if (musicaMenu != null)
-			SoundManager.soundManager.playSound (musicaMenu);
+        if (musicaMenu != null)
+        {
+            if(!musicaMenu.isPlaying)
+                SoundManager.soundManager.playSound(musicaMenu);
+        }
 
 		//Sonido al mostrar
 		if (tieneSonidos)
@@ -152,10 +151,7 @@ public class MenuController : MonoBehaviour {
 		//Buscar GameController si aun no se recupero
 		if(controller == null)
 			controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
-
-		//Enviar Score a Google Services
-		controller.SubmitScoreToPlayServices(controller.getScore());
-
+         
 		//Mostrar HighScore si corresponde
 		if (controller.getScore () > PlayerPrefs.GetInt (LevelManager.levelManager.s_HighScore)) {
 
@@ -207,6 +203,10 @@ public class MenuController : MonoBehaviour {
 			_publiShowed = false;
 			_RateShowed = false;
 
+            //Stop Music
+            MusicManager.Instance.StopMusicInGame();
+            MusicManager.Instance.PlayMusicMenu();
+
 //			controller.contadorPartidas++;
 //			PlayerPrefs.SetInt(
 			
@@ -216,6 +216,10 @@ public class MenuController : MonoBehaviour {
 			// Al ir a pantalla de Play siempre volver la Brea a su posicion inicial
 			controller.breaPosicionInicial ();
 			_pantallaInicial.SetActive (true);
+
+            //Show Banner on initial screen
+            AdsManager.Instance.ShowBanner();
+
 		}
 			
 	}
@@ -227,19 +231,23 @@ public class MenuController : MonoBehaviour {
 		if (soundOnOff.isOn) {
 			PlayerPrefs.SetString (LevelManager.levelManager.s_sound, LevelManager.levelManager.s_On);
 			if (_pantallaInicial != null && _pantallaInicial.activeSelf)
-				_pantallaInicial.GetComponent<MenuController>().musicaMenu.Play();
+				//_pantallaInicial.GetComponent<MenuController>().musicaMenu.Play();
+                MusicManager.Instance.PlayMusicMenu();
 			else if(_inGame != null && _inGame.activeSelf)
-				_inGame.GetComponent<MenuController>().musicaMenu.Play();
+				//_inGame.GetComponent<MenuController>().musicaMenu.Play();
+                MusicManager.Instance.PlayMusicInGame();
 			
 
 		} else {
 			PlayerPrefs.SetString (LevelManager.levelManager.s_sound, LevelManager.levelManager.s_Off);
 			if (_pantallaInicial != null && _pantallaInicial.activeSelf)
-				_pantallaInicial.GetComponent<MenuController>().musicaMenu.Pause();
-			else if(_inGame != null && _inGame.activeSelf)
-				_inGame.GetComponent<MenuController>().musicaMenu.Pause();
+                //_pantallaInicial.GetComponent<MenuController>().musicaMenu.Pause();
+                MusicManager.Instance.PauseMusicMenu();
+            else if (_inGame != null && _inGame.activeSelf)
+                //_inGame.GetComponent<MenuController>().musicaMenu.Pause();
+                MusicManager.Instance.PauseMusicInGame();
 
-		}
+        }
 
 	}
 
@@ -287,18 +295,26 @@ public class MenuController : MonoBehaviour {
 
 	public void comprarExtraBallVid(){
 
-		//Mostrar video por Reward
-		if (Advertisement.IsReady ()) {
-			ShowOptions options = new ShowOptions();
-			options.resultCallback = ManagerShowResult;
 
-			Advertisement.Show("rewardedVideo", options);
+        if (AdsManager.Instance.IsRewardedLoaded())
+            //Mostrar video por Reward desde Shop
+            AdsManager.Instance.ShowRewardedVideo(true, gameObject.transform, GetComponent<AudioSource>());
 
-		}
+        else
+        {
+            AdsManager.Instance.RequestRewarded();
+        }
 
-	}
 
-	void ManagerShowResult (ShowResult result)
+        //if (Advertisement.IsReady ()) {
+        //	ShowOptions options = new ShowOptions();
+        //	options.resultCallback = ManagerShowResult;
+        //	Advertisement.Show("rewardedVideo", options);
+        //}
+
+    }
+
+    void ManagerShowResult (ShowResult result)
 	{
 		if(result == ShowResult.Finished) {
 			// Reward your player here.
@@ -459,33 +475,14 @@ public class MenuController : MonoBehaviour {
 //
 //	}
 
-	public void GoToMarket(){
+	//public void GoToMarket(){
 
-		Application.OpenURL ("https://play.google.com/store/apps/details?id=com.PardeSotas.Arcatris");
+	//	Application.OpenURL ("https://play.google.com/store/apps/details?id=com.PardeSotas.Arcatris");
 
-		PlayerPrefs.SetString (LevelManager.levelManager.s_Rated, "Si");
+	//	PlayerPrefs.SetString (LevelManager.levelManager.s_Rated, "Si");
 
-	}
+	//}
 
-
-	public void ShowLeaderboards(){
-	
-		if (PlayGamesPlatform.Instance.localUser.authenticated) {
-			//Submit Score to Play Services
-//			if(controller.getScore() > 0)
-//				controller.SubmitScoreToPlayServices(PlayerPrefs.GetInt (LevelManager.levelManager.s_HighScore));
-
-			PlayGamesPlatform.Instance.SetDefaultLeaderboardForUI ("CgkIkavI79INEAIQAQ");
-			PlayGamesPlatform.Instance.ShowLeaderboardUI ();
-
-		
-		} else {
-			PlayGamesPlatform.Instance.Authenticate (controller.googlePlayServicesSignInCallBack, false);	
-//			StartCoroutine(MostrarLeaderBoardsAfterAuth ());
-
-		}
-	
-	}
 
 	public void AbrirShopBolas(){
 	
@@ -493,22 +490,5 @@ public class MenuController : MonoBehaviour {
 	
 	}
 
-//	public void isAuthenticated(bool success){
-//
-//		success = false;
-//
-//		if (PlayGamesPlatform.Instance.localUser.authenticated)
-//			success = true;
-//
-//	}
-//
-//	public IEnumerator MostrarLeaderBoardsAfterAuth(){
-//	
-//		yield return new WaitUntil (isAuthenticated);
-//
-//		PlayGamesPlatform.Instance.SetDefaultLeaderboardForUI ("CgkIkavI79INEAIQAQ");
-//		PlayGamesPlatform.Instance.ShowLeaderboardUI ();
-//	
-//	}
-		
+	
 }

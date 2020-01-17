@@ -65,4 +65,10 @@ public class AnalyticsManager : MonoBehaviour {
 	
 	}
 
+    public void RateUsPopUp(int Stars){
+        //Analytics de Rate from pop up
+        Analytics.CustomEvent("RateUsPopUp", new Dictionary<string, object> {
+            { "CantidadEstrellas", Stars.ToString() }
+        });
+    }
 }

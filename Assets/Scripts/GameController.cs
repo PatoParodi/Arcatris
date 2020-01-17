@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Analytics;
 using Language;
-using GooglePlayGames;
-using GooglePlayGames.BasicApi;
+
 
 //Para que Unity reconozca esta clase es necesaria esta sentencia
 [System.Serializable]
@@ -85,13 +84,15 @@ public class GameController : MonoBehaviour {
 	public bool c_TutorialTest;
 
 	public tutorial tutorialObjetos;
+    [HideInInspector]public bool BannerIsLoaded = false;
 
-	private float FactorPantalla;
+    private float FactorPantalla;
 
-//	private int _BloquesSpawneados = 0;
+    float posicionConvertidor;
+    //	private int _BloquesSpawneados = 0;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 
 // &*&*&*&*&*&*&**&*&*&*&*&*&*&*&*&*&*&*&*&*&*
 // PARA PRUEBAS SOLAMENTE!!!!!!! !! ! ! ! !! !! ! !!! !!!
@@ -100,7 +101,7 @@ public class GameController : MonoBehaviour {
 		//PlayerPrefs.DeleteAll();
 //		PlayerPrefs.SetString ("jugoAntes","Si");
 //		PlayerPrefs.SetInt (LevelManager.levelManager.s_HighScore, 0);
-		PlayerPrefs.SetInt ("ArcatrisMonedas", 20000);
+		//PlayerPrefs.SetInt ("ArcatrisMonedas", 6073);
 //		PlayerPrefs.SetInt ("ExtraBall", 0);
 ///////////////////////////////////////////////////////////
 		float widthPantalla = Screen.width;
@@ -133,8 +134,13 @@ public class GameController : MonoBehaviour {
 		
 		}
 
-		//Setear idioma
-		LanguageManager.setLanguage (_language);
+        _language = "EN";
+
+        //Buscar posicion de convertidor de ladrillos
+        posicionConvertidor = GameObject.FindGameObjectWithTag("Convertidor").transform.position.y;
+
+        //Setear idioma
+        LanguageManager.setLanguage (_language);
 
 		//Verificar bolas compradas y ultima elegida
 		BallManager.Instance.VerificarBolasCompradas ();
@@ -149,12 +155,6 @@ public class GameController : MonoBehaviour {
 
 		//Puntaje a cero
 		textosEnPantalla.puntajeText.text = "0";
-
-		//Google Play Services
-		googlePlayServicesStart ();
-
-		googlePlayServicesSignIn ();
-
 
 		// Monedas
 		if (PlayerPrefs.HasKey ("ArcatrisMonedas"))
@@ -192,9 +192,11 @@ public class GameController : MonoBehaviour {
 
 			paddleVivo = Instantiate (paddle, new Vector2(paddleSpawnInicial.transform.position.x,paddleSpawnInicial.transform.position.y), Quaternion.identity) as GameObject;
 
-			//Cargar objetos para el tutorial
+            //Music for TUtorial
+            MusicManager.Instance.PlayMusicInGame();
 
-			tutorialObjetos.swipeText.SetActive (true);
+            //Cargar objetos para el tutorial
+            tutorialObjetos.swipeText.SetActive (true);
 			tutorialObjetos.arrows.SetActive (true);
 			tutorialObjetos.forceField.SetActive (true);
 
@@ -202,8 +204,12 @@ public class GameController : MonoBehaviour {
 		} else {
 			
 			//Ajustar dificultad
-//			LevelManager.levelManager.determinarNivel (false);
 			LevelManager.levelManager.ReinicializarNivel ();
+
+            //ShowBanner
+            AdsManager.Instance.ShowBanner();
+
+            MusicManager.Instance.PlayMusicMenu();
 
 			PantallaInicial.SetActive (true);
 
@@ -237,49 +243,6 @@ public class GameController : MonoBehaviour {
 	
 	}
 
-	public void SubmitScoreToPlayServices(int score){
-
-		PlayGamesPlatform.Instance.ReportScore(score,
-			"CgkIkavI79INEAIQAQ",
-			(bool success) =>
-			{
-				Debug.Log("LeaderBoard Update: " + success);
-			});
-
-	}
-
-	void googlePlayServicesStart(){
-		
-		//Create client configuration
-		PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().Build();
-
-		//Enable debugging output 
-		PlayGamesPlatform.DebugLogEnabled = true;
-
-		//Initialiaze and activate the platform
-		PlayGamesPlatform.InitializeInstance(config);
-		PlayGamesPlatform.Activate ();
-	
-	}
-
-	void googlePlayServicesSignIn (){
-
-		PlayGamesPlatform.Instance.SignOut ();
-
-		if (!PlayGamesPlatform.Instance.localUser.authenticated) {
-			//Sign in with PlayGame Services
-			PlayGamesPlatform.Instance.Authenticate (googlePlayServicesSignInCallBack, false);
-		
-		} 
-
-	}
-
-	public void googlePlayServicesSignInCallBack (bool success){
-	
-		if (success)
-			Debug.Log ("Signed in!");
-	
-	}
 
 	public void mostrarVidas(int vidas, string objeto){
 	// Mostrar las vidas o ExtraBalls en pantalla
@@ -351,8 +314,11 @@ public class GameController : MonoBehaviour {
 			firstTimeEverToPlay = false;
 
 		}
-		
-		yield return new WaitForSecondsRealtime (1);
+
+        //Contador de partidas
+        contadorPartidas++;
+
+        yield return new WaitForSecondsRealtime (1);
 		//Text del Objetivo
 		tutorialObjetos.objectiveText.SetActive (true);
 		tutorialObjetos.forceField.SetActive (true);
@@ -429,40 +395,15 @@ public class GameController : MonoBehaviour {
 				pelotaViva.transform.position = new Vector3(Mathf.Clamp(paddleVivo.transform.position.x,-2f,2f), paddleVivo.GetComponent<paddle>().pelotaSpawnPaddle.position.y ,0);
 
 		}
-			
 
-		//Verificar toque inicial para soltar pelota
-//		if (ballInPlay == false) {
-//			if (pelotaViva != null) {
-//				if (pelotaViva.GetComponent<ballScript> ().pelotaSpawneada == true) { //Esto es true cuando termina la animacion de Spawn
-//					if (contadorTiempoTapToStart == 0) {
-//						contadorTiempoTapToStart = Time.time;
-//					}
-//
-//					if (Input.touchCount > 0) {
-//						contadorTiempoTapToStart = 0;
-//						//Verificar que se haga un toque "rapido" sin mover el pad
-//						if (Input.touches [0].phase == TouchPhase.Began) {
-//							antiguaPosicionPaddle = paddleVivo.transform.position.x;
-//						} else if (Input.touches [0].phase == TouchPhase.Ended &&
-//						           (antiguaPosicionPaddle == paddleVivo.transform.position.x)) {
-//			
-//							validarTouchInicial = true;
-//							mensajeTapToStart.GetComponent<Animator>().SetBool("Mostrar",false);
-//						
-//						}
-//					} else {
-//						if (Time.time - contadorTiempoTapToStart > 3) { //3 segundos
-//						//Tap to Start Message
-//							mensajeTapToStart.GetComponent<Animator>().SetBool("Mostrar",true);
-//						}
-//					
-//					}
-//				}
-//			}
-//		}else{
-//			validarTouchInicial = false;
-//		}
+        //Destroy Banner in gameplay
+        if(ballInPlay && BannerIsLoaded){
+
+            AdsManager.Instance.DestroyBanner();
+
+            BannerIsLoaded = false;
+        }
+
 	}
 
 	void FixedUpdate(){
@@ -474,17 +415,8 @@ public class GameController : MonoBehaviour {
 
 			#if UNITY_EDITOR
 
-//			if(Input.GetAxis("Horizontal") == 0){
-//
-//				_FuerzaDrag = 0;
-//
-//			}
-//
-//			else if(Input.GetAxis("Horizontal") > 0){
-//
 				_FuerzaDrag = Input.GetAxis("Horizontal")  * LevelManager.levelManager.VelocidadPaddle * 18;
 
-//			}
 
 			#else
 				if (Input.touchCount == 0){
@@ -496,112 +428,31 @@ public class GameController : MonoBehaviour {
 				}
 				else {
 
-//					if (Mathf.Abs (paddleVivo.GetComponent<Rigidbody2D> ().velocity.x) > 0) {
 				if (Input.GetTouch (0).deltaPosition.x > 0) {
 						if (Mathf.Abs (Input.GetTouch (0).deltaPosition.x) > 0.5f) {
 						_FuerzaDrag = Input.GetTouch (0).deltaPosition.x * LevelManager.levelManager.VelocidadPaddle;
-//						_FuerzaDrag = Input.GetTouch (0).deltaPosition.magnitude / Input.GetTouch (0).deltaTime / LevelManager.levelManager.SensibilidadPaddle;
 						}
 
 					} else{	//MOVER HACIA LA IZQUIERDA
 						_FuerzaDrag = Input.GetTouch (0).deltaPosition.x * LevelManager.levelManager.VelocidadPaddle;
-//					_FuerzaDrag = - Input.GetTouch (0).deltaPosition.magnitude / Input.GetTouch (0).deltaTime / LevelManager.levelManager.SensibilidadPaddle;
 					}
-
-					//					Mathf.Clamp (movimientoPaddle, -velocidadPaddle, velocidadPaddle);
 
 				}
 
 			#endif
 
-				//				if(Mathf.Abs(_FuerzaDrag) > Mathf.Abs(movimientoPaddle))
 				//Multiplicar por valor de proporcion contra 720px
 				movimientoPaddle = _FuerzaDrag * FactorPantalla;
 
-//				//Clamp manual
-//				if (movimientoPaddle > LevelManager.levelManager.MaxVelocidadPaddle)
-////					movimientoPaddle = velocidadPaddle;
-//					movimientoPaddle = LevelManager.levelManager.MaxVelocidadPaddle;
-//
-//
-//				if (movimientoPaddle < -LevelManager.levelManager.MaxVelocidadPaddle)
-////					movimientoPaddle = -velocidadPaddle;
-//					movimientoPaddle = -LevelManager.levelManager.MaxVelocidadPaddle;
-//
-//				movimientoPaddle = movimientoPaddle / 10;
-//				paddleVivo.GetComponent<Rigidbody2D> ().velocity = new Vector2 (movimientoPaddle / 10, paddleVivo.GetComponent<Rigidbody2D> ().velocity.y);
-
-
-
-//			} 
-//			else if (Controles.sw_Botones.isOn) {
-//				//Botones de media pantalla
-//				//				BotonesEnPantalla.derecha.SetActive (true);
-//				//				BotonesEnPantalla.izquierda.SetActive (true);
-//				//				touchPadSlider.gameObject.SetActive (false);
-//
-//
-//				Vector3 touchPosWorld;
-//
-//
-//				//Verificar si esta tocando la pantalla para mover el pad
-//				if (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Began || Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetTouch(0).phase == TouchPhase.Stationary)) {
-//
-//					if (Input.touches.Length > 1) {
-//						touchPosWorld = Camera.main.ScreenToWorldPoint (Input.touches [1].position);
-//					} else {
-//						//We transform the touch position into world space from screen space and store it.
-//						touchPosWorld = Camera.main.ScreenToWorldPoint (Input.GetTouch (0).position);
-//					}
-//
-////					if (tiempoPresionando == 0)
-////						tiempoPresionando = Time.deltaTime;
-////					else
-//
-//					if (touchPosWorld.x > 0) {
-////						movimientoPaddle = velocidadPaddle;
-//						tiempoPresionandoR = tiempoPresionandoR + (Time.deltaTime * multiplicadorVelocidad);
-//						tiempoPresionandoL = 0;
-//						movimientoPaddle = LevelManager.levelManager.VelocidadPaddle * tiempoPresionandoR;
-//
-//					}else if (touchPosWorld.x < 0){
-////						movimientoPaddle = -velocidadPaddle;
-//						tiempoPresionandoL = tiempoPresionandoL + (Time.deltaTime * multiplicadorVelocidad);
-//						tiempoPresionandoR = 0;
-//						movimientoPaddle = -LevelManager.levelManager.VelocidadPaddle * tiempoPresionandoL;
-//					}
-//				}
-//
-//				if (Input.touchCount == 0) {
-//					movimientoPaddle = 0;
-//					//					tiempoPresionando = 0;
-//
-//				}
-//
-//				Debug.Log (movimientoPaddle);
-//
-//
-//			}
-
 			//Clamp manual
 			if (movimientoPaddle > LevelManager.levelManager.MaxVelocidadPaddle)
-				//					movimientoPaddle = velocidadPaddle;
 				movimientoPaddle = LevelManager.levelManager.MaxVelocidadPaddle;
 
 
 			if (movimientoPaddle < -LevelManager.levelManager.MaxVelocidadPaddle)
-				//					movimientoPaddle = -velocidadPaddle;
 				movimientoPaddle = -LevelManager.levelManager.MaxVelocidadPaddle;
 
-//			movimientoPaddle = movimientoPaddle / 10;
-
 			paddleVivo.GetComponent<Rigidbody2D> ().velocity = new Vector2 (movimientoPaddle / 10, paddleVivo.GetComponent<Rigidbody2D> ().velocity.y);
-
-
-			//			paddleVivo.GetComponent<Rigidbody2D> ().AddForce (new Vector2 (movimientoPaddle, 0));
-//			paddleVivo.GetComponent<Rigidbody2D> ().velocity = new Vector2 (movimientoPaddle / 10, paddleVivo.GetComponent<Rigidbody2D> ().velocity.y);
-			// Limito la posicion en X del pad para que no se suba a las paredes
-//			paddleVivo.transform.position = new Vector2(Mathf.Clamp(paddleVivo.transform.position.x,-2f,2f),paddleVivo.transform.position.y);
 
 		}
 	
@@ -620,7 +471,9 @@ public class GameController : MonoBehaviour {
 
 		UI_inGame.SetActive (false);
 
-//		PantallaInicial.GetComponent<MenuController> ().MostrarPlay (false);
+        MusicManager.Instance.StopMusicInGame();
+        MusicManager.Instance.PlayMusicMenu();
+
 		// Al ir a pantalla de Play siempre volver la Brea a su posicion inicial
 		breaPosicionInicial ();
 		PantallaInicial.SetActive (true);
@@ -647,9 +500,12 @@ public class GameController : MonoBehaviour {
 
 		if (vidas > 0)
 			//Re-spawnear
-			ContinuarJuego ("WhiteBall");	//WhiteBall
-		
-		else {
+			//ContinuarJuego ("WhiteBall");   //WhiteBall
+            StartCoroutine(inicializarObjetos(countdownInicial, true, "WhiteBall"));
+
+
+        else
+        {
 			
 			popUpContinue.SetActive (true);
 
@@ -659,6 +515,13 @@ public class GameController : MonoBehaviour {
 			
 	}
 		
+    public IEnumerator DestroyBannerInGame(){
+        yield return new WaitForSecondsRealtime(1f);
+
+        //Destroy Banner
+        AdsManager.Instance.DestroyBanner();
+
+    }
 
 	public void IniciarJuego(bool continueFlag){
 //Comienza el juego desde el principio
@@ -669,7 +532,18 @@ public class GameController : MonoBehaviour {
 		
 		}
 
-		UI_inGame.SetActive (true);
+        MusicManager.Instance.StopMusicMenu();
+        MusicManager.Instance.PlayMusicInGame();
+
+        Time.timeScale = 1;
+
+        if(BannerIsLoaded)
+            AdsManager.Instance.DestroyBanner();
+
+        //Destroy Banner
+        StartCoroutine(DestroyBannerInGame());
+
+        UI_inGame.SetActive (true);
 
 		//Mostrar vidas iniciales
 		vidas = 3;
@@ -700,8 +574,52 @@ public class GameController : MonoBehaviour {
 //Continuar el juego sin volver a empezar
 
 		//		inicializarObjetos ();
-		StartCoroutine(inicializarObjetos(countdownInicial, true, ballType));
+		//StartCoroutine(inicializarObjetos(countdownInicial, true, ballType));
 
+
+        //GameObject[] cajas;
+        //GameObject[] prefabs;
+
+        //Reinicializar Multiplicador de Puntos
+        LevelManager.levelManager.ReinicializarMultiplicadorPuntos();
+
+        LevelManager.levelManager.gameOver = false;
+        LevelManager.levelManager.homeButton = false;
+
+        //Habilitar Boton de Pausa
+        BotonesEnPantalla.pausa.SetActive(true);
+
+        //Instanciar Pelota y Paddle
+        if (paddleVivo == null)
+        {
+            paddleVivo = Instantiate(paddle, new Vector2(paddleSpawnInicial.transform.position.x, paddleSpawnInicial.transform.position.y), Quaternion.identity) as GameObject;
+
+        }
+        //paddleVivo.transform.position = new Vector2(paddleVivo.transform.position.x, GameObject.FindGameObjectWithTag("padPosition").transform.position.y);
+
+        pelotaViva = Instantiate(pelota, new Vector3(paddleVivo.transform.position.x, ballSpawn.transform.position.y, ballSpawn.transform.position.z), Quaternion.identity) as GameObject;
+
+        //Animacion de Spawn
+        pelotaViva.GetComponent<Animator>().SetTrigger("Spawn");
+
+
+        ////Apagar la 
+        //GameObject bolaVida = GameObject.Find("vida" + vidas.ToString()) as GameObject;
+        //if (bolaVida != null)
+            //bolaVida.GetComponent<Animator>().SetBool("Ocultar", true);
+
+
+        //Frenar cualquier movimiento del pad
+        //moverDerecha(false);
+        //moverIzquierda(false);
+        
+        // Limpiar cajas explotando
+        float lineaDestruccion = 3.9f - posicionConvertidor;
+        //Limpiar 2/3 de la pantalla entre la brea y el limite superior
+        lineaDestruccion = lineaDestruccion * 2 / 3;
+        lineaDestruccion = lineaDestruccion + posicionConvertidor;
+        limpiarCajas(lineaDestruccion);
+           
 	}
 
 	public IEnumerator inicializarObjetos(float seconds, bool continueFlag, string ballType){
@@ -730,14 +648,7 @@ public class GameController : MonoBehaviour {
 		//Animacion de Spawn
 		pelotaViva.GetComponent<Animator> ().SetTrigger ("Spawn");
 
-
-        if (!continueFlag) {
-			//Leer bola seleccionada
-//			LevelManager.levelManager.numeroBolaElegida = PlayerPrefs.GetString (LevelManager.levelManager.s_BolaElegida);
-		}
-			
-		SoundManager.soundManager.playSound (ballSpawn.GetComponent<AudioSource> ());
-
+		
 		//Apagar la 
 		GameObject bolaVida = GameObject.Find ("vida" + vidas.ToString ()) as GameObject;
 		if (bolaVida != null)
@@ -805,39 +716,14 @@ public class GameController : MonoBehaviour {
 			}
 		}
 			
-		//Posicionar pelota arriba del pad a medida que vaya subiendo
-//		pelotaViva.transform.position = new Vector2(paddleVivo.transform.position.x, paddleVivo.transform.position.y + paddleVivo.GetComponentInChildren<SpriteRenderer>().bounds.size.y/2 + pelotaViva.GetComponentInChildren<SpriteRenderer>().bounds.size.y/2);
-
-//		StartCoroutine (TiempoDisparoPelota (2f));
-//		yield return new WaitUntil (() => validarTouchInicial == true);
-
-
-//		validarTouchInicial = false;
-			
-		yield return new WaitForSeconds (seconds);
-
 		if (!continueFlag){
 			//Esperar a que la Brea este en posicion inicial para arrancar
 			yield return new WaitUntil (Brea.GetComponent<LimiteBrea> ().BreaEstaEnPosicionInicial);
 		}
 
-		// Dar fuerza inicial a la pelota
-		pelotaViva.GetComponent<Rigidbody2D>().AddForce (obtenerVectorVelocidad(fuerzaPelota,50f,130f));
-		pelotaViva.GetComponent<CircleCollider2D> ().enabled = true;
-		pelotaViva.GetComponent<ballScript> ().StartSpinning ();
-
-		ballInPlay = true;
-
-
 	}
 
-//	IEnumerator TiempoDisparoPelota(float segundos){
-//	
-//		yield return new WaitForSeconds (segundos);
-//
-//		validarTouchInicial = true;
-//	
-//	}
+
 
 	public void breaPosicionInicial(){
 	//Llevar brea a su posicion inicial

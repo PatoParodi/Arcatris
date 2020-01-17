@@ -10,24 +10,35 @@ public class LimiteBrea : MonoBehaviour {
 	public ParticleSystem particulasBrea;
 
 	private Vector3 nuevaPosicion;
-	public bool BreaEnPosicionInicial;
+    private GameController gameController;
+    public bool BreaEnPosicionInicial;
+
 
 	void Start(){
 
 		nuevaPosicion = gameObject.transform.position;
+
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
 	
 	}
 
 	void Update(){
 		
-//		//Subir Brea
-		gameObject.transform.position = Vector3.Lerp (transform.position, nuevaPosicion , velocidadBrea * Time.deltaTime);
+//		//Mover Brea
+        //Si Sube la Brea, solo subir cuando la bola esta en juego
+        if(transform.position.y < nuevaPosicion.y){
+            if(gameController.ballInPlay)
+		        gameObject.transform.position = Vector3.Lerp (transform.position, nuevaPosicion , velocidadBrea * Time.deltaTime);
+        }else 
+            gameObject.transform.position = Vector3.Lerp(transform.position, nuevaPosicion, velocidadBrea * Time.deltaTime);
 
-		if (Vector3.Distance (gameObject.transform.position, PosicionInicial.position) <= 0.05f)
+
+        if (Vector3.Distance (gameObject.transform.position, PosicionInicial.position) <= 0.05f)
 			BreaEnPosicionInicial = true;
 		else
 			BreaEnPosicionInicial = false;
 
+        //Tope superior
 		if (transform.position.y > 4.4f)
 			transform.position = new Vector3 (transform.position.x, 4.4f, transform.position.z);
 
@@ -108,8 +119,8 @@ public class LimiteBrea : MonoBehaviour {
 	}
 
 	public void subirBrea(){
-		//Subir brea cuando caen ladrillos
 
+		//Subir brea cuando caen ladrillos
 		nuevaPosicion += Vector3.up * movimientoPiso;
 			
 	}

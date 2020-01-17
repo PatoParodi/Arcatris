@@ -11,6 +11,7 @@ public class ballScript : MonoBehaviour {
 	public bool pelotaSpawneada = false;
 
 	public bool RedBallFlag = false;
+    [SerializeField] AudioClip m_spawnSound;
 
 	private GameObject ballSkin;
 
@@ -45,30 +46,37 @@ public class ballScript : MonoBehaviour {
 	
 	}
 
-	void Update(){
+    //Method is called from Spawn Animation
+    public void StartBall(){
+
+        // Dar fuerza inicial a la pelota
+        GetComponent<Rigidbody2D>().AddForce(controller.obtenerVectorVelocidad(controller.fuerzaPelota, 50f, 130f));
+        GetComponent<CircleCollider2D>().enabled = true;
+        StartSpinning();
+
+        controller.ballInPlay = true;
+
+    }
+
+    //Method is called from Spawn Animation
+    public void SpawnSound(){
+
+        AudioSource AudioS = gameObject.AddComponent<AudioSource>();
+
+        AudioS.clip = m_spawnSound;
+        SoundManager.soundManager.playSound(AudioS);
+
+    }
+
+    void Update(){
 	
 		gameObject.GetComponent<Rigidbody2D> ().velocity = velocidadConstante * (gameObject.GetComponent<Rigidbody2D> ().velocity.normalized);
-
-//		//Para que al spawnear la skin no inicie girando
-//		if (!controller.ballInPlay) {
-//			if (pelotaSpawneada)
-//				GetComponentInChildren<Animator> ().speed = 0;
-//			
-//		} else {
-//
-//			GetComponentInChildren<Animator> ().speed = 1;
-//
-//		}
-
-//		if(_colaExtraBall != null)
-//			if (controller.ballInPlay)
-//				_colaExtraBall.enabled = true;
 
 	}
 
 	public void PowerUpRedBall(float duracion){
 
-		StopAllCoroutines ();
+        StopCoroutine("activarPowerUpRedBall");
 
 		//Iniciar comportamiento durante "duracion" segundos
 		StartCoroutine (activarPowerUpRedBall (duracion));

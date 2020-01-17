@@ -16,7 +16,7 @@ public class PantallaInicial : MonoBehaviour {
 		if (BotonesActivos) {
 
 			btnPlay.interactable = true;
-			btnLeaderboard.interactable = true; 
+			//btnLeaderboard.interactable = true; 
 			btnSettings.interactable = true; 
 			btnShop.interactable = true;
 			btnCreditos.interactable = true;

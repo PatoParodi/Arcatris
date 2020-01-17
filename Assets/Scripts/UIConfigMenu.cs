@@ -26,6 +26,8 @@ public class UIConfigMenu : MonoBehaviour {
 		//Ocultar Canvas UI de inGame
 		controller.TerminarPartida ();
 
+        AdsManager.Instance.ShowBanner();
+
 	}
 
     public void ShowRateUs(){

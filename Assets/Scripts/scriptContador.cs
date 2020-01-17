@@ -21,12 +21,6 @@ public class scriptContador : MonoBehaviour {
 
 	void Start(){
 	
-//		Advertisement.Initialize("1605669");
-
-		//AdMob ID Android: ca-app-pub-2321113512856314~7770392311
-		//video intersticial ca-app-pub-2321113512856314/2122194401
-		//ExtraBall ca-app-pub-2321113512856314/6042377676
-	
 		controller = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
 
 	}
@@ -35,7 +29,11 @@ public class scriptContador : MonoBehaviour {
 
 		contando = false;
 
-		if (controller.extraBalls > 0){
+        if(controller == null)
+            controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+
+
+        if (controller.extraBalls > 0){
 //			botonSiUse.GetComponent<Image> ().sprite = yesSprite;
 			sinExtraBall = false;
 			botonSiUse.gameObject.SetActive(true);
@@ -44,16 +42,21 @@ public class scriptContador : MonoBehaviour {
 		}
 		else {
 			sinExtraBall = true;
-//			botonSiUse.GetComponent<Image> ().sprite = videoSprite;
-			botonSiUse.gameObject.SetActive(false);
+            //			botonSiUse.GetComponent<Image> ().sprite = videoSprite;
+            botonSiUse.gameObject.SetActive(false);
 
 			botonSiVideo.gameObject.SetActive(true);
-//			botonSiVideo.gameObject.GetComponent<Button> ().interactable = false;
+            if (AdsManager.Instance.IsRewardedLoaded())
+                botonSiVideo.gameObject.GetComponent<Button>().interactable = true;
+            else
+            {
+                botonSiVideo.gameObject.GetComponent<Button>().interactable = false;
+            }
 
 
-		}
+        }
 
-	}
+    }
 
 	// Update is called once per frame
 	void Update () {
@@ -78,7 +81,7 @@ public class scriptContador : MonoBehaviour {
 
 			SoundManager.soundManager.playSound(GetComponent<AudioSource> ());
 
-			yield return new WaitForSecondsRealtime (1);
+            yield return new WaitForSeconds (1);
 
 		}
 
@@ -93,34 +96,38 @@ public class scriptContador : MonoBehaviour {
 
 	void ShowRewardedVideo ()
 	{
-		ShowOptions options = new ShowOptions();
-		options.resultCallback = ManagerShowResult;
 
-		Advertisement.Show("rewardedVideo", options);
+        //Mostrar video por Reward
+        AdsManager.Instance.ShowRewardedVideo(false, null, null);
+
+  //      ShowOptions options = new ShowOptions();
+		//options.resultCallback = ManagerShowResult;
+
+		//Advertisement.Show("rewardedVideo", options);
 	}
 
 
-	void ManagerShowResult (ShowResult result)
-	{
+	//void ManagerShowResult (ShowResult result)
+	//{
 		
-		if(result == ShowResult.Finished) {
-			//Utilizar una Bola Extra.
-			controller.extraBalls += 1;
-			controller.utilizarExtraBall();
-			// Reward your player here.
+	//	if(result == ShowResult.Finished) {
+	//		//Utilizar una Bola Extra.
+	//		controller.extraBalls += 1;
+	//		controller.utilizarExtraBall();
+	//		// Reward your player here.
 
-		}else if(result == ShowResult.Skipped) {
-			//Video was skipped - Do NOT reward the player
-			buttonNo();
+	//	}else if(result == ShowResult.Skipped) {
+	//		//Video was skipped - Do NOT reward the player
+	//		buttonNo();
 
-		}else if(result == ShowResult.Failed) {
-			//Video failed to show
-			buttonNo();
+	//	}else if(result == ShowResult.Failed) {
+	//		//Video failed to show
+	//		buttonNo();
 
-		}
-		else			
-			buttonNo();
-	}
+	//	}
+	//	else			
+	//		buttonNo();
+	//}
 
 	public void buttonSi(){
 
@@ -128,8 +135,9 @@ public class scriptContador : MonoBehaviour {
 
 		// Validar si le quedan Extra Ball
 		if (sinExtraBall){
-			//VER VIDEO PARA GANAR UNA BOLA EXTRA
-			ShowRewardedVideo ();
+            //VER VIDEO PARA GANAR UNA BOLA EXTRA
+            Time.timeScale = 0;
+            ShowRewardedVideo ();
 			_conVideo++;
 
 		}
@@ -137,10 +145,9 @@ public class scriptContador : MonoBehaviour {
 		//Utilizar una Bola Extra.
 			controller.utilizarExtraBall ();
 			_conExtraBall++;
-		}	
 
-		contando = false;
-		popUpContinue.SetActive (false);
+            ClosePopUp();
+        }	
 
 		//Metricas - Analytics - Cuantas extraball se usan y cuantas por video
 		Analytics.CustomEvent ("ContinueExtraBall", new Dictionary<string, object> {
@@ -150,6 +157,13 @@ public class scriptContador : MonoBehaviour {
 
 	}
 
+    public void ClosePopUp(){
+
+        contando = false;
+        popUpContinue.SetActive(false);
+
+    }
+
 	public void buttonNo(){
 
 		contando = false;
@@ -157,6 +171,9 @@ public class scriptContador : MonoBehaviour {
 		popUpContinue.SetActive (false);
 		//Ocultar Canvas UI de inGame
 		controller.UI_inGame.SetActive (false);
+
+        //Check if it is time to show ad
+        AdsManager.Instance.CheckToShowAd();
 
 		pantallaInicial.GetComponent<MenuController> ().MostrarPlay (true);
 
